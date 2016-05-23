@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import br.com.carmaix.MainActivity;
+import br.com.carmaix.activities.AvaliacaoActivity;
+import br.com.carmaix.activities.BaseActivity;
 import br.com.carmaix.R;
 import br.com.carmaix.controller.LoginController;
 import br.com.carmaix.exceptions.LoginFieldException;
@@ -64,7 +65,7 @@ public class LoginFragment extends Fragment {
 
                     controller.validarCamposLogin();
 
-                    Intent i = new Intent(getActivity(), MainActivity.class);
+                    Intent i = new Intent(getActivity(), AvaliacaoActivity.class);
 
                     startActivity(i);
 
