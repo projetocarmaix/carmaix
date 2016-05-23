@@ -11,6 +11,7 @@ import br.com.carmaix.fragments.AvaliacaoFragmentTab;
 public class AvaliacaoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*teste*/
         super.onCreate(savedInstanceState);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AvaliacaoFragmentTab()).commit();
     }
