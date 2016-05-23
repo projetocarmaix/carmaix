@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         String senha = preferences.getString("senha", null);
 
         if (login != null && senha != null) {
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            Intent i = new Intent(LoginActivity.this, BaseActivity.class);
             startActivity(i);
             finish();
         }
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean isValido = loginBO.validarCamposLogin(validation);
                 if (isValido) {
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent i = new Intent(LoginActivity.this, BaseActivity.class);
                     startActivity(i);
                     finish();
                 }
