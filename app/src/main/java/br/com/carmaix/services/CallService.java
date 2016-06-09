@@ -39,7 +39,7 @@ public class CallService {
 
     }
 
-    public static boolean isSupportWidgetIdentity() {
+    public static boolean isSupportWidgetIdentity() throws Exception {
         return getVersionRelease().isSupportWidgetIdentity();
     }
 
