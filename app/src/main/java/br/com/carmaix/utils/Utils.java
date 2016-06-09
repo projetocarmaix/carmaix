@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.http.AndroidHttpClient;
+import android.os.Environment;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -17,6 +18,8 @@ import java.io.InputStreamReader;
  * Created by rafael.savaris on 04/05/2016.
  */
 public class Utils {
+
+    private static Context contextApplication = null;
 
     public static boolean isConnected(Context context) {
         try {
@@ -92,6 +95,21 @@ public class Utils {
 
         return result;
 
+    }
+
+    public static boolean isExternalStorageWritable() {
+
+        String state = Environment.getExternalStorageState();
+
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static Context getContextApplication() {
+        return Utils.contextApplication;
     }
 
 }

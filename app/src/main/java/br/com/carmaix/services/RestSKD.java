@@ -97,6 +97,10 @@ public class RestSKD {
     // esta variável controla como retornar o erro até que seja padronizado
     private Boolean catchErrorECM = false;
 
+    private String pathRest;
+
+    private String pathRoot;
+
     public String getContentType() {
         return contentType;
     }
@@ -341,6 +345,22 @@ public class RestSKD {
 
     public void setIgnoreNewResult(boolean ignoreNewResult) {
         this.ignoreNewResult = ignoreNewResult;
+    }
+
+    public String getPathRest() {
+        return pathRest;
+    }
+
+    public void setPathRest(String pathRest) {
+        this.pathRest = pathRest;
+    }
+
+    public String getPathRoot() {
+        return pathRoot;
+    }
+
+    public void setPathRoot(String pathRoot) {
+        this.pathRoot = pathRoot;
     }
 
     public String execute(String contentType) throws Exception {
