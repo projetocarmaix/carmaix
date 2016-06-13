@@ -1,11 +1,13 @@
 package br.com.carmaix.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragment;
 
 /**
@@ -23,11 +25,15 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
         AvaliacaoFragment avaliacaoFragment = new AvaliacaoFragment();
         Bundle bundle = new Bundle();
         if(position == 0) {
-            bundle.putString("tipo","Não Avaliado");
+            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_nao_avaliados));
         }else if (position == 1) {
-            bundle.putString("tipo","Avaliado");
-        }else {
-            bundle.putString("tipo","Estoque");
+            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_avaliados));
+        }else if (position == 2) {
+            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_com_proposta));
+        }else if (position == 3) {
+            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_em_estoque));
+        }else if (position == 4) {
+            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_vendidos));
         }
 
         avaliacaoFragment.setArguments(bundle);
@@ -39,17 +45,24 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         String title = "";
         if(position == 0) {
-            title = "Não Avaliado";
+            title = this.context.getResources().getString(R.string.tab_title_nao_avaliados);
         }else if (position == 1) {
-            title = "Avaliado";
-        }else {
-            title = "Estoque";
+            title = this.context.getResources().getString(R.string.tab_title_avaliados);
+        }else if (position == 2) {
+            title = this.context.getResources().getString(R.string.tab_title_com_proposta);
+        }else if (position == 3) {
+            title = this.context.getResources().getString(R.string.tab_title_em_estoque);
+        }else if (position == 4) {
+            title = this.context.getResources().getString(R.string.tab_title_vendidos);
         }
+
         return title;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
+
+
 }

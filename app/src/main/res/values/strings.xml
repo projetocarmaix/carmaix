@@ -10,4 +10,20 @@
     <string name="lbl_senha">Senha</string>
     <string name="lbl_sair">Sair</string>
     <string name="btn_logar">Logar</string>
+
+    <string name="tab_title_nao_avaliados">não avaliados</string>
+    <string name="tab_title_avaliados">avaliados</string>
+    <string name="tab_title_com_proposta">com proposta</string>
+    <string name="tab_title_em_estoque">em estoque</string>
+    <string name="tab_title_vendidos">vendidos</string>
+
+    <string name="header_id">#</string>
+    <string name="header_data">data</string>
+    <string name="header_marca_modelo">marca/modelo</string>
+    <string name="header_nome">nome</string>
+    <string name="header_placa">placa</string>
+    <string name="header_ano">ano</string>
+    <string name="header_classe">classe</string>
+    <string name="header_avaliacao">avaliacao</string>
+    <string name="header_opc">opc</string>
 </resources>

@@ -1,21 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:gravity="center_vertical"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="wrap_content"
 >
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/avaliacaoId"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
         android:layout_height="wrap_content"
-    />
+    >
 
-    <TextView
-        android:id="@+id/avaliacaoNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    />
+        <TextView
+            android:id="@+id/avaliacao_id"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="9dp"
+        />
 
+        <TextView
+            android:id="@+id/avaliacao_data"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textSize="9dp"
+        />
+
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="9"
+            >
+            <TextView
+                android:id="@+id/avaliacao_marca"
+                android:textAllCaps="true"
+                android:gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FORD"
+                android:textSize="9dp"
+            />
+            <TextView
+                android:id="@+id/avaliacao_modelo"
+                android:textAllCaps="true"
+                android:gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FIESTA"
+                android:textSize="9dp"
+            />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/avaliacao_nome"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:textSize="9dp"
+            />
+
+        <TextView
+            android:id="@+id/avaliacao_placa"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="9dp"
+            />
+
+        <TextView
+            android:id="@+id/avaliacao_ano"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textAlignment="center"
+            android:textSize="9dp"
+            />
+
+        <TextView
+            android:id="@+id/avaliacao_classe"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textAlignment="center"
+            android:textSize="9dp"
+            />
+
+        <TextView
+            android:id="@+id/avaliacao_avaliacao"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textAlignment="center"
+            android:textSize="9dp"
+            />
+
+        <TextView
+            android:id="@+id/avaliacao_opc"
+            android:textAllCaps="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:textSize="9dp"
+            />
+    </LinearLayout>
 </LinearLayout>

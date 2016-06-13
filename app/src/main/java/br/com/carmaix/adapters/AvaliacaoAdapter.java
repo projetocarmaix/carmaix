@@ -1,16 +1,12 @@
 package br.com.carmaix.adapters;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,16 +35,16 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
     @Override
     public void onBindViewHolder(AvaliacaoViewHolder holder, int position) {
         avaliacaoSelecionada = avaliacaoList.get(position);
-        holder.avaliacaoNome.setText(avaliacaoSelecionada.getNome());
-        holder.avaliacaoId.setText(avaliacaoSelecionada.getId().toString());
-        /*holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Toast.makeText(context,avaliacaoSelecionada.getNome()+avaliacaoSelecionada.getId(),Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });*/
-
+        holder.avaliacaoNome.setText(avaliacaoSelecionada.getAvaliacaoNome());
+        holder.avaliacaoId.setText(avaliacaoSelecionada.getAvaliacaoId());
+        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAvaliacaoAno());
+        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getAvaliacaoAvaliacao());
+        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getAvaliacaoClasse());
+        holder.avaliacaoData.setText(avaliacaoSelecionada.getAvaliacaoData());
+        holder.avaliacaoMarca.setText(avaliacaoSelecionada.getAvaliacaoMarca());
+        holder.avaliacaoModelo.setText(avaliacaoSelecionada.getAvaliacaoModelo());
+        holder.avaliacaoOpc.setText(avaliacaoSelecionada.getAvaliacaoOpc());
+        holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getAvaliacaoPlaca());
     }
 
 
@@ -59,12 +55,28 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
     public static class AvaliacaoViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private TextView avaliacaoId;
+        private TextView avaliacaoData;
+        private TextView avaliacaoMarca;
+        private TextView avaliacaoModelo;
+        private TextView avaliacaoPlaca;
+        private TextView avaliacaoAno;
+        private TextView avaliacaoClasse;
+        private TextView avaliacaoAvaliacao;
+        private TextView avaliacaoOpc;
         private TextView avaliacaoNome;
 
         public AvaliacaoViewHolder(View itemView) {
             super(itemView);
-            avaliacaoId = (TextView) itemView.findViewById(R.id.avaliacaoId);
-            avaliacaoNome = (TextView) itemView.findViewById(R.id.avaliacaoNome);
+            avaliacaoId = (TextView) itemView.findViewById(R.id.avaliacao_id);
+            avaliacaoData = (TextView) itemView.findViewById(R.id.avaliacao_data);
+            avaliacaoMarca = (TextView) itemView.findViewById(R.id.avaliacao_marca);
+            avaliacaoModelo = (TextView) itemView.findViewById(R.id.avaliacao_modelo);
+            avaliacaoNome = (TextView) itemView.findViewById(R.id.avaliacao_nome);
+            avaliacaoPlaca = (TextView) itemView.findViewById(R.id.avaliacao_placa);
+            avaliacaoAno = (TextView) itemView.findViewById(R.id.avaliacao_ano);
+            avaliacaoClasse = (TextView) itemView.findViewById(R.id.avaliacao_classe);
+            avaliacaoAvaliacao = (TextView) itemView.findViewById(R.id.avaliacao_avaliacao);
+            avaliacaoOpc = (TextView) itemView.findViewById(R.id.avaliacao_opc);
 
             itemView.setOnCreateContextMenuListener(this);
         }

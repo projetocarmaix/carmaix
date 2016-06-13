@@ -13,8 +13,16 @@ public class AvaliacaoService {
         ArrayList<Avaliacao> avaliacaoArrayList = new ArrayList<>();
         for(int i = 0; i <=20; i ++) {
             Avaliacao avaliacao = new Avaliacao();
-            avaliacao.setId(i);
-            avaliacao.setNome(tipo+" - Nome: João - ID: "+i);
+            avaliacao.setAvaliacaoId(Integer.toString(i));
+            avaliacao.setAvaliacaoNome("João"+i);
+            avaliacao.setAvaliacaoAno("1984");
+            avaliacao.setAvaliacaoAvaliacao("R$ 120.000,00");
+            avaliacao.setAvaliacaoClasse("A");
+            avaliacao.setAvaliacaoMarca("Ford");
+            avaliacao.setAvaliacaoData("11/05/2014");
+            avaliacao.setAvaliacaoModelo("fiesta");
+            avaliacao.setAvaliacaoOpc("...");
+            avaliacao.setAvaliacaoPlaca("JJK-1321");
             avaliacaoArrayList.add(avaliacao);
         }
         return  avaliacaoArrayList;

@@ -1,9 +1,12 @@
 package br.com.carmaix.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +29,12 @@ public class AvaliacaoFragmentTab extends BaseFragment {
 
         viewPager = (ViewPager)view.findViewById(R.id.avaliacaoViewPager);
         viewPager.setAdapter(new AvaliacaoTabAdapter(getContext(),getChildFragmentManager()));
-        tab.setupWithViewPager(viewPager);
 
+        tab.setSelectedTabIndicatorColor(Color.GRAY);
+        tab.setTabTextColors(Color.GRAY, Color.GRAY);
+        tab.setupWithViewPager(viewPager);
+        TabItem tabItem = new TabItem(getActivity());
+        Log.i("teste",tab.getTabAt(1).getText()+" - ");
         return view;
     }
 
