@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.net.http.AndroidHttpClient;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,9 +23,12 @@ public class Utils {
     private static Context contextApplication = null;
 
     public static boolean isConnected(Context context) {
+
         try {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
             if (netInfo != null && netInfo.isConnected()) {
                 return true;
             }
@@ -108,8 +112,29 @@ public class Utils {
         return false;
     }
 
+    public static void setContext(Context context) {
+        if (Utils.contextApplication == null) {
+            Utils.contextApplication = context;
+        }
+
+    }
+
     public static Context getContextApplication() {
         return Utils.contextApplication;
     }
+
+    public static void alertToast(String title, String message, Context context) {
+        alertToast(title, message, context, Toast.LENGTH_LONG);
+    }
+
+    public static void alertToast(String title, String message, Context context, int duration) {
+        if (!title.equals("")) {
+            title += ": ";
+        }
+        CharSequence text = title + message;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
 
 }

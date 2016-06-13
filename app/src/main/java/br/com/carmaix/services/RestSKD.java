@@ -97,9 +97,9 @@ public class RestSKD {
     // esta variável controla como retornar o erro até que seja padronizado
     private Boolean catchErrorECM = false;
 
-    private String pathRest;
+    private String pathRest = "/restCache/";
 
-    private String pathRoot;
+    private String pathRoot = "/Android/data/" + Constants.APP + "/";
 
     public String getContentType() {
         return contentType;

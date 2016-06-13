@@ -1,22 +1,11 @@
 package br.com.carmaix.services;
 
+import android.content.Context;
+
 public class CallService {
 
     public static String getVersionReleaseServerLogged() {
-
-        /*
-        ApplicationFluig applicationFluig = (ApplicationFluig) Utils.getContextApplication();
-
-        if (applicationFluig.getServerLoggued() == null) {
-            return ConstantsLibrary.DEFAULT_VERSION_SEVER;
-        }
-
-        return applicationFluig.getServerLoggued().getServer_version();
-
-        */
-
         return "1.0";
-
     }
 
     public static VersionRelease getVersionRelease() {
@@ -39,9 +28,20 @@ public class CallService {
 
     }
 
-    public static boolean isSupportWidgetIdentity() throws Exception {
-        return getVersionRelease().isSupportWidgetIdentity();
+    public static TokenReturn login(Context context, String user, String password) throws Exception{
+        return getVersionRelease().login(context, user, password);
     }
 
+    public static String listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+        return getVersionRelease().listAvaliations(context, methodType, limit, offset, status, sortBy, sortOrder);
+    }
+
+    public static String searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+        return getVersionRelease().searchAvaliations(context, methodType, pattern, limit, offset, status, sortBy, sortOrder);
+    }
+
+    public static String getAvaliationsDetail(Context context, MethodType methodType, int id) throws Exception{
+        return getVersionRelease().getAvaliationsDetail(context, methodType, id);
+    }
 
 }

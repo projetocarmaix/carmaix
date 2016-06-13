@@ -53,14 +53,14 @@ public class CacheManager {
             if (data == null || data.equals("") || data.equals("[]") || (data.length() < 5 && data.contains("[]"))) {
 
                 if (Constants.DEBUG_ACTIONS_CACHE) {
-                    Log.i("DEBUG Fluig CACHE", " xxx get server ### " + consumer.getUrlFull());
+                    Log.i("DEBUG CACHE", " xxx get server ### " + consumer.getUrlFull());
                 }
 
                 data = getServerData(consumer);
             } else {
 
                 if (Constants.DEBUG_ACTIONS_CACHE) {
-                    Log.i("DEBUG Fluig CACHE", " xxx get local cache ### " + consumer.getUrlFull());
+                    Log.i("DEBUG CACHE", " xxx get local cache ### " + consumer.getUrlFull());
                 }
 
             }
@@ -68,7 +68,7 @@ public class CacheManager {
         } else {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx get server ### " + consumer.getUrlFull());
+                Log.i("DEBUG CACHE", " xxx get server ### " + consumer.getUrlFull());
             }
 
             data = getServerData(consumer);
@@ -90,14 +90,14 @@ public class CacheManager {
         if (consumer.getCacheTime() > 0) {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx Salva cache ### " + consumer.getUrlFull());
+                Log.i("DEBUG CACHE", " xxx Salva cache ### " + consumer.getUrlFull());
             }
 
             try {
                 saveStringCache(consumer, data);
             } catch (CacheException ex) {
                 if (Constants.DEBUG_ACTIONS_CACHE) {
-                    Log.i("DEBUG Fluig CACHE", " xxx Error Save cache ### " + ex.getMessage());
+                    Log.i("DEBUG CACHE", " xxx Error Save cache ### " + ex.getMessage());
                 }
             }
 
@@ -318,7 +318,7 @@ public class CacheManager {
         } catch (CacheException e) {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx Error get cache ### " + e.getMessage());
+                Log.i("DEBUG CACHE", " xxx Error get cache ### " + e.getMessage());
             }
 
             data = null;
@@ -329,7 +329,7 @@ public class CacheManager {
         } else {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx get local cache ### " + consumer.getUrlFull());
+                Log.i("DEBUG CACHE", " xxx get local cache ### " + consumer.getUrlFull());
             }
 
         }
@@ -437,7 +437,7 @@ public class CacheManager {
         } catch (CacheException e) {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx Error get cache ### " + e.getMessage());
+                Log.i("DEBUG CACHE", " xxx Error get cache ### " + e.getMessage());
             }
 
             data = null;
@@ -446,7 +446,7 @@ public class CacheManager {
         if (data == null || data.equals("") || data.equals("[]") || (data.length() < 5 && data.contains("[]"))) {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx get server ### " + consumer.getUrlFull());
+                Log.i("DEBUG CACHE", " xxx get server ### " + consumer.getUrlFull());
             }
 
             data = getServerDataCache(consumer);
@@ -454,7 +454,7 @@ public class CacheManager {
         } else {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx get local cache ### " + consumer.getUrlFull());
+                Log.i("DEBUG CACHE", " xxx get local cache ### " + consumer.getUrlFull());
             }
 
         }
@@ -486,7 +486,7 @@ public class CacheManager {
         } catch (CacheException e) {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx Error get cache ### " + e.getMessage());
+                Log.i("DEBUG CACHE", " xxx Error get cache ### " + e.getMessage());
             }
 
             data = null;
@@ -496,7 +496,7 @@ public class CacheManager {
         if (data == null || data.equals("") || data.equals("[]") || (data.length() < 5 && data.contains("[]"))) {
 
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx get server ### " + consumer.getUrlFull());
+                Log.i("DEBUG CACHE", " xxx get server ### " + consumer.getUrlFull());
             }
 
             data = getServerDataCache(consumer);
@@ -571,7 +571,7 @@ public class CacheManager {
         // if (consumer.getCacheTime() > 0) {
 
         if (Constants.DEBUG_ACTIONS_CACHE) {
-            Log.i("DEBUG Fluig CACHE", " xxx Salva cache ### " + consumer.getUrlFull());
+            Log.i("DEBUG CACHE", " xxx Salva cache ### " + consumer.getUrlFull());
         }
 
         try {
@@ -582,7 +582,7 @@ public class CacheManager {
 
         } catch (CacheException ex) {
             if (Constants.DEBUG_ACTIONS_CACHE) {
-                Log.i("DEBUG Fluig CACHE", " xxx Error Save cache ### " + ex.getMessage());
+                Log.i("DEBUG CACHE", " xxx Error Save cache ### " + ex.getMessage());
             }
         }
 
@@ -593,6 +593,30 @@ public class CacheManager {
 
     private static String getPathToSave(RestSKD consumerSDK, String pathBase) throws CacheException{
         return (!consumerSDK.getPathCustomSaveCache().equals("") ? consumerSDK.getPathCustomSaveCache() : pathBase);
+    }
+
+    public static void invalidateCache(RestSKD consumer) throws CacheException {
+
+        String fileUrl = getUrlRequisition(consumer);
+
+        String tempUrl = getDirToCache(consumer) + getPathToSave(consumer, consumer.getPathRest()) + getNameFileToCache(fileUrl)
+                + consumer.getDocumentExtension();
+
+        File file = null;
+
+        try {
+
+            file = new File(tempUrl);
+
+            if (file.exists()) {
+                file.delete();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            file = null;
+        }
     }
 
 }
