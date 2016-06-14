@@ -19,12 +19,5 @@
         android:divider="@drawable/ic_launcher"
         android:showDividers="middle"
         android:text="teste">
-        <android.support.design.widget.TabItem
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="TESTE"
-            >
-
-        </android.support.design.widget.TabItem>
     </android.support.design.widget.TabLayout>
 </LinearLayout>

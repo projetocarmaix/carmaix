@@ -21,7 +21,6 @@ public class AvaliacaoService {
             avaliacao.setAvaliacaoMarca("Ford");
             avaliacao.setAvaliacaoData("11/05/2014");
             avaliacao.setAvaliacaoModelo("fiesta");
-            avaliacao.setAvaliacaoOpc("...");
             avaliacao.setAvaliacaoPlaca("JJK-1321");
             avaliacaoArrayList.add(avaliacao);
         }

@@ -18,7 +18,6 @@ public class Avaliacao {
     String avaliacaoAno;
     String avaliacaoClasse;
     String avaliacaoAvaliacao;
-    String avaliacaoOpc;
     String avaliacaoNome;
 
     public Integer getId() {
@@ -99,14 +98,6 @@ public class Avaliacao {
 
     public void setAvaliacaoAvaliacao(String avaliacaoAvaliacao) {
         this.avaliacaoAvaliacao = avaliacaoAvaliacao;
-    }
-
-    public String getAvaliacaoOpc() {
-        return avaliacaoOpc;
-    }
-
-    public void setAvaliacaoOpc(String avaliacaoOpc) {
-        this.avaliacaoOpc = avaliacaoOpc;
     }
 
     public String getAvaliacaoNome() {

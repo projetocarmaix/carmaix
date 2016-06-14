@@ -63,6 +63,4 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 5;
     }
-
-
 }

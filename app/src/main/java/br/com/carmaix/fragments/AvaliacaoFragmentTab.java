@@ -30,11 +30,38 @@ public class AvaliacaoFragmentTab extends BaseFragment {
         viewPager = (ViewPager)view.findViewById(R.id.avaliacaoViewPager);
         viewPager.setAdapter(new AvaliacaoTabAdapter(getContext(),getChildFragmentManager()));
 
-        tab.setSelectedTabIndicatorColor(Color.GRAY);
-        tab.setTabTextColors(Color.GRAY, Color.GRAY);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0) {
+                    tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_cinza));
+                }else if(position == 1) {
+                    tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_vermelha));
+                }else if(position == 2) {
+                    tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_laranja));
+                }else if(position == 3) {
+                    tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_verde));
+                }else if(position == 4) {
+                    tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_roxo));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        tab.setSelectedTabIndicatorColor(Color.WHITE);
+        tab.setTabTextColors(Color.WHITE, Color.WHITE);
+        tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_cinza));
         tab.setupWithViewPager(viewPager);
-        TabItem tabItem = new TabItem(getActivity());
-        Log.i("teste",tab.getTabAt(1).getText()+" - ");
+
         return view;
     }
 

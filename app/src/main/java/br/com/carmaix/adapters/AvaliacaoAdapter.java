@@ -43,7 +43,6 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         holder.avaliacaoData.setText(avaliacaoSelecionada.getAvaliacaoData());
         holder.avaliacaoMarca.setText(avaliacaoSelecionada.getAvaliacaoMarca());
         holder.avaliacaoModelo.setText(avaliacaoSelecionada.getAvaliacaoModelo());
-        holder.avaliacaoOpc.setText(avaliacaoSelecionada.getAvaliacaoOpc());
         holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getAvaliacaoPlaca());
     }
 
@@ -62,7 +61,6 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         private TextView avaliacaoAno;
         private TextView avaliacaoClasse;
         private TextView avaliacaoAvaliacao;
-        private TextView avaliacaoOpc;
         private TextView avaliacaoNome;
 
         public AvaliacaoViewHolder(View itemView) {
@@ -76,7 +74,6 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
             avaliacaoAno = (TextView) itemView.findViewById(R.id.avaliacao_ano);
             avaliacaoClasse = (TextView) itemView.findViewById(R.id.avaliacao_classe);
             avaliacaoAvaliacao = (TextView) itemView.findViewById(R.id.avaliacao_avaliacao);
-            avaliacaoOpc = (TextView) itemView.findViewById(R.id.avaliacao_opc);
 
             itemView.setOnCreateContextMenuListener(this);
         }
