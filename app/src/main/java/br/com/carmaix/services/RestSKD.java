@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.net.URI;
 import java.util.ArrayList;
 
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 
@@ -187,6 +188,12 @@ public class RestSKD {
             AddHeader("Accept-Language", getDefaultLanguage());
 
             AddHeader("User-Agent", System.getProperty("http.agent"));
+
+            ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
+
+            if (application.getLoginTable() != null){
+                AddHeader("Authorization", application.getLoginTable().getToken());
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();

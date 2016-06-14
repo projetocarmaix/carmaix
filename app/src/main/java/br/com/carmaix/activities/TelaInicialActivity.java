@@ -24,6 +24,8 @@ import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
+import br.com.carmaix.services.CallService;
+import br.com.carmaix.services.MethodType;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 
@@ -163,6 +165,26 @@ public class TelaInicialActivity extends ParentBaseActivity {
                         Intent i = new Intent(this, AvaliacaoActivity.class);
 
                         startActivity(i);
+
+                        Thread a = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                try{
+
+                                    String a = CallService.listAvaliations(TelaInicialActivity.this, MethodType.CACHE_NO, 100, 0, "", "", "");
+
+                                } catch (Exception ex){
+
+                                }
+
+
+
+
+                            }
+                        });
+
+
 
                     }
 
