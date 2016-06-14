@@ -174,17 +174,16 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
                                     String a = CallService.listAvaliations(TelaInicialActivity.this, MethodType.CACHE_NO, 100, 0, "", "", "");
 
+                                    Log.i("zzz", "zzz " + a);
+
                                 } catch (Exception ex){
-
+                                    ex.printStackTrace();
                                 }
-
-
-
 
                             }
                         });
 
-
+                        a.start();
 
                     }
 

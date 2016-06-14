@@ -68,13 +68,12 @@ public class ServiceDefault implements VersionRelease {
 
         RestSKD consumerSDK = new RestSKD(context);
 
-        consumerSDK.AddHeader("Authorization", "valor");
-
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         consumerSDK.setUrlFull(URL);
         consumerSDK.setCacheTime(999999999l);
 
+        /*
         consumerSDK.AddParam("limit", ""+limit);
 
         consumerSDK.AddParam("offset", ""+offset);
@@ -84,6 +83,7 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.AddParam("sort_by", ""+sortBy);
 
         consumerSDK.AddParam("sort_order", ""+sortOrder);
+        */
 
         // Primeiro Busca registro no cache, se não tiver busca no servidor
         if (methodType == null) {
