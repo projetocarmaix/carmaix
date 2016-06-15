@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#1A237E</color>
-    <color name="colorPrimaryDark">#311B92</color>
+    <color name="colorPrimaryDark">#1A237E</color>
     <color name="colorAccent">#536DFE</color>
 
 
@@ -19,5 +19,8 @@
     <color name="tab_laranja">#FFA726</color>
     <color name="tab_verde">#00C853</color>
     <color name="tab_roxo">#9C27B0</color>
+
+    <color name="linha_tabela_cinza">#E0E0E0</color>
+
 
 </resources>
