@@ -26,4 +26,7 @@
     <string name="header_classe">classe</string>
     <string name="header_avaliacao">avaliacao</string>
     <string name="header_opc">opc</string>
+
+    <string name="icone_buscar">buscar</string>
+
 </resources>
