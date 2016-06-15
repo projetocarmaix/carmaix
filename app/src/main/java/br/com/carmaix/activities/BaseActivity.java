@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import br.com.carmaix.R;
 
-public class BaseActivity extends AppCompatActivity
+public class BaseActivity extends ParentBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override

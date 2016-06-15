@@ -35,25 +35,6 @@ public class LoginController {
             throw new PasswordFieldException("Campo obrigatório!");
         }
 
-        /*
-        if (resultado) {
-
-            if (!model.getLogin().equals("admin") || !model.getLogin().equals("admin")) {
-
-                Toast toast = new Toast(validation.getActivity());
-                toast.makeText(validation.getActivity(), "Login/Senha inválidos!", Toast.LENGTH_LONG);
-                resultado = false;
-
-            } else {
-                SharedPreferences.Editor editor = validation.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE).edit();
-                editor.putString("login", validation.getLogin());
-                editor.putString("senha", validation.getSenha());
-                editor.commit();
-            }
-        }
-        return resultado;
-        */
-
     }
 
 

@@ -10,4 +10,9 @@
     <string name="lbl_senha">Senha</string>
     <string name="lbl_sair">Sair</string>
     <string name="btn_logar">Logar</string>
+
+    <string name="errorMessage500">Houve uma falha interna no servidor</string>
+    <string name="loadingEmpty">Aguarde...</string>
+
+
 </resources>

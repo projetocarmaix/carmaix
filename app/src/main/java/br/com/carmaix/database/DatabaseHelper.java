@@ -5,20 +5,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+
+import java.sql.SQLException;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     // name of the database file for your application -- change to something
     // appropriate for your app
-    private static final String DATABASE_NAME = "msdatabase.db";
+    private static final String DATABASE_NAME = "carmaixDatabase.db";
     // any time you make changes to your database objects, you may have to
     // increase the database version
     private static final int DATABASE_VERSION = 1;
 
     // the DAO object we use to access the SimpleData table
-    //private Dao<ServerInformation, Integer> serverInformationDao = null;
-    //private RuntimeExceptionDao<ServerInformation, Integer> serverInformationRuntimeDao = null;
+    private Dao<LoginTable, Integer> loginTableDao = null;
+    private RuntimeExceptionDao<LoginTable, Integer> loginTableRuntimeDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,15 +37,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
 
-        /*
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
-            //TableUtils.createTable(connectionSource, ServerInformation.class);
+            TableUtils.createTable(connectionSource, LoginTable.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
         }
-        */
 
     }
 
@@ -70,16 +73,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             e.printStackTrace();
 
-            /*
-
             try {
-                //TableUtils.dropTable(connectionSource, ServerInformation.class, true);
-                //TableUtils.createTable(connectionSource, ServerInformation.class);
+                TableUtils.dropTable(connectionSource, LoginTable.class, true);
+                TableUtils.createTable(connectionSource, LoginTable.class);
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-
-            */
 
         }
     }
@@ -88,16 +87,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * Returns the Database Access Object (DAO) for our SimpleData class. It
      * will create it or just give the cached value.
      */
-    /*
-    public Dao<ServerInformation, Integer> getDao() throws SQLException {
+    public Dao<LoginTable, Integer> getDao() throws SQLException {
 
-        if (serverInformationDao == null) {
-            serverInformationDao = getDao(ServerInformation.class);
+        if (loginTableDao == null) {
+            loginTableDao = getDao(LoginTable.class);
         }
-        return serverInformationDao;
+        return loginTableDao;
 
     }
-    */
 
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao
@@ -105,16 +102,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * value. RuntimeExceptionDao only through RuntimeExceptions.
      */
 
-    /*
-    public RuntimeExceptionDao<ServerInformation, Integer> getSimpleServerInformationDao() {
+    public RuntimeExceptionDao<LoginTable, Integer> getSimpleServerInformationDao() {
 
-        if (serverInformationRuntimeDao == null) {
-            serverInformationRuntimeDao = getRuntimeExceptionDao(ServerInformation.class);
+        if (loginTableRuntimeDao == null) {
+            loginTableRuntimeDao = getRuntimeExceptionDao(LoginTable.class);
         }
-        return serverInformationRuntimeDao;
+        return loginTableRuntimeDao;
 
     }
-    */
 
     /**
      * Close the database connections and clear any cached DAOs.
@@ -122,7 +117,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        //serverInformationRuntimeDao = null;
+        loginTableRuntimeDao = null;
     }
 
     @Override

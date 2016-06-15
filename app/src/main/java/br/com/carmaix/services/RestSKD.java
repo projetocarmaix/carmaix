@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.net.URI;
 import java.util.ArrayList;
 
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 
@@ -97,9 +98,9 @@ public class RestSKD {
     // esta variável controla como retornar o erro até que seja padronizado
     private Boolean catchErrorECM = false;
 
-    private String pathRest;
+    private String pathRest = "/restCache/";
 
-    private String pathRoot;
+    private String pathRoot = "/Android/data/" + Constants.APP + "/";
 
     public String getContentType() {
         return contentType;
@@ -187,6 +188,12 @@ public class RestSKD {
             AddHeader("Accept-Language", getDefaultLanguage());
 
             AddHeader("User-Agent", System.getProperty("http.agent"));
+
+            ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
+
+            if (application.getLoginTable() != null){
+                AddHeader("Authorization", "Bearer " + application.getLoginTable().getToken());
+            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
