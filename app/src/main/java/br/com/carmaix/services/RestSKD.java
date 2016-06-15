@@ -192,7 +192,7 @@ public class RestSKD {
             ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
 
             if (application.getLoginTable() != null){
-                AddHeader("Authorization", application.getLoginTable().getToken());
+                AddHeader("Authorization", "Bearer " + application.getLoginTable().getToken());
             }
 
         } catch (Exception ex) {

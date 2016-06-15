@@ -60,7 +60,9 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
-    public String listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public ListAvaliationReturn listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+
+        ListAvaliationReturn listAvaliationReturn = null;
 
         String textJson = "";
 
@@ -73,17 +75,21 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.setUrlFull(URL);
         consumerSDK.setCacheTime(999999999l);
 
-        /*
         consumerSDK.AddParam("limit", ""+limit);
 
         consumerSDK.AddParam("offset", ""+offset);
 
-        consumerSDK.AddParam("s", ""+status);
+        if (status != null && !status.equals("")){
+            consumerSDK.AddParam("s", ""+status);
+        }
 
-        consumerSDK.AddParam("sort_by", ""+sortBy);
+        if (sortBy != null && !sortBy.equals("")){
+            consumerSDK.AddParam("sort_by", ""+sortBy);
+        }
 
-        consumerSDK.AddParam("sort_order", ""+sortOrder);
-        */
+        if (sortOrder != null && !sortOrder.equals("")){
+            consumerSDK.AddParam("sort_order", ""+sortOrder);
+        }
 
         // Primeiro Busca registro no cache, se não tiver busca no servidor
         if (methodType == null) {
@@ -105,10 +111,35 @@ public class ServiceDefault implements VersionRelease {
             textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
         }
 
-        return textJson;
+        if (textJson != null) {
+
+            Gson gson = new Gson();
+
+            JsonParser parser = new JsonParser();
+
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            listAvaliationReturn = gson.fromJson(element, ListAvaliationReturn.class);
+
+        }
+
+        return listAvaliationReturn;
+
     }
 
-    public String searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public AvaliationReturn searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+
+        AvaliationReturn avaliationReturn = null;
 
         String textJson = "";
 
@@ -127,11 +158,17 @@ public class ServiceDefault implements VersionRelease {
 
         consumerSDK.AddParam("offset", ""+offset);
 
-        consumerSDK.AddParam("s", ""+status);
+        if (status != null && !status.equals("")){
+            consumerSDK.AddParam("s", ""+status);
+        }
 
-        consumerSDK.AddParam("sort_by", ""+sortBy);
+        if (sortBy != null && !sortBy.equals("")){
+            consumerSDK.AddParam("sort_by", ""+sortBy);
+        }
 
-        consumerSDK.AddParam("sort_order", ""+sortOrder);
+        if (sortOrder != null && !sortOrder.equals("")){
+            consumerSDK.AddParam("sort_order", ""+sortOrder);
+        }
 
         // Primeiro Busca registro no cache, se não tiver busca no servidor
         if (methodType == null) {
@@ -153,7 +190,30 @@ public class ServiceDefault implements VersionRelease {
             textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
         }
 
-        return textJson;
+        if (textJson != null) {
+
+            Gson gson = new Gson();
+
+            JsonParser parser = new JsonParser();
+
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            avaliationReturn = gson.fromJson(element, AvaliationReturn.class);
+
+        }
+
+        return avaliationReturn;
+
     }
 
     public String getAvaliationsDetail(Context context, MethodType methodType, int id) throws Exception{

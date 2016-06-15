@@ -32,11 +32,11 @@ public class CallService {
         return getVersionRelease().login(context, user, password);
     }
 
-    public static String listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public static ListAvaliationReturn listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
         return getVersionRelease().listAvaliations(context, methodType, limit, offset, status, sortBy, sortOrder);
     }
 
-    public static String searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public static AvaliationReturn searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
         return getVersionRelease().searchAvaliations(context, methodType, pattern, limit, offset, status, sortBy, sortOrder);
     }
 

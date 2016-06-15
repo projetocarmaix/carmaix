@@ -25,6 +25,7 @@ import java.util.List;
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.services.CallService;
+import br.com.carmaix.services.ListAvaliationReturn;
 import br.com.carmaix.services.MethodType;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
@@ -172,9 +173,9 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
                                 try{
 
-                                    String a = CallService.listAvaliations(TelaInicialActivity.this, MethodType.CACHE_NO, 100, 0, "", "", "");
+                                    ListAvaliationReturn a = CallService.listAvaliations(TelaInicialActivity.this, MethodType.CACHE_NO, 100, 0, "", "", "");
 
-                                    Log.i("zzz", "zzz " + a);
+                                    Log.i("zzz", "zzz " + a.getAvaliationReturns().get(0).getMarca());
 
                                 } catch (Exception ex){
                                     ex.printStackTrace();
