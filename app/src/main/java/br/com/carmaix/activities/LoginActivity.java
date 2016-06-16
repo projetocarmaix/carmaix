@@ -11,6 +11,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginFragment fragment;
 
     /*
+    # LOGIN
     private EditText edtLogin;
     private EditText edtSenha;
     private Button btnLogar;
