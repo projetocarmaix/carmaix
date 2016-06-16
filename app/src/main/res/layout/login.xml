@@ -1,22 +1,29 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/fundo_principal_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_toast"
     >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fundo_principal_login"
+        android:scaleType="centerCrop"
+    />
+
     <LinearLayout
+        android:layout_height="272dp"
+        android:layout_width="305dp"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:background="@color/branco"
-        android:layout_height="wrap_content"
-        android:layout_width="370dp"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal|center_vertical">
+        >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_carmaix_login"
-            android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
         />
 
@@ -25,7 +32,7 @@
             style="@style/Edt_Estilo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:hint="Login"
             android:textSize="17dp"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
@@ -37,7 +44,7 @@
             style="@style/Edt_Estilo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Senha"
+            android:hint="Senha"
             android:textSize="17dp"
             android:layout_marginTop="0dp"
             android:layout_marginLeft="30dp"
@@ -57,10 +64,51 @@
 
     </LinearLayout>
 
+</FrameLayout>
 
 
-</ScrollView>
+<!--<ImageView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:src="@drawable/logo_carmaix_login"
+android:layout_marginTop="25dp"
+android:layout_gravity="center_horizontal"
+    />
 
+<EditText
+android:id="@+id/edtLogin"
+style="@style/Edt_Estilo"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Login"
+android:textSize="17dp"
+android:layout_marginTop="15dp"
+android:layout_marginLeft="30dp"
+android:layout_marginRight="30dp"
+android:inputType="text" />
+
+<EditText
+android:id="@+id/edtSenha"
+style="@style/Edt_Estilo"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Senha"
+android:textSize="17dp"
+android:layout_marginTop="0dp"
+android:layout_marginLeft="30dp"
+android:layout_marginRight="30dp"
+android:inputType="text" />
+
+<Button
+android:id="@+id/btnLogar"
+android:layout_width="150dp"
+android:layout_height="40dp"
+android:layout_gravity="right"
+android:layout_marginRight="30dp"
+android:background="@color/colorPrimary"
+android:textColor="@color/branco"
+android:layout_marginBottom="25dp"
+android:text="@string/btn_logar" />-->
 
 <!--
 <LinearLayout
