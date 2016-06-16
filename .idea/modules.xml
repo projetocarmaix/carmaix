@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Carmaix.iml" filepath="$PROJECT_DIR$/Carmaix.iml" />
       <module fileurl="file://$PROJECT_DIR$/Carmaix2.iml" filepath="$PROJECT_DIR$/Carmaix2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/carmaix.iml" filepath="$PROJECT_DIR$/carmaix.iml" />
     </modules>
   </component>
 </project>

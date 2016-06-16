@@ -3,17 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.TabLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/avaliacaoTab"
-    />
-
     <android.support.v4.view.ViewPager
         android:id="@+id/avaliacaoViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="9"
     />
 
+    <android.support.design.widget.TabLayout
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:id="@+id/avaliacaoTab"
+        android:stretchColumns="*"
+        android:padding="5dip"
+        android:divider="@drawable/ic_launcher"
+        android:showDividers="middle"
+        android:text="teste">
+    </android.support.design.widget.TabLayout>
 </LinearLayout>
