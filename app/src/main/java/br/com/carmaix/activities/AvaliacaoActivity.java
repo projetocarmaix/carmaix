@@ -15,6 +15,4 @@ public class AvaliacaoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new AvaliacaoFragmentTab()).commit();
     }
-
-
 }
