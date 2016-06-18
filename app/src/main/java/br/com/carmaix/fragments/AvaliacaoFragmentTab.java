@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliacaoActivity;
 import br.com.carmaix.adapters.AvaliacaoTabAdapter;
 
 
@@ -21,6 +22,7 @@ import br.com.carmaix.adapters.AvaliacaoTabAdapter;
 public class AvaliacaoFragmentTab extends BaseFragment {
     private TabLayout tab;
     private ViewPager viewPager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,14 +42,19 @@ public class AvaliacaoFragmentTab extends BaseFragment {
             public void onPageSelected(int position) {
                 if(position == 0) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_cinza));
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
                 }else if(position == 1) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_vermelha));
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
                 }else if(position == 2) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_laranja));
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
                 }else if(position == 3) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_verde));
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
                 }else if(position == 4) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_roxo));
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
                 }
             }
 
@@ -65,4 +72,7 @@ public class AvaliacaoFragmentTab extends BaseFragment {
         return view;
     }
 
+    public TabLayout.Tab getTabByIndex(int index) {
+        return tab.getTabAt(index);
+    }
 }
