@@ -17,9 +17,13 @@ public class Constants {
 
     public static final int ACTION_LOGIN = 1;
     public static final int ACTION_LOGOFF = 2;
+    public static final int ACTION_LIST = 3;
+    public static final int ACTION_REFRESH = 4;
+    public static final int ACTION_LIST_SERVER = 5;
+    public static final int ACTION_LIST_OLDER = 6;
 
     public static final String LOGOFF = "LOGOFF";
 
-
+    public static int MAX_ITEMS = 10;
 
 }

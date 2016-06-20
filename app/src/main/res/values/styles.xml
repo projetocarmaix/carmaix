@@ -51,5 +51,7 @@
         <item name="android:background">@color/primary_alert</item>
     </style>
 
+    <style name="CustomProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+    </style>
 
 </resources>
