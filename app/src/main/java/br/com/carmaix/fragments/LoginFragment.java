@@ -21,6 +21,7 @@ import br.com.carmaix.exceptions.PasswordFieldException;
 import br.com.carmaix.model.LoginModel;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.TokenReturn;
+import br.com.carmaix.services.UserReturn;
 import br.com.carmaix.utils.Constants;
 
 
@@ -110,6 +111,8 @@ public class LoginFragment extends BaseFragment {
             TokenReturn token = CallService.login(fragmentActivity, model.getLogin(), model.getPassword());
 
             application.authorized(model.getLogin(), token);
+
+            UserReturn user = CallService.getUser(fragmentActivity);
 
         }
 
