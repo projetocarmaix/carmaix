@@ -21,7 +21,7 @@ import br.com.carmaix.R;
 public class BaseActivity extends ParentBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private SearchView mSearchView;
+    //private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class BaseActivity extends ParentBaseActivity
         }
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -74,6 +75,7 @@ public class BaseActivity extends ParentBaseActivity
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -100,9 +102,10 @@ public class BaseActivity extends ParentBaseActivity
         return true;
     }
 
+    /*
     private void setupSearchView(MenuItem searchItem) {
-
         searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
     }
+    */
 
 }

@@ -1,5 +1,6 @@
 package br.com.carmaix.fragments;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -14,31 +15,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.adapters.AvaliacaoAdapter;
-import br.com.carmaix.domain.Avaliacao;
-import br.com.carmaix.domain.AvaliacaoService;
 import br.com.carmaix.model.Model;
 import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.services.CallService;
-import br.com.carmaix.services.ListAvaliationReturn;
 import br.com.carmaix.services.MethodType;
 import br.com.carmaix.utils.Constants;
 
 /**
  * Created by fernando on 21/05/16.
  */
-public class AvaliacaoFragment extends BaseFragment {
+public class SearchAvaliationFragment extends BaseFragment {
+
+    private String query = "";
 
     private int countOffset = 1;
 
@@ -63,6 +58,23 @@ public class AvaliacaoFragment extends BaseFragment {
     protected Model model = null;
 
     private AvaliacaoAdapter avaliacaoAdapter = new AvaliacaoAdapter(fragmentActivity, new ArrayList<AvaliationReturn>());
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        Intent intent = fragmentActivity.getIntent();
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+
+            query = intent.getStringExtra(SearchManager.QUERY);
+
+        }
+
+
+
+    }
 
     @Nullable
     @Override
@@ -159,13 +171,13 @@ public class AvaliacaoFragment extends BaseFragment {
 
         this.model = new Model();
 
-        showProgressBar();
+        //showProgressBar();
 
         emptyView.setText("Carregando");
 
         //configureEmptyView();
 
-        runBackground("", false, true, Constants.ACTION_LIST);
+        //runBackground("", false, true, Constants.ACTION_LIST);
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -440,5 +452,7 @@ public class AvaliacaoFragment extends BaseFragment {
         }
 
     }
+
+
 
 }
