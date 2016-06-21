@@ -13,16 +13,21 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import br.com.carmaix.R;
+import br.com.carmaix.application.ApplicationCarmaix;
 
 public class BaseActivity extends ParentBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SearchView mSearchView;
-
+    private TextView companyName;
+    private TextView userName;
     private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,15 @@ public class BaseActivity extends ParentBaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        companyName = (TextView) findViewById(R.id.company_name);
+        userName = (TextView) findViewById(R.id.user_name);
+
+        /*companyName.setText(application.getLoginTable().getCompanyName());
+        userName.setText(application.getLoginTable().getUserName());*/
+
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
     }
