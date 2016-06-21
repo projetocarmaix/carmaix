@@ -43,12 +43,15 @@
             <menu>
                 <item
                     android:id="@+id/menu_tabela_passecarros"
+                    android:icon="@drawable/ic_tab_black_48dp"
                     android:title="@string/tabela_passecarros" />
                 <item
                     android:id="@+id/menu_alterar_senha"
+                    android:icon="@drawable/ic_lock_black_48dp"
                     android:title="@string/alterar_senha" />
                 <item
                     android:id="@+id/menu_sair"
+                    android:icon="@drawable/ic_exit_to_app_black_48dp"
                     android:title="@string/sair_menu" />
             </menu>
         </item>
