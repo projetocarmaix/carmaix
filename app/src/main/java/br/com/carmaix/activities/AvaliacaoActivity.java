@@ -45,44 +45,13 @@ public class AvaliacaoActivity extends BaseActivity {
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 
+        searchView.setIconified(true);
+
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-
-            if (searchView.getQuery().toString() != null && !searchView.getQuery().toString().equals("")){
-                onSearchRequested();
-                return true;
-            }
-
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupSearchView(MenuItem searchItem) {
         searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-    }
-
-    @Override
-    public boolean onSearchRequested() {
-
-        Bundle appData = new Bundle();
-
-        appData.putString("hello", "world");
-
-        startSearch(null, false, appData, false);
-
-        return true;
-
     }
 
 }

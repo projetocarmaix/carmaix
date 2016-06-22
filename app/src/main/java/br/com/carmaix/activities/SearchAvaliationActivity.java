@@ -36,6 +36,9 @@ public class SearchAvaliationActivity extends ParentBaseActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SearchAvaliationFragment()).commit();
 
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
@@ -62,17 +65,9 @@ public class SearchAvaliationActivity extends ParentBaseActivity {
 
         inflater.inflate(R.menu.main, menu);
 
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
         MenuItem menuItem = menu.findItem(R.id.action_search);
 
         setupSearchView(menuItem);
-
-        SearchView searchView = (SearchView) menuItem.getActionView();
-
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
 
         return true;
     }

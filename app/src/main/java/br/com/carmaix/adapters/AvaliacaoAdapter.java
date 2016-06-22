@@ -40,23 +40,11 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
         AvaliationReturn avaliacaoSelecionada = avaliacaoList.get(position);
 
-        /*
-        holder.avaliacaoNome.setText(avaliacaoSelecionada.getAvaliacaoNome());
-        holder.avaliacaoId.setText(avaliacaoSelecionada.getAvaliacaoId());
-        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAvaliacaoAno());
-        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getAvaliacaoAvaliacao());
-        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getAvaliacaoClasse());
-        holder.avaliacaoData.setText(avaliacaoSelecionada.getAvaliacaoData());
-        holder.avaliacaoMarca.setText(avaliacaoSelecionada.getAvaliacaoMarca());
-        holder.avaliacaoModelo.setText(avaliacaoSelecionada.getAvaliacaoModelo());
-        holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getAvaliacaoPlaca());
-        */
-
         holder.avaliacaoNome.setText(avaliacaoSelecionada.getNome());
         holder.avaliacaoId.setText(avaliacaoSelecionada.getId());
-        //holder.avaliacaoAno.setText(avaliacaoSelecionada.getAvaliacaoAno());
-        //holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getAvaliacaoAvaliacao());
-        //holder.avaliacaoClasse.setText(avaliacaoSelecionada.getAvaliacaoClasse());
+        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAno());
+        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getValor());
+        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getClasse());
         holder.avaliacaoData.setText(avaliacaoSelecionada.getData());
         holder.avaliacaoMarca.setText(avaliacaoSelecionada.getMarca());
         holder.avaliacaoModelo.setText(avaliacaoSelecionada.getModelo());

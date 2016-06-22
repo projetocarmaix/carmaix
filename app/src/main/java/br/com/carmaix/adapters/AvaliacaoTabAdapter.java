@@ -63,7 +63,7 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
             avaliacaoFragment = tab3;
 
-            bundle.putString("status",this.context.getResources().getString(R.string.tab_title_com_proposta));
+            bundle.putString("status", "proposta");
 
         }else if (position == 3) {
 
@@ -83,7 +83,7 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
             avaliacaoFragment = tab5;
 
-            bundle.putString("status",this.context.getResources().getString(R.string.tab_title_vendidos));
+            bundle.putString("status", "vendido");
 
         }
 
