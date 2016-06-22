@@ -20,6 +20,10 @@ public class Constants {
 
     public static final String LOGOFF = "LOGOFF";
 
-
+    public final static int TAB_CINZA = 0;
+    public static int TAB_VERMELHA = 1;
+    public static int TAB_LARANJA = 2;
+    public static int TAB_VERDE = 3;
+    public static int TAB_ROXO = 4;
 
 }

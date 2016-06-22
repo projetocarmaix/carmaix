@@ -45,4 +45,12 @@
 
     <string name="tabela_passecarros">Tabela Passecarros</string>
 
+    <string name="avaliacao">avaliação: %s</string>
+    <string name="marca">marca: %s</string>
+    <string name="modelo">modelo: %s</string>
+    <string name="placa">placa: %s</string>
+    <string name="visualizar">Visualizar</string>
+    <string name="avaliar">Avaliar</string>
+    <string name="revalidar">Revalidar</string>
+    <string name="selecione_uma_opcao">Selecione uma opção</string>
 </resources>

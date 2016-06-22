@@ -1,5 +1,6 @@
 package br.com.carmaix.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +30,15 @@ public class AvaliacaoFragment extends BaseFragment {
     private List<Avaliacao> avaliacaoList;
     private RecyclerView recyclerView;
     private String tipo;
+    private int tabIndex;
+
+    public AvaliacaoFragment() {}
+
+    @SuppressLint("ValidFragment")
+    public AvaliacaoFragment(int tabIndex) {
+        this.tabIndex = tabIndex;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,7 +72,7 @@ public class AvaliacaoFragment extends BaseFragment {
 
     private void taskAvaliacao() {
         this.avaliacaoList = AvaliacaoService.returnListAvaliacao(tipo);
-        recyclerView.setAdapter(new AvaliacaoAdapter(getContext(),this.avaliacaoList));
+        recyclerView.setAdapter(new AvaliacaoAdapter(getContext(),this.avaliacaoList, tabIndex));
     }
 
     @Override

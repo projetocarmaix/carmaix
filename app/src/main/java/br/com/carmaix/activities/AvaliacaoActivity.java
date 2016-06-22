@@ -6,12 +6,14 @@ import android.view.MenuItem;
 import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragment;
 import br.com.carmaix.fragments.AvaliacaoFragmentTab;
+import br.com.carmaix.utils.Constants;
 
 /**
  * Created by fernando on 21/05/16.
  */
 public class AvaliacaoActivity extends BaseActivity {
     private AvaliacaoFragmentTab avaliacaoFragmentTab = new AvaliacaoFragmentTab();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*commit da feature teste*/
@@ -24,15 +26,15 @@ public class AvaliacaoActivity extends BaseActivity {
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_nao_avaliados) {
-            avaliacaoFragmentTab.getTabByIndex(0).select();
+            avaliacaoFragmentTab.getTabByIndex(Constants.TAB_CINZA).select();
         }else if (id == R.id.menu_avaliados) {
-            avaliacaoFragmentTab.getTabByIndex(1).select();
+            avaliacaoFragmentTab.getTabByIndex(Constants.TAB_VERMELHA).select();
         }else if (id == R.id.menu_com_proposta) {
-            avaliacaoFragmentTab.getTabByIndex(2).select();
+            avaliacaoFragmentTab.getTabByIndex(Constants.TAB_LARANJA).select();
         }else if (id == R.id.menu_em_estoque) {
-            avaliacaoFragmentTab.getTabByIndex(3).select();
+            avaliacaoFragmentTab.getTabByIndex(Constants.TAB_VERDE).select();
         }else if (id == R.id.menu_vendidos) {
-            avaliacaoFragmentTab.getTabByIndex(4).select();
+            avaliacaoFragmentTab.getTabByIndex(Constants.TAB_ROXO).select();
         }
         super.onNavigationItemSelected(item);
         return true;

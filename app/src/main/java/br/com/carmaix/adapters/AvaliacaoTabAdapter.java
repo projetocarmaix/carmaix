@@ -22,7 +22,7 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        AvaliacaoFragment avaliacaoFragment = new AvaliacaoFragment();
+        AvaliacaoFragment avaliacaoFragment = new AvaliacaoFragment(position);
         Bundle bundle = new Bundle();
         if(position == 0) {
             bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_nao_avaliados));
