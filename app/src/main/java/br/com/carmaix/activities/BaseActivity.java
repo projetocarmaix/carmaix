@@ -45,11 +45,11 @@ public class BaseActivity extends ParentBaseActivity
         ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        companyName = (TextView) findViewById(R.id.company_name);
-        userName = (TextView) findViewById(R.id.user_name);
+        companyName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.company_name);
+        userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name);
 
-        /*companyName.setText(application.getLoginTable().getCompanyName());
-        userName.setText(application.getLoginTable().getUserName());*/
+        companyName.setText(application.getLoginTable().getCompanyName());
+        userName.setText(application.getLoginTable().getUserName());
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);

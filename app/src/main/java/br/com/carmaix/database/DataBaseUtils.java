@@ -316,7 +316,7 @@ public class DataBaseUtils {
 
     public static void includeUserData(ApplicationCarmaix application, UserReturn user, TokenReturn token, String userEmail) throws Exception {
 
-        LoginTable loginTable = new LoginTable();
+        LoginTable loginTable = application.getLoginTable();
         loginTable.setUserEmail(userEmail);
         loginTable.setToken(token.getToken());
         loginTable.setUserId(user.getId());

@@ -13,10 +13,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:background="@color/branco"
+        android:src="@drawable/ic_crop_original_black_48dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,6 +31,7 @@
             android:id="@+id/company_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/branco"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -37,6 +39,7 @@
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/branco"
         />
     </LinearLayout>
 
