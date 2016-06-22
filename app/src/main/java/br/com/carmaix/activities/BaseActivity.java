@@ -13,16 +13,22 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import br.com.carmaix.R;
+import br.com.carmaix.application.ApplicationCarmaix;
 
 public class BaseActivity extends ParentBaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SearchView mSearchView;
-
+    private TextView companyName;
+    private TextView userName;
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +42,17 @@ public class BaseActivity extends ParentBaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        companyName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.company_name);
+        userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name);
+
+        companyName.setText(application.getLoginTable().getCompanyName());
+        userName.setText(application.getLoginTable().getUserName());
+
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -78,23 +93,6 @@ public class BaseActivity extends ParentBaseActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -103,6 +101,10 @@ public class BaseActivity extends ParentBaseActivity
     private void setupSearchView(MenuItem searchItem) {
 
         searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+    }
+
+    public NavigationView getNavigationView() {
+        return navigationView;
     }
 
 }

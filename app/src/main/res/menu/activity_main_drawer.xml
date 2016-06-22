@@ -1,36 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/item1" android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/menu_nao_avaliados"
+            android:title="@string/nao_avaliados"
+            android:icon="@drawable/square_cinza"
+        />
+    </group>
+    <group android:id="@+id/item2" android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/menu_avaliados"
+            android:title="@string/avaliados"
+            android:icon="@drawable/square_vermelho"
+        />
+    </group>
+    <group android:id="@+id/item3" android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/menu_com_proposta"
+            android:title="@string/com_proposta"
+            android:icon="@drawable/square_laranja"
+        />
+    </group>
+    <group android:id="@+id/item4" android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/menu_em_estoque"
+            android:title="@string/em_estoque"
+            android:icon="@drawable/square_verde"
+        />
+    </group>
+    <group android:id="@+id/item5" android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_vendidos"
+            android:title="@string/vendidos"
+            android:icon="@drawable/square_roxo"
+        />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
-
+    <group android:id="@+id/item6" android:checkableBehavior="single">
+        <item android:title="@string/opcoes">
+            <menu>
+                <item
+                    android:id="@+id/menu_tabela_passecarros"
+                    android:icon="@drawable/ic_tab_black_48dp"
+                    android:title="@string/tabela_passecarros" />
+                <item
+                    android:id="@+id/menu_alterar_senha"
+                    android:icon="@drawable/ic_lock_black_48dp"
+                    android:title="@string/alterar_senha" />
+                <item
+                    android:id="@+id/menu_sair"
+                    android:icon="@drawable/ic_exit_to_app_black_48dp"
+                    android:title="@string/sair_menu" />
+            </menu>
+        </item>
+    </group>
 </menu>

@@ -12,4 +12,6 @@ public interface VersionRelease {
 
     String getAvaliationsDetail(Context context, MethodType methodType, int id) throws Exception;
 
+    UserReturn getUser(Context context) throws Exception;
+
 }

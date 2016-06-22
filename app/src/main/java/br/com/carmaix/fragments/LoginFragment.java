@@ -16,11 +16,13 @@ import br.com.carmaix.activities.BaseActivity;
 import br.com.carmaix.R;
 import br.com.carmaix.activities.TelaInicialActivity;
 import br.com.carmaix.controller.LoginController;
+import br.com.carmaix.database.DataBaseUtils;
 import br.com.carmaix.exceptions.LoginFieldException;
 import br.com.carmaix.exceptions.PasswordFieldException;
 import br.com.carmaix.model.LoginModel;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.TokenReturn;
+import br.com.carmaix.services.UserReturn;
 import br.com.carmaix.utils.Constants;
 
 
@@ -111,6 +113,8 @@ public class LoginFragment extends BaseFragment {
 
             application.authorized(model.getLogin(), token);
 
+            UserReturn user = CallService.getUser(fragmentActivity);
+            DataBaseUtils.includeUserData(application,user, token, model.getLogin());
         }
 
     }

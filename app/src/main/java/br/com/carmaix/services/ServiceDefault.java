@@ -2,13 +2,18 @@ package br.com.carmaix.services;
 
 
 import android.content.Context;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+
+import org.json.JSONObject;
+
 import br.com.carmaix.R;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.cache.CacheManager;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
@@ -55,7 +60,6 @@ public class ServiceDefault implements VersionRelease {
             tokenReturn = gson.fromJson(element, TokenReturn.class);
 
         }
-
         return tokenReturn;
 
     }
@@ -252,6 +256,56 @@ public class ServiceDefault implements VersionRelease {
         }
 
         return textJson;
+    }
+
+
+    public UserReturn getUser(Context context) throws Exception {
+        String idContrato = "";
+        String idUsuario = "";
+        String textJson = "";
+        ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
+        String token = application.getLoginTable().getToken();
+
+        UserReturn userReturn = null;
+        org.apache.commons.codec.binary.Base64 base64 = new org.apache.commons.codec.binary.Base64();
+        byte[] jsonByte = base64.decode(token.getBytes());
+        String converted = new String(jsonByte);
+        JSONObject jsonObject = new JSONObject(converted.substring(converted.lastIndexOf("\"data\":")+"\"data\":".length()));
+
+        idUsuario = (String) jsonObject.get("userId");
+        idContrato = (String) jsonObject.get("userContrato");
+        String URL = "https://apicarmaix1.websiteseguro.com/v1/contratos/"+idContrato+"/usuarios/"+idUsuario;
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setCacheTime(Constants.CACHE_TIME);
+        consumerSDK.setUrlFull(URL);
+        consumerSDK.setCacheTime(999999999l);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+
+        if (textJson != null) {
+
+            Gson gson = new Gson();
+
+            JsonParser parser = new JsonParser();
+
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            userReturn = gson.fromJson(element, UserReturn.class);
+
+        }
+        return userReturn;
     }
 
 }
