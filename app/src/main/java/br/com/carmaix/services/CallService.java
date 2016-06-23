@@ -38,7 +38,7 @@ public class CallService {
         return getVersionRelease().listAvaliations(context, methodType, limit, offset, status, sortBy, sortOrder);
     }
 
-    public static AvaliationReturn searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public static ArrayList<AvaliationReturn> searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
         return getVersionRelease().searchAvaliations(context, methodType, pattern, limit, offset, status, sortBy, sortOrder);
     }
 

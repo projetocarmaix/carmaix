@@ -23,6 +23,8 @@ import br.com.carmaix.fragments.SearchAvaliationFragment;
  */
 public class SearchAvaliationActivity extends ParentBaseActivity {
 
+    private SearchAvaliationFragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -39,24 +41,18 @@ public class SearchAvaliationActivity extends ParentBaseActivity {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SearchAvaliationFragment()).commit();
+        fragment = new SearchAvaliationFragment();
 
-        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragment).commit();
 
-            String query = getIntent().getStringExtra(SearchManager.QUERY);
-
-            Log.i("zzz", "zzz " + query);
-
-            Bundle appData = getIntent().getBundleExtra(SearchManager.APP_DATA);
-
-            if (appData != null) {
-                String hello = appData.getString("hello");
-            }
-
-        }
+        handleIntent(getIntent());
 
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,9 +61,20 @@ public class SearchAvaliationActivity extends ParentBaseActivity {
 
         inflater.inflate(R.menu.main, menu);
 
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
         MenuItem menuItem = menu.findItem(R.id.action_search);
 
         setupSearchView(menuItem);
+
+        SearchView searchView =
+                (SearchView) menuItem.getActionView();
+
+        searchView.setQuery("A", false);
+
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
 
         return true;
     }
@@ -76,14 +83,18 @@ public class SearchAvaliationActivity extends ParentBaseActivity {
         searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    private void handleIntent(Intent intent) {
 
-//        if (id == R.id.search) {
-//            onSearchRequested();
-//            return true;
-//        }
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 
-        return super.onOptionsItemSelected(item);
+            String query = intent.getStringExtra(SearchManager.QUERY);
+
+            Log.i("zzz", "zzz query: " + query);
+
+            fragment.search(query);
+
+        }
     }
+
+
 }

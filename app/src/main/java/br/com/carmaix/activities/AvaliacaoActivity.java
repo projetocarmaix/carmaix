@@ -4,9 +4,11 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SearchEvent;
 
 import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragment;
@@ -54,4 +56,11 @@ public class AvaliacaoActivity extends BaseActivity {
         searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
     }
 
+    @Override
+    public boolean onSearchRequested(SearchEvent searchEvent) {
+
+        Log.i("zzz", "zzz onSearchRequested");
+
+        return super.onSearchRequested(searchEvent);
+    }
 }

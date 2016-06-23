@@ -25,6 +25,7 @@ public class Utils {
     public static boolean isConnected(Context context) {
 
         try {
+
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
             NetworkInfo netInfo = cm.getActiveNetworkInfo();

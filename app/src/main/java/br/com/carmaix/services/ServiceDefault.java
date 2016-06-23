@@ -143,17 +143,17 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
-    public AvaliationReturn searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public ArrayList<AvaliationReturn> searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
 
-        AvaliationReturn avaliationReturn = null;
+        ArrayList<AvaliationReturn> avaliationReturns = new ArrayList<AvaliationReturn>();
+
+        ListAvaliationReturn listAvaliationReturn = null;
 
         String textJson = "";
 
         String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + pattern;
 
         RestSKD consumerSDK = new RestSKD(context);
-
-        consumerSDK.AddHeader("Authorization", "valor");
 
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
@@ -213,11 +213,15 @@ public class ServiceDefault implements VersionRelease {
 
             }
 
-            avaliationReturn = gson.fromJson(element, AvaliationReturn.class);
+            listAvaliationReturn = gson.fromJson(element, ListAvaliationReturn.class);
+
+            if (listAvaliationReturn.getAvaliationReturns() != null){
+                avaliationReturns.addAll(listAvaliationReturn.getAvaliationReturns());
+            }
 
         }
 
-        return avaliationReturn;
+        return avaliationReturns;
 
     }
 

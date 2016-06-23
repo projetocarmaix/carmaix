@@ -35,12 +35,6 @@ public class SearchAvaliationFragment extends BaseFragment {
 
     private String query = "";
 
-    private int countOffset = 1;
-
-    private boolean loading = true;
-
-    int pastVisiblesItems, visibleItemCount, totalItemCount;
-
     private LinearLayoutManager linearLayoutManager;
 
     private ArrayList<AvaliationReturn> avaliationReturns;
@@ -55,8 +49,6 @@ public class SearchAvaliationFragment extends BaseFragment {
 
     private String status;
 
-    protected Model model = null;
-
     private AvaliacaoAdapter avaliacaoAdapter = new AvaliacaoAdapter(fragmentActivity, new ArrayList<AvaliationReturn>());
 
     @Override
@@ -64,6 +56,7 @@ public class SearchAvaliationFragment extends BaseFragment {
 
         super.onCreate(savedInstanceState);
 
+        /*
         Intent intent = fragmentActivity.getIntent();
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -71,8 +64,7 @@ public class SearchAvaliationFragment extends BaseFragment {
             query = intent.getStringExtra(SearchManager.QUERY);
 
         }
-
-
+        */
 
     }
 
@@ -109,35 +101,7 @@ public class SearchAvaliationFragment extends BaseFragment {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
                 super.onScrolled(recyclerView, dx, dy);
-
-                if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
-                    mSwipeRefreshLayout.setEnabled(true);
-                } else {
-                    mSwipeRefreshLayout.setEnabled(false);
-                }
-
-                if (dy > 0) //check for scroll down
-                {
-                    visibleItemCount = linearLayoutManager.getChildCount();
-                    totalItemCount = linearLayoutManager.getItemCount();
-                    pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-
-                    if (loading) {
-
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-
-                            loading = false;
-
-                            actionLast();
-
-                        }
-                    }
-                } else {
-                    loading = true;
-                }
-
             }
 
         });
@@ -145,15 +109,7 @@ public class SearchAvaliationFragment extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
             @Override
-            public void onRefresh() {
-
-                countOffset = 1;
-
-                showProgressBar();
-
-                //lst_chats.setEmptyView(layoutLoading);
-                runBackground("", false, true, Constants.ACTION_REFRESH);
-            }
+            public void onRefresh() {}
 
         });
 
@@ -168,17 +124,6 @@ public class SearchAvaliationFragment extends BaseFragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-
-        this.model = new Model();
-
-        //showProgressBar();
-
-        emptyView.setText("Carregando");
-
-        //configureEmptyView();
-
-        //runBackground("", false, true, Constants.ACTION_LIST);
-
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -190,127 +135,28 @@ public class SearchAvaliationFragment extends BaseFragment {
     }
 
     @Override
-    protected void backgroundMethod(int action) throws Throwable {
+    protected void backgroundMethod(int action, Object... params) throws Throwable {
 
-        if (action == Constants.ACTION_LIST || action == Constants.ACTION_REFRESH) {
+        if (action == Constants.ACTION_SEARCH){
 
-            Thread.sleep(2000);
+            String query = (String) params[0];
 
-            ArrayList<AvaliationReturn> avaliationReturns = null;
-
-            if (action == Constants.ACTION_LIST) {
-
-                avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_YES, Constants.MAX_ITEMS, 0, status, "", "");
-
-                if (avaliationReturns == null || avaliationReturns.size() == 0) {
-
-                    avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_NO, Constants.MAX_ITEMS, 0, status, "", "");
-
-                    this.model.setVerifiCache(false);
-
-                } else {
-                    this.model.setVerifiCache(true);
-                }
-
-            } else if (action == Constants.ACTION_REFRESH) {
-
-                avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_NO, Constants.MAX_ITEMS, 0, status, "", "");
-
-            }
+            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, status, "", "");
 
             this.avaliationReturns = avaliationReturns;
 
-        } else if (action == Constants.ACTION_LIST_SERVER) {
-
-            ArrayList<AvaliationReturn> avaliationReturns = null;
-
-            avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_NO, Constants.MAX_ITEMS, 0, status, "", "");
-
-            if (avaliationReturns != null && avaliationReturns.size() > 0) {
-
-                this.model.setRefreshListData(true);
-                this.avaliationReturns = avaliationReturns;
-
-            } else {
-
-                // Ocorre quando existe dados no cache
-                if (avaliationReturns == null) {
-                    this.model.setRefreshListData(false);
-                } else {
-
-                    // Os dados foram sobrescritos e devem ser readicionados
-                    this.model.setRefreshListData(true);
-                    this.avaliationReturns = avaliationReturns;
-
-                }
-
-            }
-
-        } else if (action == Constants.ACTION_LIST_OLDER) {
-            loadOlder(action);
         }
 
-        super.backgroundMethod(action);
+        super.backgroundMethod(action, params);
 
     }
 
     @Override
-    protected void onEndBackgroundRun(int action) {
+    protected void onEndBackgroundRun(int action, Object... params) {
 
-        if (action == Constants.ACTION_LIST || action == Constants.ACTION_REFRESH) {
+        if (action == Constants.ACTION_SEARCH) {
 
             endBackGroundList();
-
-            if (action == Constants.ACTION_LIST) {
-
-                if (this.model.isVerifiCache()) {
-                    runBackground("", false, true, Constants.ACTION_LIST_SERVER);
-                } else {
-
-                    hideProgressBar();
-
-                    /*
-                    if (entries.size() == 0) {
-                        setEmptyPages();
-                    }
-                    */
-
-                }
-
-            } else {
-
-                mSwipeRefreshLayout.setRefreshing(false);
-
-                hideProgressBar();
-
-                /*
-
-                if (entries.size() == 0) {
-                    setEmptyPages();
-                }
-
-                */
-
-            }
-
-        } else if (action == Constants.ACTION_LIST_SERVER) {
-
-            hideProgressBar();
-
-            /*
-            if (model.isRefreshListData()) {
-                endBackGroundList();
-            }
-
-            if (entries.size() == 0) {
-                setEmptyPages();
-            }
-
-            */
-
-        } else if (action == Constants.ACTION_LIST_OLDER) {
-
-            //footerView.hide();
 
             hideProgressBar();
 
@@ -328,16 +174,6 @@ public class SearchAvaliationFragment extends BaseFragment {
         hideProgressBar();
 
         setEmptyText(e.getMessage());
-
-        if (action == Constants.ACTION_REFRESH) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
-
-        /*
-        if (action == Constants.ACTION_LIST_OLDER) {
-            footerView.hide();
-        }
-        */
 
         super.onBackGroundMethodException(e, highPriority, action, params);
 
@@ -380,66 +216,6 @@ public class SearchAvaliationFragment extends BaseFragment {
         return true;
     }
 
-    protected void actionLast() {
-
-        if (avaliacaoAdapter != null && avaliacaoAdapter.getItemCount() >= Constants.MAX_ITEMS * countOffset) {
-
-            countOffset++;
-
-            //footerView.show();
-
-            showProgressBar();
-
-            runBackground("", false, true, Constants.ACTION_LIST_OLDER);
-
-        }
-
-    }
-
-    private void loadOlder(int action) throws Exception {
-
-        try {
-
-            ArrayList<AvaliationReturn> avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_NO, Constants.MAX_ITEMS, avaliacaoAdapter.getItemCount(), status, "", "");
-
-            if (avaliationReturns != null && avaliationReturns.size() > 0){
-                this.avaliationReturns.addAll(avaliationReturns);
-            }
-
-            Runnable finishedLoadingOldestTask = new LoadOldestResult(avaliationReturns);
-
-            handler.post(finishedLoadingOldestTask);
-
-        } catch (Exception e) {
-            countOffset = countOffset - 1;
-            throw e;
-        }
-
-    }
-
-    private class LoadOldestResult implements Runnable {
-
-        private ArrayList<AvaliationReturn> avaliationReturns;
-
-        public LoadOldestResult(ArrayList<AvaliationReturn> avaliationReturns) {
-            super();
-            this.avaliationReturns = avaliationReturns;
-        }
-
-        @Override
-        public void run() {
-            finishedLoadingOldest(avaliationReturns);
-        }
-    }
-
-    protected void finishedLoadingOldest(ArrayList<AvaliationReturn> avaliationReturns) {
-        appendOldest(avaliationReturns);
-    }
-
-    public void appendOldest(ArrayList<AvaliationReturn> avaliationReturns) {
-        avaliacaoAdapter.addItems(avaliationReturns);
-    }
-
     private void configureEmptyView(){
 
         if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
@@ -454,5 +230,11 @@ public class SearchAvaliationFragment extends BaseFragment {
     }
 
 
+    public void search(String query) {
 
+        showProgressBar();
+
+        runBackgroundParams("", false, true, Constants.ACTION_SEARCH, query);
+
+    }
 }
