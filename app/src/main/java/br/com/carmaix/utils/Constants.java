@@ -26,4 +26,6 @@ public class Constants {
     public static int TAB_VERDE = 3;
     public static int TAB_ROXO = 4;
 
+    public static String URL_VISUALIZAR_AVALIACAO = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes";
+
 }

@@ -1,6 +1,7 @@
 package br.com.carmaix.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.domain.Avaliacao;
 import br.com.carmaix.utils.Constants;
 
@@ -129,7 +131,8 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     visualizar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(context,"visualizar",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, AvaliacaoVisualizarActivity.class);
+                            context.startActivity(intent);
                         }
                     });
 

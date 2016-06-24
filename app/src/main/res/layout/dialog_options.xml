@@ -78,7 +78,7 @@
 
        <TextView android:layout_height="wrap_content"
            android:id="@+id/dialog_visualizar"
-           android:layout_width="wrap_content"
+           android:layout_width="match_parent"
            android:paddingLeft="20dp"
            android:text="@string/visualizar"
            android:textSize="15dp"
@@ -93,7 +93,7 @@
 
         <TextView android:layout_height="wrap_content"
             android:id="@+id/dialog_avaliar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:paddingLeft="20dp"
             android:text="@string/avaliar"
             android:textSize="15dp"
@@ -108,7 +108,7 @@
 
         <TextView android:layout_height="wrap_content"
             android:id="@+id/dialog_revalidar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:paddingLeft="20dp"
             android:text="@string/revalidar"
             android:textSize="15dp"
