@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.utils.Constants;
 
@@ -29,7 +30,8 @@ public class AvaliacaoVisualizarFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.avaliacao_visualizar_fragment,container,false);
         webView = (WebView)view.findViewById(R.id.avaliacao_visualizar_webview);
         progressBar = (ProgressBar)view.findViewById(R.id.avaliacao_visualizar_progress_bar);
-        String avaliacaoId = "237072";
+        String avaliacaoId = ((AvaliacaoVisualizarActivity)getActivity()).getAvaliacaoId();
+        avaliacaoId = "237072";
         setWebViewClient();
         ApplicationCarmaix application = (ApplicationCarmaix) getActivity().getApplicationContext();
 

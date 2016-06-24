@@ -89,7 +89,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    TextView avaliacaoId = (TextView)view.findViewById(R.id.avaliacao_id);
+                    final TextView avaliacaoId = (TextView)view.findViewById(R.id.avaliacao_id);
                     TextView avaliacaoMarca = (TextView)view.findViewById(R.id.avaliacao_marca);
                     TextView avaliacaoModelo = (TextView)view.findViewById(R.id.avaliacao_modelo);
                     TextView avaliacaoPlaca = (TextView)view.findViewById(R.id.avaliacao_placa);
@@ -132,6 +132,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(context, AvaliacaoVisualizarActivity.class);
+                            intent.putExtra("avaliacaoId",avaliacaoId.getText());
                             context.startActivity(intent);
                         }
                     });
