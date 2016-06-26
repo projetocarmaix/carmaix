@@ -8,6 +8,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.apache.http.protocol.HTTP;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 import br.com.carmaix.R;
 import br.com.carmaix.cache.CacheManager;
 import br.com.carmaix.utils.Constants;
@@ -27,7 +32,6 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.setMethodHttpType(MethodHttpType.GET_AND_POST);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         consumerSDK.setUrlFull(URL);
-        consumerSDK.setCacheTime(999999999l);
 
         consumerSDK.AddParam("username", user);
         consumerSDK.AddParam("password", password);
@@ -60,7 +64,9 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
-    public ListAvaliationReturn listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public ArrayList<AvaliationReturn> listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+
+        ArrayList<AvaliationReturn> avaliationReturns = new ArrayList<AvaliationReturn>();
 
         ListAvaliationReturn listAvaliationReturn = null;
 
@@ -73,7 +79,6 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         consumerSDK.setUrlFull(URL);
-        consumerSDK.setCacheTime(999999999l);
 
         consumerSDK.AddParam("limit", ""+limit);
 
@@ -131,28 +136,31 @@ public class ServiceDefault implements VersionRelease {
 
             listAvaliationReturn = gson.fromJson(element, ListAvaliationReturn.class);
 
+            if (listAvaliationReturn.getAvaliationReturns() != null){
+                avaliationReturns.addAll(listAvaliationReturn.getAvaliationReturns());
+            }
+
         }
 
-        return listAvaliationReturn;
+        return avaliationReturns;
 
     }
 
-    public AvaliationReturn searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public ArrayList<AvaliationReturn> searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
 
-        AvaliationReturn avaliationReturn = null;
+        ArrayList<AvaliationReturn> avaliationReturns = new ArrayList<AvaliationReturn>();
+
+        ListAvaliationReturn listAvaliationReturn = null;
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + pattern;
+        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + URLEncoder.encode(pattern, HTTP.UTF_8);
 
         RestSKD consumerSDK = new RestSKD(context);
-
-        consumerSDK.AddHeader("Authorization", "valor");
 
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         consumerSDK.setUrlFull(URL);
-        consumerSDK.setCacheTime(999999999l);
 
         consumerSDK.AddParam("limit", ""+limit);
 
@@ -208,11 +216,15 @@ public class ServiceDefault implements VersionRelease {
 
             }
 
-            avaliationReturn = gson.fromJson(element, AvaliationReturn.class);
+            listAvaliationReturn = gson.fromJson(element, ListAvaliationReturn.class);
+
+            if (listAvaliationReturn.getAvaliationReturns() != null){
+                avaliationReturns.addAll(listAvaliationReturn.getAvaliationReturns());
+            }
 
         }
 
-        return avaliationReturn;
+        return avaliationReturns;
 
     }
 
@@ -229,7 +241,6 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         consumerSDK.setUrlFull(URL);
-        consumerSDK.setCacheTime(999999999l);
 
         // Primeiro Busca registro no cache, se não tiver busca no servidor
         if (methodType == null) {

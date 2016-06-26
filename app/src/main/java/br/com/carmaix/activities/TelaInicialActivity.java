@@ -167,25 +167,6 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
                         startActivity(i);
 
-                        Thread a = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                try{
-
-                                    ListAvaliationReturn a = CallService.listAvaliations(TelaInicialActivity.this, MethodType.CACHE_NO, 100, 0, "", "", "");
-
-                                    Log.i("zzz", "zzz " + a.getAvaliationReturns().get(0).getMarca());
-
-                                } catch (Exception ex){
-                                    ex.printStackTrace();
-                                }
-
-                            }
-                        });
-
-                        a.start();
-
                     }
 
                 }

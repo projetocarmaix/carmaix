@@ -8,19 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.domain.Avaliacao;
+import br.com.carmaix.services.AvaliationReturn;
 
 /**
  * Created by fernando on 22/05/16.
  */
 public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.AvaliacaoViewHolder> {
     private final Context context;
-    private final List<Avaliacao> avaliacaoList;
-    private Avaliacao avaliacaoSelecionada;
-    public AvaliacaoAdapter(Context context, List<Avaliacao> avaliacaoList) {
+
+    private final ArrayList<AvaliationReturn> avaliacaoList;
+
+    public AvaliacaoAdapter(Context context, ArrayList<AvaliationReturn> avaliacaoList) {
         this.context = context;
         this.avaliacaoList = avaliacaoList;
     }
@@ -34,16 +37,19 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
     @Override
     public void onBindViewHolder(AvaliacaoViewHolder holder, int position) {
-        avaliacaoSelecionada = avaliacaoList.get(position);
-        holder.avaliacaoNome.setText(avaliacaoSelecionada.getAvaliacaoNome());
-        holder.avaliacaoId.setText(avaliacaoSelecionada.getAvaliacaoId());
-        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAvaliacaoAno());
-        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getAvaliacaoAvaliacao());
-        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getAvaliacaoClasse());
-        holder.avaliacaoData.setText(avaliacaoSelecionada.getAvaliacaoData());
-        holder.avaliacaoMarca.setText(avaliacaoSelecionada.getAvaliacaoMarca());
-        holder.avaliacaoModelo.setText(avaliacaoSelecionada.getAvaliacaoModelo());
-        holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getAvaliacaoPlaca());
+
+        AvaliationReturn avaliacaoSelecionada = avaliacaoList.get(position);
+
+        holder.avaliacaoNome.setText(avaliacaoSelecionada.getNome());
+        holder.avaliacaoId.setText(avaliacaoSelecionada.getId());
+        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAno());
+        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getValor());
+        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getClasse());
+        holder.avaliacaoData.setText(avaliacaoSelecionada.getData());
+        holder.avaliacaoMarca.setText(avaliacaoSelecionada.getMarca());
+        holder.avaliacaoModelo.setText(avaliacaoSelecionada.getModelo());
+        holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getPlaca());
+
     }
 
 
@@ -53,6 +59,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
     }
 
     public static class AvaliacaoViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+
         private TextView avaliacaoId;
         private TextView avaliacaoData;
         private TextView avaliacaoMarca;
@@ -86,4 +93,15 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
             contextMenu.add(0, view.getId(), 0, "Revalidar");
         }
     }
+
+    public void addItems(ArrayList<AvaliationReturn> avaliationReturns){
+
+        if (avaliationReturns != null){
+            this.avaliacaoList.addAll(avaliationReturns);
+        }
+
+        this.notifyDataSetChanged();
+
+    }
+
 }
