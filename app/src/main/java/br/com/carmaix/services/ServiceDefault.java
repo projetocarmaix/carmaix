@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.apache.http.protocol.HTTP;
+
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
@@ -151,7 +154,7 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + pattern;
+        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + URLEncoder.encode(pattern, HTTP.UTF_8);
 
         RestSKD consumerSDK = new RestSKD(context);
 
