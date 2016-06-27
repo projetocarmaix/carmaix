@@ -43,8 +43,6 @@ public class SearchAvaliationFragment extends BaseFragment {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private TextView emptyView;
-
     private ProgressBar mProgressBar;
 
     private String status;
@@ -75,8 +73,6 @@ public class SearchAvaliationFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.avaliacao_fragment, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
-
-        emptyView = (TextView) view.findViewById(R.id.textEmpty);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
 
@@ -220,11 +216,11 @@ public class SearchAvaliationFragment extends BaseFragment {
 
         if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
             recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
+            //emptyView.setVisibility(View.VISIBLE);
         }
         else {
             recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
+            //emptyView.setVisibility(View.GONE);
         }
 
     }

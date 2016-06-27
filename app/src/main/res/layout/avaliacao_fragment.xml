@@ -26,7 +26,11 @@
 
             <include layout="@layout/avaliacao_adapter_header" />
 
-            <android.support.v7.widget.RecyclerView
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <br.com.carmaix.view.EmptyRecyclerView
                 android:id="@+id/avaliacaoRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,15 +39,16 @@
                 android:divider="@null"
                 android:listSelector="@android:color/transparent"
                 android:scrollbarStyle="outsideOverlay"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"/>
 
+            <include
+                layout="@layout/item_empty_list"
+                android:id="@+id/item_empty_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/textEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="teste"/>
-
+            </RelativeLayout>
 
         </LinearLayout>
 
