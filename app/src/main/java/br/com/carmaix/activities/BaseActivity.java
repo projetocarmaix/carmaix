@@ -1,23 +1,18 @@
 package br.com.carmaix.activities;
 
-import android.app.SearchManager;
-import android.app.SearchableInfo;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
@@ -28,6 +23,7 @@ public class BaseActivity extends ParentBaseActivity
     private SearchView mSearchView;
     private TextView companyName;
     private TextView userName;
+    private ImageView userImage;
     private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +37,7 @@ public class BaseActivity extends ParentBaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        companyName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.company_name);
-        userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name);
-
-        companyName.setText(application.getLoginTable().getCompanyName());
-        userName.setText(application.getLoginTable().getUserName());
-
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setItemIconTintList(null);
+        this.setupNavigationView();
     }
 
     @Override
@@ -107,4 +92,18 @@ public class BaseActivity extends ParentBaseActivity
         return navigationView;
     }
 
+    private void setupNavigationView() {
+        ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        companyName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.company_name);
+        userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name);
+        userImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_image);
+
+        companyName.setText(application.getLoginTable().getCompanyName());
+        userName.setText(application.getLoginTable().getUserName());
+        Picasso.with(this).load(application.getLoginTable().getCompanyLogo()).resize(50,50).centerInside().into(userImage);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
+    }
 }

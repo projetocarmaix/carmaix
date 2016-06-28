@@ -12,12 +12,12 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/user_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@color/branco"
-        android:src="@drawable/ic_crop_original_black_48dp" />
+    />
 
     <LinearLayout
         android:orientation="vertical"
