@@ -305,9 +305,7 @@ public class BaseFragment extends Fragment{
     protected void onEndBackgroundRun(int action, Object... params) {}
 
     protected void onBackGroundMethodException(Throwable e, boolean highPriority, int action, Object... params) {
-
         Utils.alertToast("", e.getMessage(), fragmentActivity);
-
     }
 
     public static class MyAlertDialogFragment extends DialogFragment {

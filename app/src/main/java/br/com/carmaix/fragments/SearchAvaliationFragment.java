@@ -27,6 +27,7 @@ import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.MethodType;
 import br.com.carmaix.utils.Constants;
+import br.com.carmaix.view.EmptyRecyclerView;
 
 /**
  * Created by fernando on 21/05/16.
@@ -39,9 +40,13 @@ public class SearchAvaliationFragment extends BaseFragment {
 
     private ArrayList<AvaliationReturn> avaliationReturns;
 
-    private RecyclerView recyclerView;
+    private EmptyRecyclerView recyclerView;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private View layoutEmpty = null;
+
+    private TextView emptyTextView = null;
 
     private ProgressBar mProgressBar;
 
@@ -72,9 +77,19 @@ public class SearchAvaliationFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.avaliacao_fragment, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
+        recyclerView = (EmptyRecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
+
+        layoutEmpty = view.findViewById(R.id.item_empty_list);
+
+        emptyTextView = (TextView) view.findViewById(R.id.textEmpty);
+
+        recyclerView.setEmptyView(layoutEmpty);
+
+        emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+
+        mSwipeRefreshLayout.setEnabled(false);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
@@ -154,6 +169,10 @@ public class SearchAvaliationFragment extends BaseFragment {
 
             endBackGroundList();
 
+            if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+                emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
+            }
+
             hideProgressBar();
 
         }
@@ -169,7 +188,7 @@ public class SearchAvaliationFragment extends BaseFragment {
 
         hideProgressBar();
 
-        setEmptyText(e.getMessage());
+        emptyTextView.setText(fragmentActivity.getString(R.string.errorServer));
 
         super.onBackGroundMethodException(e, highPriority, action, params);
 
@@ -212,23 +231,13 @@ public class SearchAvaliationFragment extends BaseFragment {
         return true;
     }
 
-    private void configureEmptyView(){
-
-        if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-            recyclerView.setVisibility(View.GONE);
-            //emptyView.setVisibility(View.VISIBLE);
-        }
-        else {
-            recyclerView.setVisibility(View.VISIBLE);
-            //emptyView.setVisibility(View.GONE);
-        }
-
-    }
-
-
     public void search(String query) {
 
         showProgressBar();
+
+        if (emptyTextView != null){
+            emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
+        }
 
         runBackgroundParams("", false, true, Constants.ACTION_SEARCH, query);
 
