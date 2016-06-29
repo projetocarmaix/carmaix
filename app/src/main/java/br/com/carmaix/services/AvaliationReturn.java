@@ -19,14 +19,29 @@ public class AvaliationReturn {
     @SerializedName("placa")
     private String placa;
 
-    @SerializedName("situacao")
-    private String situacao;
-
     @SerializedName("modelo")
     private String modelo;
 
     @SerializedName("marca")
     private String marca;
+
+    @SerializedName("ano")
+    private String ano;
+
+    @SerializedName("classe")
+    private String classe;
+
+    @SerializedName("valor")
+    private String valor;
+
+    @SerializedName("situacao")
+    private String situacao;
+
+    @SerializedName("vendedor_id")
+    private String vendedor_id;
+
+    @SerializedName("validade")
+    private String validade;
 
     public String getId() {
         return id;
@@ -82,5 +97,45 @@ public class AvaliationReturn {
 
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public String getVendedor_id() {
+        return vendedor_id;
+    }
+
+    public void setVendedor_id(String vendedor_id) {
+        this.vendedor_id = vendedor_id;
+    }
+
+    public String getValidade() {
+        return validade;
+    }
+
+    public void setValidade(String validade) {
+        this.validade = validade;
     }
 }

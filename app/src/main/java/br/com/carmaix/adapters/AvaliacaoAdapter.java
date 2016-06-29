@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.domain.Avaliacao;
+import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.utils.Constants;
 
 /**
@@ -23,44 +26,42 @@ import br.com.carmaix.utils.Constants;
  */
 public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.AvaliacaoViewHolder> {
     private final Context context;
-    private final List<Avaliacao> avaliacaoList;
-    private Avaliacao avaliacaoSelecionada;
-    private int tabIndex;
-    public AvaliacaoAdapter(Context context, List<Avaliacao> avaliacaoList, int tabIndex) {
+
+    private final ArrayList<AvaliationReturn> avaliacaoList;
+
+    public AvaliacaoAdapter(Context context, ArrayList<AvaliationReturn> avaliacaoList) {
         this.context = context;
         this.avaliacaoList = avaliacaoList;
-        this.tabIndex = tabIndex;
     }
 
     @Override
     public AvaliacaoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.avaliacao_adapter,parent,false);
-        AvaliacaoViewHolder avaliacaoViewHolder = new AvaliacaoViewHolder(view,context, tabIndex);
+        AvaliacaoViewHolder avaliacaoViewHolder = new AvaliacaoViewHolder(view,context);
         return avaliacaoViewHolder;
     }
 
     @Override
     public void onBindViewHolder(AvaliacaoViewHolder holder, int position) {
-        avaliacaoSelecionada = avaliacaoList.get(position);
-        holder.avaliacaoNome.setText(avaliacaoSelecionada.getAvaliacaoNome());
-        holder.avaliacaoId.setText(avaliacaoSelecionada.getAvaliacaoId());
-        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAvaliacaoAno());
-        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getAvaliacaoAvaliacao());
-        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getAvaliacaoClasse());
-        holder.avaliacaoData.setText(avaliacaoSelecionada.getAvaliacaoData());
-        holder.avaliacaoMarca.setText(avaliacaoSelecionada.getAvaliacaoMarca());
-        holder.avaliacaoModelo.setText(avaliacaoSelecionada.getAvaliacaoModelo());
-        holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getAvaliacaoPlaca());
+
+        AvaliationReturn avaliacaoSelecionada = avaliacaoList.get(position);
+
+        holder.avaliacaoNome.setText(avaliacaoSelecionada.getNome());
+        holder.avaliacaoId.setText(avaliacaoSelecionada.getId());
+        holder.avaliacaoAno.setText(avaliacaoSelecionada.getAno());
+        holder.avaliacaoAvaliacao.setText(avaliacaoSelecionada.getValor());
+        holder.avaliacaoClasse.setText(avaliacaoSelecionada.getClasse());
+        holder.avaliacaoData.setText(avaliacaoSelecionada.getData());
+        holder.avaliacaoMarca.setText(avaliacaoSelecionada.getMarca());
+        holder.avaliacaoModelo.setText(avaliacaoSelecionada.getModelo());
+        holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getPlaca());
+        holder.setSituacao(avaliacaoSelecionada.getSituacao());
     }
 
 
     @Override
     public int getItemCount() {
         return this.avaliacaoList.size();
-    }
-
-    public Context getContext() {
-        return context;
     }
 
     public static class AvaliacaoViewHolder extends RecyclerView.ViewHolder  {
@@ -73,8 +74,9 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         private TextView avaliacaoClasse;
         private TextView avaliacaoAvaliacao;
         private TextView avaliacaoNome;
+        private String situacao;
 
-        public AvaliacaoViewHolder(View itemView, final Context context, final int tabIndex) {
+        public AvaliacaoViewHolder(View itemView, final Context context) {
             super(itemView);
             avaliacaoId = (TextView) itemView.findViewById(R.id.avaliacao_id);
             avaliacaoData = (TextView) itemView.findViewById(R.id.avaliacao_data);
@@ -138,28 +140,48 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     });
 
                     LinearLayout optionsGroup = (LinearLayout)options.findViewById(R.id.options_group);
-                    this.setbackgroundColor(tabIndex, optionsGroup);
+                    this.setbackgroundColor(optionsGroup);
                     alerBuilder.setView(options);
                     alerBuilder.create().show();
 
                     return false;
                 }
 
-                private void setbackgroundColor(int tabIndex, LinearLayout optionsGroup) {
-                    if(tabIndex == Constants.TAB_CINZA) {
+                private void setbackgroundColor(LinearLayout optionsGroup) {
+                    String situacao = getSituacao();
+                    if(situacao.equals(Constants.SITUACAO_NAO_AVALIADO)) {
                         optionsGroup.setBackgroundColor(context.getResources().getColor(R.color.tab_cinza));
-                    }else if(tabIndex == Constants.TAB_VERMELHA) {
+                    }else if(situacao.equals(Constants.SITUACAO_AVALIADO)) {
                         optionsGroup.setBackgroundColor(context.getResources().getColor(R.color.tab_vermelha));
-                    }else if(tabIndex == Constants.TAB_LARANJA) {
+                    }else if(situacao.equals(Constants.SITUACAO_PROPOSTA)) {
                         optionsGroup.setBackgroundColor(context.getResources().getColor(R.color.tab_laranja));
-                    }else if(tabIndex == Constants.TAB_VERDE) {
+                    }else if(situacao.equals(Constants.SITUACAO_ESTOQUE)) {
                         optionsGroup.setBackgroundColor(context.getResources().getColor(R.color.tab_verde));
-                    }else if(tabIndex == Constants.TAB_ROXO) {
+                    }else if(situacao.equals(Constants.SITUACAO_VENDIDO)) {
                         optionsGroup.setBackgroundColor(context.getResources().getColor(R.color.tab_roxo));
                     }
                 }
             });
 
         }
+
+        public void setSituacao(String situacao) {
+            this.situacao = situacao;
+        }
+
+        public String getSituacao() {
+            return situacao;
+        }
     }
+
+    public void addItems(ArrayList<AvaliationReturn> avaliationReturns){
+
+        if (avaliationReturns != null){
+            this.avaliacaoList.addAll(avaliationReturns);
+        }
+
+        this.notifyDataSetChanged();
+
+    }
+
 }

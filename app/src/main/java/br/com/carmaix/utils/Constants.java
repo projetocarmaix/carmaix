@@ -17,6 +17,11 @@ public class Constants {
 
     public static final int ACTION_LOGIN = 1;
     public static final int ACTION_LOGOFF = 2;
+    public static final int ACTION_LIST = 3;
+    public static final int ACTION_REFRESH = 4;
+    public static final int ACTION_LIST_SERVER = 5;
+    public static final int ACTION_LIST_OLDER = 6;
+    public static final int ACTION_SEARCH = 7;
 
     public static final String LOGOFF = "LOGOFF";
 
@@ -27,5 +32,12 @@ public class Constants {
     public static int TAB_ROXO = 4;
 
     public static String URL_VISUALIZAR_AVALIACAO = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes";
+    public static int MAX_ITEMS = 10;
+
+    public static String SITUACAO_NAO_AVALIADO = "Pré-Cadastro";
+    public static String SITUACAO_AVALIADO = "Avaliado";
+    public static String SITUACAO_PROPOSTA = "Proposta";
+    public static String SITUACAO_ESTOQUE = "Estoque";
+    public static String SITUACAO_VENDIDO = "Vendido";
 
 }

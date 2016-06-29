@@ -14,7 +14,15 @@ import br.com.carmaix.fragments.AvaliacaoFragment;
  * Created by fernando on 23/05/16.
  */
 public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
+
+    private AvaliacaoFragment tab1 = null;
+    private AvaliacaoFragment tab2 = null;
+    private AvaliacaoFragment tab3 = null;
+    private AvaliacaoFragment tab4 = null;
+    private AvaliacaoFragment tab5 = null;
+
     private Context context;
+
     public AvaliacaoTabAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
@@ -22,18 +30,61 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        AvaliacaoFragment avaliacaoFragment = new AvaliacaoFragment(position);
+
+        AvaliacaoFragment avaliacaoFragment = null;
+
         Bundle bundle = new Bundle();
+
         if(position == 0) {
-            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_nao_avaliados));
+
+            if (tab1 == null){
+                tab1 = new AvaliacaoFragment();
+            }
+
+            avaliacaoFragment = tab1;
+
+            bundle.putString("status", "pré-cadastro");
+
         }else if (position == 1) {
-            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_avaliados));
+
+            if (tab2 == null){
+                tab2 = new AvaliacaoFragment();
+            }
+
+            avaliacaoFragment = tab2;
+
+            bundle.putString("status", "avaliado");
+
         }else if (position == 2) {
-            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_com_proposta));
+
+            if (tab3 == null){
+                tab3 = new AvaliacaoFragment();
+            }
+
+            avaliacaoFragment = tab3;
+
+            bundle.putString("status", "proposta");
+
         }else if (position == 3) {
-            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_em_estoque));
+
+            if (tab4 == null){
+                tab4 = new AvaliacaoFragment();
+            }
+
+            avaliacaoFragment = tab4;
+
+            bundle.putString("status", "estoque");
+
         }else if (position == 4) {
-            bundle.putString("tipo",this.context.getResources().getString(R.string.tab_title_vendidos));
+
+            if (tab5 == null){
+                tab5 = new AvaliacaoFragment();
+            }
+
+            avaliacaoFragment = tab5;
+
+            bundle.putString("status", "vendido");
+
         }
 
         avaliacaoFragment.setArguments(bundle);

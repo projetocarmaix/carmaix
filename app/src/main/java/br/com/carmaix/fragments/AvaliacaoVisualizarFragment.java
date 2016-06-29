@@ -31,7 +31,6 @@ public class AvaliacaoVisualizarFragment extends BaseFragment {
         webView = (WebView)view.findViewById(R.id.avaliacao_visualizar_webview);
         progressBar = (ProgressBar)view.findViewById(R.id.avaliacao_visualizar_progress_bar);
         String avaliacaoId = ((AvaliacaoVisualizarActivity)getActivity()).getAvaliacaoId();
-        avaliacaoId = "237072";
         setWebViewClient();
         ApplicationCarmaix application = (ApplicationCarmaix) getActivity().getApplicationContext();
 

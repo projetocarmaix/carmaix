@@ -2,6 +2,8 @@ package br.com.carmaix.services;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 public class CallService {
 
     public static String getVersionReleaseServerLogged() {
@@ -32,15 +34,18 @@ public class CallService {
         return getVersionRelease().login(context, user, password);
     }
 
+
     public static UserReturn getUser(Context context) throws Exception{
         return getVersionRelease().getUser(context);
     }
 
-    public static ListAvaliationReturn listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+
+    public static ArrayList<AvaliationReturn> listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+
         return getVersionRelease().listAvaliations(context, methodType, limit, offset, status, sortBy, sortOrder);
     }
 
-    public static AvaliationReturn searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+    public static ArrayList<AvaliationReturn> searchAvaliations(Context context, MethodType methodType, String pattern, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
         return getVersionRelease().searchAvaliations(context, methodType, pattern, limit, offset, status, sortBy, sortOrder);
     }
 
