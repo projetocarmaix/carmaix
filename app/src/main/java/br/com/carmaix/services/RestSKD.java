@@ -552,9 +552,9 @@ public class RestSKD {
     }
 
     private String getUrlRequisition(String url) throws Exception {
-        return url
+        return (url
                 + (("?" + URLEncodedUtils.format(params, HTTP.UTF_8)).trim().length() <= 1 ? "" : "?"
-                        + URLEncodedUtils.format(params, HTTP.UTF_8));
+                        + URLEncodedUtils.format(params, HTTP.UTF_8))).replace("+", "%20");
     }
 
     private void addToGetHeader(String contentType, HttpGet httpGet){

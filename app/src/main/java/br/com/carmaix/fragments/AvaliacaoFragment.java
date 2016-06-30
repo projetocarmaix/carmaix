@@ -25,6 +25,7 @@ import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.MethodType;
 import br.com.carmaix.utils.Constants;
+import br.com.carmaix.view.EmptyRecyclerView;
 
 /**
  * Created by fernando on 21/05/16.
@@ -41,11 +42,13 @@ public class AvaliacaoFragment extends BaseFragment {
 
     private ArrayList<AvaliationReturn> avaliationReturns;
 
-    private RecyclerView recyclerView;
+    private EmptyRecyclerView recyclerView;
+
+    private View layoutEmpty = null;
+
+    private TextView emptyTextView = null;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private TextView emptyView;
 
     private ProgressBar mProgressBar;
 
@@ -61,9 +64,13 @@ public class AvaliacaoFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.avaliacao_fragment, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
+        recyclerView = (EmptyRecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
 
-        emptyView = (TextView) view.findViewById(R.id.textEmpty);
+        layoutEmpty = view.findViewById(R.id.item_empty_list);
+
+        emptyTextView = (TextView) view.findViewById(R.id.textEmpty);
+
+        recyclerView.setEmptyView(layoutEmpty);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
 
@@ -130,8 +137,10 @@ public class AvaliacaoFragment extends BaseFragment {
 
                 showProgressBar();
 
-                //lst_chats.setEmptyView(layoutLoading);
+                emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
+
                 runBackground("", false, true, Constants.ACTION_REFRESH);
+
             }
 
         });
@@ -152,9 +161,7 @@ public class AvaliacaoFragment extends BaseFragment {
 
         showProgressBar();
 
-        emptyView.setText("Carregando");
-
-        //configureEmptyView();
+        emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
 
         runBackground("", false, true, Constants.ACTION_LIST);
 
@@ -173,7 +180,7 @@ public class AvaliacaoFragment extends BaseFragment {
 
         if (action == Constants.ACTION_LIST || action == Constants.ACTION_REFRESH) {
 
-            Thread.sleep(2000);
+            Thread.sleep(5000);
 
             ArrayList<AvaliationReturn> avaliationReturns = null;
 
@@ -248,11 +255,9 @@ public class AvaliacaoFragment extends BaseFragment {
 
                     hideProgressBar();
 
-                    /*
-                    if (entries.size() == 0) {
-                        setEmptyPages();
+                    if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+                        emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
                     }
-                    */
 
                 }
 
@@ -262,13 +267,9 @@ public class AvaliacaoFragment extends BaseFragment {
 
                 hideProgressBar();
 
-                /*
-
-                if (entries.size() == 0) {
-                    setEmptyPages();
+                if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+                    emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
                 }
-
-                */
 
             }
 
@@ -276,23 +277,16 @@ public class AvaliacaoFragment extends BaseFragment {
 
             hideProgressBar();
 
-            /*
+            if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+                emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
+            }
+
             if (model.isRefreshListData()) {
                 endBackGroundList();
             }
 
-            if (entries.size() == 0) {
-                setEmptyPages();
-            }
-
-            */
-
         } else if (action == Constants.ACTION_LIST_OLDER) {
-
-            //footerView.hide();
-
             hideProgressBar();
-
         }
 
         super.onEndBackgroundRun(action);
@@ -304,19 +298,13 @@ public class AvaliacaoFragment extends BaseFragment {
 
         e.printStackTrace();
 
-        hideProgressBar();
+        emptyTextView.setText(fragmentActivity.getString(R.string.errorServer));
 
-        setEmptyText(e.getMessage());
+        hideProgressBar();
 
         if (action == Constants.ACTION_REFRESH) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
-
-        /*
-        if (action == Constants.ACTION_LIST_OLDER) {
-            footerView.hide();
-        }
-        */
 
         super.onBackGroundMethodException(e, highPriority, action, params);
 
@@ -364,8 +352,6 @@ public class AvaliacaoFragment extends BaseFragment {
         if (avaliacaoAdapter != null && avaliacaoAdapter.getItemCount() >= Constants.MAX_ITEMS * countOffset) {
 
             countOffset++;
-
-            //footerView.show();
 
             showProgressBar();
 
@@ -417,19 +403,6 @@ public class AvaliacaoFragment extends BaseFragment {
 
     public void appendOldest(ArrayList<AvaliationReturn> avaliationReturns) {
         avaliacaoAdapter.addItems(avaliationReturns);
-    }
-
-    private void configureEmptyView(){
-
-        if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        }
-        else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        }
-
     }
 
 }

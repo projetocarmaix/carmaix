@@ -32,12 +32,15 @@ public class Constants {
     public static int TAB_ROXO = 4;
 
     public static String URL_VISUALIZAR_AVALIACAO = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes";
-    public static int MAX_ITEMS = 10;
+
+    public static int MAX_ITEMS = 20;
 
     public static String SITUACAO_NAO_AVALIADO = "Pré-Cadastro";
     public static String SITUACAO_AVALIADO = "Avaliado";
     public static String SITUACAO_PROPOSTA = "Proposta";
     public static String SITUACAO_ESTOQUE = "Estoque";
     public static String SITUACAO_VENDIDO = "Vendido";
+
+    public static String typeStatus = "pre-cadastro";
 
 }

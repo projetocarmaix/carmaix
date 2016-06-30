@@ -14,6 +14,8 @@
 
     <string name="errorMessage500">Houve uma falha interna no servidor</string>
     <string name="loadingEmpty">Aguarde...</string>
+    <string name="emptyValues">Não existem itens disponíveis</string>
+    <string name="errorServer">Algo de errado aconteceu. Tente novamente.</string>
 
 
     <string name="tab_title_nao_avaliados">não avaliados</string>

@@ -38,8 +38,7 @@ public class SearchAvaliationActivity extends ParentBaseActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fragment = new SearchAvaliationFragment();
 

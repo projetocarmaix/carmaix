@@ -2,6 +2,7 @@ package br.com.carmaix.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -58,11 +59,13 @@ public class AvaliacaoActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onSearchRequested(SearchEvent searchEvent) {
+    public void onBackPressed() {
 
-        Log.i("zzz", "zzz onSearchRequested");
+        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
 
-        return super.onSearchRequested(searchEvent);
     }
 
     @Override
