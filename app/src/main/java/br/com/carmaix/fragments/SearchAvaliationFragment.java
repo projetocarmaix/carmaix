@@ -50,14 +50,14 @@ public class SearchAvaliationFragment extends BaseFragment {
 
     private ProgressBar mProgressBar;
 
-    private String status;
-
     private AvaliacaoAdapter avaliacaoAdapter = new AvaliacaoAdapter(fragmentActivity, new ArrayList<AvaliationReturn>());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        Log.i("zzz", "zzz " + Constants.typeStatus);
 
         /*
         Intent intent = fragmentActivity.getIntent();
@@ -126,10 +126,6 @@ public class SearchAvaliationFragment extends BaseFragment {
 
         registerForContextMenu(recyclerView);
 
-        if (this.getArguments() != null) {
-            status = (String) this.getArguments().get("status");
-        }
-
         return view;
     }
 
@@ -152,7 +148,7 @@ public class SearchAvaliationFragment extends BaseFragment {
 
             String query = (String) params[0];
 
-            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, status, "", "");
+            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, Constants.typeStatus, "", "");
 
             this.avaliationReturns = avaliationReturns;
 

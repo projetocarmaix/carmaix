@@ -158,7 +158,11 @@ public class DataBaseUtils {
         loginTable.setUserEmail(userEmail);
 
         loginTable.setToken(tokenReturn.getToken());
-        loginTable.setCompanyName("blaaaaa");
+
+        loginTable.setCompanyName("CompanyName");
+
+        loginTable.setCompanyLogo("CompanyLogo");
+
         RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
 
         simpleDao.create(loginTable);

@@ -27,10 +27,13 @@ public class AvaliacaoFragmentTab extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.avaliacao_fragment_tab,container,false);
+
         tab = (TabLayout)view.findViewById(R.id.avaliacaoTab);
 
         viewPager = (ViewPager)view.findViewById(R.id.avaliacaoViewPager);
+
         viewPager.setAdapter(new AvaliacaoTabAdapter(getContext(),getChildFragmentManager()));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

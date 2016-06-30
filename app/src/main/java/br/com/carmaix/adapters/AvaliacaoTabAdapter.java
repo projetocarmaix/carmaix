@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragment;
+import br.com.carmaix.utils.Constants;
 
 /**
  * Created by fernando on 23/05/16.
@@ -45,6 +46,8 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
             bundle.putString("status", "pre-cadastro");
 
+            Constants.typeStatus = "pre-cadastro";
+
         }else if (position == 1) {
 
             if (tab2 == null){
@@ -54,6 +57,8 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
             avaliacaoFragment = tab2;
 
             bundle.putString("status", "avaliado");
+
+            Constants.typeStatus = "avaliado";
 
         }else if (position == 2) {
 
@@ -65,6 +70,8 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
             bundle.putString("status", "proposta");
 
+            Constants.typeStatus = "proposta";
+
         }else if (position == 3) {
 
             if (tab4 == null){
@@ -75,6 +82,8 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
             bundle.putString("status", "estoque");
 
+            Constants.typeStatus = "estoque";
+
         }else if (position == 4) {
 
             if (tab5 == null){
@@ -84,6 +93,8 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
             avaliacaoFragment = tab5;
 
             bundle.putString("status", "vendido");
+
+            Constants.typeStatus = "vendido";
 
         }
 
