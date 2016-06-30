@@ -50,9 +50,11 @@
 
         <activity
             android:name=".activities.AvaliacaoVisualizarActivity"
-            android:screenOrientation="landscape"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activities.AvaliacaoActivity"
+            >
         </activity>
 
         <activity

@@ -6,6 +6,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 
 import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.services.TokenReturn;
+import br.com.carmaix.services.UserReturn;
 
 public class DataBaseUtils {
 
@@ -150,14 +151,14 @@ public class DataBaseUtils {
 
     */
 
-    public static void createAccount(ApplicationCarmaix application, String userName, TokenReturn tokenReturn) throws Exception {
+    public static void createAccount(ApplicationCarmaix application, String userEmail, TokenReturn tokenReturn) throws Exception {
 
         LoginTable loginTable = new LoginTable();
 
-        loginTable.setUsername(userName);
+        loginTable.setUserEmail(userEmail);
 
         loginTable.setToken(tokenReturn.getToken());
-
+        loginTable.setCompanyName("blaaaaa");
         RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
 
         simpleDao.create(loginTable);
@@ -313,4 +314,19 @@ public class DataBaseUtils {
 
     */
 
+    public static void includeUserData(ApplicationCarmaix application, UserReturn user, TokenReturn token, String userEmail) throws Exception {
+
+        LoginTable loginTable = application.getLoginTable();
+        loginTable.setUserEmail(userEmail);
+        loginTable.setToken(token.getToken());
+        loginTable.setUserId(user.getId());
+        loginTable.setUserName(user.getNome());
+        loginTable.setCompanyName(user.getNome_empresa());
+        loginTable.setCompanyLogo(user.getLogo_empresa());
+        loginTable.setUserId(user.getId());
+
+        RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
+        simpleDao.update(loginTable);
+
+    }
 }

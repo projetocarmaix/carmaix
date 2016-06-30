@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="vertical">
+
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25dp"
+            android:text="@string/selecione_uma_opcao"
+        />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:id="@+id/options_group"
+        android:layout_width="match_parent"
+        android:paddingLeft="20dp"
+        android:background="@color/tab_cinza"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
+        <TextView android:layout_height="wrap_content"
+            android:id="@+id/dialog_avaliacao"
+            android:layout_width="wrap_content"
+            android:text="@string/avaliacao"
+            android:textColor="@color/branco"
+            android:textAllCaps="true"
+            android:textSize="10dp"
+            />
+        <TextView android:layout_height="wrap_content"
+            android:id="@+id/dialog_marca"
+            android:layout_width="wrap_content"
+            android:textSize="10dp"
+            android:textAllCaps="true"
+            android:textColor="@color/branco"
+            android:text="@string/marca"
+            />
+        <TextView android:layout_height="wrap_content"
+            android:id="@+id/dialog_modelo"
+            android:layout_width="wrap_content"
+            android:textSize="10dp"
+            android:textAllCaps="true"
+            android:textColor="@color/branco"
+            android:text="@string/modelo"
+            />
+        <TextView android:layout_height="wrap_content"
+            android:id="@+id/dialog_placa"
+            android:layout_width="wrap_content"
+            android:textSize="10dp"
+            android:textAllCaps="true"
+            android:textColor="@color/branco"
+            android:text="@string/placa"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/linha_tabela_cinza" />
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+       <TextView android:layout_height="wrap_content"
+           android:id="@+id/dialog_visualizar"
+           android:layout_width="match_parent"
+           android:paddingLeft="20dp"
+           android:text="@string/visualizar"
+           android:textSize="15dp"
+           android:paddingTop="10dp"
+           android:paddingBottom="10dp"
+        />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/linha_tabela_cinza" />
+
+        <TextView android:layout_height="wrap_content"
+            android:id="@+id/dialog_avaliar"
+            android:layout_width="match_parent"
+            android:paddingLeft="20dp"
+            android:text="@string/avaliar"
+            android:textSize="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+        />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/linha_tabela_cinza" />
+
+        <TextView android:layout_height="wrap_content"
+            android:id="@+id/dialog_revalidar"
+            android:layout_width="match_parent"
+            android:paddingLeft="20dp"
+            android:text="@string/revalidar"
+            android:textSize="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+        />
+    </LinearLayout>
+</LinearLayout>

@@ -34,7 +34,14 @@ public class CallService {
         return getVersionRelease().login(context, user, password);
     }
 
+
+    public static UserReturn getUser(Context context) throws Exception{
+        return getVersionRelease().getUser(context);
+    }
+
+
     public static ArrayList<AvaliationReturn> listAvaliations(Context context, MethodType methodType, int limit, int offset, String status, String sortBy, String sortOrder) throws Exception{
+
         return getVersionRelease().listAvaliations(context, methodType, limit, offset, status, sortBy, sortOrder);
     }
 

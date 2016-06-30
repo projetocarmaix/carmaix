@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliacaoActivity;
 import br.com.carmaix.adapters.AvaliacaoTabAdapter;
+import br.com.carmaix.utils.Constants;
 
 
 /**
@@ -21,6 +23,7 @@ import br.com.carmaix.adapters.AvaliacaoTabAdapter;
 public class AvaliacaoFragmentTab extends BaseFragment {
     private TabLayout tab;
     private ViewPager viewPager;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,16 +41,21 @@ public class AvaliacaoFragmentTab extends BaseFragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0) {
+                if(position == Constants.TAB_CINZA) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_cinza));
-                }else if(position == 1) {
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
+                }else if(position == Constants.TAB_VERMELHA) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_vermelha));
-                }else if(position == 2) {
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
+                }else if(position == Constants.TAB_LARANJA) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_laranja));
-                }else if(position == 3) {
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
+                }else if(position == Constants.TAB_VERDE) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_verde));
-                }else if(position == 4) {
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
+                }else if(position == Constants.TAB_ROXO) {
                     tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_roxo));
+                    ((AvaliacaoActivity)getContext()).setItemMenuSelected(position);
                 }
             }
 
@@ -65,4 +73,7 @@ public class AvaliacaoFragmentTab extends BaseFragment {
         return view;
     }
 
+    public TabLayout.Tab getTabByIndex(int index) {
+        return tab.getTabAt(index);
+    }
 }

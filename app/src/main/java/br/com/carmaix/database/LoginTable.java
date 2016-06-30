@@ -16,10 +16,22 @@ public class LoginTable implements Serializable {
     int id;
 
     @DatabaseField
-    String username;
+    String userEmail;
 
     @DatabaseField
     String token;
+
+    @DatabaseField
+    String userId;
+
+    @DatabaseField
+    String userName;
+
+    @DatabaseField
+    String companyName;
+
+    @DatabaseField
+    String companyLogo;
 
     public int getId() {
         return id;
@@ -29,12 +41,44 @@ public class LoginTable implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getCompanyLogo() {
+        return companyLogo;
+    }
+
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getToken() {

@@ -25,6 +25,19 @@ public class Constants {
 
     public static final String LOGOFF = "LOGOFF";
 
+    public final static int TAB_CINZA = 0;
+    public static int TAB_VERMELHA = 1;
+    public static int TAB_LARANJA = 2;
+    public static int TAB_VERDE = 3;
+    public static int TAB_ROXO = 4;
+
+    public static String URL_VISUALIZAR_AVALIACAO = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes";
     public static int MAX_ITEMS = 10;
+
+    public static String SITUACAO_NAO_AVALIADO = "Pré-Cadastro";
+    public static String SITUACAO_AVALIADO = "Avaliado";
+    public static String SITUACAO_PROPOSTA = "Proposta";
+    public static String SITUACAO_ESTOQUE = "Estoque";
+    public static String SITUACAO_VENDIDO = "Vendido";
 
 }

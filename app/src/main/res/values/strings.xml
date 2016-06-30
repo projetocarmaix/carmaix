@@ -36,5 +36,23 @@
 
     <string name="icone_buscar">buscar</string>
 
+    <string name="alterar_senha">Alterar senha</string>
+    <string name="sair_menu">Sair</string>
+    <string name="nao_avaliados">Não avaliados</string>
+    <string name="avaliados">Avaliados</string>
+    <string name="com_proposta">Com proposta</string>
+    <string name="em_estoque">Em estoque</string>
+    <string name="vendidos">Vendidos</string>
+    <string name="opcoes">Opções</string>
 
+    <string name="tabela_passecarros">Tabela Passecarros</string>
+
+    <string name="avaliacao">avaliação: %s</string>
+    <string name="marca">marca: %s</string>
+    <string name="modelo">modelo: %s</string>
+    <string name="placa">placa: %s</string>
+    <string name="visualizar">Visualizar</string>
+    <string name="avaliar">Avaliar</string>
+    <string name="revalidar">Revalidar</string>
+    <string name="selecione_uma_opcao">Selecione uma opção</string>
 </resources>
