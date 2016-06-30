@@ -154,13 +154,15 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + URLEncoder.encode(pattern, HTTP.UTF_8);
+        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca";
 
         RestSKD consumerSDK = new RestSKD(context);
 
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         consumerSDK.setUrlFull(URL);
+
+        consumerSDK.AddParam("q", pattern);
 
         consumerSDK.AddParam("limit", ""+limit);
 

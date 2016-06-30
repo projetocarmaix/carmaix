@@ -43,7 +43,7 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
             avaliacaoFragment = tab1;
 
-            bundle.putString("status", "pré-cadastro");
+            bundle.putString("status", "pre-cadastro");
 
         }else if (position == 1) {
 
