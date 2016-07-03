@@ -31,7 +31,7 @@ public class AvaliacaoActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, avaliacaoFragmentTab).commit();
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -56,7 +56,7 @@ public class AvaliacaoActivity extends BaseActivity {
 
     private void setupSearchView(MenuItem searchItem) {
         searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-    }
+    }*/
 
     @Override
     public void onBackPressed() {

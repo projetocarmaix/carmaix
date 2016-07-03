@@ -57,7 +57,7 @@ public class SearchAvaliationFragment extends BaseFragment {
 
         super.onCreate(savedInstanceState);
 
-        Log.i("zzz", "zzz " + Constants.typeStatus);
+
 
         /*
         Intent intent = fragmentActivity.getIntent();
@@ -148,7 +148,7 @@ public class SearchAvaliationFragment extends BaseFragment {
 
             String query = (String) params[0];
 
-            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, Constants.typeStatus, "", "");
+            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, "vendido", "", "");
 
             this.avaliationReturns = avaliationReturns;
 

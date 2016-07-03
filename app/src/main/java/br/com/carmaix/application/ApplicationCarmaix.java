@@ -25,7 +25,6 @@ public class ApplicationCarmaix extends Application {
     private LoginTable loginTable;
 
 
-
     @Override
     public void onCreate() {
 

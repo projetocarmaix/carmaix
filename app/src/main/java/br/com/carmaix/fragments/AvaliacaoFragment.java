@@ -1,14 +1,19 @@
 package br.com.carmaix.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +25,7 @@ import java.util.ArrayList;
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.adapters.AvaliacaoAdapter;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.model.Model;
 import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.services.CallService;
@@ -30,7 +36,7 @@ import br.com.carmaix.view.EmptyRecyclerView;
 /**
  * Created by fernando on 21/05/16.
  */
-public class AvaliacaoFragment extends BaseFragment {
+public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQueryTextListener {
 
     private int countOffset = 1;
 
@@ -54,9 +60,31 @@ public class AvaliacaoFragment extends BaseFragment {
 
     private String status;
 
+    private int tab;
+
     protected Model model = null;
 
     private AvaliacaoAdapter avaliacaoAdapter = new AvaliacaoAdapter(fragmentActivity, new ArrayList<AvaliationReturn>());
+
+    @SuppressLint("ValidFragment")
+    public AvaliacaoFragment(int tab) {
+        this.tab = tab;
+
+        if(tab == Constants.TAB_CINZA) {
+            status = Constants.STATUS_NAO_AVALIADO;
+        }else if(tab == Constants.TAB_VERMELHA) {
+            status = Constants.STATUS_AVALIADO;
+        }else if(tab == Constants.TAB_LARANJA) {
+            status = Constants.STATUS_PROPOSTA;
+        }else if(tab == Constants.TAB_VERDE) {
+            status = Constants.STATUS_ESTOQUE;
+        }else if(tab == Constants.TAB_ROXO) {
+            status = Constants.STATUS_VENDIDO;
+        }
+
+    }
+
+    public AvaliacaoFragment(){}
 
     @Nullable
     @Override
@@ -146,10 +174,6 @@ public class AvaliacaoFragment extends BaseFragment {
         });
 
         registerForContextMenu(recyclerView);
-
-        if (this.getArguments() != null) {
-            status = (String) this.getArguments().get("status");
-        }
 
         return view;
     }
@@ -403,6 +427,83 @@ public class AvaliacaoFragment extends BaseFragment {
 
     public void appendOldest(ArrayList<AvaliationReturn> avaliationReturns) {
         avaliacaoAdapter.addItems(avaliationReturns);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        setupSearchView(menuItem);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+    }
+
+    private void setupSearchView(MenuItem searchItem) {
+        searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        this.search(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    public void search(String query) {
+
+        showProgressBar();
+
+        if (emptyTextView != null){
+            emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
+        }
+
+        runBackgroundParams("", false, true, Constants.ACTION_SEARCH, query);
+
+    }
+
+    @Override
+    protected void backgroundMethod(int action, Object... params) throws Throwable {
+
+        if (action == Constants.ACTION_SEARCH){
+
+            String query = (String) params[0];
+
+            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, status, "", "");
+
+            this.avaliationReturns = avaliationReturns;
+
+        }
+
+        super.backgroundMethod(action, params);
+
+    }
+
+    @Override
+    protected void onEndBackgroundRun(int action, Object... params) {
+
+        if (action == Constants.ACTION_SEARCH) {
+
+            endBackGroundList();
+
+            if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+                emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
+            }
+
+            hideProgressBar();
+
+        }
+
+        super.onEndBackgroundRun(action);
+
     }
 
 }

@@ -1,26 +1,19 @@
 package br.com.carmaix.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragment;
-import br.com.carmaix.utils.Constants;
 
 /**
  * Created by fernando on 23/05/16.
  */
 public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
-    private AvaliacaoFragment tab1 = null;
-    private AvaliacaoFragment tab2 = null;
-    private AvaliacaoFragment tab3 = null;
-    private AvaliacaoFragment tab4 = null;
-    private AvaliacaoFragment tab5 = null;
+    private AvaliacaoFragment avaliacaoFragment = null;
 
     private Context context;
 
@@ -31,75 +24,7 @@ public class AvaliacaoTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-        AvaliacaoFragment avaliacaoFragment = null;
-
-        Bundle bundle = new Bundle();
-
-        if(position == 0) {
-
-            if (tab1 == null){
-                tab1 = new AvaliacaoFragment();
-            }
-
-            avaliacaoFragment = tab1;
-
-            bundle.putString("status", "pre-cadastro");
-
-            Constants.typeStatus = "pre-cadastro";
-
-        }else if (position == 1) {
-
-            if (tab2 == null){
-                tab2 = new AvaliacaoFragment();
-            }
-
-            avaliacaoFragment = tab2;
-
-            bundle.putString("status", "avaliado");
-
-            Constants.typeStatus = "avaliado";
-
-        }else if (position == 2) {
-
-            if (tab3 == null){
-                tab3 = new AvaliacaoFragment();
-            }
-
-            avaliacaoFragment = tab3;
-
-            bundle.putString("status", "proposta");
-
-            Constants.typeStatus = "proposta";
-
-        }else if (position == 3) {
-
-            if (tab4 == null){
-                tab4 = new AvaliacaoFragment();
-            }
-
-            avaliacaoFragment = tab4;
-
-            bundle.putString("status", "estoque");
-
-            Constants.typeStatus = "estoque";
-
-        }else if (position == 4) {
-
-            if (tab5 == null){
-                tab5 = new AvaliacaoFragment();
-            }
-
-            avaliacaoFragment = tab5;
-
-            bundle.putString("status", "vendido");
-
-            Constants.typeStatus = "vendido";
-
-        }
-
-        avaliacaoFragment.setArguments(bundle);
-
+        avaliacaoFragment = new AvaliacaoFragment(position);
         return avaliacaoFragment;
     }
 

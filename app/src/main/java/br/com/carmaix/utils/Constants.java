@@ -41,6 +41,10 @@ public class Constants {
     public static String SITUACAO_ESTOQUE = "Estoque";
     public static String SITUACAO_VENDIDO = "Vendido";
 
-    public static String typeStatus = "pre-cadastro";
+    public final static String STATUS_NAO_AVALIADO = "pre-cadastro";
+    public final static String STATUS_AVALIADO = "avaliado";
+    public final static String STATUS_PROPOSTA = "proposta";
+    public final static String STATUS_ESTOQUE = "estoque";
+    public final static String STATUS_VENDIDO = "vendido";
 
 }
