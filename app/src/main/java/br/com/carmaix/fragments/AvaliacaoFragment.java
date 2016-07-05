@@ -11,7 +11,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,21 +18,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
-import br.com.carmaix.activities.AvaliacaoActivity;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.adapters.AvaliacaoAdapter;
-import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.model.Model;
 import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.MethodType;
 import br.com.carmaix.utils.Constants;
-import br.com.carmaix.view.EmptyRecyclerView;
 
 /**
  * Created by fernando on 21/05/16.
@@ -45,8 +40,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<AvaliationReturn> avaliationReturns;
     private RecyclerView recyclerView;
-    private View layoutEmpty = null;
-    private TextView emptyTextView = null;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar mProgressBar;
     private String status;
@@ -82,8 +75,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.avaliacao_fragment, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
-        layoutEmpty = view.findViewById(R.id.item_empty_list);
-        emptyTextView = (TextView) view.findViewById(R.id.textEmpty);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         mProgressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -131,7 +122,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
                 countOffset = 1;
                 queryString = "";
                 showProgressBar();
-                emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
 
                 runBackground("", false, true, Constants.ACTION_REFRESH);
 
@@ -151,11 +141,16 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
         showProgressBar();
 
-        emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
 
         runBackground("", false, true, Constants.ACTION_LIST);
 
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        countOffset = 1;
     }
 
     @Override
@@ -246,7 +241,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
                     hideProgressBar();
 
                     if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-                        emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
                     }
 
                 }
@@ -258,7 +252,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
                 hideProgressBar();
 
                 if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-                    emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
                 }
 
             }
@@ -267,7 +260,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
             hideProgressBar();
 
             if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-                emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
             }
 
             if (model.isRefreshListData()) {
@@ -287,7 +279,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
         e.printStackTrace();
 
-        emptyTextView.setText(fragmentActivity.getString(R.string.errorServer));
 
         hideProgressBar();
 
@@ -404,9 +395,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
         showProgressBar();
 
-        if (emptyTextView != null){
-            emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
-        }
         queryString = query;
         runBackgroundParams("", false, true, Constants.ACTION_SEARCH, query);
 
@@ -458,7 +446,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
             endBackGroundList();
 
             if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-                emptyTextView.setText(fragmentActivity.getString(R.string.emptyValues));
             }
 
             hideProgressBar();
@@ -466,6 +453,10 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
         }
 
         if (action == Constants.ACTION_SEARCH_LIST) {
+
+            if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+            }
+
             hideProgressBar();
         }
 
