@@ -22,6 +22,7 @@ public class Constants {
     public static final int ACTION_LIST_SERVER = 5;
     public static final int ACTION_LIST_OLDER = 6;
     public static final int ACTION_SEARCH = 7;
+    public static final int ACTION_SEARCH_LIST = 8;
 
     public static final String LOGOFF = "LOGOFF";
 

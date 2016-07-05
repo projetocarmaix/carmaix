@@ -2,18 +2,14 @@ package br.com.carmaix.services;
 
 
 import android.content.Context;
-import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-
 import org.json.JSONObject;
-import org.apache.http.protocol.HTTP;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;

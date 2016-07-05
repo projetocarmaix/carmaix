@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliacaoActivity;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.adapters.AvaliacaoAdapter;
 import br.com.carmaix.application.ApplicationCarmaix;
@@ -39,32 +41,19 @@ import br.com.carmaix.view.EmptyRecyclerView;
 public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQueryTextListener {
 
     private int countOffset = 1;
-
-    private boolean loading = true;
-
     int pastVisiblesItems, visibleItemCount, totalItemCount;
-
     private LinearLayoutManager linearLayoutManager;
-
     private ArrayList<AvaliationReturn> avaliationReturns;
-
-    private EmptyRecyclerView recyclerView;
-
+    private RecyclerView recyclerView;
     private View layoutEmpty = null;
-
     private TextView emptyTextView = null;
-
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
     private ProgressBar mProgressBar;
-
     private String status;
-
     private int tab;
-
     protected Model model = null;
-
     private AvaliacaoAdapter avaliacaoAdapter = new AvaliacaoAdapter(fragmentActivity, new ArrayList<AvaliationReturn>());
+    private String queryString;
 
     @SuppressLint("ValidFragment")
     public AvaliacaoFragment(int tab) {
@@ -82,6 +71,8 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
             status = Constants.STATUS_VENDIDO;
         }
 
+        this.queryString = "";
+
     }
 
     public AvaliacaoFragment(){}
@@ -89,23 +80,13 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.avaliacao_fragment, container, false);
-
-        recyclerView = (EmptyRecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
-
+        recyclerView = (RecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
         layoutEmpty = view.findViewById(R.id.item_empty_list);
-
         emptyTextView = (TextView) view.findViewById(R.id.textEmpty);
-
-        recyclerView.setEmptyView(layoutEmpty);
-
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
-
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-
         mProgressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-
         linearLayoutManager = new LinearLayoutManager(getActivity());
 
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -123,7 +104,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
@@ -132,26 +112,14 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
                     mSwipeRefreshLayout.setEnabled(false);
                 }
 
-                if (dy > 0) //check for scroll down
-                {
+                if (dy > 0) { //check for scroll down
                     visibleItemCount = linearLayoutManager.getChildCount();
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-
-                    if (loading) {
-
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-
-                            loading = false;
-
-                            actionLast();
-
-                        }
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        actionLast();
                     }
-                } else {
-                    loading = true;
                 }
-
             }
 
         });
@@ -160,11 +128,9 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
             @Override
             public void onRefresh() {
-
                 countOffset = 1;
-
+                queryString = "";
                 showProgressBar();
-
                 emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
 
                 runBackground("", false, true, Constants.ACTION_REFRESH);
@@ -257,7 +223,7 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
             }
 
         } else if (action == Constants.ACTION_LIST_OLDER) {
-            loadOlder(action);
+            loadOlder();
         }
 
         super.backgroundMethod(action);
@@ -296,7 +262,6 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
                 }
 
             }
-
         } else if (action == Constants.ACTION_LIST_SERVER) {
 
             hideProgressBar();
@@ -373,60 +338,37 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
     protected void actionLast() {
 
-        if (avaliacaoAdapter != null && avaliacaoAdapter.getItemCount() >= Constants.MAX_ITEMS * countOffset) {
+        if (avaliacaoAdapter != null && (avaliacaoAdapter.getItemCount() >= (Constants.MAX_ITEMS * countOffset))) {
 
             countOffset++;
-
             showProgressBar();
-
-            runBackground("", false, true, Constants.ACTION_LIST_OLDER);
-
+            if(queryString.isEmpty()) {
+                runBackground("", false, true, Constants.ACTION_LIST_OLDER);
+            }else {
+                runBackgroundParams("", false, true, Constants.ACTION_SEARCH_LIST, queryString, avaliacaoAdapter.getItemCount());
+            }
         }
 
     }
 
-    private void loadOlder(int action) throws Exception {
+    private void loadOlder() throws Exception {
 
         try {
-
             ArrayList<AvaliationReturn> avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_NO, Constants.MAX_ITEMS, avaliacaoAdapter.getItemCount(), status, "", "");
 
             if (avaliationReturns != null && avaliationReturns.size() > 0){
                 this.avaliationReturns.addAll(avaliationReturns);
+
+                ReceiverThread receiverThread = new ReceiverThread();
+                receiverThread.run();
+            }else {
+                countOffset = countOffset - 1;
             }
 
-            Runnable finishedLoadingOldestTask = new LoadOldestResult(avaliationReturns);
-
-            handler.post(finishedLoadingOldestTask);
-
         } catch (Exception e) {
-            countOffset = countOffset - 1;
             throw e;
         }
 
-    }
-
-    private class LoadOldestResult implements Runnable {
-
-        private ArrayList<AvaliationReturn> avaliationReturns;
-
-        public LoadOldestResult(ArrayList<AvaliationReturn> avaliationReturns) {
-            super();
-            this.avaliationReturns = avaliationReturns;
-        }
-
-        @Override
-        public void run() {
-            finishedLoadingOldest(avaliationReturns);
-        }
-    }
-
-    protected void finishedLoadingOldest(ArrayList<AvaliationReturn> avaliationReturns) {
-        appendOldest(avaliationReturns);
-    }
-
-    public void appendOldest(ArrayList<AvaliationReturn> avaliationReturns) {
-        avaliacaoAdapter.addItems(avaliationReturns);
     }
 
     @Override
@@ -465,17 +407,16 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
         if (emptyTextView != null){
             emptyTextView.setText(fragmentActivity.getString(R.string.loadingEmpty));
         }
-
+        queryString = query;
         runBackgroundParams("", false, true, Constants.ACTION_SEARCH, query);
 
     }
 
     @Override
     protected void backgroundMethod(int action, Object... params) throws Throwable {
+        String query = (String) params[0];
 
         if (action == Constants.ACTION_SEARCH){
-
-            String query = (String) params[0];
 
             ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, status, "", "");
 
@@ -483,8 +424,30 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
         }
 
+        if (action == Constants.ACTION_SEARCH_LIST) {
+            loadResultQuery(query);
+        }
+
         super.backgroundMethod(action, params);
 
+    }
+
+    private void loadResultQuery(String query) throws Exception {
+        try {
+            ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, avaliacaoAdapter.getItemCount(), status, "", "");
+
+            if (avaliationReturns != null && avaliationReturns.size() > 0){
+                this.avaliationReturns.addAll(avaliationReturns);
+
+                ReceiverThread receiverThread = new ReceiverThread();
+                receiverThread.run();
+            }else {
+                countOffset = countOffset - 1;
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
@@ -502,8 +465,23 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
         }
 
+        if (action == Constants.ACTION_SEARCH_LIST) {
+            hideProgressBar();
+        }
+
         super.onEndBackgroundRun(action);
 
     }
 
+    private class ReceiverThread extends Thread {
+        @Override
+        public void run() {
+            fragmentActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    avaliacaoAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
 }
