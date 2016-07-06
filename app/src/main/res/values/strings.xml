@@ -55,4 +55,6 @@
     <string name="avaliar">Avaliar</string>
     <string name="revalidar">Revalidar</string>
     <string name="selecione_uma_opcao">Selecione uma opção</string>
+
+    <string name="exibindo_resultados">Exibindo resultados para: %s</string>
 </resources>

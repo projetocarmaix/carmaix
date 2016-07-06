@@ -17,7 +17,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,10 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     protected Model model = null;
     private AvaliacaoAdapter avaliacaoAdapter = new AvaliacaoAdapter(fragmentActivity, new ArrayList<AvaliationReturn>());
     private String queryString;
-
+    private MenuItem menuItem;
+    private View searchResultsHeader;
+    private TextView resultsSearch;
+    private TextView textRefresh;
     @SuppressLint("ValidFragment")
     public AvaliacaoFragment(int tab) {
         this.tab = tab;
@@ -75,6 +80,11 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.avaliacao_fragment, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.avaliacaoRecyclerView);
+
+        searchResultsHeader = view.findViewById(R.id.search_results);
+        resultsSearch = (TextView) searchResultsHeader.findViewById(R.id.textResult);
+        textRefresh = (TextView) searchResultsHeader.findViewById(R.id.textRefresh);
+
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         mProgressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -119,19 +129,29 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
             @Override
             public void onRefresh() {
-                countOffset = 1;
-                queryString = "";
-                showProgressBar();
-
-                runBackground("", false, true, Constants.ACTION_REFRESH);
-
+                refreshList();
             }
 
         });
 
         registerForContextMenu(recyclerView);
 
+        textRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshList();
+            }
+        });
+
         return view;
+    }
+
+    private void refreshList() {
+        countOffset = 1;
+        queryString = "";
+        searchResultsHeader.setVisibility(View.GONE);
+        showProgressBar();
+        runBackground("", false, true, Constants.ACTION_REFRESH);
     }
 
     @Override
@@ -151,6 +171,8 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     public void onResume() {
         super.onResume();
         countOffset = 1;
+        queryString = "";
+        searchResultsHeader.setVisibility(View.GONE);
     }
 
     @Override
@@ -184,9 +206,7 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
                 }
 
             } else if (action == Constants.ACTION_REFRESH) {
-
                 avaliationReturns = CallService.listAvaliations(fragmentActivity, MethodType.CACHE_NO, Constants.MAX_ITEMS, 0, status, "", "");
-
             }
 
             this.avaliationReturns = avaliationReturns;
@@ -240,8 +260,7 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
                     hideProgressBar();
 
-                    if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-                    }
+                    if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {}
 
                 }
 
@@ -251,16 +270,14 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
                 hideProgressBar();
 
-                if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-                }
+                if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {}
 
             }
         } else if (action == Constants.ACTION_LIST_SERVER) {
 
             hideProgressBar();
 
-            if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
-            }
+            if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {}
 
             if (model.isRefreshListData()) {
                 endBackGroundList();
@@ -365,7 +382,7 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
+        this.menuItem = menu.findItem(R.id.action_search);
         setupSearchView(menuItem);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
@@ -382,7 +399,9 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        countOffset = 1;
         this.search(query);
+        menuItem.collapseActionView();
         return false;
     }
 
@@ -405,9 +424,7 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
         String query = (String) params[0];
 
         if (action == Constants.ACTION_SEARCH){
-
             ArrayList<AvaliationReturn> avaliationReturns = CallService.searchAvaliations(fragmentActivity, MethodType.CACHE_NO, query, Constants.MAX_ITEMS, 0, status, "", "");
-
             this.avaliationReturns = avaliationReturns;
 
         }
@@ -446,7 +463,10 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
             endBackGroundList();
 
             if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+
             }
+            resultsSearch.setText(String.format(fragmentActivity.getResources().getString(R.string.exibindo_resultados), queryString));
+            searchResultsHeader.setVisibility(View.VISIBLE);
 
             hideProgressBar();
 
@@ -455,6 +475,7 @@ public class AvaliacaoFragment extends BaseFragment implements SearchView.OnQuer
         if (action == Constants.ACTION_SEARCH_LIST) {
 
             if (avaliacaoAdapter == null || avaliacaoAdapter.getItemCount() == 0) {
+
             }
 
             hideProgressBar();

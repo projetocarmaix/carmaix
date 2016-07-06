@@ -24,6 +24,7 @@
                 style="@style/CustomProgressBar"
                 android:layout_alignParentTop="true"/>
 
+            <include layout="@layout/avaliacao_adapter_result_search" android:id="@+id/search_results" />
             <include layout="@layout/avaliacao_adapter_header" />
 
             <RelativeLayout
