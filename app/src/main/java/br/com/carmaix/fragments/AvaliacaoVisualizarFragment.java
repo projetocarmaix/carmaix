@@ -1,9 +1,18 @@
 package br.com.carmaix.fragments;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -32,6 +41,7 @@ public class AvaliacaoVisualizarFragment extends BaseFragment {
         progressBar = (ProgressBar)view.findViewById(R.id.avaliacao_visualizar_progress_bar);
         String avaliacaoId = ((AvaliacaoVisualizarActivity)getActivity()).getAvaliacaoId();
         setWebViewClient();
+
         ApplicationCarmaix application = (ApplicationCarmaix) getActivity().getApplicationContext();
 
         Map<String,String> header = new HashMap<>();
@@ -53,5 +63,37 @@ public class AvaliacaoVisualizarFragment extends BaseFragment {
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_visualizar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_print:
+                createWebPrintJob();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void createWebPrintJob() {
+
+        PrintManager printManager = (PrintManager) fragmentActivity.getSystemService(Context.PRINT_SERVICE);
+
+        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
+
+        String jobName = getString(R.string.app_name) + " Document";
+
+        printManager.print(jobName, printAdapter, new PrintAttributes.Builder().build());
     }
 }
