@@ -57,4 +57,11 @@
     <string name="selecione_uma_opcao">Selecione uma opção</string>
 
     <string name="exibindo_resultados">Exibindo resultados para: %s</string>
+
+    <string name="veiculo_cliente">VEÍCULO E CLIENTE</string>
+    <string name="opcionais">OPCIONAIS</string>
+    <string name="mecanica">MÊCANICA</string>
+    <string name="fotos">FOTOS</string>
+    <string name="estatistica_preco">ESTATÍSTICA E PREÇO</string>
+
 </resources>

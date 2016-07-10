@@ -17,6 +17,7 @@ import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
+import br.com.carmaix.activities.AvaliarActivity;
 import br.com.carmaix.domain.Avaliacao;
 import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.utils.Constants;
@@ -125,7 +126,8 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     avaliar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(context,"avaliar",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, AvaliarActivity.class);
+                            context.startActivity(intent);
                         }
                     });
 

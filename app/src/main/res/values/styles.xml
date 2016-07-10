@@ -53,4 +53,9 @@
     <style name="CustomProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
     </style>
 
+    <style name="CustomTabTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

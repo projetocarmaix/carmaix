@@ -19,7 +19,7 @@ public class AvaliacaoVisualizarActivity extends BaseActivityHomeAsUp {
             avaliacaoId = extras.getString("avaliacaoId");
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container_avaliacao_visualizar, new AvaliacaoVisualizarFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container_home_as_up, new AvaliacaoVisualizarFragment()).commit();
     }
 
     public String getAvaliacaoId() {

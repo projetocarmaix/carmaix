@@ -17,7 +17,7 @@
         <FrameLayout
             android:orientation="vertical"
             android:layout_height="match_parent" android:layout_width="match_parent"
-            android:id="@+id/main_container_avaliacao_visualizar"
+            android:id="@+id/main_container_home_as_up"
             />
     </LinearLayout>
 
