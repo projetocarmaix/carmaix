@@ -2,6 +2,8 @@ package br.com.carmaix.services;
 
 import android.content.Context;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public interface VersionRelease {
@@ -15,5 +17,7 @@ public interface VersionRelease {
     String getAvaliationsDetail(Context context, MethodType methodType, int id) throws Exception;
 
     UserReturn getUser(Context context) throws Exception;
+
+    TokenConvertedReturn getTokenConverted(Context context) throws JSONException;
 
 }

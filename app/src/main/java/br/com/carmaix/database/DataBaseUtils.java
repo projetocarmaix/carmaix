@@ -5,6 +5,7 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import br.com.carmaix.application.ApplicationCarmaix;
+import br.com.carmaix.services.TokenConvertedReturn;
 import br.com.carmaix.services.TokenReturn;
 import br.com.carmaix.services.UserReturn;
 
@@ -318,7 +319,7 @@ public class DataBaseUtils {
 
     */
 
-    public static void includeUserData(ApplicationCarmaix application, UserReturn user, TokenReturn token, String userEmail) throws Exception {
+    public static void includeUserData(ApplicationCarmaix application, UserReturn user, TokenConvertedReturn tokenConvertedReturn, TokenReturn token, String userEmail) throws Exception {
 
         LoginTable loginTable = application.getLoginTable();
         loginTable.setUserEmail(userEmail);
@@ -328,9 +329,12 @@ public class DataBaseUtils {
         loginTable.setCompanyName(user.getNome_empresa());
         loginTable.setCompanyLogo(user.getLogo_empresa());
         loginTable.setUserId(user.getId());
+        loginTable.setUserRevalida(tokenConvertedReturn.getUserRevalida());
 
         RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
         simpleDao.update(loginTable);
 
     }
+
+
 }

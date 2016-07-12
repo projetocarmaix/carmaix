@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -271,17 +272,11 @@ public class ServiceDefault implements VersionRelease {
         String idContrato = "";
         String idUsuario = "";
         String textJson = "";
-        ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
-        String token = application.getLoginTable().getToken();
 
         UserReturn userReturn = null;
-        org.apache.commons.codec.binary.Base64 base64 = new org.apache.commons.codec.binary.Base64();
-        byte[] jsonByte = base64.decode(token.getBytes());
-        String converted = new String(jsonByte);
-        JSONObject jsonObject = new JSONObject(converted.substring(converted.lastIndexOf("\"data\":")+"\"data\":".length()));
-
-        idUsuario = (String) jsonObject.get("userId");
-        idContrato = (String) jsonObject.get("userContrato");
+        TokenConvertedReturn tokenConvertedReturn = getTokenConverted(context);
+        idContrato = tokenConvertedReturn.getUserContrato();
+        idUsuario = tokenConvertedReturn.getUserId();
         String URL = "https://apicarmaix1.websiteseguro.com/v1/contratos/"+idContrato+"/usuarios/"+idUsuario;
 
         RestSKD consumerSDK = new RestSKD(context);
@@ -313,7 +308,29 @@ public class ServiceDefault implements VersionRelease {
             userReturn = gson.fromJson(element, UserReturn.class);
 
         }
+
         return userReturn;
     }
 
+    public TokenConvertedReturn getTokenConverted(Context context) throws JSONException {
+        ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
+        String token = application.getLoginTable().getToken();
+        TokenConvertedReturn tokenConvertedReturn = null;
+        org.apache.commons.codec.binary.Base64 base64 = new org.apache.commons.codec.binary.Base64();
+        byte[] jsonByte = base64.decode(token.getBytes());
+        String converted = new String(jsonByte);
+        JSONObject jsonObject = new JSONObject(converted.substring(converted.lastIndexOf("\"data\":")+"\"data\":".length()));
+
+        String textJson = jsonObject.toString();
+
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+            element = parser.parse(textJson);
+            tokenConvertedReturn = gson.fromJson(element, TokenConvertedReturn.class);
+        }
+
+        return tokenConvertedReturn;
+    }
 }

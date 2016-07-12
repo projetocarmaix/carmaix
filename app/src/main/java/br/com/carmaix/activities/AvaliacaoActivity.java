@@ -31,33 +31,6 @@ public class AvaliacaoActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, avaliacaoFragmentTab).commit();
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-
-        setupSearchView(menuItem);
-
-        searchView = (SearchView) menuItem.getActionView();
-
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-
-        searchView.setIconified(true);
-
-        return true;
-    }
-
-    private void setupSearchView(MenuItem searchItem) {
-        searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-    }*/
-
     @Override
     public void onBackPressed() {
 

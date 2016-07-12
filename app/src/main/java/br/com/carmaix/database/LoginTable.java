@@ -32,6 +32,9 @@ public class LoginTable implements Serializable {
     @DatabaseField
     String companyLogo;
 
+    @DatabaseField
+    String userRevalida;
+
     public int getId() {
         return id;
     }
@@ -86,5 +89,13 @@ public class LoginTable implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getUserRevalida() {
+        return userRevalida;
+    }
+
+    public void setUserRevalida(String userRevalida) {
+        this.userRevalida = userRevalida;
     }
 }

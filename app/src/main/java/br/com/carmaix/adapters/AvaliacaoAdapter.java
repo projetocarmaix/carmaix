@@ -18,6 +18,7 @@ import java.util.List;
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.activities.AvaliarActivity;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.domain.Avaliacao;
 import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.utils.Constants;
@@ -96,6 +97,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     TextView avaliacaoMarca = (TextView)view.findViewById(R.id.avaliacao_marca);
                     TextView avaliacaoModelo = (TextView)view.findViewById(R.id.avaliacao_modelo);
                     TextView avaliacaoPlaca = (TextView)view.findViewById(R.id.avaliacao_placa);
+                    String situacao = getSituacao();
 
                     AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = LayoutInflater.from(context);
@@ -115,21 +117,29 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
 
                     TextView revalidar = (TextView)options.findViewById(R.id.dialog_revalidar);
-                    revalidar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(context,"revalidar",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    if(exibeRevalidar(context)) {
+                        revalidar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(context, "revalidar", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else {
+                        revalidar.setVisibility(View.GONE);
+                    }
 
-                    TextView avaliar = (TextView)options.findViewById(R.id.dialog_avaliar);
-                    avaliar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(context, AvaliarActivity.class);
-                            context.startActivity(intent);
-                        }
-                    });
+                    TextView avaliar = (TextView) options.findViewById(R.id.dialog_avaliar);
+                    if(situacao.equals(Constants.SITUACAO_NAO_AVALIADO)) {
+                        avaliar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(context, AvaliarActivity.class);
+                                context.startActivity(intent);
+                            }
+                        });
+                    }else {
+                        avaliar.setVisibility(View.GONE);
+                    }
 
                     TextView visualizar = (TextView)options.findViewById(R.id.dialog_visualizar);
                     visualizar.setOnClickListener(new View.OnClickListener() {
@@ -174,6 +184,12 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         public String getSituacao() {
             return situacao;
         }
+
+        private Boolean exibeRevalidar(Context context) {
+            String situacao = getSituacao();
+            ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
+            return (situacao.equals(Constants.SITUACAO_AVALIADO) && (application.getLoginTable().getUserRevalida()).equals("1"));
+        }
     }
 
     public void addItems(ArrayList<AvaliationReturn> avaliationReturns){
@@ -185,5 +201,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         this.notifyDataSetChanged();
 
     }
+
+
 
 }

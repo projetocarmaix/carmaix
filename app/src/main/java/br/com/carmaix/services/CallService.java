@@ -53,4 +53,8 @@ public class CallService {
         return getVersionRelease().getAvaliationsDetail(context, methodType, id);
     }
 
+    public static TokenConvertedReturn getTokenConverted(Context context) throws Exception{
+        return getVersionRelease().getTokenConverted(context);
+    }
+
 }

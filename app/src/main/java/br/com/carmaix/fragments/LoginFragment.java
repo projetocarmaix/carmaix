@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import br.com.carmaix.exceptions.LoginFieldException;
 import br.com.carmaix.exceptions.PasswordFieldException;
 import br.com.carmaix.model.LoginModel;
 import br.com.carmaix.services.CallService;
+import br.com.carmaix.services.TokenConvertedReturn;
 import br.com.carmaix.services.TokenReturn;
 import br.com.carmaix.services.UserReturn;
 import br.com.carmaix.utils.Constants;
@@ -114,7 +116,8 @@ public class LoginFragment extends BaseFragment {
             application.authorized(model.getLogin(), token);
 
             UserReturn user = CallService.getUser(fragmentActivity);
-            DataBaseUtils.includeUserData(application,user, token, model.getLogin());
+            TokenConvertedReturn tokenConvertedReturn = CallService.getTokenConverted(fragmentActivity);
+            DataBaseUtils.includeUserData(application,user, tokenConvertedReturn, token, model.getLogin());
         }
 
     }
