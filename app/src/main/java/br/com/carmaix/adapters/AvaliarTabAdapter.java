@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragment;
 import br.com.carmaix.fragments.AvaliarFragment;
+import br.com.carmaix.fragments.VeiculoClienteFragment;
 
 /**
  * Created by fernando on 23/05/16.
@@ -15,6 +16,7 @@ import br.com.carmaix.fragments.AvaliarFragment;
 public class AvaliarTabAdapter extends FragmentPagerAdapter {
 
     private AvaliarFragment avaliarFragment = null;
+    private VeiculoClienteFragment veiculoClienteFragment = null;
     private Context context;
 
     public AvaliarTabAdapter(Context context, FragmentManager fm) {
@@ -24,8 +26,8 @@ public class AvaliarTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        avaliarFragment = new AvaliarFragment();
-        return avaliarFragment;
+        veiculoClienteFragment = new VeiculoClienteFragment();
+        return veiculoClienteFragment;
     }
 
     /*@Override

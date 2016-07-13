@@ -64,4 +64,38 @@
     <string name="fotos">FOTOS</string>
     <string name="estatistica_preco">ESTATÍSTICA E PREÇO</string>
 
+
+    <string name="label_data_e_hora">Data e Hora:</string>
+    <string name="label_vendedor">Vendedor:</string>
+    <string name="label_cliente">Cliente:</string>
+    <string name="label_categoria">Categoria:</string>
+    <string name="label_chassi">Chassi:</string>
+    <string name="label_situacao">Situação:</string>
+    <string name="label_marca">Marca:</string>
+    <string name="label_ano_fabricacao">Ano Fabricação:</string>
+    <string name="label_combustivel">Combustível:</string>
+    <string name="label_portas">Portas:</string>
+    <string name="label_cor">Cor:</string>
+    <string name="label_classificacao">Classificação:</string>
+    <string name="label_veiculo_comprado">Veículo Comprado:</string>
+    <string name="label_avaliador">Avaliador:</string>
+    <string name="label_empresa">Empresa:</string>
+    <string name="label_telefone">Telefone:</string>
+    <string name="label_placa">Placa:</string>
+    <string name="label_renavam">Renavam:</string>
+    <string name="label_uf">UF:</string>
+    <string name="label_cidade">Cidade:</string>
+    <string name="label_modelo">Modelo:</string>
+    <string name="label_ano_modelo">Ano Modelo:</string>
+    <string name="label_acessorio">Acessório:</string>
+    <string name="label_motivo_avaliacao">Motivo Avaliação:</string>
+    <string name="label_km">KM:</string>
+    <string name="label_nota">Nota:</string>
+    <string name="label_garantia_de_fabrica">Garantia de Fábrica:</string>
+
+    <string name="radio_atacado">Atacado</string>
+    <string name="radio_varejo">Varejo</string>
+
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 </resources>

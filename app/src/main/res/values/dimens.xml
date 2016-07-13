@@ -16,4 +16,7 @@
     <dimen name="txt_btn">25sp</dimen>
 
     <dimen name="design_navigation_separator_vertical_padding">0dp</dimen>
+    <dimen name="avaliar_text_size">11sp</dimen>
+    <dimen name="avaliar_text_width">100dp</dimen>
+
 </resources>

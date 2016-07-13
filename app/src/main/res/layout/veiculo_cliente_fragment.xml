@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+        >
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+            >
+                <TextView
+                    android:text="@string/label_data_e_hora"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <EditText
+                    android:id="@+id/edit_text_data_e_hora"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+            >
+                <TextView
+                    android:text="@string/label_vendedor"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+
+                />
+
+                <Spinner
+                    android:gravity="center_vertical"
+                    android:id="@+id/spinner_vendedor"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+            >
+                <TextView
+                    android:text="@string/label_cliente"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <EditText
+                    android:id="@+id/edit_text_cliente"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_categoria"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/spinner_categoria"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_chassi"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <EditText
+                    android:id="@+id/edit_text_chassi"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_situacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_situacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_marca"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_marca"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_ano_fabricacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_ano_fabricacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_combustivel"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_combustivel"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_portas"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_portas"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_cor"
+                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                    android:gravity="center_vertical" />
+
+                <EditText
+                    android:id="@+id/edit_text_cor"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_classificacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+                <Spinner
+                    android:id="@+id/spinner_classificacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_veiculo_comprado"
+                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                    android:gravity="center_vertical" />
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <RadioButton android:id="@+id/radio_atacado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_atacado"
+                        android:textSize="@dimen/avaliar_text_size"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                    />
+                    <RadioButton android:id="@+id/radio_varejo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_varejo"
+                        android:textSize="@dimen/avaliar_text_size"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                    />
+                </RadioGroup>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+        >
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_avaliador"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <EditText
+                    android:id="@+id/edit_text_avaliador"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_empresa"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_empresa"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_telefone"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <EditText
+                    android:id="@+id/edit_text_telefone"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_placa"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_placa"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_renavam"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <EditText
+                    android:id="@+id/edit_text_renavam"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:text="@string/label_uf"
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/avaliar_text_size"
+                        android:gravity="center_vertical" />
+                    <Spinner
+                        android:id="@+id/spinner_uf"
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_vertical"
+                    />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:text="@string/label_cidade"
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/avaliar_text_size"
+                        android:gravity="center_vertical"
+                    />
+                    <Spinner
+                        android:id="@+id/spinner_cidade"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_modelo"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_modelo"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_ano_modelo"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_ano_modelo"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_acessorio"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_acessorio"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_motivo_avaliacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+                <Spinner
+                    android:id="@+id/spinner_motivo_avaliacao"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/label_km"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+                <EditText
+                    android:id="@+id/edit_text_km"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_nota"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+
+                <Spinner
+                    android:id="@+id/spinner_nota"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/label_garantia_de_fabrica"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_width="@dimen/avaliar_text_width"
+                    android:textSize="@dimen/avaliar_text_size"
+                />
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/radio_garantia_de_fabrica"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <RadioButton android:id="@+id/radio_garantia_de_fabrica_sim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sim"
+                        android:textSize="@dimen/avaliar_text_size"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        />
+                    <RadioButton android:id="@+id/radio_garantia_de_fabrica_nao"
+                        android:text="@string/nao"
+                        android:textSize="@dimen/avaliar_text_size"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

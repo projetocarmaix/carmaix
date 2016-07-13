@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import br.com.carmaix.R;
 
 /**
- * Created by fernando on 08/07/16.
+ * Created by fernando on 12/07/16.
  */
-public class AvaliarFragment extends BaseFragment {
+public class VeiculoClienteFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
