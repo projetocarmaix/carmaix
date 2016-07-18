@@ -20,4 +20,6 @@ public interface VersionRelease {
 
     TokenConvertedReturn getTokenConverted(Context context) throws JSONException;
 
+    ArrayList<VendedorReturn> listVendedor(Context context) throws Exception;
+
 }

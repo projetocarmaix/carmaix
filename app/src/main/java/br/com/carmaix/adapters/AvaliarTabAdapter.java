@@ -5,9 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import br.com.carmaix.R;
-import br.com.carmaix.fragments.AvaliacaoFragment;
-import br.com.carmaix.fragments.AvaliarFragment;
 import br.com.carmaix.fragments.VeiculoClienteFragment;
 
 /**
@@ -15,7 +12,6 @@ import br.com.carmaix.fragments.VeiculoClienteFragment;
  */
 public class AvaliarTabAdapter extends FragmentPagerAdapter {
 
-    private AvaliarFragment avaliarFragment = null;
     private VeiculoClienteFragment veiculoClienteFragment = null;
     private Context context;
 

@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
@@ -20,6 +21,7 @@ import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 
 public class ServiceDefault implements VersionRelease {
+    public final static String BASE_URL = "https://apicarmaix1.websiteseguro.com/v1";
 
     public TokenReturn login(Context context, String user, String password) throws Exception{
 
@@ -27,7 +29,7 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/auth/login";
+        String URL = this.BASE_URL+"/auth/login";
 
         RestSKD consumerSDK = new RestSKD(context);
         consumerSDK.setMethodHttpType(MethodHttpType.GET_AND_POST);
@@ -60,6 +62,7 @@ public class ServiceDefault implements VersionRelease {
             tokenReturn = gson.fromJson(element, TokenReturn.class);
 
         }
+
         return tokenReturn;
 
     }
@@ -72,7 +75,7 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes";
+        String URL = this.BASE_URL+"/avaliacoes";
 
         RestSKD consumerSDK = new RestSKD(context);
 
@@ -154,7 +157,7 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca";
+        String URL = this.BASE_URL+"/avaliacoes/busca";
 
         RestSKD consumerSDK = new RestSKD(context);
 
@@ -234,7 +237,7 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
 
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/avaliacoes/busca/" + id;
+        String URL = this.BASE_URL+"/avaliacoes/busca/" + id;
 
         RestSKD consumerSDK = new RestSKD(context);
 
@@ -277,7 +280,7 @@ public class ServiceDefault implements VersionRelease {
         TokenConvertedReturn tokenConvertedReturn = getTokenConverted(context);
         idContrato = tokenConvertedReturn.getUserContrato();
         idUsuario = tokenConvertedReturn.getUserId();
-        String URL = "https://apicarmaix1.websiteseguro.com/v1/contratos/"+idContrato+"/usuarios/"+idUsuario;
+        String URL = this.BASE_URL+"/contratos/"+idContrato+"/usuarios/"+idUsuario;
 
         RestSKD consumerSDK = new RestSKD(context);
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
@@ -332,5 +335,45 @@ public class ServiceDefault implements VersionRelease {
         }
 
         return tokenConvertedReturn;
+    }
+
+    public ArrayList<VendedorReturn> listVendedor(Context context) throws Exception {
+        String idContrato = "";
+        String textJson = "";
+
+        ArrayList<VendedorReturn> vendedorReturn = new ArrayList<>();
+        TokenConvertedReturn tokenConvertedReturn = getTokenConverted(context);
+        idContrato = tokenConvertedReturn.getUserContrato();
+        String URL = this.BASE_URL+"/contratos/"+idContrato+"/usuarios";
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            VendedorReturn[] v = gson.fromJson(element, VendedorReturn[].class);
+            if(v.length > 0) {
+                vendedorReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return vendedorReturn;
+
     }
 }

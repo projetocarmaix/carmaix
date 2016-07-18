@@ -57,4 +57,8 @@ public class CallService {
         return getVersionRelease().getTokenConverted(context);
     }
 
+    public static ArrayList<VendedorReturn> listVendedor(Context context) throws Exception {
+        return getVersionRelease().listVendedor(context);
+    }
+
 }
