@@ -19,6 +19,7 @@ import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.cache.CacheManager;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
+import br.com.carmaix.utils.ValueLabelDefault;
 
 public class ServiceDefault implements VersionRelease {
     public final static String BASE_URL = "https://apicarmaix1.websiteseguro.com/v1";
@@ -337,14 +338,14 @@ public class ServiceDefault implements VersionRelease {
         return tokenConvertedReturn;
     }
 
-    public ArrayList<VendedorReturn> listVendedor(Context context) throws Exception {
+    public ArrayList<ValueLabelDefault> listVendedor(Context context) throws Exception {
         String idContrato = "";
         String textJson = "";
 
-        ArrayList<VendedorReturn> vendedorReturn = new ArrayList<>();
+        ArrayList<ValueLabelDefault> vendedorReturn = Utils.createArrayDefault(new VendedorReturn(context));
         TokenConvertedReturn tokenConvertedReturn = getTokenConverted(context);
         idContrato = tokenConvertedReturn.getUserContrato();
-        String URL = this.BASE_URL+"/contratos/"+idContrato+"/usuarios";
+        String URL = this.BASE_URL+"/contratos/"+idContrato+"/usuarios?t=vendas";
 
         RestSKD consumerSDK = new RestSKD(context);
         consumerSDK.setMethodHttpType(MethodHttpType.GET);
@@ -376,4 +377,79 @@ public class ServiceDefault implements VersionRelease {
         return vendedorReturn;
 
     }
+
+    public ArrayList<ValueLabelDefault> listCategorias(Context context) throws Exception {
+        String textJson = "";
+
+        ArrayList<ValueLabelDefault> categoriaReturn = Utils.createArrayDefault(new CategoriaReturn(context));
+        String URL = this.BASE_URL+"/veiculos/categorias";
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            CategoriaReturn[] v = gson.fromJson(element, CategoriaReturn[].class);
+            if(v.length > 0) {
+                categoriaReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return categoriaReturn;
+
+    }
+
+    public ArrayList<ValueLabelDefault> listCombustiveis(Context context) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/combustiveis";
+        ArrayList<ValueLabelDefault> commbustiveisReturn = Utils.createArrayDefault(new CombustiveisReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            CombustiveisReturn[] v = gson.fromJson(element, CombustiveisReturn[].class);
+            if(v.length > 0) {
+                commbustiveisReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return commbustiveisReturn;
+
+    }
+
 }

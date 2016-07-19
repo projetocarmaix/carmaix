@@ -12,22 +12,38 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
+import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.utils.BinderSpinner;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.VendedorReturn;
 import br.com.carmaix.utils.Constants;
+import br.com.carmaix.utils.ValueLabelDefault;
 
 /**
  * Created by fernando on 12/07/16.
  */
 public class VeiculoClienteFragment extends BaseFragment {
-    ArrayList<VendedorReturn> vendedorReturns = null;
+    ArrayList<ValueLabelDefault> vendedorReturns = null;
+    ArrayList<ValueLabelDefault> categoriaReturns = null;
+    ArrayList<ValueLabelDefault> combustiveisReturns = null;
+    ArrayList<ValueLabelDefault> portasReturns = null;
+    ArrayList<ValueLabelDefault> classificacaoReturns = null;
+
     private Spinner spinnerVendedor;
+    private Spinner spinnerCategoria;
+    private Spinner spinnerCombustivel;
+    private Spinner spinnerPortas;
+    private Spinner spinnerClassificacao;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.veiculo_cliente_fragment, container, false);
         spinnerVendedor = (Spinner)view.findViewById(R.id.spinner_vendedor);
+        spinnerCategoria = (Spinner)view.findViewById(R.id.spinner_categoria);
+        spinnerCombustivel = (Spinner)view.findViewById(R.id.spinner_combustivel);
+        spinnerPortas = (Spinner)view.findViewById(R.id.spinner_portas);
+        spinnerClassificacao= (Spinner)view.findViewById(R.id.spinner_classificacao);
         runBackground("",false,true, Constants.ACTION_LIST);
         return view;
 
@@ -38,15 +54,15 @@ public class VeiculoClienteFragment extends BaseFragment {
         if(action == Constants.ACTION_LIST) {
             try {
                 vendedorReturns = CallService.listVendedor(fragmentActivity);
+                categoriaReturns = CallService.listCategorias(fragmentActivity);
+                combustiveisReturns = CallService.listCombustiveis(fragmentActivity);
+                portasReturns = SpinnerStaticValues.listPortas(fragmentActivity);
+                classificacaoReturns = SpinnerStaticValues.listClassificacao(fragmentActivity);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         super.backgroundMethod(action);
-    }
-
-    private ArrayList<VendedorReturn> getVendedorReturns() {
-        return vendedorReturns;
     }
 
     @Override
@@ -67,6 +83,19 @@ public class VeiculoClienteFragment extends BaseFragment {
 
                 }
             });
+
+            ArrayAdapter categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,categoriaReturns);
+            spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
+
+            ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,combustiveisReturns);
+            spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
+
+            ArrayAdapter portasSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,portasReturns);
+            spinnerPortas.setAdapter(portasSpinnerAdapter);
+
+            ArrayAdapter classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,classificacaoReturns);
+            spinnerClassificacao.setAdapter(classificacaoSpinnerAdapter);
+
         }
         super.onEndBackgroundRun(action);
     }

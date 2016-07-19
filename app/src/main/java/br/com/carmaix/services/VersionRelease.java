@@ -6,6 +6,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import br.com.carmaix.utils.ValueLabelDefault;
+
 public interface VersionRelease {
 
     TokenReturn login(Context context, String user, String password) throws Exception;
@@ -20,6 +22,10 @@ public interface VersionRelease {
 
     TokenConvertedReturn getTokenConverted(Context context) throws JSONException;
 
-    ArrayList<VendedorReturn> listVendedor(Context context) throws Exception;
+    ArrayList<ValueLabelDefault> listVendedor(Context context) throws Exception;
+
+    ArrayList<ValueLabelDefault> listCategorias(Context context) throws Exception;
+
+    ArrayList<ValueLabelDefault> listCombustiveis(Context context) throws Exception;
 
 }

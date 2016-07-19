@@ -98,4 +98,10 @@
 
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+
+    <string name="value_default_vendedor">Selecione um vendedor</string>
+    <string name="value_default_categoria">Selecione uma categoria</string>
+    <string name="value_default_combustivel">Selecione o combustível</string>
+    <string name="value_default_portas">Portas</string>
+    <string name="value_default_classificacao">Classificação</string>
 </resources>

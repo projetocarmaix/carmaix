@@ -14,6 +14,7 @@ import org.apache.http.HttpResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * Created by rafael.savaris on 04/05/2016.
@@ -137,5 +138,16 @@ public class Utils {
         toast.show();
     }
 
+    public static ArrayList<ValueLabelDefault> createArrayDefault(Object object) {
+        ArrayList<ValueLabelDefault> arraylistValueLabelDefault = new ArrayList<>();
+        if(object instanceof ValueLabelDefault) {
+            String valueDefault = ((ValueLabelDefault) object).getValueDefault();
+            ((ValueLabelDefault) object).setId("");
+            ((ValueLabelDefault) object).setDescricao(valueDefault);
+
+            arraylistValueLabelDefault.add(((ValueLabelDefault) object));
+        }
+        return arraylistValueLabelDefault;
+    }
 
 }

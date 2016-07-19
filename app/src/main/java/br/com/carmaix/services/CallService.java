@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
+import br.com.carmaix.utils.ValueLabelDefault;
+
 public class CallService {
 
     public static String getVersionReleaseServerLogged() {
@@ -57,8 +59,16 @@ public class CallService {
         return getVersionRelease().getTokenConverted(context);
     }
 
-    public static ArrayList<VendedorReturn> listVendedor(Context context) throws Exception {
+    public static ArrayList<ValueLabelDefault> listVendedor(Context context) throws Exception {
         return getVersionRelease().listVendedor(context);
+    }
+
+    public static ArrayList<ValueLabelDefault> listCategorias(Context context) throws Exception {
+        return getVersionRelease().listCategorias(context);
+    }
+
+    public static ArrayList<ValueLabelDefault> listCombustiveis(Context context) throws Exception {
+        return getVersionRelease().listCombustiveis(context);
     }
 
 }
