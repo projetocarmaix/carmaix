@@ -356,11 +356,12 @@
                     android:textSize="@dimen/avaliar_text_size"
                 />
 
-                <Spinner
+                <EditText
                     android:id="@+id/spinner_empresa"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
                 />
             </LinearLayout>
 
@@ -398,11 +399,12 @@
                     android:textSize="@dimen/avaliar_text_size"
                 />
 
-                <Spinner
+                <EditText
                     android:id="@+id/spinner_placa"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
+                    android:textSize="@dimen/avaliar_text_size"
                     />
             </LinearLayout>
 

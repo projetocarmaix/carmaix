@@ -28,12 +28,18 @@ public class VeiculoClienteFragment extends BaseFragment {
     ArrayList<ValueLabelDefault> combustiveisReturns = null;
     ArrayList<ValueLabelDefault> portasReturns = null;
     ArrayList<ValueLabelDefault> classificacaoReturns = null;
+    ArrayList<ValueLabelDefault> acessoriosReturns = null;
+    ArrayList<ValueLabelDefault> motivoAvaliacaoReturns = null;
+    ArrayList<ValueLabelDefault> notasReturns = null;
 
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
     private Spinner spinnerCombustivel;
     private Spinner spinnerPortas;
     private Spinner spinnerClassificacao;
+    private Spinner spinnerAcessorios;
+    private Spinner spinnerMotivoAvaliacao;
+    private Spinner spinnerNotas;
 
     @Nullable
     @Override
@@ -44,6 +50,9 @@ public class VeiculoClienteFragment extends BaseFragment {
         spinnerCombustivel = (Spinner)view.findViewById(R.id.spinner_combustivel);
         spinnerPortas = (Spinner)view.findViewById(R.id.spinner_portas);
         spinnerClassificacao= (Spinner)view.findViewById(R.id.spinner_classificacao);
+        spinnerAcessorios = (Spinner)view.findViewById(R.id.spinner_acessorio);
+        spinnerMotivoAvaliacao = (Spinner)view.findViewById(R.id.spinner_motivo_avaliacao);
+        spinnerNotas = (Spinner)view.findViewById(R.id.spinner_nota);
         runBackground("",false,true, Constants.ACTION_LIST);
         return view;
 
@@ -58,6 +67,9 @@ public class VeiculoClienteFragment extends BaseFragment {
                 combustiveisReturns = CallService.listCombustiveis(fragmentActivity);
                 portasReturns = SpinnerStaticValues.listPortas(fragmentActivity);
                 classificacaoReturns = SpinnerStaticValues.listClassificacao(fragmentActivity);
+                acessoriosReturns = SpinnerStaticValues.listAcessorios(fragmentActivity);
+                motivoAvaliacaoReturns = SpinnerStaticValues.listMotivoAvaliacao(fragmentActivity);
+                notasReturns = SpinnerStaticValues.listNota(fragmentActivity);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -95,6 +107,15 @@ public class VeiculoClienteFragment extends BaseFragment {
 
             ArrayAdapter classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,classificacaoReturns);
             spinnerClassificacao.setAdapter(classificacaoSpinnerAdapter);
+
+            ArrayAdapter acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,acessoriosReturns);
+            spinnerAcessorios.setAdapter(acessoriosSpinnerAdapter);
+
+            ArrayAdapter motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,motivoAvaliacaoReturns);
+            spinnerMotivoAvaliacao.setAdapter(motivoAvaliacaoSpinnerAdapter);
+
+            ArrayAdapter notasSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,notasReturns);
+            spinnerNotas.setAdapter(notasSpinnerAdapter);
 
         }
         super.onEndBackgroundRun(action);

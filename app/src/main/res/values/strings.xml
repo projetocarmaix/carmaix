@@ -104,4 +104,8 @@
     <string name="value_default_combustivel">Selecione o combustível</string>
     <string name="value_default_portas">Portas</string>
     <string name="value_default_classificacao">Classificação</string>
+    <string name="value_default_acessorios">Selecione os acessórios</string>
+    <string name="value_default_motivo_avaliacao">Selecione o motivo da avaliação</string>
+    <string name="value_default_nota">Nota</string>
+    <string name="value_default_uf">UF</string>
 </resources>
