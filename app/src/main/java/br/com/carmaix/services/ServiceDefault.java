@@ -489,4 +489,42 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
+
+    public ArrayList<ValueLabelDefault> listModelosMarca(Context context, String id) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/marcas/"+id+"/modelos";
+        ArrayList<ValueLabelDefault> modelosMarcaReturn = Utils.createArrayDefault(new ModelosMarcaReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            ModelosMarcaReturn[] v = gson.fromJson(element, ModelosMarcaReturn[].class);
+            if(v.length > 0) {
+                modelosMarcaReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return modelosMarcaReturn;
+
+    }
+
 }

@@ -30,4 +30,6 @@ public interface VersionRelease {
 
     ArrayList<ValueLabelDefault> listMarcasCategoria(Context context, String id) throws Exception;
 
+    ArrayList<ValueLabelDefault> listModelosMarca(Context context, String id) throws Exception;
+
 }

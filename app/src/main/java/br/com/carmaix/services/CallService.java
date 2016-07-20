@@ -75,4 +75,7 @@ public class CallService {
         return getVersionRelease().listMarcasCategoria(context, id);
     }
 
+    public static ArrayList<ValueLabelDefault> listModelosMarca(Context context, String id) throws Exception {
+        return getVersionRelease().listModelosMarca(context,id);
+    }
 }

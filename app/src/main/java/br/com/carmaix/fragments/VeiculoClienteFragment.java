@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import br.com.carmaix.R;
 import br.com.carmaix.services.CategoriaReturn;
+import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.utils.BinderSpinner;
 import br.com.carmaix.services.CallService;
@@ -36,6 +37,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     ArrayList<ValueLabelDefault> notasReturns = null;
     ArrayList<ValueLabelDefault> ufReturns = null;
     ArrayList<ValueLabelDefault> marcasCategoriaReturns = null;
+    ArrayList<ValueLabelDefault> modelosMarcaReturns = null;
 
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
@@ -47,8 +49,10 @@ public class VeiculoClienteFragment extends BaseFragment {
     private Spinner spinnerNotas;
     private Spinner spinnerUf;
     private Spinner spinnerMarcasCategoria;
+    private Spinner spinnerModelosMarca;
 
-    private Boolean firstLoad = true;
+    private Boolean firstLoadMarcas = true;
+    private Boolean firstLoadModelos = true;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class VeiculoClienteFragment extends BaseFragment {
         spinnerNotas = (Spinner)view.findViewById(R.id.spinner_nota);
         spinnerUf = (Spinner)view.findViewById(R.id.spinner_uf);
         spinnerMarcasCategoria = (Spinner)view.findViewById(R.id.spinner_marca);
+        spinnerModelosMarca = (Spinner)view.findViewById(R.id.spinner_modelo);
         runBackground("",false,true, Constants.ACTION_LIST);
         return view;
 
@@ -96,9 +101,7 @@ public class VeiculoClienteFragment extends BaseFragment {
             spinnerVendedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    VendedorReturn vs = (VendedorReturn)spinnerVendedor.getSelectedItem();
-                    String label = vs.getId();
-                    String value = vs.getDescricao();
+
                 }
 
                 @Override
@@ -112,15 +115,15 @@ public class VeiculoClienteFragment extends BaseFragment {
             spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(!firstLoad) {
-                        CategoriaReturn c = (CategoriaReturn) spinnerCategoria.getSelectedItem();
-                        final String value = c.getId();
+                    if(!firstLoadMarcas) {
+                        CategoriaReturn c = (CategoriaReturn)spinnerCategoria.getSelectedItem();
+                        final String idCategoria = c.getId();
 
                         AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
                             @Override
                             protected Object doInBackground(Object[] objects) {
                                 try {
-                                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, value);
+                                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, idCategoria);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -131,20 +134,52 @@ public class VeiculoClienteFragment extends BaseFragment {
                             protected void onPostExecute(Object o) {
                                 ArrayAdapter marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaReturns);
                                 spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
-                            }
+                                spinnerMarcasCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        if(!firstLoadModelos) {
+                                            MarcasCategoriaReturn m = (MarcasCategoriaReturn)spinnerMarcasCategoria.getSelectedItem();
+                                            final String idModelo = m.getId();
 
+                                            AsyncTask asyncTaskModelos = new AsyncTask() {
+                                                @Override
+                                                protected Object doInBackground(Object[] params) {
+                                                    try {
+                                                        modelosMarcaReturns = CallService.listModelosMarca(fragmentActivity, idModelo);
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+
+                                                    return null;
+                                                }
+
+                                                @Override
+                                                protected void onPostExecute(Object o) {
+                                                    ArrayAdapter modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaReturns);
+                                                    spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
+                                                }
+                                            };
+
+                                            asyncTaskModelos.execute();
+                                        }else {
+                                            firstLoadModelos = false;
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {}
+                                });
+                            }
                         };
 
                         asyncTaskMarcas.execute();
                     }else {
-                        firstLoad = false;
+                        firstLoadMarcas = false;
                     }
                 }
 
                 @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
+                public void onNothingSelected(AdapterView<?> adapterView) {}
             });
 
             ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
@@ -171,4 +206,5 @@ public class VeiculoClienteFragment extends BaseFragment {
         }
         super.onEndBackgroundRun(action);
     }
+
 }

@@ -109,4 +109,5 @@
     <string name="value_default_nota">Nota</string>
     <string name="value_default_uf">UF</string>
     <string name="value_default_marcas_categoria">Escolha a Marca</string>
+    <string name="value_default_modelos_marca">Escolha um modelo</string>
 </resources>
