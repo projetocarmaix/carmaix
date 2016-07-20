@@ -71,4 +71,8 @@ public class CallService {
         return getVersionRelease().listCombustiveis(context);
     }
 
+    public static ArrayList<ValueLabelDefault> listMarcasCategoria(Context context, String id) throws Exception {
+        return getVersionRelease().listMarcasCategoria(context, id);
+    }
+
 }

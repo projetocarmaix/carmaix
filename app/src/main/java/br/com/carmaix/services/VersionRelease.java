@@ -28,4 +28,6 @@ public interface VersionRelease {
 
     ArrayList<ValueLabelDefault> listCombustiveis(Context context) throws Exception;
 
+    ArrayList<ValueLabelDefault> listMarcasCategoria(Context context, String id) throws Exception;
+
 }

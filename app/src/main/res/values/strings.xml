@@ -108,4 +108,5 @@
     <string name="value_default_motivo_avaliacao">Selecione o motivo da avaliação</string>
     <string name="value_default_nota">Nota</string>
     <string name="value_default_uf">UF</string>
+    <string name="value_default_marcas_categoria">Escolha a Marca</string>
 </resources>

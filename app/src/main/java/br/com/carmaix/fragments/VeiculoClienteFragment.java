@@ -1,5 +1,7 @@
 package br.com.carmaix.fragments;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
+import br.com.carmaix.services.CategoriaReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.utils.BinderSpinner;
 import br.com.carmaix.services.CallService;
@@ -31,6 +34,8 @@ public class VeiculoClienteFragment extends BaseFragment {
     ArrayList<ValueLabelDefault> acessoriosReturns = null;
     ArrayList<ValueLabelDefault> motivoAvaliacaoReturns = null;
     ArrayList<ValueLabelDefault> notasReturns = null;
+    ArrayList<ValueLabelDefault> ufReturns = null;
+    ArrayList<ValueLabelDefault> marcasCategoriaReturns = null;
 
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
@@ -40,7 +45,10 @@ public class VeiculoClienteFragment extends BaseFragment {
     private Spinner spinnerAcessorios;
     private Spinner spinnerMotivoAvaliacao;
     private Spinner spinnerNotas;
+    private Spinner spinnerUf;
+    private Spinner spinnerMarcasCategoria;
 
+    private Boolean firstLoad = true;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,6 +61,8 @@ public class VeiculoClienteFragment extends BaseFragment {
         spinnerAcessorios = (Spinner)view.findViewById(R.id.spinner_acessorio);
         spinnerMotivoAvaliacao = (Spinner)view.findViewById(R.id.spinner_motivo_avaliacao);
         spinnerNotas = (Spinner)view.findViewById(R.id.spinner_nota);
+        spinnerUf = (Spinner)view.findViewById(R.id.spinner_uf);
+        spinnerMarcasCategoria = (Spinner)view.findViewById(R.id.spinner_marca);
         runBackground("",false,true, Constants.ACTION_LIST);
         return view;
 
@@ -70,6 +80,7 @@ public class VeiculoClienteFragment extends BaseFragment {
                 acessoriosReturns = SpinnerStaticValues.listAcessorios(fragmentActivity);
                 motivoAvaliacaoReturns = SpinnerStaticValues.listMotivoAvaliacao(fragmentActivity);
                 notasReturns = SpinnerStaticValues.listNota(fragmentActivity);
+                ufReturns = SpinnerStaticValues.listUf(fragmentActivity);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,7 +91,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     @Override
     protected void onEndBackgroundRun(int action) {
         if(action == Constants.ACTION_LIST) {
-            ArrayAdapter vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,vendedorReturns);
+            ArrayAdapter vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,vendedorReturns);
             spinnerVendedor.setAdapter(vendedorSpinnerAdapter);
             spinnerVendedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -96,26 +107,66 @@ public class VeiculoClienteFragment extends BaseFragment {
                 }
             });
 
-            ArrayAdapter categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,categoriaReturns);
+            ArrayAdapter categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,categoriaReturns);
             spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
+            spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(!firstLoad) {
+                        CategoriaReturn c = (CategoriaReturn) spinnerCategoria.getSelectedItem();
+                        final String value = c.getId();
 
-            ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,combustiveisReturns);
+                        AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
+                            @Override
+                            protected Object doInBackground(Object[] objects) {
+                                try {
+                                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, value);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Object o) {
+                                ArrayAdapter marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaReturns);
+                                spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
+                            }
+
+                        };
+
+                        asyncTaskMarcas.execute();
+                    }else {
+                        firstLoad = false;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
             spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
 
-            ArrayAdapter portasSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,portasReturns);
+            ArrayAdapter portasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,portasReturns);
             spinnerPortas.setAdapter(portasSpinnerAdapter);
 
-            ArrayAdapter classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,classificacaoReturns);
+            ArrayAdapter classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,classificacaoReturns);
             spinnerClassificacao.setAdapter(classificacaoSpinnerAdapter);
 
-            ArrayAdapter acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,acessoriosReturns);
+            ArrayAdapter acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,acessoriosReturns);
             spinnerAcessorios.setAdapter(acessoriosSpinnerAdapter);
 
-            ArrayAdapter motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,motivoAvaliacaoReturns);
+            ArrayAdapter motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,motivoAvaliacaoReturns);
             spinnerMotivoAvaliacao.setAdapter(motivoAvaliacaoSpinnerAdapter);
 
-            ArrayAdapter notasSpinnerAdapter = new ArrayAdapter(fragmentActivity,android.R.layout.simple_spinner_item,notasReturns);
+            ArrayAdapter notasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,notasReturns);
             spinnerNotas.setAdapter(notasSpinnerAdapter);
+
+            ArrayAdapter ufSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,ufReturns);
+            spinnerUf.setAdapter(ufSpinnerAdapter);
 
         }
         super.onEndBackgroundRun(action);

@@ -2,7 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
 >
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:paddingLeft="15dp"
@@ -58,9 +58,10 @@
                 <Spinner
                     android:gravity="center_vertical"
                     android:id="@+id/spinner_vendedor"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                />
+                    android:textSize="@dimen/avaliar_text_size"
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,11 +101,11 @@
                 />
 
                 <Spinner
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:id="@+id/spinner_categoria"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,10 +145,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_situacao"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,10 +165,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_marca"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -184,10 +185,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_ano_fabricacao"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -205,10 +206,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_combustivel"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -227,10 +228,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_portas"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -269,10 +270,10 @@
                 />
                 <Spinner
                     android:id="@+id/spinner_classificacao"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -314,7 +315,7 @@
 
         <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:paddingLeft="15dp"
@@ -437,9 +438,8 @@
                 <LinearLayout
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:layout_weight="4"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:text="@string/label_uf"
@@ -449,18 +449,18 @@
                         android:gravity="center_vertical" />
                     <Spinner
                         android:id="@+id/spinner_uf"
-                        android:layout_height="match_parent"
-                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
                         android:gravity="center_vertical"
-                    />
+                        android:layout_gravity="center_vertical" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:layout_weight="8"
+                    android:layout_weight="6"
                     android:orientation="horizontal"
-                    android:weightSum="1">
+                >
 
                     <TextView
                         android:text="@string/label_cidade"
@@ -471,9 +471,10 @@
                     />
                     <Spinner
                         android:id="@+id/spinner_cidade"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -491,10 +492,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_modelo"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -512,10 +513,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_ano_modelo"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -532,10 +533,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_acessorio"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -551,10 +552,10 @@
                 />
                 <Spinner
                     android:id="@+id/spinner_motivo_avaliacao"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
@@ -569,6 +570,7 @@
                     android:layout_width="@dimen/avaliar_text_width"
                     android:textSize="@dimen/avaliar_text_size"
                 />
+
                 <EditText
                     android:id="@+id/edit_text_km"
                     android:layout_height="match_parent"
@@ -576,6 +578,8 @@
                     android:layout_width="match_parent"
                     android:textSize="@dimen/avaliar_text_size"
                 />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -592,10 +596,10 @@
 
                 <Spinner
                     android:id="@+id/spinner_nota"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                />
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
 
             <LinearLayout
