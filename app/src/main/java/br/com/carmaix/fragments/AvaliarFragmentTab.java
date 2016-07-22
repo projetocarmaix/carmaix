@@ -29,10 +29,11 @@ public class AvaliarFragmentTab extends BaseFragment {
         viewPager = (CustomViewPager) view.findViewById(R.id.avaliarViewPager);
         viewPager.setAdapter(new AvaliarTabAdapter(getContext(),getChildFragmentManager()));
         viewPager.setPagingEnabled(false);
+        viewPager.setOffscreenPageLimit(4);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        /*tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition() == 1) {
@@ -51,7 +52,7 @@ public class AvaliarFragmentTab extends BaseFragment {
                     tabLayout.getTabAt(0).select();
                 }
             }
-        });
+        });*/
 
 
 

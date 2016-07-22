@@ -527,4 +527,115 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
+    public ArrayList<ValueLabelDefault> listAnoFabricacao(Context context, String id) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/modelos/"+id+"/anos";
+        ArrayList<ValueLabelDefault> anoFabricacaoReturn = Utils.createArrayDefault(new AnoFabricacaoReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            AnoFabricacaoReturn[] v = gson.fromJson(element, AnoFabricacaoReturn[].class);
+            if(v.length > 0) {
+                anoFabricacaoReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return anoFabricacaoReturn;
+
+    }
+
+
+    public ArrayList<ValueLabelDefault> listAnoModelo(Context context, String id, String ano) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/modelos/"+id+"/anos/"+ano;
+        ArrayList<ValueLabelDefault> anoModeloReturn = Utils.createArrayDefault(new AnoModeloReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            AnoModeloReturn[] v = gson.fromJson(element, AnoModeloReturn[].class);
+            if(v.length > 0) {
+                anoModeloReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return anoModeloReturn;
+
+    }
+
+    public ArrayList<ValueLabelDefault> listOpcionais(Context context) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/opcionais";
+        ArrayList<ValueLabelDefault> opcionaisReturn = new ArrayList<>();
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            OpcionaisReturn[] v = gson.fromJson(element, OpcionaisReturn[].class);
+            if(v.length > 0) {
+                opcionaisReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return opcionaisReturn;
+
+    }
 }

@@ -5,14 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import br.com.carmaix.fragments.OpcionaisFragment;
 import br.com.carmaix.fragments.VeiculoClienteFragment;
 
 /**
  * Created by fernando on 23/05/16.
  */
 public class AvaliarTabAdapter extends FragmentPagerAdapter {
-
-    private VeiculoClienteFragment veiculoClienteFragment = null;
     private Context context;
 
     public AvaliarTabAdapter(Context context, FragmentManager fm) {
@@ -22,8 +21,13 @@ public class AvaliarTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        veiculoClienteFragment = new VeiculoClienteFragment();
-        return veiculoClienteFragment;
+        Fragment fragment = new OpcionaisFragment();
+        if(position == 0) {
+            fragment = new VeiculoClienteFragment();
+        }else if(position == 1) {
+            fragment = new OpcionaisFragment();
+        }
+        return fragment;
     }
 
     /*@Override

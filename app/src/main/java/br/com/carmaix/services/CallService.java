@@ -78,4 +78,16 @@ public class CallService {
     public static ArrayList<ValueLabelDefault> listModelosMarca(Context context, String id) throws Exception {
         return getVersionRelease().listModelosMarca(context,id);
     }
+
+    public static ArrayList<ValueLabelDefault> listAnoFabricacao(Context context, String id) throws Exception {
+        return getVersionRelease().listAnoFabricacao(context,id);
+    }
+
+    public static ArrayList<ValueLabelDefault> listAnoModelo(Context context, String id, String ano) throws Exception {
+        return getVersionRelease().listAnoModelo(context,id,ano);
+    }
+
+    public static ArrayList<ValueLabelDefault> listOpcionais(Context context) throws Exception {
+        return getVersionRelease().listOpcionais(context);
+    }
 }

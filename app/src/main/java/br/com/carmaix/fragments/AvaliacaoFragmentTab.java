@@ -67,7 +67,7 @@ public class AvaliacaoFragmentTab extends BaseFragment {
 
             }
         });
-
+        viewPager.setOffscreenPageLimit(4);
         tab.setSelectedTabIndicatorColor(Color.WHITE);
         tab.setTabTextColors(Color.WHITE, Color.WHITE);
         tab.setBackgroundColor(getActivity().getResources().getColor(R.color.tab_cinza));
