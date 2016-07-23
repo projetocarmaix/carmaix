@@ -2,15 +2,409 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="wrap_content"
->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp">
+    android:layout_width="match_parent">
 
-        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Oi"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3.07">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/column_opcionais"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/check_abs_tras"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_abs_tras"
+                    />
+
+                    <CheckBox
+                        android:id="@+id/check_airbag_mot"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_airbag_mot"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_airbag_lateral"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_airbag_lateral"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_alarme"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_alarme"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_alarme_orig"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_alarme_orig"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_ar_condicionado"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_ar_condicionado"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_ar_cond_digital"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_ar_cond_digital"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_ar_quente"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_ar_quente"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_barra_no_teto"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_barra_no_teto"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_bco_couro"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_bco_couro"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_cambio_aut"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_cambio_aut"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_capota_maritima"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_capota_maritima"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_chave_code"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_chave_code"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_dir_hidraulica"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_dir_hidraulica"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_dir_eletrica"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_dir_eletrica"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_desemb_traseiro"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_desemb_traseiro"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_farois_neblina"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_farois_neblina"
+                        />
+
+
+                    <CheckBox
+                        android:id="@+id/check_rodas_liga_orig"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_rodas_liga_orig"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/check_rodas_liga_esp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_rodas_liga_esp"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_limpador_tras"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_limpador_tras"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_gnv"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_gnv"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_prot_cacamba"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_prot_cacamba"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_retrovisor_eletr"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_retrovisor_eletr"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_santo_antonio"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_santo_antonio"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_teto_solar_eletr"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_teto_solar_eletr"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_trava_eletr"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_trava_eletr"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_vidros_eletr_dian"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_vidros_eletr_dian"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_vidros_eletr_tras"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_vidros_eletr_tras"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_cd"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_cd"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_cd_orig"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_cd_orig"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_cd_mp3"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_cd_mp3"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_tracao_4_4"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_tracao_4_4"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_xenon_orig"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_xenon_orig"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_xenon"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_xenon"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_sensor_est"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_sensor_est"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_sensor_crep"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_sensor_crep"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_sensor_chuva"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_sensor_chuva"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/linha_tabela_cinza"
+            android:layout_weight="0.03" />
+
+        <LinearLayout android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/column_items"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:layout_gravity="center_horizontal">
+
+                <CheckBox android:id="@+id/check_extintor"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_extintor" />
+
+                <CheckBox android:id="@+id/check_triangulo"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_triangulo" />
+
+                <CheckBox android:id="@+id/check_macaco"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_macaco" />
+
+                <CheckBox android:id="@+id/check_chave_de_rodas"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_chave_de_rodas" />
+
+                <CheckBox android:id="@+id/check_estepe"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_estepe" />
+
+                <CheckBox android:id="@+id/check_calotas"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_calotas" />
+
+                <CheckBox android:id="@+id/check_antena"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_antena" />
+
+                <CheckBox android:id="@+id/check_acendedor"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_acendedor" />
+
+                <CheckBox android:id="@+id/check_tapetes"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_tapetes" />
+
+                <CheckBox android:id="@+id/check_manual_de_garantia"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_manual_de_garantia" />
+
+                <CheckBox android:id="@+id/check_manual_do_prop"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_manual_do_prop" />
+
+                <CheckBox android:id="@+id/check_cartao_transponder"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_cartao_transponder" />
+
+                <CheckBox android:id="@+id/check_chave_reserva"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/check_chave_reserva" />
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="7dp">
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_aro"/>
+
+                    <EditText android:layout_height="wrap_content"
+                        android:layout_width="40dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

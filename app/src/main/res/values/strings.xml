@@ -112,4 +112,64 @@
     <string name="value_default_modelos_marca">Escolha um modelo</string>
     <string name="value_default_ano_fabricacao">Selecione o ano de fabricação</string>
     <string name="value_default_ano_modelo">Selecione o ano do modelo</string>
+
+    <string name="check_abs_tras">Abs. Tras.</string>
+    <string name="check_airbag_mot">Airbag Mot.</string>
+    <string name="check_airbag_duplo">Airbag Duplo</string>
+    <string name="check_airbag_lateral">Airbag Lateral</string>
+    <string name="check_alarme">Alarme</string>
+    <string name="check_alarme_orig">Alarme Orig.</string>
+    <string name="check_ar_condicionado">Ar Condicionado</string>
+    <string name="check_ar_cond_digital">Ar Cond. Digital</string>
+    <string name="check_ar_quente">Ar Quente</string>
+    <string name="check_barra_no_teto">Barra no Teto</string>
+    <string name="check_bco_couro">Bco. Couro</string>
+    <string name="check_cambio_aut">Câmbio Aut.</string>
+    <string name="check_capota_maritima">Capota Marítima</string>
+    <string name="check_chave_code">Chave Code</string>
+    <string name="check_dir_hidraulica">Dir. Hidráulica</string>
+    <string name="check_dir_eletrica">Dir. Elétrica</string>
+    <string name="check_desemb_traseiro">Desemb. Traseiro</string>
+    <string name="check_farois_neblina">Farois Neblina</string>
+    <string name="check_rodas_liga_orig"> Rodas Liga Orig.</string>
+    <string name="check_rodas_liga_esp">Rodas Liga Esp.</string>
+    <string name="check_limpador_tras">Limpador Tras.</string>
+    <string name="check_gnv">GNV</string>
+    <string name="check_prot_cacamba">Prot. Caçamba</string>
+    <string name="check_retrovisor_eletr">Retrovisor Elétr.</string>
+    <string name="check_santo_antonio">Santo Antônio</string>
+    <string name="check_teto_solar_eletr">Teto Solar Elétr.</string>
+    <string name="check_trava_eletr">Trava Elétr.</string>
+    <string name="check_vidros_eletr_dian">Vidros Elétr. Dian.</string>
+    <string name="check_vidros_eletr_tras">Vidros Elétr. Tras.</string>
+    <string name="check_cd">CD</string>
+    <string name="check_cd_orig">CD Orig.</string>
+    <string name="check_cd_mp3">CD/MP3</string>
+    <string name="check_tracao_4_4">Tração 4x4</string>
+    <string name="check_xenon_orig">Xenon Orig.</string>
+    <string name="check_xenon">Xenon</string>
+    <string name="check_sensor_est">Sensor Est.</string>
+    <string name="check_sensor_crep">Sensor Crep.</string>
+    <string name="check_sensor_chuva">Sensor Chuva</string>
+
+    <string name="column_opcionais">Opcionais</string>
+    <string name="column_items">Items</string>
+
+    <string name="check_extintor">Extintor</string>
+    <string name="check_triangulo">Triângulo </string>
+    <string name="check_macaco">Macaco</string>
+    <string name="check_chave_de_rodas">Chave de Rodas</string>
+    <string name="check_estepe">Estepe</string>
+    <string name="check_calotas">Calotas</string>
+    <string name="check_antena">Antena</string>
+    <string name="check_acendedor">Acendedor</string>
+    <string name="check_tapetes">Tapetes</string>
+    <string name="check_manual_de_garantia">Manual de Garantia</string>
+    <string name="check_manual_do_prop">Manual do Prop.</string>
+    <string name="check_cartao_transponder">Cartão Transponder</string>
+    <string name="check_chave_reserva">Chave Reserva</string>
+
+    <string name="label_aro">Aro:</string>
+
+
 </resources>
