@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import br.com.carmaix.fragments.MecanicaFragment;
 import br.com.carmaix.fragments.OpcionaisFragment;
 import br.com.carmaix.fragments.VeiculoClienteFragment;
 
@@ -26,6 +27,8 @@ public class AvaliarTabAdapter extends FragmentPagerAdapter {
             fragment = new VeiculoClienteFragment();
         }else if(position == 1) {
             fragment = new OpcionaisFragment();
+        }else if(position == 2) {
+            fragment = new MecanicaFragment();
         }
         return fragment;
     }

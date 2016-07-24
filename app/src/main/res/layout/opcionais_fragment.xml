@@ -17,6 +17,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/column_opcionais"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp" />
@@ -304,7 +306,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/linha_tabela_cinza"
-            android:layout_weight="0.03" />
+            android:layout_weight="0.01" />
 
         <LinearLayout android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -314,6 +316,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/column_items"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp" />

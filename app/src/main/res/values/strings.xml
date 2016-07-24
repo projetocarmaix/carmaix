@@ -168,8 +168,41 @@
     <string name="check_manual_do_prop">Manual do Prop.</string>
     <string name="check_cartao_transponder">Cartão Transponder</string>
     <string name="check_chave_reserva">Chave Reserva</string>
-
     <string name="label_aro">Aro:</string>
+
+    <string name="radio_motor">Motor</string>
+    <string name="radio_cambio">Câmbio</string>
+    <string name="radio_embragem">Embreagem</string>
+    <string name="radio_freios">Freios</string>
+
+    <string name="radio_suspensao_diant">Suspensão Diant.</string>
+    <string name="radio_suspensao_tras">Suspensão Tras.</string>
+    <string name="radio_caixa_direcao">Caixa de Direção</string>
+    <string name="radio_escapamento">Escapamento</string>
+
+    <string name="radio_homocinetica">Homocinética</string>
+    <string name="radio_rolamentos">Rolamentos</string>
+    <string name="radio_pneu_diant">Pneus Diant.</string>
+    <string name="radio_pneus_tras">Pneus Tras.</string>
+    <string name="radio_diferencial_carda">Diferencial/Cardã</string>
+
+    <string name="radio_lataria">Lataria</string>
+    <string name="radio_pintura">Pintura</string>
+    <string name="radio_carroceria">Carroceria</string>
+    <string name="radio_porta_malas">Porta-malas</string>
+    <string name="radio_comp_motor">Comp. motor</string>
+
+    <string name="radio_para_choque_d">Para-choque D.</string>
+    <string name="radio_para_choque_t">Para-choque T</string>
+    <string name="radio_parabrisa">Parabrisa</string>
+    <string name="radio_estofamento">Estofamento</string>
+    <string name="radio_farol_lanterna">Farol/Lanterna</string>
+
+    <string name="label_observacoes">Observações:</string>
+    <string name="label_observacoes_adicionais">Observações adicionais:</string>
+
+    <string name="label_valor">Valor(R$):</string>
+    <string name="label_reparos">Reparos:</string>
 
 
 </resources>
