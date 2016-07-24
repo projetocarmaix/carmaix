@@ -47,4 +47,10 @@ public class Constants {
     public final static String STATUS_PROPOSTA = "proposta";
     public final static String STATUS_ESTOQUE = "estoque";
     public final static String STATUS_VENDIDO = "vendido";
+
+
+    public final static Integer MARTELINHO = 160;
+    public final static Integer PINTAR_PORTA = 300;
+    public final static Integer PNEUS_13 = 150;
+    public final static Integer PNEUS_R15 = 300;
 }

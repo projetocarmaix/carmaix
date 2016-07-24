@@ -2,4 +2,205 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center_vertical|center_horizontal">
+
+        <TableLayout android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:background="@drawable/border_default"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp">
+            <TableRow android:layout_width="wrap_content">
+                <TextView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/label_dialog_titulo"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold" />
+
+                <TextView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_dialog_valor"
+                    android:textStyle="bold"/>
+
+                <TextView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/label_dialog_opc"
+                    android:textStyle="bold"/>
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/linha_tabela_cinza" />
+
+            <TableRow android:layout_width="wrap_content">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/label_dialog_martelinho"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:text="@string/label_dialog_martelinho_valor"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp">
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_martelinho_add"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_add_circle_black_36dp"
+                        android:contentDescription="plus_martelinho" />
+
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_martelinho_remove"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:background="@drawable/ic_remove_circle_black_36dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/linha_tabela_cinza" />
+
+            <TableRow android:layout_width="wrap_content">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/label_dialog_pintar_porta"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:text="@string/label_dialog_pintar_porta_valor"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp">
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_pintar_porta_add"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_add_circle_black_36dp" />
+
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_pintar_porta_remove"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_remove_circle_black_36dp" />
+                </LinearLayout>
+            </TableRow>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/linha_tabela_cinza" />
+            <TableRow android:layout_width="wrap_content">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/label_dialog_pneus_13"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:text="@string/label_dialog_pneus_13_valor"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp">
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_pneus_13_add"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_add_circle_black_36dp" />
+
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_pneus_13_remove"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_remove_circle_black_36dp" />
+                </LinearLayout>
+            </TableRow>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/linha_tabela_cinza" />
+            <TableRow android:layout_width="wrap_content">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/label_dialog_pneus_r15"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:text="@string/label_dialog_pneus_r15_valor"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp">
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_pneus_r15_add"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_add_circle_black_36dp" />
+
+                    <ImageButton android:layout_width="wrap_content"
+                        android:id="@+id/image_buttom_pneus_r15_remove"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_remove_circle_black_36dp" />
+                </LinearLayout>
+            </TableRow>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/linha_tabela_cinza" />
+        </TableLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/label_reparos"/>
+
+            <EditText
+                android:id="@+id/edit_reparos_dialog"
+                android:focusableInTouchMode="false"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

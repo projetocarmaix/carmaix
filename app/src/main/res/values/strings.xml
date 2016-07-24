@@ -204,5 +204,23 @@
     <string name="label_valor">Valor(R$):</string>
     <string name="label_reparos">Reparos:</string>
 
+    <string name="label_dialog_titulo">Título</string>
+    <string name="label_dialog_valor">Valor</string>
+    <string name="label_dialog_opc">Opc.</string>
+
+    <string name="label_dialog_martelinho">Martelinho</string>
+    <string name="label_dialog_martelinho_valor">160,00</string>
+    <string name="label_dialog_pintar_porta">Pintar porta</string>
+    <string name="label_dialog_pintar_porta_valor">300,00</string>
+    <string name="label_dialog_pneus_13">Pneus 13</string>
+    <string name="label_dialog_pneus_13_valor">150,00</string>
+    <string name="label_dialog_pneus_r15">Pneus R15</string>
+    <string name="label_dialog_pneus_r15_valor">300,00</string>
+
+    <string name="label_dialog_confirmar">Confirmar</string>
+    <string name="label_dialog_cancelar">Cancelar</string>
+
+
+
 
 </resources>
