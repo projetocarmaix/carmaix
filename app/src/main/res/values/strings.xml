@@ -220,7 +220,19 @@
     <string name="label_dialog_confirmar">Confirmar</string>
     <string name="label_dialog_cancelar">Cancelar</string>
 
+    <string name="label_image_frente">Frente:</string>
+    <string name="label_image_traseira">Traseira:</string>
+    <string name="label_image_lateral_e">Lateral E.:</string>
+    <string name="label_image_lateral_d">Lateral D.:</string>
+    <string name="label_image_interior">Interior:</string>
+    <string name="label_image_odometro">Odometro:</string>
+    <string name="label_image_pneu">Pneu:</string>
+    <string name="label_image_detalhe">Detalhe:</string>
+    <string name="label_image_estepe">Estepe:</string>
+    <string name="label_image_documento">Documento:</string>
 
+
+    <string name="label_image_enviar">Enviar Imagem</string>
 
 
 </resources>
