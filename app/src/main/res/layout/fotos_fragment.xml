@@ -19,16 +19,207 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
                 android:text="@string/label_image_frente" />
 
             <ImageView
                 android:layout_height="200dp"
+                android:id="@+id/image_frente"
                 android:layout_width="match_parent"
-                android:src="@drawable/ic_attach_money_black_48dp"
-                android:background="@color/linha_tabela_cinza"
+                android:padding="10dp"
+                android:background="@drawable/border_default_image"
                 android:layout_gravity="center_horizontal" />
 
             <Button
+                android:layout_height="wrap_content"
+                android:id="@+id/button_frente"
+                android:text="@string/label_image_enviar"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:text="@string/label_image_traseira" />
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/image_traseira"
+                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_default_image"
+                android:padding="10dp"
+                />
+            <Button
+                android:layout_height="wrap_content"
+                android:id="@+id/button_traseira"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/label_image_enviar"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:text="@string/label_image_lateral_e" />
+
+            <ImageView
+                android:layout_height="200dp"
+                android:id="@+id/image_lateral_e"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:background="@drawable/border_default_image"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:text="@string/label_image_enviar"
+                android:id="@+id/button_lateral_e"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:text="@string/label_image_lateral_d" />
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/image_lateral_d"
+                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_default_image"
+                android:padding="10dp"
+                />
+            <Button
+                android:id="@+id/button_lateral_d"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/label_image_enviar"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:text="@string/label_image_interior" />
+
+            <ImageView
+                android:layout_height="200dp"
+                android:id="@+id/image_interior"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:background="@drawable/border_default_image"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:text="@string/label_image_enviar"
+                android:id="@+id/button_interior"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:text="@string/label_image_odometro" />
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/image_odometro"
+                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_default_image"
+                android:padding="10dp"
+                />
+            <Button
+                android:layout_height="wrap_content"
+                android:id="@+id/button_odometro"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/label_image_enviar"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:text="@string/label_image_pneu" />
+
+            <ImageView
+                android:layout_height="200dp"
+                android:id="@+id/image_pneu"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:background="@drawable/border_default_image"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/button_pneu"
                 android:layout_height="wrap_content"
                 android:text="@string/label_image_enviar"
                 android:layout_gravity="center_horizontal"
@@ -46,15 +237,83 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_image_traseira" />
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:text="@string/label_image_detalhe" />
             <ImageView
                 android:layout_gravity="center_horizontal"
+                android:id="@+id/image_detalhe"
                 android:layout_height="200dp"
                 android:layout_width="match_parent"
-                android:src="@drawable/ic_attach_money_black_48dp"
-                android:background="@color/linha_tabela_cinza" />
+                android:background="@drawable/border_default_image"
+                android:padding="10dp"
+                />
+            <Button
+                android:id="@+id/button_detalhe"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/label_image_enviar"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:text="@string/label_image_estepe" />
+
+            <ImageView
+                android:layout_height="200dp"
+                android:id="@+id/image_estepe"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:background="@drawable/border_default_image"
+                android:layout_gravity="center_horizontal" />
+
             <Button
                 android:layout_height="wrap_content"
+                android:id="@+id/button_estepe"
+                android:text="@string/label_image_enviar"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            app:layout_columnWeight="1">
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/tabs_avaliar_font_size_title"
+                android:textStyle="bold"
+                android:text="@string/label_image_documento" />
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/image_documento"
+                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_default_image"
+                android:padding="10dp"
+                />
+            <Button
+                android:layout_height="wrap_content"
+                android:id="@+id/button_documento"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/label_image_enviar"
                 android:layout_width="wrap_content" />

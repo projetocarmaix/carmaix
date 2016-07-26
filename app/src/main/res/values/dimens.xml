@@ -19,4 +19,6 @@
     <dimen name="avaliar_text_size">11sp</dimen>
     <dimen name="avaliar_text_width">100dp</dimen>
 
+    <dimen name="tabs_avaliar_font_size_title">20sp</dimen>
+
 </resources>

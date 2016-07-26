@@ -234,5 +234,9 @@
 
     <string name="label_image_enviar">Enviar Imagem</string>
 
+    <string name="label_title_dialog_opcoes">Opções</string>
+    <string name="label_title_dialog_camera">Câmera</string>
+    <string name="label_title_dialog_galeria">Galeria</string>
+
 
 </resources>
