@@ -9,21 +9,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,10 +52,6 @@ public class FotosFragment extends BaseFragment {
     private Button buttonEstepe;
     private Button buttonDocumento;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int GALLERY_PICTURE = 0;
-    static final int REQUEST_TAKE_PHOTO = 2;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,16 +63,34 @@ public class FotosFragment extends BaseFragment {
 
     private void setupButtons(View view) {
         buttonFrente    = (Button)view.findViewById(R.id.button_frente);
-        buttonFrente.setOnClickListener(clickButtonListener());
+        buttonFrente.setOnClickListener(clickButtonListener("1"));
+
         buttonTraseira  = (Button)view.findViewById(R.id.button_traseira);
+        buttonTraseira.setOnClickListener(clickButtonListener("2"));
+
         buttonLateralE  = (Button)view.findViewById(R.id.button_lateral_e);
+        buttonLateralE.setOnClickListener(clickButtonListener("3"));
+
         buttonLateralD  = (Button)view.findViewById(R.id.button_lateral_d);
+        buttonLateralD.setOnClickListener(clickButtonListener("4"));
+
         buttonInterior  = (Button)view.findViewById(R.id.button_interior);
+        buttonInterior.setOnClickListener(clickButtonListener("5"));
+
         buttonOdometro  = (Button)view.findViewById(R.id.button_odometro);
+        buttonOdometro.setOnClickListener(clickButtonListener("6"));
+
         buttonPneu      = (Button)view.findViewById(R.id.button_pneu);
+        buttonPneu.setOnClickListener(clickButtonListener("7"));
+
         buttonDetalhe   = (Button)view.findViewById(R.id.button_detalhe);
+        buttonDetalhe.setOnClickListener(clickButtonListener("8"));
+
         buttonEstepe    = (Button)view.findViewById(R.id.button_estepe);
+        buttonEstepe.setOnClickListener(clickButtonListener("9"));
+
         buttonDocumento = (Button)view.findViewById(R.id.button_documento);
+        buttonDocumento.setOnClickListener(clickButtonListener("10"));
     }
 
 
@@ -111,7 +122,7 @@ public class FotosFragment extends BaseFragment {
         Picasso.with(fragmentActivity).load(R.drawable.no_image_box).fit().centerInside().into(imageView);
     }
 
-    private View.OnClickListener clickButtonListener() {
+    private View.OnClickListener clickButtonListener(final String requestode) {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,10 +132,13 @@ public class FotosFragment extends BaseFragment {
                 alertBuilder.setItems(opcoes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String req = requestode;
                         if(i == 0) {
-                            callCamera();
+                            req = req + "1";
+                            callCamera(req);
                         }else if(i == 1) {
-                            callGallery();
+                            req = req + "2";
+                            callGallery(req);
                         }
                     }
                 });
@@ -135,31 +149,44 @@ public class FotosFragment extends BaseFragment {
         return onClickListener;
     }
 
-    private void callCamera() {
+    private void callCamera(String requestode) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(fragmentActivity. getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent, Integer.parseInt(requestode));
         }
     }
 
-    private void callGallery() {
+    private void callGallery(String requestode) {
         Intent pictureActionIntent = null;
         pictureActionIntent = new Intent(Intent.ACTION_PICK);
         pictureActionIntent.setType("image/*");
-        startActivityForResult(pictureActionIntent, GALLERY_PICTURE);
+        startActivityForResult(pictureActionIntent, Integer.parseInt(requestode));
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == fragmentActivity.RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                Bundle extras = data.getExtras();
+            Bundle extras = data.getExtras();
+
+            String fullCode = String.valueOf(requestCode);
+            String codeImageView;
+            String codeOption;
+            if(fullCode.length() <= 2) {
+                codeImageView = String.valueOf(fullCode.charAt(0));
+                codeOption = String.valueOf(fullCode.charAt(1));
+            }else {
+                codeImageView = String.valueOf(fullCode.substring(0,2));
+                codeOption = String.valueOf(fullCode.charAt(2));
+            }
+
+            if (codeOption.equals("1")) {
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
                 String path = escreveImagem(imageBitmap);
+
                 if (!path.isEmpty()) {
-                    Picasso.with(fragmentActivity).load(new File(path)).fit().centerInside().into(imageFrente);
+                    Picasso.with(fragmentActivity).load(new File(path)).fit().centerInside().into(getImageViewByCode(codeImageView));
                 }
-            }else if(requestCode == GALLERY_PICTURE) {
+            }else if(codeOption.equals("2")) {
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = { MediaStore.Images.Media.DATA };
                 Cursor cursor = fragmentActivity.getContentResolver().query(selectedImage,filePathColumn, null, null, null);
@@ -168,10 +195,35 @@ public class FotosFragment extends BaseFragment {
                 String picturePath = cursor.getString(columnIndex);
                 cursor.close();
                 if (!picturePath.isEmpty()) {
-                    Picasso.with(fragmentActivity).load(new File(picturePath)).fit().centerInside().into(imageFrente);
+                    Picasso.with(fragmentActivity).load(new File(picturePath)).fit().centerInside().into(getImageViewByCode(codeImageView));
                 }
             }
         }
+    }
+
+    private ImageView getImageViewByCode(String codeImageView) {
+        if(codeImageView.equals("1"))
+            return imageFrente;
+        else if(codeImageView.equals("2"))
+            return imageTraseira;
+        else if(codeImageView.equals("3"))
+            return imageLateralE;
+        else if(codeImageView.equals("4"))
+            return imageLateralD;
+        else if(codeImageView.equals("5"))
+            return imageInterior;
+        else if(codeImageView.equals("6"))
+            return  imageOdometro;
+        else if(codeImageView.equals("7"))
+            return  imagePneu;
+        else if(codeImageView.equals("8"))
+            return  imageDetalhe;
+        else if(codeImageView.equals("9"))
+            return  imageEstepe;
+        else if(codeImageView.equals("10"))
+            return  imageDocumento;
+
+        return null;
     }
 
     private String escreveImagem(Bitmap bmp){
@@ -199,3 +251,6 @@ public class FotosFragment extends BaseFragment {
         }
     }
 }
+
+
+
