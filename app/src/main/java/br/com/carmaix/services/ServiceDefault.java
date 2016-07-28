@@ -638,4 +638,42 @@ public class ServiceDefault implements VersionRelease {
         return opcionaisReturn;
 
     }
+
+
+    public ArrayList<ValueLabelDefault> listCidades(Context context, String uf) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/localizacao/estados/"+uf+"/cidades";
+        ArrayList<ValueLabelDefault> cidadesReturn = Utils.createArrayDefault(new CidadesReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            CidadesReturn[] v = gson.fromJson(element, CidadesReturn[].class);
+            if(v.length > 0) {
+                cidadesReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return cidadesReturn;
+
+    }
 }

@@ -20,6 +20,7 @@ import br.com.carmaix.services.CategoriaReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
+import br.com.carmaix.spinnerStaticValues.UfReturn;
 import br.com.carmaix.utils.BinderSpinner;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.VendedorReturn;
@@ -44,6 +45,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     ArrayList<ValueLabelDefault> modelosMarcaReturns = null;
     ArrayList<ValueLabelDefault> anoFabricacaoReturns = null;
     private ArrayList<ValueLabelDefault> anoModeloReturns;
+    private ArrayList<ValueLabelDefault> cidadesReturns;
 
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
@@ -58,12 +60,13 @@ public class VeiculoClienteFragment extends BaseFragment {
     private Spinner spinnerModelosMarca;
     private Spinner spinnerAnoFabricacao;
     private Spinner spinnerAnoModelo;
+    private Spinner spinnerCidades;
 
     private Boolean firstLoadMarcas = true;
     private Boolean firstLoadModelos = true;
     private Boolean firstLoadAnoFabricacao = true;
     private Boolean firstLoadAnoModelo = true;
-
+    private Boolean firstLoadCidades = true;
 
 
     @Nullable
@@ -83,7 +86,7 @@ public class VeiculoClienteFragment extends BaseFragment {
         spinnerModelosMarca = (Spinner)view.findViewById(R.id.spinner_modelo);
         spinnerAnoFabricacao = (Spinner)view.findViewById(R.id.spinner_ano_fabricacao);
         spinnerAnoModelo = (Spinner)view.findViewById(R.id.spinner_ano_modelo);
-
+        spinnerCidades = (Spinner)view.findViewById(R.id.spinner_cidade);
         runBackground("",false,true, Constants.ACTION_LIST);
         return view;
 
@@ -306,6 +309,40 @@ public class VeiculoClienteFragment extends BaseFragment {
 
             ArrayAdapter ufSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,ufReturns);
             spinnerUf.setAdapter(ufSpinnerAdapter);
+
+            spinnerUf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (!firstLoadCidades) {
+                        UfReturn ufReturn = (UfReturn) spinnerUf.getSelectedItem();
+                        final String uf = ufReturn.getId();
+                        AsyncTask asyncTaskCidades = new AsyncTask() {
+                            @Override
+                            protected Boolean doInBackground(Object[] params) {
+                                try {
+                                    cidadesReturns = CallService.listCidades(fragmentActivity, uf);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return true;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Object o) {
+                                ArrayAdapter cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, cidadesReturns);
+                                spinnerCidades.setAdapter(cidadesSpinnerAdapter);
+                            }
+                        };
+
+                        asyncTaskCidades.execute();
+                    } else {
+                        firstLoadCidades = false;
+                    }
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {}
+
+            });
 
         }
         super.onEndBackgroundRun(action);

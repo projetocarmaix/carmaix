@@ -112,6 +112,7 @@
     <string name="value_default_modelos_marca">Escolha um modelo</string>
     <string name="value_default_ano_fabricacao">Selecione o ano de fabricação</string>
     <string name="value_default_ano_modelo">Selecione o ano do modelo</string>
+    <string name="value_default_cidade">Escolha a cidade</string>
 
     <string name="check_abs_tras">Abs. Tras.</string>
     <string name="check_airbag_mot">Airbag Mot.</string>

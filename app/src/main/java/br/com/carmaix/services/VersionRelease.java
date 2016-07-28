@@ -37,4 +37,6 @@ public interface VersionRelease {
     ArrayList<ValueLabelDefault> listAnoModelo(Context context, String id, String ano) throws Exception;
 
     ArrayList<ValueLabelDefault> listOpcionais(Context context) throws Exception;
+
+    ArrayList<ValueLabelDefault> listCidades(Context context, String uf) throws Exception;
 }

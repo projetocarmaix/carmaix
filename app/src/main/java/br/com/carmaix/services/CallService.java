@@ -90,4 +90,8 @@ public class CallService {
     public static ArrayList<ValueLabelDefault> listOpcionais(Context context) throws Exception {
         return getVersionRelease().listOpcionais(context);
     }
+
+    public static ArrayList<ValueLabelDefault> listCidades(Context context, String uf) throws Exception {
+        return getVersionRelease().listCidades(context, uf);
+    }
 }
