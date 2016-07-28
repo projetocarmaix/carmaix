@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import br.com.carmaix.fragments.EstatisticaFragment;
 import br.com.carmaix.fragments.FotosFragment;
 import br.com.carmaix.fragments.MecanicaFragment;
 import br.com.carmaix.fragments.OpcionaisFragment;
@@ -32,6 +33,8 @@ public class AvaliarTabAdapter extends FragmentPagerAdapter {
             fragment = new MecanicaFragment();
         }else if(position == 3) {
             fragment = new FotosFragment();
+        }else if(position == 4) {
+            fragment = new EstatisticaFragment();
         }
 
         return fragment;

@@ -238,5 +238,25 @@
     <string name="label_title_dialog_camera">Câmera</string>
     <string name="label_title_dialog_galeria">Galeria</string>
 
+    <string name="field_table_avaliados">Avaliados</string>
+    <string name="field_table_em_estoque">Em estoque</string>
+    <string name="field_table_vendidos">Vendidos</string>
+
+    <string name="field_table_unidade">Unidade</string>
+    <string name="field_table_grupo">Grupo</string>
+    <string name="field_table_total">Total</string>
+
+    <string name="field_table_quant">Quant.:</string>
+    <string name="field_table_max">Máx. (R$):</string>
+    <string name="field_table_med">Méd. (R$):</string>
+    <string name="field_table_min">Mín. (R$):</string>
+    <string name="field_table_med_dias">Méd. Dias:</string>
+    <string name="field_table_rep">Rep. (R$):</string>
+
+
+
+
+
+
 
 </resources>

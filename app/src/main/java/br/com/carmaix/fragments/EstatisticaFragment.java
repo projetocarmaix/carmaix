@@ -11,7 +11,7 @@ import br.com.carmaix.R;
 /**
  * Created by fernando on 21/07/16.
  */
-public class EstatísticaFragment extends BaseFragment {
+public class EstatisticaFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
