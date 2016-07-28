@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,10 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -195,7 +199,9 @@ public class FotosFragment extends BaseFragment {
                 String picturePath = cursor.getString(columnIndex);
                 cursor.close();
                 if (!picturePath.isEmpty()) {
-                    Picasso.with(fragmentActivity).load(new File(picturePath)).fit().centerInside().into(getImageViewByCode(codeImageView));
+                    String path = copiaArquivo(new File(picturePath));
+                    File f = new File(path);
+                    Picasso.with(fragmentActivity).load(f).fit().centerInside().into(getImageViewByCode(codeImageView));
                 }
             }
         }
@@ -249,6 +255,39 @@ public class FotosFragment extends BaseFragment {
         if(!f.exists()) {
             f.mkdirs();
         }
+    }
+
+    public String copiaArquivo(File fileInput) {
+        String nomeArquivo = "";
+        createFolder();
+        try {
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            nomeArquivo = Environment.getExternalStorageDirectory().getAbsolutePath()+"/carmaix/"+timeStamp+".jpg";
+
+            File fileOutput = new File(nomeArquivo);
+            if(!fileOutput.exists()) {
+                fileOutput.createNewFile();
+            }
+
+            OutputStream o = new FileOutputStream(fileOutput);
+
+            int fileSize = (int)fileInput.length();
+            byte[] buf = new byte[fileSize];
+            InputStream i = new FileInputStream(fileInput);
+            int len;
+            while((len = i.read(buf)) > 0) {
+                o.write(buf,0,len);
+            }
+            o.flush();
+            o.close();
+            i.close();
+        }catch (Exception e ) {
+            Log.i("teste","erro");
+            e.printStackTrace();
+        }
+
+        return nomeArquivo;
+
     }
 }
 
