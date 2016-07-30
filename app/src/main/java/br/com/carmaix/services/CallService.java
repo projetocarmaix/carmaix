@@ -103,4 +103,8 @@ public class CallService {
         return getVersionRelease().listAnoCombustivel(context, modelo, combustivel);
     }
 
+    public static ValorMedioReturn getValorMedio(Context context, String modelo,String ano, String combustivel) throws Exception {
+        return getVersionRelease().getValorMedio(context, modelo, ano,  combustivel);
+    }
+
 }

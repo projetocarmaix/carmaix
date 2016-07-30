@@ -3,6 +3,7 @@ package br.com.carmaix.fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,6 +30,7 @@ import br.com.carmaix.services.CategoriaReturn;
 import br.com.carmaix.services.CombustiveisModelosReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
+import br.com.carmaix.services.ValorMedioReturn;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 import br.com.carmaix.utils.ValueLabelDefault;
@@ -53,13 +57,17 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
     private ProgressBar progressbarModelo;
     private ProgressBar progressbarCombustivel;
     private ProgressBar progressbarAno;
+    private ProgressBar progressbarValorMedio;
 
     private Boolean firstLoadMarcas = true;
     private Boolean firstLoadModelos = true;
     private Boolean firstLoadCombustivel = true;
     private Boolean firstLoadAno= true;
+    private Boolean firstLoadValorMedio= true;
 
+    private ValorMedioReturn valorMedioReturn = null;
 
+    private TextView textValorMedio;
 
     @Nullable
     @Override
@@ -75,6 +83,8 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
         progressbarModelo = (ProgressBar)view.findViewById(R.id.progressbar_modelo);
         progressbarCombustivel = (ProgressBar)view.findViewById(R.id.progressbar_combustivel);
         progressbarAno = (ProgressBar)view.findViewById(R.id.progressbar_ano);
+        textValorMedio = (TextView) view.findViewById(R.id.text_dialog_valor_medio);
+        progressbarValorMedio = (ProgressBar) view.findViewById(R.id.progressbar_valormedio);
 
 
         runBackground("",false,true, Constants.ACTION_LIST);
@@ -84,7 +94,7 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
     @Override
     protected void backgroundMethod(int action) throws Throwable {
         if(action == Constants.ACTION_LIST) {
-            showProgressBar(progressbarCategoria);
+            showProgressBar(progressbarCategoria,spinnerCategoria);
             categoriaReturns = CallService.listCategorias(fragmentActivity);
             categoriaReturns.get(0).setDescricao(fragmentActivity.getResources().getString(R.string.dialog_passecarros_tipo));
         }
@@ -96,9 +106,9 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
         if(action == Constants.ACTION_LIST) {
             ArrayAdapter categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, categoriaReturns);
             spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
-            hideProgressBar(progressbarCategoria);
-            setDefaultValuesToSpinners(true,false,false,false);
-            setLoadValuesToSpinners(true,false,false,false);
+            hideProgressBar(progressbarCategoria,spinnerCategoria);
+            setDefaultValuesToSpinners(true,false,false,false,false);
+            setLoadValuesToSpinners(true,false,false,false,false);
             spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -109,7 +119,7 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                         AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
                             @Override
                             protected void onPreExecute() {
-                                showProgressBar(progressbarMarca);
+                                showProgressBar(progressbarMarca,spinnerMarca);
                             }
 
                             @Override
@@ -126,9 +136,9 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                             protected void onPostExecute(Object o) {
                                 ArrayAdapter marcasSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcaReturns);
                                 spinnerMarca.setAdapter(marcasSpinnerAdapter);
-                                setDefaultValuesToSpinners(false,true,false,false);
-                                setLoadValuesToSpinners(false,true,false,false);
-                                hideProgressBar(progressbarMarca);
+                                setDefaultValuesToSpinners(false,true,false,false,false);
+                                setLoadValuesToSpinners(false,true,false,false,false);
+                                hideProgressBar(progressbarMarca,spinnerMarca);
                                 spinnerMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -139,7 +149,7 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                             AsyncTask asyncTaskModelos = new AsyncTask<Object, Object, Object>() {
                                                 @Override
                                                 protected void onPreExecute() {
-                                                    showProgressBar(progressbarModelo);
+                                                    showProgressBar(progressbarModelo,spinnerModelo);
                                                 }
 
                                                 @Override
@@ -156,9 +166,9 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                                 protected void onPostExecute(Object o) {
                                                     ArrayAdapter modelosSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modeloReturns);
                                                     spinnerModelo.setAdapter(modelosSpinnerAdapter);
-                                                    hideProgressBar(progressbarModelo);
-                                                    setDefaultValuesToSpinners(false,false,true,false);
-                                                    setLoadValuesToSpinners(false,false,true,false);
+                                                    hideProgressBar(progressbarModelo,spinnerModelo);
+                                                    setDefaultValuesToSpinners(false,false,true,false, false);
+                                                    setLoadValuesToSpinners(false,false,true,false,false);
                                                     spinnerModelo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                         @Override
                                                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -169,7 +179,7 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                                                 AsyncTask asyncTaskCombustivel = new AsyncTask<Object, Object, Object>() {
                                                                     @Override
                                                                     protected void onPreExecute() {
-                                                                        showProgressBar(progressbarCombustivel);
+                                                                        showProgressBar(progressbarCombustivel,spinnerCombustivel);
                                                                     }
 
                                                                     @Override
@@ -186,9 +196,9 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                                                     protected void onPostExecute(Object o) {
                                                                         ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, combustivelReturns);
                                                                         spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
-                                                                        hideProgressBar(progressbarCombustivel);
-                                                                        setDefaultValuesToSpinners(false,false,false,true);
-                                                                        setLoadValuesToSpinners(false,false,false,true);
+                                                                        hideProgressBar(progressbarCombustivel,spinnerCombustivel);
+                                                                        setDefaultValuesToSpinners(false,false,false,true, false);
+                                                                        setLoadValuesToSpinners(false,false,false,true,false);
 
                                                                         spinnerCombustivel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                                             @Override
@@ -200,7 +210,7 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                                                                     AsyncTask asyncTaskAno = new AsyncTask<Object, Object, Object>() {
                                                                                         @Override
                                                                                         protected void onPreExecute() {
-                                                                                            showProgressBar(progressbarAno);
+                                                                                            showProgressBar(progressbarAno,spinnerAno);
                                                                                         }
 
                                                                                         @Override
@@ -217,7 +227,49 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                                                                         protected void onPostExecute(Object o) {
                                                                                             ArrayAdapter anoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoReturns);
                                                                                             spinnerAno.setAdapter(anoSpinnerAdapter);
-                                                                                            hideProgressBar(progressbarAno);
+                                                                                            hideProgressBar(progressbarAno,spinnerAno);
+                                                                                            setLoadValuesToSpinners(false,false,false,false,true);
+                                                                                            setDefaultValuesToSpinners(false,false,false,false,true);
+                                                                                            spinnerAno.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                                                                @Override
+                                                                                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                                                                                    if(!firstLoadValorMedio) {
+                                                                                                        AnosCombustivelReturn c = (AnosCombustivelReturn) spinnerAno.getSelectedItem();
+                                                                                                        final String idAno = c.getId();
+
+                                                                                                        AsyncTask asyncTaskSend = new AsyncTask<Object, Object, Object>() {
+                                                                                                            @Override
+                                                                                                            protected void onPreExecute() {
+                                                                                                                progressbarValorMedio.setVisibility(View.VISIBLE);
+                                                                                                            }
+
+                                                                                                            @Override
+                                                                                                            protected Object doInBackground(Object[] objects) {
+                                                                                                                try {
+                                                                                                                    valorMedioReturn = CallService.getValorMedio(fragmentActivity, idModelo, idAno, idCombustivel);
+                                                                                                                } catch (Exception e) {
+                                                                                                                    e.printStackTrace();
+                                                                                                                }
+                                                                                                                return null;
+                                                                                                            }
+
+                                                                                                            @Override
+                                                                                                            protected void onPostExecute(Object o) {
+                                                                                                                progressbarValorMedio.setVisibility(View.GONE);
+                                                                                                                textValorMedio.setVisibility(View.VISIBLE);
+                                                                                                                textValorMedio.setText(String.format(fragmentActivity.getResources().getString(R.string.dialog_passecarros_valor_medio), valorMedioReturn.getMed()));
+                                                                                                            }
+                                                                                                        };
+
+                                                                                                        asyncTaskSend.execute();
+                                                                                                    }else {
+                                                                                                        firstLoadValorMedio = false;
+                                                                                                    }
+                                                                                                }
+
+                                                                                                @Override
+                                                                                                public void onNothingSelected(AdapterView<?> adapterView) {}
+                                                                                            });
                                                                                         }
                                                                                     };
 
@@ -225,7 +277,6 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
                                                                                 }else {
                                                                                     firstLoadAno = false;
                                                                                 }
-
                                                                             }
 
                                                                             @Override
@@ -276,7 +327,7 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
         super.onEndBackgroundRun(action);
     }
 
-    public void setDefaultValuesToSpinners(Boolean categoria, Boolean marca,Boolean modelo,Boolean combustivel) {
+    public void setDefaultValuesToSpinners(Boolean categoria, Boolean marca,Boolean modelo,Boolean combustivel, Boolean ano) {
         if (categoria) {
             ArrayList<ValueLabelDefault> marcasCategoriaDefault = Utils.createArrayDefault(new MarcasCategoriaReturn(fragmentActivity));
             marcasCategoriaDefault.get(0).setDescricao(fragmentActivity.getResources().getString(R.string.dialog_passecarros_marca));
@@ -304,9 +355,13 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
             ArrayAdapter anosCombustivelAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anosCombustivelDefault);
             spinnerAno.setAdapter(anosCombustivelAdapter);
         }
+
+        if (categoria || marca || modelo || combustivel || ano) {
+            textValorMedio.setVisibility(View.GONE);
+        }
     }
 
-    public void setLoadValuesToSpinners(Boolean categoria, Boolean marca,Boolean modelo,Boolean combustivel) {
+    public void setLoadValuesToSpinners(Boolean categoria, Boolean marca,Boolean modelo,Boolean combustivel, Boolean ano) {
         if (categoria) {
             firstLoadMarcas = true;
         }
@@ -322,14 +377,21 @@ public class DialogTabelaPassecarrosFragment extends BaseFragment {
         if (categoria || marca || modelo || combustivel) {
             firstLoadAno= true;
         }
+
+        if (categoria || marca || modelo || combustivel || ano) {
+            firstLoadValorMedio = true;
+        }
     }
 
-    private void showProgressBar(ProgressBar progressBar) {
+    private void showProgressBar(ProgressBar progressBar, Spinner spinner) {
+        spinner.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    private void hideProgressBar(ProgressBar progressBar) {
+    private void hideProgressBar(ProgressBar progressBar, Spinner spinner) {
+        spinner.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+
     }
 }
 
