@@ -113,6 +113,8 @@
     <string name="value_default_ano_fabricacao">Selecione o ano de fabricação</string>
     <string name="value_default_ano_modelo">Selecione o ano do modelo</string>
     <string name="value_default_cidade">Escolha a cidade</string>
+    <string name="value_default_dialog_passecarros_combustivel">Escolha o Combustível</string>
+    <string name="value_default_dialog_passecarros_ano">Escolha o Ano</string>
 
     <string name="check_abs_tras">Abs. Tras.</string>
     <string name="check_airbag_mot">Airbag Mot.</string>
@@ -254,10 +256,10 @@
     <string name="field_table_med_dias">Méd. Dias:</string>
     <string name="field_table_rep">Rep. (R$):</string>
 
-
-
-
-
-
+    <string name="dialog_passecarros_tipo">Escolha o tipo</string>
+    <string name="dialog_passecarros_marca">Marca</string>
+    <string name="dialog_passecarros_modelo">Modelo</string>
+    <string name="dialog_passecarros_combustivel">Combustível</string>
+    <string name="dialog_passecarros_ano">Ano</string>
 
 </resources>

@@ -52,6 +52,8 @@ public class BaseActivity extends ParentBaseActivity
         }
     }
 
+
+
     /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

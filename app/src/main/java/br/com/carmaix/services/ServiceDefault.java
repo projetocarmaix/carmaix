@@ -676,4 +676,79 @@ public class ServiceDefault implements VersionRelease {
         return cidadesReturn;
 
     }
+
+    public ArrayList<ValueLabelDefault> listCombustiveisModelos(Context context, String modelo) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/modelos/"+modelo+"/combustiveis";
+        ArrayList<ValueLabelDefault> commbustiveisModelosReturn = Utils.createArrayDefault(new CombustiveisModelosReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            CombustiveisModelosReturn[] v = gson.fromJson(element, CombustiveisModelosReturn[].class);
+            if(v.length > 0) {
+                commbustiveisModelosReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return commbustiveisModelosReturn;
+
+    }
+
+    public ArrayList<ValueLabelDefault> listAnoCombustivel(Context context, String modelo, String combustivel) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/modelos/"+modelo+"/combustiveis/"+combustivel+"/anos";
+        ArrayList<ValueLabelDefault> anosCombustivelReturn = Utils.createArrayDefault(new AnosCombustivelReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            AnosCombustivelReturn[] v = gson.fromJson(element, AnosCombustivelReturn[].class);
+            if(v.length > 0) {
+                anosCombustivelReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return anosCombustivelReturn;
+
+    }
 }
+

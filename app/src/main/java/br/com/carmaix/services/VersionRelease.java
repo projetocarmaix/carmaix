@@ -39,4 +39,8 @@ public interface VersionRelease {
     ArrayList<ValueLabelDefault> listOpcionais(Context context) throws Exception;
 
     ArrayList<ValueLabelDefault> listCidades(Context context, String uf) throws Exception;
+
+    ArrayList<ValueLabelDefault> listCombustiveisModelos(Context context, String modelo) throws Exception;
+
+    ArrayList<ValueLabelDefault> listAnoCombustivel(Context context, String modelo, String combustivel) throws Exception;
 }

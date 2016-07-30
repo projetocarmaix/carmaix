@@ -94,4 +94,13 @@ public class CallService {
     public static ArrayList<ValueLabelDefault> listCidades(Context context, String uf) throws Exception {
         return getVersionRelease().listCidades(context, uf);
     }
+
+    public static ArrayList<ValueLabelDefault> listCombustiveisModelos(Context context, String modelo) throws Exception {
+        return getVersionRelease().listCombustiveisModelos(context, modelo);
+    }
+
+    public static ArrayList<ValueLabelDefault> listAnoCombustivel(Context context, String modelo, String combustivel) throws Exception {
+        return getVersionRelease().listAnoCombustivel(context, modelo, combustivel);
+    }
+
 }
