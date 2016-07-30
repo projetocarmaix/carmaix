@@ -209,25 +209,28 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="999.999,99"
+                    android:text="-"
                     android:gravity="center_horizontal|center_vertical"
-                    android:textSize="8sp" />
+                    android:textSize="8sp"
+                    android:id="@+id/avaliados_unidade_quant" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_grupo_quant" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_total_quant" />
             </LinearLayout>
 
             <LinearLayout android:layout_height="match_parent"
@@ -239,24 +242,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_unidade_quant" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_grupo_quant" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_total_quant" />
             </LinearLayout>
 
             <LinearLayout android:layout_height="50dp"
@@ -268,40 +274,45 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_unidade_quant" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_grupo_quant" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_total_quant" />
             </LinearLayout>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/quant_passecarros" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/quant_fipe" />
 
 
         </LinearLayout>
@@ -329,24 +340,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_unidade_med" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_grupo_med" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_total_med" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -358,24 +372,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_unidade_med" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_grupo_med" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_total_med" />
 
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
@@ -388,16 +405,18 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_unidade_med" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_grupo_med" />
 
 
                 <TextView
@@ -405,24 +424,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_total_med" />
             </LinearLayout>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/med_passecarros" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/med_fipe" />
 
 
         </LinearLayout>
@@ -450,24 +472,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_unidade_max" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_grupo_max" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_total_max" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -479,24 +504,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_unidade_max" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_grupo_max" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_total_max" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -507,24 +535,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_unidade_max" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_grupo_max" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_total_max" />
             </LinearLayout>
 
             <TextView
@@ -532,16 +563,18 @@
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/max_passecarros" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/max_fipe" />
 
 
         </LinearLayout>
@@ -569,24 +602,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_unidade_min" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_grupo_min" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_total_min" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -598,24 +634,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_unidade_min" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_grupo_min" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_total_min" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -626,24 +665,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_unidade_min" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_grupo_min" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_total_min" />
             </LinearLayout>
 
             <TextView
@@ -651,16 +693,18 @@
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/min_passecarros" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/min_fipe" />
 
 
         </LinearLayout>
@@ -688,24 +732,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_unidade_med_dias" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_grupo_med_dias" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_total_med_dias" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -716,24 +763,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_unidade_med_dias" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_grupo_med_dias" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_total_med_dias" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -744,24 +794,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_unidade_med_dias" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_grupo_med_dias" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_total_med_dias" />
             </LinearLayout>
 
             <TextView
@@ -769,16 +822,18 @@
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/med_dias_passecarros" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/med_dias_fipe" />
 
 
         </LinearLayout>
@@ -805,24 +860,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_unidade_rep" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_grupo_rep" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/avaliados_total_rep" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -833,24 +891,27 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_unidade_rep" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_grupo_rep" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/estoque_total_rep" />
             </LinearLayout>
             <LinearLayout android:layout_height="50dp"
                 android:layout_width="0dp"
@@ -861,40 +922,45 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_unidade_rep" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_grupo_rep" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_default_no_corner"
                     android:layout_height="match_parent"
-                    android:text="B"
-                    android:gravity="center_horizontal|center_vertical"/>
+                    android:text="-"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/vendidos_total_rep" />
             </LinearLayout>
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/rep_passecarros" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:background="@drawable/border_default_no_corner"
                 android:layout_height="match_parent"
-                android:text="B"
-                android:gravity="center_horizontal|center_vertical"/>
+                android:text="-"
+                android:gravity="center_horizontal|center_vertical"
+                android:id="@+id/rep_fipe" />
         </LinearLayout>
     </LinearLayout>
 
