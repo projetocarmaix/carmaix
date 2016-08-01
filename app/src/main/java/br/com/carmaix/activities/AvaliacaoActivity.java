@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.fragments.AvaliacaoFragmentTab;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
@@ -36,35 +37,10 @@ public class AvaliacaoActivity extends BaseActivity {
     private SearchView searchView;
     private AvaliacaoFragmentTab avaliacaoFragmentTab = new AvaliacaoFragmentTab();
     private int mStackLevel =0 ;
-    private Spinner spinnerMarca;
-    private Spinner spinnerModelo;
-    private Spinner spinnerAno;
     ArrayList<ValueLabelDefault> marcasCategoriaReturns = null;
     ArrayList<ValueLabelDefault> modelosMarcaReturns = null;
     ArrayList<ValueLabelDefault> anoFabricacaoReturns = null;
     private ArrayList<ValueLabelDefault> anoModeloReturns;
-
-    private Spinner spinnerVendedor;
-    private Spinner spinnerCategoria;
-    private Spinner spinnerCombustivel;
-    private Spinner spinnerPortas;
-    private Spinner spinnerClassificacao;
-    private Spinner spinnerAcessorios;
-    private Spinner spinnerMotivoAvaliacao;
-    private Spinner spinnerNotas;
-    private Spinner spinnerUf;
-    private Spinner spinnerMarcasCategoria;
-    private Spinner spinnerModelosMarca;
-    private Spinner spinnerAnoFabricacao;
-    private Spinner spinnerAnoModelo;
-    private Spinner spinnerCidades;
-
-    private Boolean firstLoadMarcas = true;
-    private Boolean firstLoadModelos = true;
-    private Boolean firstLoadAnoFabricacao = true;
-    private Boolean firstLoadAnoModelo = true;
-    private Boolean firstLoadCidades = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +76,11 @@ public class AvaliacaoActivity extends BaseActivity {
         }else if(id == R.id.menu_tabela_passecarros) {
             Intent intent = new Intent(this, DialogTabelaPassecarrosActivity.class);
             this.startActivity(intent);
+        }else if(id == R.id.menu_sair) {
+            ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
+            application.getHelper().logoff();
+            /*Intent intent = new Intent(this, DialogTabelaPassecarrosActivity.class);
+            this.startActivity(intent);*/
         }
         super.onNavigationItemSelected(item);
         return true;

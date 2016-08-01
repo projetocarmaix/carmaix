@@ -5,6 +5,7 @@ import android.os.Bundle;
 import br.com.carmaix.R;
 import br.com.carmaix.fragments.AvaliacaoFragmentTab;
 import br.com.carmaix.fragments.AvaliacaoVisualizarFragment;
+import br.com.carmaix.utils.Constants;
 
 /**
  * Created by fernando on 21/05/16.
@@ -25,4 +26,5 @@ public class AvaliacaoVisualizarActivity extends BaseActivityHomeAsUp {
     public String getAvaliacaoId() {
         return avaliacaoId;
     }
+
 }

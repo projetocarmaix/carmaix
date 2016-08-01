@@ -45,4 +45,10 @@ public interface VersionRelease {
     ArrayList<ValueLabelDefault> listAnoCombustivel(Context context, String modelo, String combustivel) throws Exception;
 
     ValorMedioReturn getValorMedio(Context context, String modelo,String ano, String combustivel) throws Exception;
+
+    ArrayList<ValueLabelDefault> listMotivoAvaliacao(Context context) throws Exception;
+
+    ArrayList<ValueLabelDefault> listClassificacoes(Context context) throws Exception;
+
+    ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception;
 }

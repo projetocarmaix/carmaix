@@ -100,9 +100,9 @@ public class VeiculoClienteFragment extends BaseFragment {
                 categoriaReturns = CallService.listCategorias(fragmentActivity);
                 combustiveisReturns = CallService.listCombustiveis(fragmentActivity);
                 portasReturns = SpinnerStaticValues.listPortas(fragmentActivity);
-                classificacaoReturns = SpinnerStaticValues.listClassificacao(fragmentActivity);
+                classificacaoReturns = CallService.listClassificacoes(fragmentActivity);
                 acessoriosReturns = SpinnerStaticValues.listAcessorios(fragmentActivity);
-                motivoAvaliacaoReturns = SpinnerStaticValues.listMotivoAvaliacao(fragmentActivity);
+                motivoAvaliacaoReturns = CallService.listMotivoAvaliacao(fragmentActivity);
                 notasReturns = SpinnerStaticValues.listNota(fragmentActivity);
                 ufReturns = SpinnerStaticValues.listUf(fragmentActivity);
             } catch (Exception e) {

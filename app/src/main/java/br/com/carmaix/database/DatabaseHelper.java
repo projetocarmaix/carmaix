@@ -119,10 +119,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super.close();
         loginTableRuntimeDao = null;
     }
-
+    public void logoff() {
+        try {
+            TableUtils.clearTable(connectionSource,LoginTable.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
     }
-
 }

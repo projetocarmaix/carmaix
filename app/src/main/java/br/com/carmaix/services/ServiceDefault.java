@@ -17,6 +17,8 @@ import java.util.Arrays;
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.cache.CacheManager;
+import br.com.carmaix.spinnerStaticValues.ClassificacaoReturn;
+import br.com.carmaix.spinnerStaticValues.MotivoAvaliacaoReturn;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 import br.com.carmaix.utils.ValueLabelDefault;
@@ -714,6 +716,80 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
+    public ArrayList<ValueLabelDefault> listMotivoAvaliacao(Context context) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/avaliacoes/motivos";
+        ArrayList<ValueLabelDefault> motivoAvaliacaoReturn = Utils.createArrayDefault(new MotivoAvaliacaoReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            MotivoAvaliacaoReturn[] v = gson.fromJson(element, MotivoAvaliacaoReturn[].class);
+            if(v.length > 0) {
+                motivoAvaliacaoReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return motivoAvaliacaoReturn;
+
+    }
+
+    public ArrayList<ValueLabelDefault> listClassificacoes(Context context) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/veiculos/classificacoes";
+        ArrayList<ValueLabelDefault> classificacaoReturn = Utils.createArrayDefault(new ClassificacaoReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            ClassificacaoReturn[] v = gson.fromJson(element, ClassificacaoReturn[].class);
+            if(v.length > 0) {
+                classificacaoReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return classificacaoReturn;
+
+    }
+
     public ArrayList<ValueLabelDefault> listAnoCombustivel(Context context, String modelo, String combustivel) throws Exception {
         String textJson = "";
 
@@ -782,6 +858,42 @@ public class ServiceDefault implements VersionRelease {
         }
 
         return valorMedioReturn;
+    }
+
+    public ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
+        String textJson = "";
+
+        String URL = this.BASE_URL+"/avaliacoes/"+idAvaliacao;
+        ArrayList<ValueLabelDefault> anosCombustivelReturn = Utils.createArrayDefault(new AnosCombustivelReturn(context));
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }
+
+            AnosCombustivelReturn[] v = gson.fromJson(element, AnosCombustivelReturn[].class);
+            if(v.length > 0) {
+                anosCombustivelReturn.addAll(Arrays.asList(v));
+            }
+
+        }
+
+        return anosCombustivelReturn;
 
     }
 }

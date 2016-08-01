@@ -9,7 +9,7 @@ import br.com.carmaix.R;
 /**
  * Created by fernando on 23/06/16.
  */
-public class BaseActivityHomeAsUp extends AppCompatActivity {
+public class BaseActivityHomeAsUp extends ParentBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

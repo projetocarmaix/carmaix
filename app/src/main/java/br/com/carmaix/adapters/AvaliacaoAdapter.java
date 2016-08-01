@@ -134,6 +134,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(context, AvaliarActivity.class);
+                                intent.putExtra("avaliacaoId",avaliacaoId.getText());
                                 context.startActivity(intent);
                             }
                         });

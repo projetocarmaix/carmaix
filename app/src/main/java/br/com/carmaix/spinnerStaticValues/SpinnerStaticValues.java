@@ -29,23 +29,6 @@ public class SpinnerStaticValues {
         return listPortas;
     }
 
-    public static ArrayList<ValueLabelDefault> listClassificacao(Context context){
-        ArrayList<ValueLabelDefault> listClassificacao = Utils.createArrayDefault(new ClassificacaoReturn(context));
-
-        ClassificacaoReturn[] classificacaoReturns = {new ClassificacaoReturn(), new ClassificacaoReturn(), new ClassificacaoReturn(), new ClassificacaoReturn()};
-
-        classificacaoReturns[0].setId("");
-        classificacaoReturns[0].setDescricao("AA");
-        classificacaoReturns[1].setId("");
-        classificacaoReturns[1].setDescricao("A");
-        classificacaoReturns[2].setId("");
-        classificacaoReturns[2].setDescricao("B");
-        classificacaoReturns[3].setId("");
-        classificacaoReturns[3].setDescricao("C");
-        listClassificacao.addAll(Arrays.asList(classificacaoReturns));
-        return listClassificacao;
-    }
-
     public static ArrayList<ValueLabelDefault> listAcessorios(Context context){
         ArrayList<ValueLabelDefault> listAcessorios = Utils.createArrayDefault(new AcessorioReturn(context));
 
@@ -58,20 +41,6 @@ public class SpinnerStaticValues {
 
         listAcessorios.addAll(Arrays.asList(acessorioReturns));
         return listAcessorios;
-    }
-
-    public static ArrayList<ValueLabelDefault> listMotivoAvaliacao(Context context){
-        ArrayList<ValueLabelDefault> listMotivoAvaliacao = Utils.createArrayDefault(new MotivoAvaliacaoReturn(context));
-
-        MotivoAvaliacaoReturn[] motivoAvaliacaoReturns = {new MotivoAvaliacaoReturn(), new MotivoAvaliacaoReturn()};
-
-        motivoAvaliacaoReturns[0].setId("troca");
-        motivoAvaliacaoReturns[0].setDescricao("Avaliação para troca");
-        motivoAvaliacaoReturns[1].setId("venda");
-        motivoAvaliacaoReturns[1].setDescricao("Avaliação para venda");
-
-        listMotivoAvaliacao.addAll(Arrays.asList(motivoAvaliacaoReturns));
-        return listMotivoAvaliacao;
     }
 
     public static ArrayList<ValueLabelDefault> listNota(Context context){

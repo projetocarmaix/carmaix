@@ -107,4 +107,15 @@ public class CallService {
         return getVersionRelease().getValorMedio(context, modelo, ano,  combustivel);
     }
 
+    public static ArrayList<ValueLabelDefault> listMotivoAvaliacao(Context context) throws Exception {
+        return getVersionRelease().listMotivoAvaliacao(context);
+    }
+
+    public static ArrayList<ValueLabelDefault> listClassificacoes(Context context) throws Exception {
+        return getVersionRelease().listClassificacoes(context);
+    }
+
+    public static ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
+        return getVersionRelease().listInformacaoAvaliacao(context, idAvaliacao);
+    }
 }

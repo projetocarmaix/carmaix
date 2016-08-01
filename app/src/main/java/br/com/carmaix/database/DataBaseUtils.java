@@ -335,6 +335,4 @@ public class DataBaseUtils {
         simpleDao.update(loginTable);
 
     }
-
-
 }
