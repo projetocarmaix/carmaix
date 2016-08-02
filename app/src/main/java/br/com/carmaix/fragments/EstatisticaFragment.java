@@ -1,5 +1,6 @@
 package br.com.carmaix.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -7,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -98,6 +98,9 @@ public class EstatisticaFragment extends BaseFragment {
     private String ano;
     private String combustivel;
 
+    private LinearLayout estatisticaMensagem;
+    private LinearLayout tabelaEstatistica;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -107,6 +110,9 @@ public class EstatisticaFragment extends BaseFragment {
 
         Picasso.with(fragmentActivity).load(R.drawable.tabela_passecarros).into(imagePassecarros);
         Picasso.with(fragmentActivity).load(R.drawable.fipe).into(imageFipe);
+
+        estatisticaMensagem  =  (LinearLayout)view.findViewById(R.id.estatistica_mensagem);
+        tabelaEstatistica   =  (LinearLayout)view.findViewById(R.id.tabela_estatistica);
 
         avaliadosUnidadeQuant  =  (TextView)view.findViewById(R.id.avaliados_unidade_quant);
         avaliadosUnidadeMed    =  (TextView)view.findViewById(R.id.avaliados_unidade_med);
@@ -190,16 +196,19 @@ public class EstatisticaFragment extends BaseFragment {
     }
 
     @Override
-    protected void backgroundMethod(int action) throws Throwable {
+    protected void backgroundMethod(final int action) throws Throwable {
+        changeInformationState(action);
         if(action == Constants.ACTION_LIST) {
-            this.estatisticaReturn = CallService.getEstatistica(fragmentActivity,this.modelo, this.ano, this.combustivel);
+            this.estatisticaReturn = CallService.getEstatistica(fragmentActivity, this.modelo, this.ano, this.combustivel);
         }
+
         super.backgroundMethod(action);
     }
 
     @Override
     protected void onEndBackgroundRun(int action) {
         if(action == Constants.ACTION_LIST) {
+
             EstatisticaRows avaliadoRows = this.estatisticaReturn.getAvaliado();
             EstatisticaRows estoqueRows = this.estatisticaReturn.getEstoque();
             EstatisticaRows vendidoRows = this.estatisticaReturn.getVendido();
@@ -370,8 +379,30 @@ public class EstatisticaFragment extends BaseFragment {
         this.ano = params.get("ano");
 
         if(!(this.modelo.isEmpty()) && !(this.combustivel.isEmpty()) && !(this.ano.isEmpty())) {
-            runBackground("Carregando...", true, true, Constants.ACTION_LIST);
+            runBackground(fragmentActivity.getResources().getString(R.string.carregando), true, true, Constants.ACTION_LIST);
+        }else {
+            runBackground(fragmentActivity.getResources().getString(R.string.carregando), true, true, Constants.ACTION_FILL);
         }
+    }
+
+    private void changeInformationState(final int action) {
+        AsyncTask asyncTask = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if(action == Constants.ACTION_LIST) {
+                    estatisticaMensagem.setVisibility(View.GONE);
+                    tabelaEstatistica.setVisibility(View.VISIBLE);
+                }else if(action == Constants.ACTION_FILL) {
+                    estatisticaMensagem.setVisibility(View.VISIBLE);
+                    tabelaEstatistica.setVisibility(View.GONE);
+                }
+            }
+        }.execute();
     }
 }
 

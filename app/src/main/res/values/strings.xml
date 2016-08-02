@@ -10,7 +10,7 @@
     <string name="lbl_senha">Senha</string>
     <string name="lbl_sair">Sair</string>
     <string name="btn_logar">Entrar</string>
-
+    <string name="carregando">Carregando...</string>
 
     <string name="errorMessage500">Houve uma falha interna no servidor</string>
     <string name="loadingEmpty">Aguarde...</string>
@@ -262,5 +262,5 @@
     <string name="dialog_passecarros_combustivel">Combustível</string>
     <string name="dialog_passecarros_ano">Ano</string>
     <string name="dialog_passecarros_valor_medio">Valor Médio: %s</string>
-
+    <string name="tabela_mensagem">Não há opções selecionadas para a exibição de estatistícas</string>
 </resources>
