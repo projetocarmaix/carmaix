@@ -51,4 +51,6 @@ public interface VersionRelease {
     ArrayList<ValueLabelDefault> listClassificacoes(Context context) throws Exception;
 
     ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception;
+
+    EstatisticaReturn getEstatistica(Context context, String modelo, String ano, String combustivel) throws Exception;
 }

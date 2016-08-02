@@ -894,7 +894,41 @@ public class ServiceDefault implements VersionRelease {
         }
 
         return anosCombustivelReturn;
+    }
 
+
+    public EstatisticaReturn getEstatistica(Context context, String modelo, String ano, String combustivel) throws Exception {
+        String textJson = "";
+        JsonElement element = null;
+        EstatisticaReturn estatisticaReturn = null;
+
+        String anoSplit = ano.split("-")[0];
+
+        String URL = this.BASE_URL+"/veiculos/modelos/"+modelo+"/anos/"+anoSplit+"/combustiveis/"+combustivel+"/estatisticas";
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+            }
+
+            estatisticaReturn = gson.fromJson(element, EstatisticaReturn.class);
+
+        }
+
+        return estatisticaReturn;
     }
 }
 

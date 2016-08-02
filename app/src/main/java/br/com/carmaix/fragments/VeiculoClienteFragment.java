@@ -1,6 +1,5 @@
 package br.com.carmaix.fragments;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,14 +15,12 @@ import java.util.ArrayList;
 import br.com.carmaix.R;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
+import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.CategoriaReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.spinnerStaticValues.UfReturn;
-import br.com.carmaix.utils.BinderSpinner;
-import br.com.carmaix.services.CallService;
-import br.com.carmaix.services.VendedorReturn;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 import br.com.carmaix.utils.ValueLabelDefault;
@@ -371,5 +368,17 @@ public class VeiculoClienteFragment extends BaseFragment {
             ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloDefault);
             spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
         }
+    }
+
+    public Spinner getSpinnerModelosMarca() {
+        return spinnerModelosMarca;
+    }
+
+    public Spinner getSpinnerCombustivel() {
+        return spinnerCombustivel;
+    }
+
+    public Spinner getSpinnerAnoModelo() {
+        return spinnerAnoModelo;
     }
 }

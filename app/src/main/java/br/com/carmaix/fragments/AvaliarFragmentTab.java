@@ -3,11 +3,16 @@ package br.com.carmaix.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.adapters.AvaliarTabAdapter;
@@ -19,7 +24,7 @@ import br.com.carmaix.view.CustomViewPager;
 public class AvaliarFragmentTab extends BaseFragment {
     private TabLayout tabLayout;
     private CustomViewPager viewPager;
-
+    private AvaliarTabAdapter avaliarTabAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,34 +32,29 @@ public class AvaliarFragmentTab extends BaseFragment {
 
         tabLayout = (TabLayout)view.findViewById(R.id.avaliarTab);
         viewPager = (CustomViewPager) view.findViewById(R.id.avaliarViewPager);
-        viewPager.setAdapter(new AvaliarTabAdapter(getContext(),getChildFragmentManager()));
+        avaliarTabAdapter = new AvaliarTabAdapter(getContext(), getChildFragmentManager());
+        viewPager.setAdapter(avaliarTabAdapter);
         viewPager.setPagingEnabled(false);
         viewPager.setOffscreenPageLimit(4);
         tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
 
-        /*tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager){
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 1) {
-                    tabLayout.getTabAt(0).select();
+                super.onTabSelected(tab);
+                if(tab.getPosition() == 4) {
+                    List<Fragment> fragments = getChildFragmentManager().getFragments();
+                    for (Fragment fragment : fragments) {
+                        if (fragment instanceof EstatisticaFragment) {
+                            ((EstatisticaFragment) fragment).loadData();
+                            break;
+                        }
+                    }
                 }
             }
+        });
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 1) {
-                    tabLayout.getTabAt(0).select();
-                }
-            }
-        });*/
-
-
+        setupTabIcons();
 
         return view;
     }

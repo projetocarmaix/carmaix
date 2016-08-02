@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import br.com.carmaix.fragments.EstatisticaFragment;
 import br.com.carmaix.fragments.FotosFragment;
@@ -14,7 +15,8 @@ import br.com.carmaix.fragments.VeiculoClienteFragment;
 /**
  * Created by fernando on 23/05/16.
  */
-public class AvaliarTabAdapter extends FragmentPagerAdapter {
+public class AvaliarTabAdapter extends FragmentStatePagerAdapter
+{
     private Context context;
 
     public AvaliarTabAdapter(Context context, FragmentManager fm) {
@@ -61,5 +63,10 @@ public class AvaliarTabAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 5;
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return 4;
     }
 }

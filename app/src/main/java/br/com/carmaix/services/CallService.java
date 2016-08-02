@@ -118,4 +118,8 @@ public class CallService {
     public static ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
         return getVersionRelease().listInformacaoAvaliacao(context, idAvaliacao);
     }
+
+    public static EstatisticaReturn getEstatistica(Context context, String modelo, String ano, String combustivel) throws Exception {
+        return getVersionRelease().getEstatistica(context, modelo,ano,combustivel);
+    }
 }

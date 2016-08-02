@@ -25,6 +25,7 @@ import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.CategoriaReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
+import br.com.carmaix.services.ServiceDefault;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.Utils;
 import br.com.carmaix.utils.ValueLabelDefault;
@@ -77,8 +78,8 @@ public class AvaliacaoActivity extends BaseActivity {
             Intent intent = new Intent(this, DialogTabelaPassecarrosActivity.class);
             this.startActivity(intent);
         }else if(id == R.id.menu_sair) {
-            ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
-            application.getHelper().logoff();
+            /*ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
+            application.getHelper().logoff();*/
             /*Intent intent = new Intent(this, DialogTabelaPassecarrosActivity.class);
             this.startActivity(intent);*/
         }
