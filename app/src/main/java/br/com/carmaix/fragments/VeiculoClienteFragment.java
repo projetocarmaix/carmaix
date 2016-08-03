@@ -92,7 +92,7 @@ public class VeiculoClienteFragment extends BaseFragment {
         spinnerAnoFabricacao = (Spinner)view.findViewById(R.id.spinner_ano_fabricacao);
         spinnerAnoModelo = (Spinner)view.findViewById(R.id.spinner_ano_modelo);
         spinnerCidades = (Spinner)view.findViewById(R.id.spinner_cidade);
-        runBackground("",false,true, Constants.ACTION_LIST);
+        runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
         return view;
 
     }
@@ -110,6 +110,12 @@ public class VeiculoClienteFragment extends BaseFragment {
                 motivoAvaliacaoReturns = CallService.listMotivoAvaliacao(fragmentActivity);
                 notasReturns = SpinnerStaticValues.listNota(fragmentActivity);
                 ufReturns = SpinnerStaticValues.listUf(fragmentActivity);
+                informacoesAvaliacaoReturn = ((AvaliarActivity)fragmentActivity).getInformacoesAvaliacaoReturn();
+
+                marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getCategoria_id());
+                modelosMarcaReturns= CallService.listModelosMarca(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getMarca_id());
+                anoFabricacaoReturns= CallService.listAnoFabricacao(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getModelo_id());
+                anoModeloReturns = CallService.listAnoModelo(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getModelo_id(),informacoesAvaliacaoReturn.getVeiculo().getAno_fabricacao());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -149,6 +155,8 @@ public class VeiculoClienteFragment extends BaseFragment {
                 public void onNothingSelected(AdapterView<?> adapterView) {}
             });
 
+            marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
+            spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
 
             ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
             spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
@@ -224,19 +232,7 @@ public class VeiculoClienteFragment extends BaseFragment {
 
 
     private void loadValues() {
-        AsyncTask asyncTaskInformacoesAvaliacao = new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                informacoesAvaliacaoReturn = ((AvaliarActivity)fragmentActivity).getInformacoesAvaliacaoReturn();
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                fillFields();
-            }
-        }.execute();
+        fillFields();
     }
 
     private void fillFields() {
@@ -256,14 +252,20 @@ public class VeiculoClienteFragment extends BaseFragment {
             if(categoriaReturn != null) {
                 if((categoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCategoria_id())){
                     spinnerCategoria.setSelection(i);
-                    loadMarcasSpinner();
                     break;
                 }
             }
         }
 
-
-
+        for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
+            MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
+            if(marcasCategoriaReturn != null) {
+                if((marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())){
+                    spinnerMarcasCategoria.setSelection(i);
+                    break;
+                }
+            }
+        }
 
     }
 
