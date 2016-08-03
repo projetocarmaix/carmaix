@@ -860,43 +860,6 @@ public class ServiceDefault implements VersionRelease {
         return valorMedioReturn;
     }
 
-    public ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
-        String textJson = "";
-
-        String URL = this.BASE_URL+"/avaliacoes/"+idAvaliacao;
-        ArrayList<ValueLabelDefault> anosCombustivelReturn = Utils.createArrayDefault(new AnosCombustivelReturn(context));
-
-        RestSKD consumerSDK = new RestSKD(context);
-        consumerSDK.setMethodHttpType(MethodHttpType.GET);
-        consumerSDK.setUrlFull(URL);
-
-        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
-        if (textJson != null) {
-            Gson gson = new Gson();
-            JsonParser parser = new JsonParser();
-            JsonElement element;
-
-            try {
-                element = parser.parse(textJson);
-            } catch (Exception e) {
-
-                CacheManager.invalidateCache(consumerSDK);
-                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
-                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
-
-            }
-
-            AnosCombustivelReturn[] v = gson.fromJson(element, AnosCombustivelReturn[].class);
-            if(v.length > 0) {
-                anosCombustivelReturn.addAll(Arrays.asList(v));
-            }
-
-        }
-
-        return anosCombustivelReturn;
-    }
-
-
     public EstatisticaReturn getEstatistica(Context context, String modelo, String ano, String combustivel) throws Exception {
         String textJson = "";
         JsonElement element = null;
@@ -929,6 +892,40 @@ public class ServiceDefault implements VersionRelease {
         }
 
         return estatisticaReturn;
+    }
+
+
+    public InformacoesAvaliacaoReturn listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
+        String textJson = "";
+        JsonElement element = null;
+
+        InformacoesAvaliacaoReturn informacoesAvaliacaoReturn = null;
+
+
+        String URL = this.BASE_URL+"/avaliacoes/"+idAvaliacao;
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET);
+        consumerSDK.setUrlFull(URL);
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+        if (textJson != null) {
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+            }
+
+            informacoesAvaliacaoReturn = gson.fromJson(element, InformacoesAvaliacaoReturn.class);
+
+        }
+        return informacoesAvaliacaoReturn;
     }
 }
 

@@ -13,12 +13,15 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliarActivity;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.CategoriaReturn;
+import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
+import br.com.carmaix.services.VendedorReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.spinnerStaticValues.UfReturn;
 import br.com.carmaix.utils.Constants;
@@ -65,6 +68,10 @@ public class VeiculoClienteFragment extends BaseFragment {
     private Boolean firstLoadAnoModelo = true;
     private Boolean firstLoadCidades = true;
 
+    private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn = null;
+    private ArrayAdapter vendedorSpinnerAdapter;
+    private ArrayAdapter categoriaSpinnerAdapter;
+    private ArrayAdapter marcasCategoriaSpinnerAdapter;
 
     @Nullable
     @Override
@@ -121,7 +128,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     @Override
     protected void onEndBackgroundRun(int action) {
         if(action == Constants.ACTION_LIST) {
-            ArrayAdapter vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,vendedorReturns);
+            vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,vendedorReturns);
             spinnerVendedor.setAdapter(vendedorSpinnerAdapter);
             spinnerVendedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -135,7 +142,7 @@ public class VeiculoClienteFragment extends BaseFragment {
                 }
             });
 
-            ArrayAdapter categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,categoriaReturns);
+            categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,categoriaReturns);
             spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
             setDefaultValuesToSpinners(true,false,false,false);
             spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -158,7 +165,7 @@ public class VeiculoClienteFragment extends BaseFragment {
 
                             @Override
                             protected void onPostExecute(Object o) {
-                                ArrayAdapter marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaReturns);
+                                marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaReturns);
                                 spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
                                 setDefaultValuesToSpinners(false,true,false,false);
 
@@ -340,8 +347,10 @@ public class VeiculoClienteFragment extends BaseFragment {
                 public void onNothingSelected(AdapterView<?> parent) {}
 
             });
-
+            loadValues();
         }
+
+
         super.onEndBackgroundRun(action);
     }
 
@@ -380,5 +389,61 @@ public class VeiculoClienteFragment extends BaseFragment {
 
     public Spinner getSpinnerAnoModelo() {
         return spinnerAnoModelo;
+    }
+
+
+    private void loadValues() {
+        AsyncTask asyncTask = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                informacoesAvaliacaoReturn = ((AvaliarActivity)fragmentActivity).getInformacoesAvaliacaoReturn();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                fillFields();
+            }
+        }.execute();
+    }
+
+    private void fillFields() {
+
+        for(int i = 0; i < spinnerVendedor.getCount(); i++) {
+            VendedorReturn vendedorReturn = (VendedorReturn)vendedorSpinnerAdapter.getItem(i);
+            if(vendedorReturn != null) {
+                if((vendedorReturn.getId()).equals(informacoesAvaliacaoReturn.getVendedor_id())){
+                    spinnerVendedor.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+
+        for(int i = 0; i < spinnerCategoria.getCount(); i++) {
+            CategoriaReturn categoriaReturn = (CategoriaReturn)categoriaSpinnerAdapter.getItem(i);
+            if(categoriaReturn != null) {
+                if((categoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCategoria_id())){
+                    spinnerCategoria.setSelection(i);
+                    spinnerCategoria.performItemClick(null,0,0);
+                    break;
+                }
+            }
+        }
+
+
+        for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
+            MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
+            if(marcasCategoriaReturn != null) {
+                if((marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())){
+                    spinnerMarcasCategoria.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+
+
     }
 }

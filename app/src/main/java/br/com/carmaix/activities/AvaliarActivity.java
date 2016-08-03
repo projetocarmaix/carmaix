@@ -15,6 +15,7 @@ import br.com.carmaix.fragments.VeiculoClienteFragment;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.CombustiveisReturn;
+import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
 import br.com.carmaix.utils.Constants;
 
@@ -23,6 +24,7 @@ import br.com.carmaix.utils.Constants;
  */
 public class AvaliarActivity extends BaseActivityHomeAsUp{
     private String avaliacaoId;
+    private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     @Override
     protected void backgroundMethod(int action) throws Throwable {
         if(action == Constants.ACTION_LIST) {
-            CallService.listInformacaoAvaliacao(this,avaliacaoId);
+            informacoesAvaliacaoReturn = CallService.listInformacaoAvaliacao(this,avaliacaoId);
         }
 
         super.backgroundMethod(action);
@@ -49,9 +51,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
     @Override
     protected void onEndBackgroundRun(int action) {
-        if(action == Constants.ACTION_LIST) {
 
-        }
         super.onEndBackgroundRun(action);
     }
 
@@ -100,5 +100,9 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
         return values;
 
+    }
+
+    public InformacoesAvaliacaoReturn getInformacoesAvaliacaoReturn() {
+        return informacoesAvaliacaoReturn;
     }
 }

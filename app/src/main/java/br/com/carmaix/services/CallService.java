@@ -115,7 +115,7 @@ public class CallService {
         return getVersionRelease().listClassificacoes(context);
     }
 
-    public static ArrayList<ValueLabelDefault> listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
+    public static InformacoesAvaliacaoReturn listInformacaoAvaliacao(Context context, String idAvaliacao) throws Exception {
         return getVersionRelease().listInformacaoAvaliacao(context, idAvaliacao);
     }
 
