@@ -72,6 +72,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     private ArrayAdapter vendedorSpinnerAdapter;
     private ArrayAdapter categoriaSpinnerAdapter;
     private ArrayAdapter marcasCategoriaSpinnerAdapter;
+    private ArrayAdapter modelosMarcaSpinnerAdapter;
 
     @Nullable
     @Override
@@ -130,17 +131,6 @@ public class VeiculoClienteFragment extends BaseFragment {
         if(action == Constants.ACTION_LIST) {
             vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,vendedorReturns);
             spinnerVendedor.setAdapter(vendedorSpinnerAdapter);
-            spinnerVendedor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
 
             categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,categoriaReturns);
             spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
@@ -148,142 +138,8 @@ public class VeiculoClienteFragment extends BaseFragment {
             spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                     if(!firstLoadMarcas) {
-                        CategoriaReturn c = (CategoriaReturn)spinnerCategoria.getSelectedItem();
-                        final String idCategoria = c.getId();
-                        AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
-                            @Override
-                            protected Object doInBackground(Object[] objects) {
-                                try {
-                                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, idCategoria);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-
-                            @Override
-                            protected void onPostExecute(Object o) {
-                                marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaReturns);
-                                spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
-                                setDefaultValuesToSpinners(false,true,false,false);
-
-                                spinnerMarcasCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                        if(!firstLoadModelos) {
-                                            MarcasCategoriaReturn m = (MarcasCategoriaReturn)spinnerMarcasCategoria.getSelectedItem();
-                                            final String idMarca = m.getId();
-                                            AsyncTask asyncTaskModelos = new AsyncTask() {
-                                                @Override
-                                                protected Boolean doInBackground(Object[] params) {
-                                                    try {
-                                                        if(idMarca.isEmpty()) {return false;}
-                                                        modelosMarcaReturns = CallService.listModelosMarca(fragmentActivity, idMarca);
-                                                    } catch (Exception e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    return true;
-                                                }
-
-                                                @Override
-                                                protected void onPostExecute(Object o) {
-                                                    if(((Boolean)o)== true) {
-                                                        ArrayAdapter modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaReturns);
-                                                        spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
-                                                        setDefaultValuesToSpinners(false,false,true,false);
-                                                        spinnerModelosMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                            @Override
-                                                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                                if (!firstLoadAnoFabricacao) {
-                                                                    ModelosMarcaReturn m = (ModelosMarcaReturn) spinnerModelosMarca.getSelectedItem();
-                                                                    final String idModelo = m.getId();
-                                                                    AsyncTask asyncTaskAnoFabricacao = new AsyncTask() {
-                                                                        @Override
-                                                                        protected Object doInBackground(Object[] objects) {
-                                                                            try {
-                                                                                if (idModelo.isEmpty()) {return false;}
-                                                                                anoFabricacaoReturns = CallService.listAnoFabricacao(fragmentActivity, idModelo);
-                                                                            } catch (Exception e) {
-                                                                                e.printStackTrace();
-                                                                            }
-                                                                            return true;
-                                                                        }
-
-                                                                        @Override
-                                                                        protected void onPostExecute(Object o) {
-                                                                            if(((Boolean)o)==true) {
-                                                                                ArrayAdapter anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
-                                                                                spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
-                                                                                setDefaultValuesToSpinners(false,false,false,true);
-                                                                                spinnerAnoFabricacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                                                    @Override
-                                                                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                                                                                        if (!firstLoadAnoModelo) {
-                                                                                            AnoFabricacaoReturn a = (AnoFabricacaoReturn) spinnerAnoFabricacao.getSelectedItem();
-                                                                                            final String ano = a.getId();
-                                                                                            AsyncTask asyncTaskAnoModelo = new AsyncTask() {
-                                                                                                @Override
-                                                                                                protected Object doInBackground(Object[] objects) {
-                                                                                                    try {
-                                                                                                        if(idModelo.isEmpty() || ano.isEmpty()) {return false;}
-                                                                                                        anoModeloReturns = CallService.listAnoModelo(fragmentActivity, idModelo, ano);
-                                                                                                    } catch (Exception e) {
-                                                                                                        e.printStackTrace();
-                                                                                                    }
-                                                                                                    return true;
-                                                                                                }
-
-                                                                                                @Override
-                                                                                                protected void onPostExecute(Object o) {
-                                                                                                    if(((Boolean)o) == true) {
-                                                                                                        ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloReturns);
-                                                                                                        spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
-                                                                                                    }
-                                                                                                }
-                                                                                            };
-                                                                                            asyncTaskAnoModelo.execute();
-                                                                                        } else {
-                                                                                            firstLoadAnoModelo = false;
-                                                                                        }
-                                                                                    }
-
-                                                                                    @Override
-                                                                                    public void onNothingSelected(AdapterView<?> adapterView) {
-                                                                                    }
-                                                                                });
-                                                                            }
-                                                                        }
-                                                                    };
-                                                                    asyncTaskAnoFabricacao.execute();
-
-                                                                } else {
-                                                                    firstLoadAnoFabricacao = false;
-                                                                }
-                                                            }
-
-                                                            @Override
-                                                            public void onNothingSelected(AdapterView<?> adapterView) {
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            };
-                                            asyncTaskModelos.execute();
-                                        }else {
-                                            firstLoadModelos = false;
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> parent) {}
-                                });
-                            }
-                        };
-
-                        asyncTaskMarcas.execute();
+                        loadMarcas();
                     }else {
                         firstLoadMarcas = false;
                     }
@@ -292,6 +148,7 @@ public class VeiculoClienteFragment extends BaseFragment {
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {}
             });
+
 
             ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
             spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
@@ -347,36 +204,10 @@ public class VeiculoClienteFragment extends BaseFragment {
                 public void onNothingSelected(AdapterView<?> parent) {}
 
             });
-            loadValues();
         }
-
+        loadValues();
 
         super.onEndBackgroundRun(action);
-    }
-
-    public void setDefaultValuesToSpinners(Boolean categoria, Boolean marca,Boolean modelo, Boolean anoFabricacao) {
-        if(categoria) {
-            ArrayList<ValueLabelDefault> marcasCategoriaDefault = Utils.createArrayDefault(new MarcasCategoriaReturn(fragmentActivity));
-            ArrayAdapter marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaDefault);
-            spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
-        }
-
-        if (categoria || marca) {
-            ArrayList<ValueLabelDefault> modelosMarcaDefault = Utils.createArrayDefault(new ModelosMarcaReturn(fragmentActivity));
-            ArrayAdapter modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaDefault);
-            spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
-        }
-
-        if (categoria || marca || modelo) {
-            ArrayList<ValueLabelDefault> anoFabricacaoDefault = Utils.createArrayDefault(new AnoFabricacaoReturn(fragmentActivity));
-            ArrayAdapter anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoDefault);
-            spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
-        }
-        if (categoria || marca || modelo || anoFabricacao) {
-            ArrayList<ValueLabelDefault> anoModeloDefault = Utils.createArrayDefault(new AnoModeloReturn((fragmentActivity)));
-            ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloDefault);
-            spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
-        }
     }
 
     public Spinner getSpinnerModelosMarca() {
@@ -393,7 +224,7 @@ public class VeiculoClienteFragment extends BaseFragment {
 
 
     private void loadValues() {
-        AsyncTask asyncTask = new AsyncTask() {
+        AsyncTask asyncTaskInformacoesAvaliacao = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
                 informacoesAvaliacaoReturn = ((AvaliarActivity)fragmentActivity).getInformacoesAvaliacaoReturn();
@@ -420,24 +251,12 @@ public class VeiculoClienteFragment extends BaseFragment {
             }
         }
 
-
         for(int i = 0; i < spinnerCategoria.getCount(); i++) {
             CategoriaReturn categoriaReturn = (CategoriaReturn)categoriaSpinnerAdapter.getItem(i);
             if(categoriaReturn != null) {
                 if((categoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCategoria_id())){
                     spinnerCategoria.setSelection(i);
-                    spinnerCategoria.performItemClick(null,0,0);
-                    break;
-                }
-            }
-        }
-
-
-        for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
-            MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
-            if(marcasCategoriaReturn != null) {
-                if((marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())){
-                    spinnerMarcasCategoria.setSelection(i);
+                    loadMarcasSpinner();
                     break;
                 }
             }
@@ -445,5 +264,201 @@ public class VeiculoClienteFragment extends BaseFragment {
 
 
 
+
+    }
+
+    private void loadMarcasSpinner() {
+        final String idCategoria = ((CategoriaReturn)spinnerCategoria.getSelectedItem()).getId();
+        AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, idCategoria);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
+                spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
+
+                for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
+                    MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
+                    if(marcasCategoriaReturn != null) {
+                        if((marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())){
+                            spinnerMarcasCategoria.setSelection(i,true);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+        }.execute();
+    }
+
+
+    private void loadMarcas() {
+        final String idCategoria = ((CategoriaReturn)spinnerCategoria.getSelectedItem()).getId();
+        AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, idCategoria);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
+                spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
+                setDefaultValuesToSpinners(false,true,false,false);
+                spinnerMarcasCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        loadModelos();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                });
+            }
+        }.execute();
+    }
+
+
+    private void loadModelos() {
+        MarcasCategoriaReturn m = (MarcasCategoriaReturn)spinnerMarcasCategoria.getSelectedItem();
+        final String idMarca = m.getId();
+        AsyncTask asyncTaskModelos = new AsyncTask() {
+            @Override
+            protected Boolean doInBackground(Object[] params) {
+                try {
+                    if (idMarca.isEmpty()) {return false;}
+
+                    modelosMarcaReturns = CallService.listModelosMarca(fragmentActivity, idMarca);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if(((Boolean)o)== true) {
+                    modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaReturns);
+                    spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
+                    setDefaultValuesToSpinners(false,false,true,false);
+                    spinnerModelosMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            loadAnoFabricacao();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {}
+                    });
+                }
+            }
+        }.execute();
+    }
+
+    private void loadAnoFabricacao() {
+        AsyncTask asyncTaskAnoFabricacao = new AsyncTask() {
+
+            ModelosMarcaReturn m = (ModelosMarcaReturn) spinnerModelosMarca.getSelectedItem();
+            final String idModelo = m.getId();
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    if (idModelo.isEmpty()) {
+                        return false;
+                    }
+                    anoFabricacaoReturns = CallService.listAnoFabricacao(fragmentActivity, idModelo);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if (((Boolean) o) == true) {
+                    ArrayAdapter anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
+                    spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
+                    setDefaultValuesToSpinners(false,false,false,true);
+                    spinnerAnoFabricacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            loadAnoModelo();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {}
+                    });
+                }
+            }
+        }.execute();
+    }
+
+    private void loadAnoModelo() {
+        AnoFabricacaoReturn a = (AnoFabricacaoReturn) spinnerAnoFabricacao.getSelectedItem();
+        final String ano = a.getId();
+
+        ModelosMarcaReturn m = (ModelosMarcaReturn) spinnerModelosMarca.getSelectedItem();
+        final String idModelo = m.getId();
+
+        AsyncTask asyncTaskAnoModelo = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                try {
+                    if(idModelo.isEmpty() || ano.isEmpty()) {return false;}
+                    anoModeloReturns = CallService.listAnoModelo(fragmentActivity, idModelo, ano);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if(((Boolean)o) == true) {
+                    ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloReturns);
+                    spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
+                }
+            }
+        }.execute();
+    }
+
+    public void setDefaultValuesToSpinners(Boolean categoria, Boolean marca,Boolean modelo, Boolean anoFabricacao) {
+        if(categoria) {
+            ArrayList<ValueLabelDefault> marcasCategoriaDefault = Utils.createArrayDefault(new MarcasCategoriaReturn(fragmentActivity));
+            ArrayAdapter marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaDefault);
+            spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
+        }
+
+        if (categoria || marca) {
+            ArrayList<ValueLabelDefault> modelosMarcaDefault = Utils.createArrayDefault(new ModelosMarcaReturn(fragmentActivity));
+            ArrayAdapter modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaDefault);
+            spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
+        }
+
+        if (categoria || marca || modelo) {
+            ArrayList<ValueLabelDefault> anoFabricacaoDefault = Utils.createArrayDefault(new AnoFabricacaoReturn(fragmentActivity));
+            ArrayAdapter anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoDefault);
+            spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
+        }
+        if (categoria || marca || modelo || anoFabricacao) {
+            ArrayList<ValueLabelDefault> anoModeloDefault = Utils.createArrayDefault(new AnoModeloReturn((fragmentActivity)));
+            ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloDefault);
+            spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
+        }
     }
 }
