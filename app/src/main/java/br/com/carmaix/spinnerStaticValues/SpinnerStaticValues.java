@@ -17,11 +17,11 @@ public class SpinnerStaticValues {
         ArrayList<ValueLabelDefault> listPortas = Utils.createArrayDefault(new PortasReturn(context));
 
         PortasReturn[] portas = {new PortasReturn(),new PortasReturn(),new PortasReturn()};
-        portas[0].setId("");
+        portas[0].setId("2");
         portas[0].setDescricao("2");
-        portas[1].setId("");
+        portas[1].setId("3");
         portas[1].setDescricao("3");
-        portas[2].setId("");
+        portas[2].setId("4");
         portas[2].setDescricao("4");
 
         listPortas.addAll(Arrays.asList(portas));

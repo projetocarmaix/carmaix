@@ -54,4 +54,6 @@ public interface VersionRelease {
 
     EstatisticaReturn getEstatistica(Context context, String modelo, String ano, String combustivel) throws Exception;
 
+    UserReturn getAvaliador(Context context, String idUsuario) throws Exception;
+
 }

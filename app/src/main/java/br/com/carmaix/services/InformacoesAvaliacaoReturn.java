@@ -2,6 +2,8 @@ package br.com.carmaix.services;
 
 import com.google.gson.annotations.SerializedName;
 
+import br.com.carmaix.utils.Utils;
+
 /**
  * Created by fernando on 02/08/16.
  */
@@ -25,8 +27,11 @@ public class InformacoesAvaliacaoReturn {
     @SerializedName("cliente")
     private Cliente cliente;
 
-    @SerializedName("observacoes")
-    private String observacoes;
+    @SerializedName("situacao")
+    private String situacao;
+
+    @SerializedName("observacao")
+    private String observacao;
 
     @SerializedName("observacoes_adicionais")
     private String observacoes_adicionais;
@@ -88,14 +93,6 @@ public class InformacoesAvaliacaoReturn {
         this.cliente = cliente;
     }
 
-    public String getObservacoes() {
-        return observacoes;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
-    }
-
     public String getObservacoes_adicionais() {
         return observacoes_adicionais;
     }
@@ -105,7 +102,8 @@ public class InformacoesAvaliacaoReturn {
     }
 
     public String getMotivo_avaliacao() {
-        return motivo_avaliacao;
+        String motivo_avaliacaoConverted = Utils.convertUTF8toISO(motivo_avaliacao);
+        return motivo_avaliacaoConverted;
     }
 
     public void setMotivo_avaliacao(String motivo_avaliacao) {
@@ -126,5 +124,22 @@ public class InformacoesAvaliacaoReturn {
 
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+    }
+
+    public String getSituacao() {
+        String situacaoConverted = Utils.convertUTF8toISO(situacao);
+        return situacaoConverted;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 }

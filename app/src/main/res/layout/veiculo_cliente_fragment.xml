@@ -37,6 +37,7 @@
                     android:id="@+id/edit_text_data_e_hora"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:enabled="false"
                     android:textSize="@dimen/avaliar_text_size"
                 />
             </LinearLayout>
@@ -142,13 +143,14 @@
                     android:layout_width="@dimen/avaliar_text_width"
                     android:textSize="@dimen/avaliar_text_size"
                 />
-
-                <Spinner
-                    android:id="@+id/spinner_situacao"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/edit_text_situacao"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_gravity="center_vertical" />
+                    android:textSize="@dimen/avaliar_text_size"
+                    />
+
             </LinearLayout>
 
             <LinearLayout
@@ -338,6 +340,7 @@
                     android:id="@+id/edit_text_avaliador"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:textSize="@dimen/avaliar_text_size"
                 />
@@ -358,10 +361,11 @@
                 />
 
                 <EditText
-                    android:id="@+id/spinner_empresa"
+                    android:id="@+id/edit_text_empresa"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
+                    android:enabled="false"
                     android:textSize="@dimen/avaliar_text_size"
                 />
             </LinearLayout>
@@ -401,7 +405,7 @@
                 />
 
                 <EditText
-                    android:id="@+id/spinner_placa"
+                    android:id="@+id/edit_text_placa"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"

@@ -122,4 +122,8 @@ public class CallService {
     public static EstatisticaReturn getEstatistica(Context context, String modelo, String ano, String combustivel) throws Exception {
         return getVersionRelease().getEstatistica(context, modelo,ano,combustivel);
     }
+
+    public static UserReturn getAvaliador(Context context, String idUsuario) throws Exception {
+        return getVersionRelease().getAvaliador(context, idUsuario);
+    }
 }

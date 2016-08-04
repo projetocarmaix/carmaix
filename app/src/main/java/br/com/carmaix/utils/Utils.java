@@ -150,4 +150,14 @@ public class Utils {
         return arraylistValueLabelDefault;
     }
 
+    public static String convertUTF8toISO(String str) {
+        String ret = null;
+        try {
+            ret = new String(str.getBytes("ISO-8859-1"), "UTF-8");
+        }
+        catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return ret;
+    }
 }

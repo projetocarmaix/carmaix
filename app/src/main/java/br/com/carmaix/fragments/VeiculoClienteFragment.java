@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -18,10 +19,18 @@ import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.CategoriaReturn;
+import br.com.carmaix.services.CidadesReturn;
+import br.com.carmaix.services.CombustiveisReturn;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
+import br.com.carmaix.services.UserReturn;
 import br.com.carmaix.services.VendedorReturn;
+import br.com.carmaix.spinnerStaticValues.AcessorioReturn;
+import br.com.carmaix.spinnerStaticValues.ClassificacaoReturn;
+import br.com.carmaix.spinnerStaticValues.MotivoAvaliacaoReturn;
+import br.com.carmaix.spinnerStaticValues.NotaReturn;
+import br.com.carmaix.spinnerStaticValues.PortasReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.spinnerStaticValues.UfReturn;
 import br.com.carmaix.utils.Constants;
@@ -46,6 +55,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     ArrayList<ValueLabelDefault> anoFabricacaoReturns = null;
     private ArrayList<ValueLabelDefault> anoModeloReturns;
     private ArrayList<ValueLabelDefault> cidadesReturns;
+    private UserReturn userReturn;
 
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
@@ -62,6 +72,18 @@ public class VeiculoClienteFragment extends BaseFragment {
     private Spinner spinnerAnoModelo;
     private Spinner spinnerCidades;
 
+    private EditText editTextDataHora;
+    private EditText editTextAvaliador;
+    private EditText editTextEmpresa;
+    private EditText editTextCliente;
+    private EditText editTextTelefone;
+    private EditText editTextPlaca;
+    private EditText editTextChassi;
+    private EditText editTextRenavam;
+    private EditText editTextSituacao;
+    private EditText editTextCor;
+    private EditText editTextKm;
+
     private Boolean firstLoadMarcas = true;
     private Boolean firstLoadModelos = true;
     private Boolean firstLoadAnoFabricacao = true;
@@ -73,6 +95,18 @@ public class VeiculoClienteFragment extends BaseFragment {
     private ArrayAdapter categoriaSpinnerAdapter;
     private ArrayAdapter marcasCategoriaSpinnerAdapter;
     private ArrayAdapter modelosMarcaSpinnerAdapter;
+    private ArrayAdapter anoFabricacaoSpinnerAdapter;
+    private ArrayAdapter anoModeloSpinnerAdapter;
+    private ArrayAdapter ufSpinnerAdapter;
+    private ArrayAdapter cidadesSpinnerAdapter;
+    private ArrayAdapter acessoriosSpinnerAdapter;
+    private ArrayAdapter combustivelSpinnerAdapter;
+    private ArrayAdapter portasSpinnerAdapter;
+    private ArrayAdapter motivoAvaliacaoSpinnerAdapter;
+    private ArrayAdapter classificacaoSpinnerAdapter;
+    private ArrayAdapter notasSpinnerAdapter;
+
+
 
     @Nullable
     @Override
@@ -92,6 +126,19 @@ public class VeiculoClienteFragment extends BaseFragment {
         spinnerAnoFabricacao = (Spinner)view.findViewById(R.id.spinner_ano_fabricacao);
         spinnerAnoModelo = (Spinner)view.findViewById(R.id.spinner_ano_modelo);
         spinnerCidades = (Spinner)view.findViewById(R.id.spinner_cidade);
+
+        editTextDataHora = (EditText)view.findViewById(R.id.edit_text_data_e_hora);
+        editTextAvaliador = (EditText)view.findViewById(R.id.edit_text_avaliador);
+        editTextEmpresa     = (EditText)view.findViewById(R.id.edit_text_empresa);
+        editTextCliente  = (EditText)view.findViewById(R.id.edit_text_cliente);
+        editTextTelefone = (EditText)view.findViewById(R.id.edit_text_telefone);
+        editTextPlaca    = (EditText)view.findViewById(R.id.edit_text_placa);
+        editTextChassi   = (EditText)view.findViewById(R.id.edit_text_chassi);
+        editTextRenavam  = (EditText)view.findViewById(R.id.edit_text_renavam);
+        editTextSituacao = (EditText)view.findViewById(R.id.edit_text_situacao);
+        editTextCor     = (EditText)view.findViewById(R.id.edit_text_cor);
+        editTextKm      = (EditText)view.findViewById(R.id.edit_text_km);
+
         runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
         return view;
 
@@ -110,12 +157,18 @@ public class VeiculoClienteFragment extends BaseFragment {
                 motivoAvaliacaoReturns = CallService.listMotivoAvaliacao(fragmentActivity);
                 notasReturns = SpinnerStaticValues.listNota(fragmentActivity);
                 ufReturns = SpinnerStaticValues.listUf(fragmentActivity);
+
                 informacoesAvaliacaoReturn = ((AvaliarActivity)fragmentActivity).getInformacoesAvaliacaoReturn();
 
+
+                cidadesReturns = CallService.listCidades(fragmentActivity,informacoesAvaliacaoReturn.getCliente().getEstado_id());
                 marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getCategoria_id());
                 modelosMarcaReturns= CallService.listModelosMarca(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getMarca_id());
                 anoFabricacaoReturns= CallService.listAnoFabricacao(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getModelo_id());
                 anoModeloReturns = CallService.listAnoModelo(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getModelo_id(),informacoesAvaliacaoReturn.getVeiculo().getAno_fabricacao());
+
+                userReturn = CallService.getAvaliador(fragmentActivity,informacoesAvaliacaoReturn.getAvaliador_id());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -158,26 +211,38 @@ public class VeiculoClienteFragment extends BaseFragment {
             marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
             spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
 
-            ArrayAdapter combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
+            modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,modelosMarcaReturns);
+            spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
+
+            anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,anoFabricacaoReturns);
+            spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
+
+            anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,anoModeloReturns);
+            spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
+
+            combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
             spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
 
-            ArrayAdapter portasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,portasReturns);
+            portasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,portasReturns);
             spinnerPortas.setAdapter(portasSpinnerAdapter);
 
-            ArrayAdapter classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,classificacaoReturns);
+            classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,classificacaoReturns);
             spinnerClassificacao.setAdapter(classificacaoSpinnerAdapter);
 
-            ArrayAdapter acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,acessoriosReturns);
+            acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,acessoriosReturns);
             spinnerAcessorios.setAdapter(acessoriosSpinnerAdapter);
 
-            ArrayAdapter motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,motivoAvaliacaoReturns);
+            motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,motivoAvaliacaoReturns);
             spinnerMotivoAvaliacao.setAdapter(motivoAvaliacaoSpinnerAdapter);
 
-            ArrayAdapter notasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,notasReturns);
+            notasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,notasReturns);
             spinnerNotas.setAdapter(notasSpinnerAdapter);
 
-            ArrayAdapter ufSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,ufReturns);
+            ufSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,ufReturns);
             spinnerUf.setAdapter(ufSpinnerAdapter);
+
+            cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,cidadesReturns);
+            spinnerCidades.setAdapter(cidadesSpinnerAdapter);
 
             spinnerUf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -198,7 +263,7 @@ public class VeiculoClienteFragment extends BaseFragment {
 
                             @Override
                             protected void onPostExecute(Object o) {
-                                ArrayAdapter cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, cidadesReturns);
+                                cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, cidadesReturns);
                                 spinnerCidades.setAdapter(cidadesSpinnerAdapter);
                             }
                         };
@@ -230,76 +295,144 @@ public class VeiculoClienteFragment extends BaseFragment {
         return spinnerAnoModelo;
     }
 
-
     private void loadValues() {
-        fillFields();
-    }
-
-    private void fillFields() {
 
         for(int i = 0; i < spinnerVendedor.getCount(); i++) {
             VendedorReturn vendedorReturn = (VendedorReturn)vendedorSpinnerAdapter.getItem(i);
-            if(vendedorReturn != null) {
-                if((vendedorReturn.getId()).equals(informacoesAvaliacaoReturn.getVendedor_id())){
+            if(vendedorReturn != null && (vendedorReturn.getId()).equals(informacoesAvaliacaoReturn.getVendedor_id())) {
                     spinnerVendedor.setSelection(i);
                     break;
-                }
             }
         }
 
         for(int i = 0; i < spinnerCategoria.getCount(); i++) {
             CategoriaReturn categoriaReturn = (CategoriaReturn)categoriaSpinnerAdapter.getItem(i);
-            if(categoriaReturn != null) {
-                if((categoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCategoria_id())){
-                    spinnerCategoria.setSelection(i);
-                    break;
-                }
+            if(categoriaReturn != null && (categoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCategoria_id())) {
+                spinnerCategoria.setSelection(i);
+                break;
             }
         }
 
         for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
             MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
-            if(marcasCategoriaReturn != null) {
-                if((marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())){
-                    spinnerMarcasCategoria.setSelection(i);
-                    break;
-                }
+            if(marcasCategoriaReturn != null && (marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())) {
+                spinnerMarcasCategoria.setSelection(i);
+                break;
             }
         }
 
-    }
-
-    private void loadMarcasSpinner() {
-        final String idCategoria = ((CategoriaReturn)spinnerCategoria.getSelectedItem()).getId();
-        AsyncTask asyncTaskMarcas = new AsyncTask<Object, Object, Object>() {
-            @Override
-            protected Object doInBackground(Object[] objects) {
-                try {
-                    marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, idCategoria);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
+        for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
+            MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
+            if(marcasCategoriaReturn != null && (marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())) {
+                spinnerMarcasCategoria.setSelection(i);
+                break;
             }
+        }
 
-            @Override
-            protected void onPostExecute(Object o) {
-                marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
-                spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
-
-                for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
-                    MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
-                    if(marcasCategoriaReturn != null) {
-                        if((marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())){
-                            spinnerMarcasCategoria.setSelection(i,true);
-                            break;
-                        }
-                    }
-                }
-
+        for(int i = 0; i < spinnerModelosMarca.getCount(); i++) {
+            ModelosMarcaReturn modelosMarcaReturn = (ModelosMarcaReturn)modelosMarcaSpinnerAdapter.getItem(i);
+            if(modelosMarcaReturn != null && (modelosMarcaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getModelo_id())) {
+                spinnerModelosMarca.setSelection(i);
+                break;
             }
+        }
 
-        }.execute();
+        for(int i = 0; i < spinnerAnoFabricacao.getCount(); i++) {
+            AnoFabricacaoReturn anoFabricacaoReturn = (AnoFabricacaoReturn)anoFabricacaoSpinnerAdapter.getItem(i);
+            if(anoFabricacaoReturn != null && (anoFabricacaoReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getAno_fabricacao())) {
+                spinnerAnoFabricacao.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerAnoModelo.getCount(); i++) {
+            AnoModeloReturn anoModeloReturn = (AnoModeloReturn)anoModeloSpinnerAdapter.getItem(i);
+            if(anoModeloReturn != null && ((anoModeloReturn.getId()).split("-")[0]).equals(informacoesAvaliacaoReturn.getVeiculo().getAno_modelo())) {
+                spinnerAnoModelo.setSelection(i);
+                break;
+            }
+        }
+
+
+        for(int i = 0; i < spinnerUf.getCount(); i++) {
+            UfReturn ufReturn = (UfReturn)ufSpinnerAdapter.getItem(i);
+            if(ufReturn != null && (ufReturn.getId()).equals(informacoesAvaliacaoReturn.getCliente().getEstado_id())) {
+                spinnerUf.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerCidades.getCount(); i++) {
+            CidadesReturn cidadesReturn = (CidadesReturn)cidadesSpinnerAdapter.getItem(i);
+            if(cidadesReturn != null && (cidadesReturn.getId()).equals(informacoesAvaliacaoReturn.getCliente().getCidade_id())) {
+                spinnerCidades.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerAcessorios.getCount(); i++) {
+            AcessorioReturn acessorioReturn = (AcessorioReturn)acessoriosSpinnerAdapter.getItem(i);
+            if(acessorioReturn != null && (acessorioReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getAcessorio())) {
+                spinnerAcessorios.setSelection(i);
+                break;
+            }
+        }
+
+
+        for(int i = 0; i < spinnerCombustivel.getCount(); i++) {
+            CombustiveisReturn combustiveisReturn = (CombustiveisReturn)combustivelSpinnerAdapter.getItem(i);
+            if(combustiveisReturn != null && (combustiveisReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCombustivel_id())) {
+                spinnerCombustivel.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerPortas.getCount(); i++) {
+            PortasReturn portasReturn = (PortasReturn)portasSpinnerAdapter.getItem(i);
+            if(portasReturn != null && (portasReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getPortas())) {
+                spinnerPortas.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerMotivoAvaliacao.getCount(); i++) {
+            MotivoAvaliacaoReturn motivoAvaliacaoReturn = (MotivoAvaliacaoReturn)motivoAvaliacaoSpinnerAdapter.getItem(i);
+            if(motivoAvaliacaoReturn != null && (motivoAvaliacaoReturn.getId()).equals(informacoesAvaliacaoReturn.getMotivo_avaliacao())) {
+                spinnerMotivoAvaliacao.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerClassificacao.getCount(); i++) {
+            ClassificacaoReturn classificacaoReturn = (ClassificacaoReturn)classificacaoSpinnerAdapter.getItem(i);
+            if(classificacaoReturn != null && (classificacaoReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getClassificacao())) {
+                spinnerClassificacao.setSelection(i);
+                break;
+            }
+        }
+
+        for(int i = 0; i < spinnerNotas.getCount(); i++) {
+            NotaReturn notaReturn = (NotaReturn)notasSpinnerAdapter.getItem(i);
+            if(notaReturn != null && (notaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getNota())) {
+                spinnerNotas.setSelection(i);
+                break;
+            }
+        }
+
+
+        editTextDataHora.setText(informacoesAvaliacaoReturn.getData());
+        if(userReturn != null) {
+            editTextAvaliador.setText(userReturn.getNome());
+        }
+        editTextEmpresa.setText(informacoesAvaliacaoReturn.getEmpresa());
+        editTextCliente.setText(informacoesAvaliacaoReturn.getCliente().getNome());
+        editTextTelefone.setText(informacoesAvaliacaoReturn.getCliente().getTelefone());
+        editTextPlaca.setText(informacoesAvaliacaoReturn.getVeiculo().getPlaca());
+        editTextChassi.setText(informacoesAvaliacaoReturn.getVeiculo().getChassi());
+        editTextRenavam.setText(informacoesAvaliacaoReturn.getVeiculo().getRenavam());
+        editTextSituacao.setText(informacoesAvaliacaoReturn.getSituacao());
+        editTextCor.setText(informacoesAvaliacaoReturn.getVeiculo().getCor());
+        editTextKm.setText(informacoesAvaliacaoReturn.getVeiculo().getKm());
     }
 
 
@@ -393,7 +526,7 @@ public class VeiculoClienteFragment extends BaseFragment {
             @Override
             protected void onPostExecute(Object o) {
                 if (((Boolean) o) == true) {
-                    ArrayAdapter anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
+                    anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
                     spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
                     setDefaultValuesToSpinners(false,false,false,true);
                     spinnerAnoFabricacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -432,7 +565,7 @@ public class VeiculoClienteFragment extends BaseFragment {
             @Override
             protected void onPostExecute(Object o) {
                 if(((Boolean)o) == true) {
-                    ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloReturns);
+                    anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloReturns);
                     spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
                 }
             }
@@ -454,13 +587,14 @@ public class VeiculoClienteFragment extends BaseFragment {
 
         if (categoria || marca || modelo) {
             ArrayList<ValueLabelDefault> anoFabricacaoDefault = Utils.createArrayDefault(new AnoFabricacaoReturn(fragmentActivity));
-            ArrayAdapter anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoDefault);
+            anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoDefault);
             spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
         }
         if (categoria || marca || modelo || anoFabricacao) {
             ArrayList<ValueLabelDefault> anoModeloDefault = Utils.createArrayDefault(new AnoModeloReturn((fragmentActivity)));
-            ArrayAdapter anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloDefault);
+            anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloDefault);
             spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
         }
     }
 }
+

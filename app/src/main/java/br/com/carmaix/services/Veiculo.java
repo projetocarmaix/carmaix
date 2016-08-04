@@ -2,6 +2,8 @@ package br.com.carmaix.services;
 
 import com.google.gson.annotations.SerializedName;
 
+import br.com.carmaix.utils.Utils;
+
 /**
  * Created by fernando on 02/08/16.
  */
@@ -172,7 +174,8 @@ public class Veiculo {
     }
 
     public String getAcessorio() {
-        return acessorio;
+        String acessorioConverted = Utils.convertUTF8toISO(acessorio);
+        return acessorioConverted;
     }
 
     public void setAcessorio(String acessorio) {
