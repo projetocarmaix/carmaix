@@ -289,10 +289,12 @@
                     android:layout_width="@dimen/avaliar_text_width"
                     android:textSize="@dimen/avaliar_text_size"
                     android:gravity="center_vertical" />
+
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:id="@+id/radio_tipo_compra"
                     android:gravity="center_vertical">
                     <RadioButton android:id="@+id/radio_atacado"
                         android:layout_width="wrap_content"

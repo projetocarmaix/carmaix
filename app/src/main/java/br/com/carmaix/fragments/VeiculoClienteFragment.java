@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -84,6 +85,12 @@ public class VeiculoClienteFragment extends BaseFragment {
     private EditText editTextCor;
     private EditText editTextKm;
 
+    private RadioButton radioButtonAtacado;
+    private RadioButton radioButtonVarejo;
+
+    private RadioButton radioButtonGarantiaSim;
+    private RadioButton radioButtonGarantiaNao;
+
     private Boolean firstLoadMarcas = true;
     private Boolean firstLoadModelos = true;
     private Boolean firstLoadAnoFabricacao = true;
@@ -138,6 +145,12 @@ public class VeiculoClienteFragment extends BaseFragment {
         editTextSituacao = (EditText)view.findViewById(R.id.edit_text_situacao);
         editTextCor     = (EditText)view.findViewById(R.id.edit_text_cor);
         editTextKm      = (EditText)view.findViewById(R.id.edit_text_km);
+
+
+        radioButtonAtacado = (RadioButton)view.findViewById(R.id.radio_atacado);
+        radioButtonVarejo= (RadioButton)view.findViewById(R.id.radio_varejo);
+        radioButtonGarantiaSim= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_sim);
+        radioButtonGarantiaNao= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_nao);
 
         runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
         return view;
@@ -433,6 +446,20 @@ public class VeiculoClienteFragment extends BaseFragment {
         editTextSituacao.setText(informacoesAvaliacaoReturn.getSituacao());
         editTextCor.setText(informacoesAvaliacaoReturn.getVeiculo().getCor());
         editTextKm.setText(informacoesAvaliacaoReturn.getVeiculo().getKm());
+
+        String tipoCompra = informacoesAvaliacaoReturn.getTipo_compra();
+        if(tipoCompra.equals(Constants.OPTION_ATACADO)){
+            radioButtonAtacado.setChecked(true);
+        }else if(tipoCompra.equals(Constants.OPTION_VAREJO)){
+            radioButtonVarejo.setChecked(true);
+        }
+
+        String garantia = informacoesAvaliacaoReturn.getVeiculo().getGarantia_fabrica();
+        if(garantia.equals(Constants.OPTION_GARANTIA_SIM)){
+            radioButtonGarantiaSim.setChecked(true);
+        }else if(garantia.equals(Constants.OPTION_GARANTIA_NAO)){
+            radioButtonGarantiaNao.setChecked(true);
+        }
     }
 
 

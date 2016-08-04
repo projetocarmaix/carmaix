@@ -54,4 +54,11 @@ public class Constants {
     public final static Integer PINTAR_PORTA = 300;
     public final static Integer PNEUS_13 = 150;
     public final static Integer PNEUS_R15 = 300;
+
+    public final static String OPTION_ATACADO = "atacado";
+    public final static String OPTION_VAREJO = "varejo";
+
+
+    public final static String OPTION_GARANTIA_SIM = "S";
+    public final static String OPTION_GARANTIA_NAO = "N";
 }
