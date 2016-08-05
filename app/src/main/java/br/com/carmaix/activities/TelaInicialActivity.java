@@ -43,10 +43,12 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         this.application = (ApplicationCarmaix) getApplication();
+
+        if(this.application != null) {
+        }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -60,7 +62,6 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
     @Override
     protected void onResume() {
-
         super.onResume();
 
         verifyConnection(true);
@@ -70,7 +71,6 @@ public class TelaInicialActivity extends ParentBaseActivity {
     private void beginAuthorization() {
 
         Intent i = new Intent(this, LoginActivity.class);
-
         startActivity(i);
 
     }
@@ -137,19 +137,14 @@ public class TelaInicialActivity extends ParentBaseActivity {
     }
 
     private void verifyConnection(boolean validateFragment) {
-
         if (bundle != null && bundle.get(Constants.LOGOFF) != null) {
-
             Utils.alertToast("", this.getString(R.string.loadingEmpty), this, Toast.LENGTH_SHORT);
 
             runBackground("Carregando...", false, true, Constants.ACTION_LOGOFF);
 
         } else {
-
             try {
-
-                if (bundle == null) {
-
+                if (true) {
                     if (!application.isAuthorized()) {
                         beginAuthorization();
                     } else {
@@ -164,7 +159,6 @@ public class TelaInicialActivity extends ParentBaseActivity {
                         application.getAuthHelper().loadDataLogin();
 
                         Intent i = new Intent(this, AvaliacaoActivity.class);
-
                         startActivity(i);
 
                     }

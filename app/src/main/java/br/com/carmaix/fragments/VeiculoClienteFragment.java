@@ -152,14 +152,20 @@ public class VeiculoClienteFragment extends BaseFragment {
         radioButtonGarantiaSim= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_sim);
         radioButtonGarantiaNao= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_nao);
 
+        runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
+
         return view;
 
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
+    public void onResume() {
+        super.onResume();
+        firstLoadMarcas = true;
+        firstLoadModelos = true;
+        firstLoadAnoFabricacao = true;
+        firstLoadAnoModelo = true;
+        firstLoadCidades = true;
     }
 
     @Override
@@ -195,15 +201,6 @@ public class VeiculoClienteFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        firstLoadMarcas = true;
-        firstLoadModelos = true;
-        firstLoadAnoFabricacao = true;
-        firstLoadAnoModelo = true;
-    }
-
-    @Override
     protected void onEndBackgroundRun(int action) {
         if(action == Constants.ACTION_LIST) {
             vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,vendedorReturns);
@@ -212,19 +209,7 @@ public class VeiculoClienteFragment extends BaseFragment {
             categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,categoriaReturns);
             spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
             setDefaultValuesToSpinners(true,false,false,false);
-            spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(!firstLoadMarcas) {
-                        loadMarcas();
-                    }else {
-                        firstLoadMarcas = false;
-                    }
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {}
-            });
+            setDefaultInitSpinners(true,false,false,false);
 
             marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
             spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
@@ -297,7 +282,7 @@ public class VeiculoClienteFragment extends BaseFragment {
             });
         }
         loadValues();
-
+        loadListeners();
         super.onEndBackgroundRun(action);
     }
 
@@ -327,14 +312,6 @@ public class VeiculoClienteFragment extends BaseFragment {
             CategoriaReturn categoriaReturn = (CategoriaReturn)categoriaSpinnerAdapter.getItem(i);
             if(categoriaReturn != null && (categoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getCategoria_id())) {
                 spinnerCategoria.setSelection(i);
-                break;
-            }
-        }
-
-        for(int i = 0; i < spinnerMarcasCategoria.getCount(); i++) {
-            MarcasCategoriaReturn marcasCategoriaReturn = (MarcasCategoriaReturn)marcasCategoriaSpinnerAdapter.getItem(i);
-            if(marcasCategoriaReturn != null && (marcasCategoriaReturn.getId()).equals(informacoesAvaliacaoReturn.getVeiculo().getMarca_id())) {
-                spinnerMarcasCategoria.setSelection(i);
                 break;
             }
         }
@@ -486,15 +463,9 @@ public class VeiculoClienteFragment extends BaseFragment {
                 marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
                 spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
                 setDefaultValuesToSpinners(false,true,false,false);
-                spinnerMarcasCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        loadModelos();
-                    }
+                setDefaultInitSpinners(false,true,false,false);
+                loadModelos();
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
-                });
             }
         }.execute();
     }
@@ -522,15 +493,22 @@ public class VeiculoClienteFragment extends BaseFragment {
                     modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaReturns);
                     spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
                     setDefaultValuesToSpinners(false,false,true,false);
+                    setDefaultInitSpinners(false,false,true,false);
+
                     spinnerModelosMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            loadAnoFabricacao();
+                            if(!firstLoadAnoFabricacao) {
+                                loadAnoFabricacao();
+                            }else {
+                                firstLoadAnoFabricacao = false;
+                            }
                         }
 
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {}
                     });
+
                 }
             }
         }.execute();
@@ -561,10 +539,15 @@ public class VeiculoClienteFragment extends BaseFragment {
                     anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
                     spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
                     setDefaultValuesToSpinners(false,false,false,true);
+                    setDefaultInitSpinners(false,false,false,true);
                     spinnerAnoFabricacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            loadAnoModelo();
+                            if(!firstLoadAnoModelo) {
+                                loadAnoModelo();
+                            }else {
+                                firstLoadAnoModelo = false;
+                            }
                         }
 
                         @Override
@@ -627,6 +610,85 @@ public class VeiculoClienteFragment extends BaseFragment {
             anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloDefault);
             spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
         }
+    }
+
+
+    private void setDefaultInitSpinners(Boolean categoria, Boolean marca,Boolean modelo, Boolean anoFabricacao) {
+        /*if(categoria) {
+            firstLoadMarcas = true;
+        }
+
+        if (categoria || marca) {
+            firstLoadModelos = true;
+        }
+
+        if (categoria || marca || modelo) {
+            firstLoadAnoFabricacao = true;
+        }
+
+        if (categoria || marca || modelo || anoFabricacao) {
+            firstLoadAnoModelo = true;
+        }*/
+    }
+
+    private void loadListeners() {
+        spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!firstLoadMarcas) {
+                    loadMarcas();
+                }else {
+                    firstLoadMarcas = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+        spinnerMarcasCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!firstLoadModelos) {
+                    loadModelos();
+                }else {
+                    firstLoadModelos = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+
+        /*spinnerModelosMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!firstLoadAnoFabricacao) {
+                    loadAnoFabricacao();
+                }else {
+                    firstLoadAnoFabricacao = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+
+        spinnerAnoFabricacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(!firstLoadAnoModelo) {
+                    loadAnoModelo();
+                }else {
+                    firstLoadAnoFabricacao = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });*/
     }
 }
 
