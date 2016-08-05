@@ -32,7 +32,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
         if(extras!= null) {
             avaliacaoId = extras.getString("avaliacaoId");
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_container_home_as_up, new AvaliarFragmentTab()).commit();
+
         runBackground("",false,true, Constants.ACTION_LIST);
     }
 
@@ -51,7 +51,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
     @Override
     protected void onEndBackgroundRun(int action) {
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container_home_as_up, new AvaliarFragmentTab()).commit();
         super.onEndBackgroundRun(action);
     }
 

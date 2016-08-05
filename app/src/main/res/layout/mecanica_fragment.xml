@@ -16,9 +16,10 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:layout_marginBottom="15dp"
-            android:textSize="@dimen/tabs_avaliar_font_size_title"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Mecânica"/>
+            android:text="Mecânica" />
+
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -450,346 +451,499 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             android:background="@color/linha_tabela_cinza" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Estrutura"/>
         <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <LinearLayout android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:layout_weight="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:text="Estrutura"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal" />
                 <LinearLayout android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal">
+                    android:orientation="vertical">
+                    <LinearLayout android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="right">
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="31dp"
+                            android:text="B"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:textAlignment="center" />
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="31dp"
+                            android:text="M"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="31dp"
+                            android:text="R"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+
                     <LinearLayout android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_gravity="right">
-                            <TextView
-                                android:layout_height="match_parent"
-                                android:layout_width="31dp"
-                                android:text="B"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center|right"
-                                android:textAlignment="center" />
-                            <TextView
-                                android:layout_height="match_parent"
-                                android:layout_width="31dp"
-                                android:text="M"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center|right"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:layout_height="match_parent"
-                                android:layout_width="31dp"
-                                android:text="R"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center|right"
-                                android:textAlignment="center" />
-                        </LinearLayout>
+                        android:orientation="horizontal">
 
                         <LinearLayout android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical"
+                            android:layout_marginRight="5dp">
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_lataria"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                            <LinearLayout android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginRight="5dp">
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_lataria"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_pintura"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_pintura"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_carroceria"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_carroceria"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_porta_malas"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_porta_malas"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_comp_motor"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right"
+                                android:id="@+id/textView" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_comp_motor"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                        </LinearLayout>
 
-                            </LinearLayout>
+                        <LinearLayout android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                            <LinearLayout android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
-
-                            </LinearLayout>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:text="Sinais de Colisão"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal" />
                 <LinearLayout android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal">
+                    android:orientation="vertical">
+
+                    <LinearLayout android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="right">
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="31dp"
+                            android:text="B"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:textAlignment="center" />
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="31dp"
+                            android:text="M"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="31dp"
+                            android:text="R"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+
                     <LinearLayout android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_gravity="right">
-                            <TextView
-                                android:layout_height="match_parent"
-                                android:layout_width="31dp"
-                                android:text="B"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center|right"
-                                android:textAlignment="center" />
-                            <TextView
-                                android:layout_height="match_parent"
-                                android:layout_width="31dp"
-                                android:text="M"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center|right"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:layout_height="match_parent"
-                                android:layout_width="31dp"
-                                android:text="R"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center|right"
-                                android:textAlignment="center" />
-                        </LinearLayout>
+                        android:orientation="horizontal">
 
                         <LinearLayout android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical"
+                            android:layout_marginRight="5dp">
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_para_choque_d"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                            <LinearLayout android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginRight="5dp">
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_para_choque_d"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_para_choque_t"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_para_choque_t"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_parabrisa"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_parabrisa"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_estofamento"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right" />
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_estofamento"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                            <TextView
+                                android:layout_height="40dp"
+                                android:layout_width="wrap_content"
+                                android:text="@string/radio_farol_lanterna"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|right"
+                                android:id="@+id/textView2" />
+                        </LinearLayout>
 
-                                <TextView
-                                    android:layout_height="40dp"
-                                    android:layout_width="wrap_content"
-                                    android:text="@string/radio_farol_lanterna"
-                                    android:layout_gravity="center_vertical"
-                                    android:gravity="center|right" />
+                        <LinearLayout android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                            </LinearLayout>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                            <LinearLayout android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
 
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
-
-                                <RadioGroup
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                    <RadioButton android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content" />
-                                </RadioGroup>
-
-                            </LinearLayout>
+                            <RadioGroup
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/linha_tabela_cinza" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Sinais de Colisão" />
+
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="right">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="31dp"
+                    android:text="B"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center|right"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="31dp"
+                    android:text="M"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center|right"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="31dp"
+                    android:text="R"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center|right"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/radio_colisao_pequeno"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center|right" />
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/radio_colisao_medio"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center|right" />
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/radio_colisao_grande"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center|right" />
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/radio_colisao_nao"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center|right" />
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/radio_colisao_repintura"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center|right" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <RadioButton android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RadioGroup>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
 
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -798,7 +952,6 @@
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textSize="@dimen/tabs_avaliar_font_size_title"
                 android:text="@string/label_observacoes"/>
 
             <EditText

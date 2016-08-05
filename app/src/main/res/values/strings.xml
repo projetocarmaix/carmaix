@@ -118,7 +118,6 @@
 
     <string name="check_abs_tras">Abs. Tras.</string>
     <string name="check_airbag_mot">Airbag Mot.</string>
-    <string name="check_airbag_duplo">Airbag Duplo</string>
     <string name="check_airbag_lateral">Airbag Lateral</string>
     <string name="check_alarme">Alarme</string>
     <string name="check_alarme_orig">Alarme Orig.</string>
@@ -149,6 +148,7 @@
     <string name="check_cd_orig">CD Orig.</string>
     <string name="check_cd_mp3">CD/MP3</string>
     <string name="check_tracao_4_4">Tração 4x4</string>
+    <string name="check_airbag_duplo">Airbag Duplo</string>
     <string name="check_xenon_orig">Xenon Orig.</string>
     <string name="check_xenon">Xenon</string>
     <string name="check_sensor_est">Sensor Est.</string>
@@ -200,6 +200,12 @@
     <string name="radio_parabrisa">Parabrisa</string>
     <string name="radio_estofamento">Estofamento</string>
     <string name="radio_farol_lanterna">Farol/Lanterna</string>
+
+    <string name="radio_colisao_pequeno">Pequeno</string>
+    <string name="radio_colisao_medio">Médio</string>
+    <string name="radio_colisao_grande">Grande</string>
+    <string name="radio_colisao_nao">Não</string>
+    <string name="radio_colisao_repintura">Repintura</string>
 
     <string name="label_observacoes">Observações:</string>
     <string name="label_observacoes_adicionais">Observações adicionais:</string>

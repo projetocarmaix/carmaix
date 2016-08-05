@@ -29,12 +29,14 @@
                 <LinearLayout android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/opcionais_col1">
                     <CheckBox
                         android:id="@+id/check_abs_tras"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_abs_tras"
+                        android:tag="opc_abs_tras"
                     />
 
                     <CheckBox
@@ -42,6 +44,15 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_airbag_mot"
+                        android:tag="opc_airbag_mot"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/check_tracao_4_4"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/check_airbag_duplo"
+                        android:tag="opc_airbag_duplo"
                         />
 
                     <CheckBox
@@ -49,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_airbag_lateral"
+                        android:tag="opc_airbag_lat"
                         />
 
                     <CheckBox
@@ -56,6 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_alarme"
+                        android:tag="opc_alarme"
                         />
 
                     <CheckBox
@@ -63,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_alarme_orig"
+                        android:tag="opc_alarme_orig"
                         />
 
                     <CheckBox
@@ -70,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_ar_condicionado"
+                        android:tag="opc_ar_cond"
                         />
 
                     <CheckBox
@@ -77,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_ar_cond_digital"
+                        android:tag="opc_ar_cond_dig"
                         />
 
                     <CheckBox
@@ -84,6 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_ar_quente"
+                        android:tag="opc_ar_quente"
                         />
 
                     <CheckBox
@@ -91,6 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_barra_no_teto"
+                        android:tag="opc_barra_teto"
                         />
 
                     <CheckBox
@@ -98,6 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_bco_couro"
+                        android:tag="opc_bco_couro"
                         />
 
                     <CheckBox
@@ -105,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_cambio_aut"
+                        android:tag="opc_camb_aut"
                         />
 
                     <CheckBox
@@ -112,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_capota_maritima"
+                        android:tag="opc_capota_marit"
                         />
 
                     <CheckBox
@@ -119,6 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_chave_code"
+                        android:tag="opc_chave_cod"
                         />
 
                     <CheckBox
@@ -126,6 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_dir_hidraulica"
+                        android:tag="opc_dir_hidraulica"
                         />
 
                     <CheckBox
@@ -133,6 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_dir_eletrica"
+                        android:tag="opc_dir_eletrica"
                         />
 
                     <CheckBox
@@ -140,6 +164,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_desemb_traseiro"
+                        android:tag="opc_desem_tras"
                         />
 
                     <CheckBox
@@ -147,6 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_farois_neblina"
+                        android:tag="opc_farois_neblina"
                         />
 
 
@@ -155,6 +181,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_rodas_liga_orig"
+                        android:tag="opc_roda_liga_orig"
                         />
 
 
@@ -163,12 +190,14 @@
                 <LinearLayout android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/opcionais_col2">
                     <CheckBox
                         android:id="@+id/check_rodas_liga_esp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_rodas_liga_esp"
+                        android:tag="opc_roda_liga_esp"
                         />
 
                     <CheckBox
@@ -176,6 +205,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_limpador_tras"
+                        android:tag="opc_limp_tras"
                         />
 
                     <CheckBox
@@ -183,6 +213,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_gnv"
+                        android:tag="opc_gnv"
                         />
 
                     <CheckBox
@@ -190,6 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_prot_cacamba"
+                        android:tag="opc_prot_cacamba"
                         />
 
                     <CheckBox
@@ -197,6 +229,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_retrovisor_eletr"
+                        android:tag="opc_retrov_elet"
                         />
 
                     <CheckBox
@@ -204,6 +237,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_santo_antonio"
+                        android:tag="opc_sto_antonio"
                         />
 
                     <CheckBox
@@ -211,6 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_teto_solar_eletr"
+                        android:tag="opc_teto"
                         />
 
                     <CheckBox
@@ -218,6 +253,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_trava_eletr"
+                        android:tag="opc_trava_elet"
                         />
 
                     <CheckBox
@@ -225,6 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_vidros_eletr_dian"
+                        android:tag="opc_vidro_eletr_diant"
                         />
 
                     <CheckBox
@@ -232,6 +269,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_vidros_eletr_tras"
+                        android:tag="opc_vidro_eletr_tras"
                         />
 
                     <CheckBox
@@ -239,6 +277,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_cd"
+                        android:tag="opc_cd"
                         />
 
                     <CheckBox
@@ -246,6 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_cd_orig"
+                        android:tag="opc_cd_orig"
                         />
 
                     <CheckBox
@@ -253,13 +293,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_cd_mp3"
-                        />
-
-                    <CheckBox
-                        android:id="@+id/check_tracao_4_4"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/check_tracao_4_4"
+                        android:tag="opc_mp3"
                         />
 
                     <CheckBox
@@ -267,6 +301,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_xenon_orig"
+                        android:tag="opc_xenon_orig"
                         />
 
                     <CheckBox
@@ -274,6 +309,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_xenon"
+                        android:tag="opc_xenon"
                         />
 
                     <CheckBox
@@ -281,6 +317,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_sensor_est"
+                        android:tag="opc_sens_estac"
                         />
 
                     <CheckBox
@@ -288,6 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_sensor_crep"
+                        android:tag="opc_sens_crepuscular"
                         />
 
                     <CheckBox
@@ -295,6 +333,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="@string/check_sensor_chuva"
+                        android:tag="opc_sens_chuva"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -326,72 +365,86 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:id="@+id/items"
                 android:paddingLeft="10dp"
                 android:layout_gravity="center_horizontal">
 
                 <CheckBox android:id="@+id/check_extintor"
                     android:layout_height="wrap_content"
+                    android:tag="opc_extintor"
                     android:layout_width="wrap_content"
                     android:text="@string/check_extintor" />
 
                 <CheckBox android:id="@+id/check_triangulo"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_triangulo"
                     android:text="@string/check_triangulo" />
 
                 <CheckBox android:id="@+id/check_macaco"
                     android:layout_height="wrap_content"
+                    android:tag="opc_macaco"
                     android:layout_width="wrap_content"
                     android:text="@string/check_macaco" />
 
                 <CheckBox android:id="@+id/check_chave_de_rodas"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_chave_rodas"
                     android:text="@string/check_chave_de_rodas" />
 
                 <CheckBox android:id="@+id/check_estepe"
                     android:layout_height="wrap_content"
+                    android:tag="opc_estepe"
                     android:layout_width="wrap_content"
                     android:text="@string/check_estepe" />
 
                 <CheckBox android:id="@+id/check_calotas"
                     android:layout_height="wrap_content"
+                    android:tag="opc_calotas"
                     android:layout_width="wrap_content"
                     android:text="@string/check_calotas" />
 
                 <CheckBox android:id="@+id/check_antena"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_antena"
                     android:text="@string/check_antena" />
 
                 <CheckBox android:id="@+id/check_acendedor"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_acendedor"
                     android:text="@string/check_acendedor" />
 
                 <CheckBox android:id="@+id/check_tapetes"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_tapetes"
                     android:text="@string/check_tapetes" />
 
                 <CheckBox android:id="@+id/check_manual_de_garantia"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_manual_garantia"
                     android:text="@string/check_manual_de_garantia" />
 
                 <CheckBox android:id="@+id/check_manual_do_prop"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_manual_proprietario"
                     android:text="@string/check_manual_do_prop" />
 
                 <CheckBox android:id="@+id/check_cartao_transponder"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_cartao_transponder"
                     android:text="@string/check_cartao_transponder" />
 
                 <CheckBox android:id="@+id/check_chave_reserva"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:tag="opc_chave_reserva"
                     android:text="@string/check_chave_reserva" />
 
                 <LinearLayout
@@ -404,7 +457,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/label_aro"/>
 
-                    <EditText android:layout_height="wrap_content"
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edit_aro"
                         android:layout_width="40dp" />
                 </LinearLayout>
             </LinearLayout>
