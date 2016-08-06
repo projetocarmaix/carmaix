@@ -117,8 +117,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        loginTableRuntimeDao = null;
     }
+
     public void logoff() {
         try {
             TableUtils.clearTable(connectionSource,LoginTable.class);

@@ -201,11 +201,11 @@
     <string name="radio_estofamento">Estofamento</string>
     <string name="radio_farol_lanterna">Farol/Lanterna</string>
 
-    <string name="radio_colisao_pequeno">Pequeno</string>
-    <string name="radio_colisao_medio">Médio</string>
-    <string name="radio_colisao_grande">Grande</string>
-    <string name="radio_colisao_nao">Não</string>
-    <string name="radio_colisao_repintura">Repintura</string>
+    <string name="check_colisao_pequeno">Pequeno</string>
+    <string name="check_colisao_medio">Médio</string>
+    <string name="check_colisao_grande">Grande</string>
+    <string name="check_colisao_nao">Não</string>
+    <string name="check_colisao_repintura">Repintura</string>
 
     <string name="label_observacoes">Observações:</string>
     <string name="label_observacoes_adicionais">Observações adicionais:</string>

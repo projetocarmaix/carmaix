@@ -94,7 +94,8 @@ public class InformacoesAvaliacaoReturn {
     }
 
     public String getObservacoes_adicionais() {
-        return observacoes_adicionais;
+        String observacoesAdicionaisConverted = Utils.convertUTF8toISO(observacoes_adicionais);
+        return observacoesAdicionaisConverted;
     }
 
     public void setObservacoes_adicionais(String observacoes_adicionais) {
@@ -136,7 +137,8 @@ public class InformacoesAvaliacaoReturn {
     }
 
     public String getObservacao() {
-        return observacao;
+        String observacaoConverted = Utils.convertUTF8toISO(observacao);
+        return observacaoConverted;
     }
 
     public void setObservacao(String observacao) {

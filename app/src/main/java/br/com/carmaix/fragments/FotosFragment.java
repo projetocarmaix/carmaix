@@ -29,6 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.carmaix.R;
+import br.com.carmaix.activities.AvaliarActivity;
+import br.com.carmaix.services.Fotos;
+import br.com.carmaix.services.InformacoesAvaliacaoReturn;
+import br.com.carmaix.services.Veiculo;
 
 /**
  * Created by fernando on 21/07/16.
@@ -55,6 +59,7 @@ public class FotosFragment extends BaseFragment {
     private Button buttonDetalhe;
     private Button buttonEstepe;
     private Button buttonDocumento;
+    private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn;
 
     @Nullable
     @Override
@@ -110,20 +115,26 @@ public class FotosFragment extends BaseFragment {
         imageEstepe    = (ImageView)view.findViewById(R.id.image_estepe);
         imageDocumento = (ImageView)view.findViewById(R.id.image_documento);
 
-        inicializaImages(imageFrente);
-        inicializaImages(imageTraseira);
-        inicializaImages(imageLateralE);
-        inicializaImages(imageLateralD);
-        inicializaImages(imageInterior);
-        inicializaImages(imageOdometro);
-        inicializaImages(imagePneu);
-        inicializaImages(imageDetalhe);
-        inicializaImages(imageEstepe);
-        inicializaImages(imageDocumento);
+        informacoesAvaliacaoReturn = ((AvaliarActivity) fragmentActivity).getInformacoesAvaliacaoReturn();
+        Fotos fotos = informacoesAvaliacaoReturn.getVeiculo().getFotos();
+        inicializaImages(imageFrente, fotos.getFrente());
+        inicializaImages(imageTraseira, fotos.getTraseira());
+        inicializaImages(imageLateralE, fotos.getLat_esquerda());
+        inicializaImages(imageLateralD , fotos.getLat_direita());
+        inicializaImages(imageInterior, fotos.getInterior());
+        inicializaImages(imageOdometro, fotos.getOdometro());
+        inicializaImages(imagePneu, fotos.getPneu());
+        inicializaImages(imageDetalhe, fotos.getDetalhe());
+        inicializaImages(imageEstepe, fotos.getEstepe());
+        inicializaImages(imageDocumento, fotos.getDocumento());
     }
 
-    private void inicializaImages(ImageView imageView) {
-        Picasso.with(fragmentActivity).load(R.drawable.no_image_box).fit().centerInside().into(imageView);
+    private void inicializaImages(ImageView imageView, String urlImg) {
+        if(urlImg.isEmpty()) {
+            Picasso.with(fragmentActivity).load(R.drawable.no_image_box).fit().centerInside().into(imageView);
+        }else {
+            Picasso.with(fragmentActivity).load(urlImg).fit().centerInside().into(imageView);
+        }
     }
 
     private View.OnClickListener clickButtonListener(final String requestode) {
@@ -282,7 +293,6 @@ public class FotosFragment extends BaseFragment {
             o.close();
             i.close();
         }catch (Exception e ) {
-            Log.i("teste","erro");
             e.printStackTrace();
         }
 

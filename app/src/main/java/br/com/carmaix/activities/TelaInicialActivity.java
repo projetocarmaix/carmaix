@@ -144,24 +144,22 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
         } else {
             try {
-                if (true) {
-                    if (!application.isAuthorized()) {
-                        beginAuthorization();
-                    } else {
 
-                        authenticated = true;
+                if (!application.isAuthorized()) {
+                    beginAuthorization();
+                } else {
 
-                        bundleServerSelected = null;
-                        bundle = null;
+                    authenticated = true;
 
-                        application.getAuthHelper().loadAccessToken();
+                    bundleServerSelected = null;
+                    bundle = null;
 
-                        application.getAuthHelper().loadDataLogin();
+                    application.getAuthHelper().loadAccessToken();
 
-                        Intent i = new Intent(this, AvaliacaoActivity.class);
-                        startActivity(i);
+                    application.getAuthHelper().loadDataLogin();
 
-                    }
+                    Intent i = new Intent(this, AvaliacaoActivity.class);
+                    startActivity(i);
 
                 }
 

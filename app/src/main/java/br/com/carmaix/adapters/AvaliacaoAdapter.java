@@ -90,9 +90,9 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
             avaliacaoClasse = (TextView) itemView.findViewById(R.id.avaliacao_classe);
             avaliacaoAvaliacao = (TextView) itemView.findViewById(R.id.avaliacao_avaliacao);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View view) {
+                public void onClick(View view) {
                     final TextView avaliacaoId = (TextView)view.findViewById(R.id.avaliacao_id);
                     TextView avaliacaoMarca = (TextView)view.findViewById(R.id.avaliacao_marca);
                     TextView avaliacaoModelo = (TextView)view.findViewById(R.id.avaliacao_modelo);
@@ -156,8 +156,6 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     this.setbackgroundColor(optionsGroup);
                     alerBuilder.setView(options);
                     alerBuilder.create().show();
-
-                    return false;
                 }
 
                 private void setbackgroundColor(LinearLayout optionsGroup) {
