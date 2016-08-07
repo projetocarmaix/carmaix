@@ -4,4 +4,8 @@
     android:layout_height="match_parent"
     android:textSize="@dimen/avaliar_text_size"
     android:textStyle="bold"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:layout_marginBottom="1dp"
 />
+
