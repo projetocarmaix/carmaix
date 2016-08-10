@@ -54,16 +54,34 @@
             android:layout_gravity="center_horizontal"
             android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/btnLogar"
-            android:layout_width="59dp"
-            android:layout_height="22dp"
-            android:layout_gravity="right"
-            android:textSize="9sp"
-            android:layout_marginRight="4dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/branco"
-            android:text="@string/btn_logar" />
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView android:layout_height="wrap_content"
+                android:id="@+id/txt_esqueci_senha"
+                android:layout_width="0dp"
+                android:text="Esqueceu a senha?"
+                android:gravity="bottom"
+                android:layout_gravity="bottom|left"
+                android:layout_weight="3"
+                android:textSize="10sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="italic"
+                android:textIsSelectable="true"
+                android:layout_marginRight="25dp" />
+
+            <Button
+                android:id="@+id/btnLogar"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:textSize="9sp"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/branco"
+                android:text="@string/btn_logar"
+                android:layout_weight="3"
+                android:layout_marginRight="3dp" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -6,5 +6,6 @@ public enum MethodHttpType {
     GET_AND_POST,
     GET_AND_BinaryPOST,
     GET_AND_POST_WITHOUT_USE_EXPECT_CONTINUE_PARAM,
-    POST_;
+    POST_,
+    PUT;
 }

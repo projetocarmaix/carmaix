@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
+import br.com.carmaix.database.DataBaseUtils;
 import br.com.carmaix.fragments.AvaliacaoFragmentTab;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
@@ -78,10 +79,15 @@ public class AvaliacaoActivity extends BaseActivity {
             Intent intent = new Intent(this, DialogTabelaPassecarrosActivity.class);
             this.startActivity(intent);
         }else if(id == R.id.menu_sair) {
-            /*ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
-            application.getHelper().logoff();*/
-            /*Intent intent = new Intent(this, DialogTabelaPassecarrosActivity.class);
-            this.startActivity(intent);*/
+            ApplicationCarmaix application = (ApplicationCarmaix) this.getApplicationContext();
+            try {
+                DataBaseUtils.deleteData(application);
+                application.getAuthHelper().setAuthenticated(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(this, TelaInicialActivity.class);
+            this.startActivity(intent);
         }
         super.onNavigationItemSelected(item);
         return true;

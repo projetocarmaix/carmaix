@@ -3,6 +3,7 @@ package br.com.carmaix.services;
 import android.content.Context;
 
 import android.net.http.AndroidHttpClient;
+import android.net.http.HttpResponseCache;
 import android.util.Log;
 
 
@@ -12,6 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -193,6 +195,7 @@ public class RestSKD {
 
             if (application.getLoginTable() != null){
                 AddHeader("Authorization", "Bearer " + application.getLoginTable().getToken());
+                Log.i("token",application.getLoginTable().getToken());
             }
 
         } catch (Exception ex) {
@@ -450,7 +453,7 @@ public class RestSKD {
                 result = executeRequest(post);
                 break;
             }
-            case POST_:
+            case POST_: {
 
                 URI url2 = new URI(getUrlRequisition(url));
 
@@ -465,6 +468,23 @@ public class RestSKD {
                 post.getParams().setBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
                 result = executeRequest(post);
                 break;
+            }
+            case PUT: {
+
+                URI url2 = new URI(getUrlRequisition(url));
+
+                HttpPut put = new HttpPut(url2);
+
+                addToPutHeader(contentType, put);
+
+                if (binaryBodyParam != null) {
+                    put.setEntity(new ByteArrayEntity(binaryBodyParam));
+                }
+
+                put.getParams().setBooleanParameter(CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
+                result = executeRequest(put);
+                break;
+            }
 
         }
 
@@ -586,6 +606,63 @@ public class RestSKD {
         } else {
             httpPost.setHeader("Content-Type", contentType);
         }
+
+    }
+
+    private void addToPutHeader(String contentType, HttpPut httpPut){
+
+        if (headers.size() > 0) {
+
+            httpPut.addHeader("Content-Type", contentType);
+
+            for (NameValuePair nameValuePair : headers) {
+                httpPut.setHeader(nameValuePair.getName(), nameValuePair.getValue());
+            }
+
+        } else {
+            httpPut.setHeader("Content-Type", contentType);
+        }
+
+    }
+
+
+    private String executeRequest(HttpPut request) throws Exception {
+
+        String result = "";
+
+        try {
+
+            if (Utils.isConnected(context)) {
+
+                long start = System.currentTimeMillis();
+
+                HttpClient client = new DefaultHttpClient();
+
+                HttpParams httpParameters = client.getParams();
+                HttpConnectionParams.setConnectionTimeout(httpParameters, TIMEOUT);
+                HttpConnectionParams.setSoTimeout(httpParameters, TIMEOUT);
+
+                HttpResponse response = client.execute(request);
+
+                result = Utils.verifyResponseCode(context, response, getCatchErrorECM(), true, isUseGZipEncoding(), isIgnoreNewResult());
+
+                long end = System.currentTimeMillis();
+
+                if (Constants.DEBUG_TEMPO_RESPOSTA_SERVICE) {
+                    Log.i("DEBUG Rest Tempo", "xxx " + request.getURI().toString() + " :" + (end - start));
+                }
+
+            } else {
+                throw new Exception("Dispositivo não está conectado");
+            }
+
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } catch (Throwable e) {
+            throw new Exception(e.getMessage());
+        }
+
+        return result;
 
     }
 

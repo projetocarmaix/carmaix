@@ -969,5 +969,30 @@ public class ServiceDefault implements VersionRelease {
 
         return userReturn;
     }
+
+
+    public String sendEsqueciSenha(Context context, String email) throws Exception {
+        String textJson = "";
+        String message = "";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email",email);
+
+        jsonObject.toString();
+        String URL = this.BASE_URL+"/auth/forgot-password";
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.PUT);
+        consumerSDK.setCacheTime(Constants.CACHE_TIME);
+        consumerSDK.setUrlFull(URL);
+        consumerSDK.setCacheTime(999999999l);
+        consumerSDK.setContentType("application/json");
+        consumerSDK.AddBinaryBodyParam(jsonObject.toString().getBytes());
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+
+        JSONObject jsonObjectReturn = new JSONObject(textJson);
+        message = jsonObjectReturn.get("description").toString();
+
+        return message;
+    }
 }
 

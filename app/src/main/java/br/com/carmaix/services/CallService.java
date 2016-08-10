@@ -126,4 +126,8 @@ public class CallService {
     public static UserReturn getAvaliador(Context context, String idUsuario) throws Exception {
         return getVersionRelease().getAvaliador(context, idUsuario);
     }
+
+    public static String sendEsqueciSenha(Context context, String email) throws Exception {
+        return getVersionRelease().sendEsqueciSenha(context, email);
+    }
 }

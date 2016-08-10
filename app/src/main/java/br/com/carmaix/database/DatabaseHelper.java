@@ -119,9 +119,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super.close();
     }
 
-    public void logoff() {
+    public void dropTable() {
         try {
-            TableUtils.clearTable(connectionSource,LoginTable.class);
+            TableUtils.dropTable(connectionSource,LoginTable.class,true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,4 +130,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
     }
+
+
 }

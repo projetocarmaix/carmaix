@@ -56,4 +56,6 @@ public interface VersionRelease {
 
     UserReturn getAvaliador(Context context, String idUsuario) throws Exception;
 
+    String sendEsqueciSenha(Context context, String email) throws Exception;
+
 }

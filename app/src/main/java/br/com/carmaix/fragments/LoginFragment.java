@@ -1,6 +1,7 @@
 package br.com.carmaix.fragments;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import br.com.carmaix.activities.AvaliacaoActivity;
 import br.com.carmaix.activities.BaseActivity;
 import br.com.carmaix.R;
+import br.com.carmaix.activities.DialogEsqueciSenhaActivity;
 import br.com.carmaix.activities.TelaInicialActivity;
 import br.com.carmaix.controller.LoginController;
 import br.com.carmaix.database.DataBaseUtils;
@@ -36,9 +39,9 @@ public class LoginFragment extends BaseFragment {
     private EditText edtLogin;
     private EditText edtSenha;
     private Button btnLogar;
-
+    private TextView esqueciSenha;
     private LoginController controller;
-
+    private String messageSenha;
     private LoginModel model;
 
     @Override
@@ -99,6 +102,16 @@ public class LoginFragment extends BaseFragment {
 
                 }
 
+            }
+        });
+
+        esqueciSenha = (TextView)view.findViewById(R.id.txt_esqueci_senha);
+
+        esqueciSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(fragmentActivity, DialogEsqueciSenhaActivity.class);
+                startActivity(intent);
             }
         });
 

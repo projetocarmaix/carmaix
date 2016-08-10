@@ -269,4 +269,10 @@
     <string name="dialog_passecarros_ano">Ano</string>
     <string name="dialog_passecarros_valor_medio">Valor Médio: %s</string>
     <string name="tabela_mensagem">Não há opções selecionadas para a exibição de estatistícas</string>
+
+    <string name="enviar">Enviar</string>
+    <string name="informe_o_seu_email">Informe o seu email</string>
+    <string name="algo_deu_errado">Algo deu errado</string>
+
+
 </resources>

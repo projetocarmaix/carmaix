@@ -55,6 +55,14 @@
             android:theme="@style/CustomDialog">
         </activity>
 
+
+        <activity
+            android:name=".activities.DialogEsqueciSenhaActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomDialog">
+        </activity>
+
         <activity
             android:name=".activities.TelaInicialActivity"
             android:clearTaskOnLaunch="true"

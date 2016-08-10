@@ -333,6 +333,14 @@ public class DataBaseUtils {
 
         RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
         simpleDao.update(loginTable);
-
     }
+
+    public static void deleteData(ApplicationCarmaix application) throws Exception {
+        LoginTable loginTable = application.getLoginTable();
+
+        RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
+        simpleDao.delete(loginTable);
+    }
+
+
 }
