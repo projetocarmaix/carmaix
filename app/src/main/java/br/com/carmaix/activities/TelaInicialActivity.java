@@ -144,7 +144,6 @@ public class TelaInicialActivity extends ParentBaseActivity {
 
         } else {
             try {
-
                 if (!application.isAuthorized()) {
                     beginAuthorization();
                 } else {

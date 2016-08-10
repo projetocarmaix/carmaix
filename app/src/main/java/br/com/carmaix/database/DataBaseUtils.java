@@ -152,24 +152,6 @@ public class DataBaseUtils {
 
     */
 
-    public static void createAccount(ApplicationCarmaix application, String userEmail, TokenReturn tokenReturn) throws Exception {
-
-        LoginTable loginTable = new LoginTable();
-
-        loginTable.setUserEmail(userEmail);
-
-        loginTable.setToken(tokenReturn.getToken());
-
-        loginTable.setCompanyName("CompanyName");
-
-        loginTable.setCompanyLogo("CompanyLogo");
-
-        RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
-
-        simpleDao.create(loginTable);
-
-    }
-
     /*
 
     public static void updateTenantServer(ApplicationAction application, int serverId, boolean changeServer,
@@ -206,7 +188,7 @@ public class DataBaseUtils {
         }
 
     }
-    
+
     public static void updateTenantServerPushStatus(ApplicationAction application, ServerInformation serverInformation) throws Exception {
 
         RuntimeExceptionDao<ServerInformation, Integer> simpleDao = application.getServerInformationHelper().getSimpleServerInformationDao();
@@ -319,6 +301,24 @@ public class DataBaseUtils {
 
     */
 
+    public static void createAccount(ApplicationCarmaix application, String userEmail, TokenReturn tokenReturn) throws Exception {
+
+        LoginTable loginTable = new LoginTable();
+
+        loginTable.setUserEmail(userEmail);
+
+        loginTable.setToken(tokenReturn.getToken());
+
+        loginTable.setCompanyName("CompanyName");
+
+        loginTable.setCompanyLogo("CompanyLogo");
+
+        RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
+
+        simpleDao.create(loginTable);
+
+    }
+
     public static void includeUserData(ApplicationCarmaix application, UserReturn user, TokenConvertedReturn tokenConvertedReturn, TokenReturn token, String userEmail) throws Exception {
 
         LoginTable loginTable = application.getLoginTable();
@@ -336,11 +336,11 @@ public class DataBaseUtils {
     }
 
     public static void deleteData(ApplicationCarmaix application) throws Exception {
+
         LoginTable loginTable = application.getLoginTable();
 
         RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
         simpleDao.delete(loginTable);
+
     }
-
-
 }

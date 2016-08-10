@@ -52,7 +52,8 @@
             android:name=".activities.DialogTabelaPassecarrosActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:theme="@style/CustomDialog">
+            android:theme="@style/CustomDialog"
+            android:parentActivityName=".activities.AvaliacaoActivity">
         </activity>
 
 
@@ -60,7 +61,8 @@
             android:name=".activities.DialogEsqueciSenhaActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:theme="@style/CustomDialog">
+            android:theme="@style/CustomDialog"
+            android:parentActivityName=".activities.LoginActivity">
         </activity>
 
         <activity

@@ -83,6 +83,7 @@ public class AvaliacaoActivity extends BaseActivity {
             try {
                 DataBaseUtils.deleteData(application);
                 application.getAuthHelper().setAuthenticated(false);
+                application.setLoginTable(null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
