@@ -42,7 +42,7 @@
             android:textColor="@color/tab_cinza"
             android:textSize="11sp"
             android:layout_gravity="center_horizontal"
-            android:inputType="text" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/edtSenha"
@@ -61,7 +61,6 @@
             <TextView android:layout_height="wrap_content"
                 android:id="@+id/txt_esqueci_senha"
                 android:layout_width="0dp"
-                android:text="Esqueceu a senha?"
                 android:gravity="bottom"
                 android:layout_gravity="bottom|left"
                 android:layout_weight="3"

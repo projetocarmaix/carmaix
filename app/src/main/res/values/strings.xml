@@ -272,7 +272,15 @@
 
     <string name="enviar">Enviar</string>
     <string name="informe_o_seu_email">Informe o seu email</string>
-    <string name="algo_deu_errado">Algo deu errado</string>
+    <string name="algo_deu_errado">Ops... algo deu errado</string>
+    <string name="nao_foi_possivel_enviar_email">Não foi possível enviar o lembrete de senha.</string>
+    <string name="esqueceu_senha">Esqueceu a senha?</string>
 
+    <string name="trocar_a_senha">Trocar a senha</string>
+    <string name="senha_atual">Senha atual</string>
+    <string name="nova_senha">Nova senha</string>
+    <string name="repita_a_nova_senha">Repita a nova senha</string>
+    <string name="alterar">Alterar</string>
 
 </resources>
+

@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -991,6 +992,45 @@ public class ServiceDefault implements VersionRelease {
 
         JSONObject jsonObjectReturn = new JSONObject(textJson);
         message = jsonObjectReturn.get("description").toString();
+
+        return message;
+    }
+
+    public String alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception {
+        String textJson = "";
+        String message = "";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("password",senhaAtual);
+        jsonObject.put("new_password",novaSenha);
+        jsonObject.put("new_confirm",confirmacaoSenha);
+
+        jsonObject.toString();
+        String URL = this.BASE_URL+"/auth/change-password";
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.PUT);
+        consumerSDK.setCacheTime(Constants.CACHE_TIME);
+        consumerSDK.setUrlFull(URL);
+        consumerSDK.setCacheTime(999999999l);
+        consumerSDK.setContentType("application/json");
+        consumerSDK.AddBinaryBodyParam(jsonObject.toString().getBytes());
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+
+        JsonElement element = null;
+        Gson gson = new Gson();
+        JSONObject jsonObjectReturn = new JSONObject(textJson);
+        String code = (String)jsonObjectReturn.get("code");
+        JsonParser parser = new JsonParser();
+
+        if(code.equals("400")) {
+            JSONArray jsonArray = (JSONArray)jsonObjectReturn.get("errors");
+            element = parser.parse(jsonArray.toString());
+
+
+            for(int i = 0; i < jsonArray.length(); i++) {
+                new JSONObject(jsonArray.get(i).toString()).get("message");
+            }
+        }
 
         return message;
     }

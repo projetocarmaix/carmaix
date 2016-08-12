@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -106,12 +109,17 @@ public class LoginFragment extends BaseFragment {
         });
 
         esqueciSenha = (TextView)view.findViewById(R.id.txt_esqueci_senha);
+        String esqueciSenhaText = fragmentActivity.getResources().getString(R.string.esqueceu_senha);
+        SpannableString spannableString = new SpannableString(esqueciSenhaText);
+        spannableString.setSpan(new UnderlineSpan(),0,esqueciSenhaText.length(),0);
+        esqueciSenha.setText(spannableString);
 
-        esqueciSenha.setOnClickListener(new View.OnClickListener() {
+        esqueciSenha.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 Intent intent = new Intent(fragmentActivity, DialogEsqueciSenhaActivity.class);
                 startActivity(intent);
+                return true;
             }
         });
 

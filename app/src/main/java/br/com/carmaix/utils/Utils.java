@@ -61,6 +61,14 @@ public class Utils {
                     return "";
                 }
 
+            case 400:
+
+                if (convertResponse) {
+                    return convertStreamToString(response, useGZip);
+                } else {
+                    return "";
+                }
+
             default:
                 throw new Exception("Erro na execução do rest " + responseCode + " " + message);
         }

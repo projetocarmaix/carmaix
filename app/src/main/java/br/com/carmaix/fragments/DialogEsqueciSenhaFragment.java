@@ -82,16 +82,20 @@ public class DialogEsqueciSenhaFragment extends BaseFragment {
                         buttonEsqueciSenha.setVisibility(View.VISIBLE);
 
                         String messageToShow = o.toString();
-                        if(messageToShow.isEmpty()) {
-                            messageToShow = fragmentActivity.getResources().getString(R.string.algo_deu_errado);
-                        }
 
                         AlertDialog.Builder alerBuilder = new AlertDialog.Builder(fragmentActivity);
+
+                        if(messageToShow.isEmpty()) {
+                            alerBuilder.setTitle(fragmentActivity.getResources().getString(R.string.algo_deu_errado));
+                            messageToShow = fragmentActivity.getResources().getString(R.string.nao_foi_possivel_enviar_email);
+                        }
+
                         alerBuilder.setMessage(messageToShow);
                         alerBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent(fragmentActivity, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 startActivity(intent);
                             }
                         });

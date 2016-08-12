@@ -20,6 +20,7 @@ import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.database.DataBaseUtils;
 import br.com.carmaix.fragments.AvaliacaoFragmentTab;
+import br.com.carmaix.fragments.DialogAlterarSenhaFragment;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
@@ -89,7 +90,12 @@ public class AvaliacaoActivity extends BaseActivity {
             }
             Intent intent = new Intent(this, TelaInicialActivity.class);
             this.startActivity(intent);
+        }else if(id == R.id.menu_alterar_senha) {
+            Intent intent = new Intent(this, DialogAlterarSenhaActivity.class);
+            this.startActivity(intent);
         }
+
+
         super.onNavigationItemSelected(item);
         return true;
     }

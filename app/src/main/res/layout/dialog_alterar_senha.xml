@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="vertical">
+
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25dp"
+            android:text="@string/trocar_a_senha"
+        />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+       <EditText android:layout_height="wrap_content"
+           android:id="@+id/senha_atual"
+           android:layout_width="match_parent"
+           android:textSize="15dp"
+           android:hint="@string/senha_atual"
+           android:textColorHint="@color/linha_tabela_cinza"
+           android:paddingTop="10dp"
+           android:inputType="textPassword"
+           android:paddingBottom="10dp"
+           android:layout_marginTop="5dp" />
+
+        <EditText android:layout_height="wrap_content"
+            android:id="@+id/nova_senha"
+            android:layout_width="match_parent"
+            android:hint="@string/nova_senha"
+            android:textColorHint="@color/linha_tabela_cinza"
+            android:textSize="15dp"
+            android:paddingTop="10dp"
+            android:inputType="textPassword"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="5dp" />
+
+        <EditText android:layout_height="wrap_content"
+            android:id="@+id/confirmacao_senha"
+            android:layout_width="match_parent"
+            android:hint="@string/repita_a_nova_senha"
+            android:textColorHint="@color/linha_tabela_cinza"
+            android:textSize="15dp"
+            android:inputType="textPassword"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="5dp" />
+
+        <Button
+            android:id="@+id/btn_alterar_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/branco"
+            android:text="@string/alterar"
+            android:visibility="visible"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_alterar_senha"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

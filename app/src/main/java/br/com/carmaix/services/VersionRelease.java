@@ -58,4 +58,6 @@ public interface VersionRelease {
 
     String sendEsqueciSenha(Context context, String email) throws Exception;
 
+    String alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception;
+
 }
