@@ -82,12 +82,13 @@ public class DialogEsqueciSenhaFragment extends BaseFragment {
                         buttonEsqueciSenha.setVisibility(View.VISIBLE);
 
                         String messageToShow = o.toString();
-
                         AlertDialog.Builder alerBuilder = new AlertDialog.Builder(fragmentActivity);
 
                         if(messageToShow.isEmpty()) {
                             alerBuilder.setTitle(fragmentActivity.getResources().getString(R.string.algo_deu_errado));
                             messageToShow = fragmentActivity.getResources().getString(R.string.nao_foi_possivel_enviar_email);
+                        }else {
+                            alerBuilder.setTitle(fragmentActivity.getResources().getString(R.string.sucesso));
                         }
 
                         alerBuilder.setMessage(messageToShow);

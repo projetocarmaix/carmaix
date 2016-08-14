@@ -5,6 +5,7 @@ import android.content.Context;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import br.com.carmaix.utils.ValueLabelDefault;
 
@@ -58,6 +59,6 @@ public interface VersionRelease {
 
     String sendEsqueciSenha(Context context, String email) throws Exception;
 
-    String alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception;
+    HashMap<String, Object> alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception;
 
 }

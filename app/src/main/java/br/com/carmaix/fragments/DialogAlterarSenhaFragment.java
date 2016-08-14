@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+
 import br.com.carmaix.R;
 import br.com.carmaix.activities.LoginActivity;
 import br.com.carmaix.services.CallService;
@@ -29,6 +33,10 @@ public class DialogAlterarSenhaFragment extends BaseFragment {
     private EditText novaSenha;
     private EditText confirmacaoNovaSenha;
     private Button alterarSenha;
+    private HashMap<String, Object> hashMapResult;
+    private String atual;
+    private String nova;
+    private String confirmacao;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,9 +47,6 @@ public class DialogAlterarSenhaFragment extends BaseFragment {
         novaSenha = (EditText)view.findViewById(R.id.nova_senha);
         confirmacaoNovaSenha = (EditText)view.findViewById(R.id.confirmacao_senha);
         alterarSenha = (Button)view.findViewById(R.id.btn_alterar_senha);
-        final String atual =senhaAtual.getText().toString();
-        final String nova = novaSenha.getText().toString();
-        final String confirmacao = confirmacaoNovaSenha.getText().toString();
 
 
         alterarSenha.setOnClickListener(new View.OnClickListener() {
@@ -49,26 +54,52 @@ public class DialogAlterarSenhaFragment extends BaseFragment {
             public void onClick(View view) {
 
                 AsyncTask asyncTask = new AsyncTask() {
-
                     @Override
-                    protected Object doInBackground(Object[] objects) {
-                        try {
-                            CallService.alterarSenha(fragmentActivity,atual,nova,confirmacao);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return null;
+                    protected void onPreExecute() {
+                        progressBarAlterarSenha.setVisibility(View.VISIBLE);
+                        alterarSenha.setVisibility(View.GONE);
+                        atual = senhaAtual.getText().toString();
+                        nova = novaSenha.getText().toString();
+                        confirmacao = confirmacaoNovaSenha.getText().toString();
                     }
 
                     @Override
-                    protected void onPostExecute(Object o) {
+                    protected Object doInBackground(Object[] objects) {
 
+                        try {
+                            hashMapResult =  CallService.alterarSenha(fragmentActivity,atual,nova,confirmacao);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return hashMapResult;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object result) {
+                        progressBarAlterarSenha.setVisibility(View.GONE);
+                        alterarSenha.setVisibility(View.VISIBLE);
+
+                        AlertDialog.Builder alerBuilder = new AlertDialog.Builder(fragmentActivity);
+                        HashMap<String,Object> messageToShow = (HashMap<String, Object>)result;
+                        String code = (String)messageToShow.get("code");
+
+                        if(!code.equals("200")) {
+                            alerBuilder.setTitle(fragmentActivity.getResources().getString(R.string.algo_deu_errado));
+                        } else {
+                            alerBuilder.setTitle(fragmentActivity.getResources().getString(R.string.sucesso));
+                        }
+
+                        ArrayList<String> messages = (ArrayList<String>)messageToShow.get("message");
+                        for(String message : messages) {
+                            alerBuilder.setMessage(message+"\n");
+                        }
+
+                        alerBuilder.setPositiveButton("OK", null);
+                        alerBuilder.show();
                     }
                 };
 
                 asyncTask.execute();
-
-
 
             }
         });

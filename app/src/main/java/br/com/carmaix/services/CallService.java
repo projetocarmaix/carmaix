@@ -3,6 +3,7 @@ package br.com.carmaix.services;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import br.com.carmaix.utils.ValueLabelDefault;
 
@@ -131,7 +132,7 @@ public class CallService {
         return getVersionRelease().sendEsqueciSenha(context, email);
     }
 
-    public static String alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception {
+    public static HashMap<String, Object> alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception {
         return getVersionRelease().alterarSenha(context, senhaAtual, novaSenha, confirmacaoSenha);
     }
 }

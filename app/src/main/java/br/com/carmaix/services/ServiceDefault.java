@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
@@ -996,9 +997,8 @@ public class ServiceDefault implements VersionRelease {
         return message;
     }
 
-    public String alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception {
+    public HashMap<String, Object> alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception {
         String textJson = "";
-        String message = "";
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("password",senhaAtual);
         jsonObject.put("new_password",novaSenha);
@@ -1016,23 +1016,27 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.AddBinaryBodyParam(jsonObject.toString().getBytes());
         textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
 
-        JsonElement element = null;
-        Gson gson = new Gson();
         JSONObject jsonObjectReturn = new JSONObject(textJson);
         String code = (String)jsonObjectReturn.get("code");
-        JsonParser parser = new JsonParser();
 
-        if(code.equals("400")) {
+        ArrayList<String> messageList = new ArrayList<String>();
+        HashMap<String, Object> hashMapReturn = new HashMap<>();
+
+        if(!code.equals("200")) {
             JSONArray jsonArray = (JSONArray)jsonObjectReturn.get("errors");
-            element = parser.parse(jsonArray.toString());
 
-
-            for(int i = 0; i < jsonArray.length(); i++) {
-                new JSONObject(jsonArray.get(i).toString()).get("message");
+            for(int i = 0; i < jsonArray.length(); i++){
+                messageList.add(jsonArray.getJSONObject(i).getString("message"));
             }
+
+        }else {
+            messageList.add(jsonObjectReturn.get("description").toString());
         }
 
-        return message;
+        hashMapReturn.put("code",code);
+        hashMapReturn.put("message",messageList);
+
+        return hashMapReturn;
     }
 }
 
