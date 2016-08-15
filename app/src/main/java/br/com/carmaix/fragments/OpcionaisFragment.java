@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliarActivity;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
@@ -141,4 +143,47 @@ public class OpcionaisFragment extends BaseFragment {
             editAro.setText(informacoesAvaliacaoReturn.getVeiculo().getAro());
         }
     }*/
+
+    public String getAro() {
+        return editAro.getText().toString();
+    }
+
+    public String[] getOpcionais() {
+        ArrayList<String> opcionais = new ArrayList<>();
+        for (int i = 0; i < opcionaosCol1.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox) opcionaosCol1.getChildAt(i);
+            if(checkBox.isChecked()) {
+                opcionais.add((String)checkBox.getTag());
+            }
+        }
+
+        for (int i = 0; i < opcionaosCol2.getChildCount(); i++) {
+            CheckBox checkBox = (CheckBox) opcionaosCol2.getChildAt(i);
+            if(checkBox.isChecked()) {
+                opcionais.add((String)checkBox.getTag());
+            }
+        }
+        String[] opcionaisArray = new String[opcionais.size()];
+        opcionaisArray = opcionais.toArray(opcionaisArray);
+        return opcionaisArray;
+    }
+
+
+    public String[] getItens() {
+        ArrayList<String> itens = new ArrayList<>();
+
+        for (int i = 0; i < itensCol.getChildCount(); i++) {
+            if(itensCol.getChildAt(i) instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) itensCol.getChildAt(i);
+                if (checkBox.isChecked()) {
+                    String tag = (String)checkBox.getTag();
+                    itens.add(tag);
+                }
+            }
+        }
+
+        String[] itensArray = new String[itens.size()];
+        itensArray = itens.toArray(itensArray);
+        return itensArray;
+    }
 }

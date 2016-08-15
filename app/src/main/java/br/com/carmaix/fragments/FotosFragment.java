@@ -33,6 +33,7 @@ import br.com.carmaix.activities.AvaliarActivity;
 import br.com.carmaix.services.Fotos;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.Veiculo;
+import br.com.carmaix.utils.Constants;
 
 /**
  * Created by fernando on 21/07/16.
@@ -60,6 +61,7 @@ public class FotosFragment extends BaseFragment {
     private Button buttonEstepe;
     private Button buttonDocumento;
     private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn;
+    private String directoryPath = "";
 
     @Nullable
     @Override
@@ -132,8 +134,10 @@ public class FotosFragment extends BaseFragment {
     private void inicializaImages(ImageView imageView, String urlImg) {
         if(urlImg.isEmpty()) {
             Picasso.with(fragmentActivity).load(R.drawable.no_image_box).fit().centerInside().into(imageView);
+            imageView.setTag(Constants.NO_IMAGE);
         }else {
             Picasso.with(fragmentActivity).load(urlImg).fit().centerInside().into(imageView);
+            imageView.setTag(urlImg);
         }
     }
 
@@ -199,7 +203,9 @@ public class FotosFragment extends BaseFragment {
                 String path = escreveImagem(imageBitmap);
 
                 if (!path.isEmpty()) {
-                    Picasso.with(fragmentActivity).load(new File(path)).fit().centerInside().into(getImageViewByCode(codeImageView));
+                    ImageView imageView = getImageViewByCode(codeImageView);
+                    imageView.setTag(path);
+                    Picasso.with(fragmentActivity).load(new File(path)).fit().centerInside().into(imageView);
                 }
             }else if(codeOption.equals("2")) {
                 Uri selectedImage = data.getData();
@@ -212,7 +218,10 @@ public class FotosFragment extends BaseFragment {
                 if (!picturePath.isEmpty()) {
                     String path = copiaArquivo(new File(picturePath));
                     File f = new File(path);
-                    Picasso.with(fragmentActivity).load(f).fit().centerInside().into(getImageViewByCode(codeImageView));
+                    ImageView imageView = getImageViewByCode(codeImageView);
+                    imageView.setTag(path);
+                    Picasso.with(fragmentActivity).load(f).fit().centerInside().into(imageView);
+
                 }
             }
         }
@@ -251,7 +260,7 @@ public class FotosFragment extends BaseFragment {
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] bytes = stream.toByteArray();
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            nomeArquivo = Environment.getExternalStorageDirectory().getAbsolutePath()+"/carmaix/"+timeStamp+".jpg";
+            nomeArquivo = directoryPath+"/"+timeStamp+".jpg";
             FileOutputStream fos = new FileOutputStream(nomeArquivo);
             fos.write(bytes);
             fos.close();
@@ -262,7 +271,8 @@ public class FotosFragment extends BaseFragment {
     }
 
     private void createFolder() {
-        File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"carmaix");
+        File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"carmaix"+"/"+informacoesAvaliacaoReturn.getId());
+        directoryPath = f.getAbsolutePath();
         if(!f.exists()) {
             f.mkdirs();
         }
@@ -273,7 +283,7 @@ public class FotosFragment extends BaseFragment {
         createFolder();
         try {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            nomeArquivo = Environment.getExternalStorageDirectory().getAbsolutePath()+"/carmaix/"+timeStamp+".jpg";
+            nomeArquivo = directoryPath+"/"+timeStamp+".jpg";
 
             File fileOutput = new File(nomeArquivo);
             if(!fileOutput.exists()) {
@@ -298,6 +308,50 @@ public class FotosFragment extends BaseFragment {
 
         return nomeArquivo;
 
+    }
+
+    public String getImageFrente() {
+        return (String)imageFrente.getTag();
+    }
+
+    public String getImageTraseira() {
+        return (String)imageTraseira.getTag();
+    }
+
+    public String getImageLateralE() {
+        return (String)imageLateralE.getTag();
+    }
+
+    public String getImageLateralD() {
+        return (String)imageLateralD.getTag();
+    }
+
+    public String getImageInterior() {
+        return (String)imageInterior.getTag();
+    }
+
+    public String getImageOdometro() {
+        return (String)imageOdometro.getTag();
+    }
+
+    public String getImagePneu() {
+        return (String)imagePneu.getTag();
+    }
+
+    public String getImageDetalhe() {
+        return (String)imageDetalhe.getTag();
+    }
+
+    public String getImageEstepe() {
+        return (String)imageEstepe.getTag();
+    }
+
+    public String getImageDocumento() {
+        return (String)imageDocumento.getTag();
+    }
+
+    public String getDirectoryPath() {
+        return directoryPath;
     }
 }
 

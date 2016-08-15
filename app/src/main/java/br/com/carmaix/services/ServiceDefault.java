@@ -1038,5 +1038,16 @@ public class ServiceDefault implements VersionRelease {
 
         return hashMapReturn;
     }
+
+    public static Object sendImageFiles(String imageFrente, String directoryPath) {
+        if(imageFrente.isEmpty()) {
+
+        }else if(imageFrente.contains(directoryPath)) {
+
+        }else {
+
+        }
+        return null;
+    }
 }
 

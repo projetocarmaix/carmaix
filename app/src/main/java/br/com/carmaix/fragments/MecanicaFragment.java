@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliarActivity;
@@ -35,12 +36,39 @@ public class MecanicaFragment extends BaseFragment {
     private EditText editReparos;
     private EditText editValor;
 
+    private String mecMotor;
+    private String mecSuspDianteira;
+    private String mecHomocinetica;
+    private String mecCambio;
+    private String mecSuspTraseira;
+    private String mecRolamentos;
+    private String mecEmbreagem;
+    private String mecCxDirecao;
+    private String mecPneusDiant;
+    private String mecFreios;
+    private String mecEscapamento;
+    private String mecPneusTras;
+    private String mecDiferencial;
+
+    private String estLataria;
+    private String estParachoqueDiant;
+    private String estPintura;
+    private String estParachoqueTras;
+    private String estCarroceria;
+    private String estParabrisa;
+    private String estPortaMalas;
+    private String estEstofamento;
+    private String estMotor;
+    private String estFarol;
+
+
+    private View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.mecanica_fragment,container,false);
+        view = inflater.inflate(R.layout.mecanica_fragment,container,false);
 
-        editReparos = (EditText)v.findViewById(R.id.edit_reparos);
+        editReparos = (EditText)view.findViewById(R.id.edit_reparos);
         editReparos.setClickable(true);
         editReparos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +125,13 @@ public class MecanicaFragment extends BaseFragment {
             }
         });
 
-        editObservacoes = (EditText)v.findViewById(R.id.edit_observacoes);
-        editObservacoesAdicionais = (EditText)v.findViewById(R.id.edit_observacoes_adicionais);
-        editValor = (EditText)v.findViewById(R.id.edit_valor);
+        editObservacoes = (EditText)view.findViewById(R.id.edit_observacoes);
+        editObservacoesAdicionais = (EditText)view.findViewById(R.id.edit_observacoes_adicionais);
+        editValor = (EditText)view.findViewById(R.id.edit_valor);
         
 
-        loadValues(v);
-        return v;
+        loadValues();
+        return view;
     }
 
 
@@ -149,7 +177,7 @@ public class MecanicaFragment extends BaseFragment {
         };
     }
 
-    private void loadValues(View view) {
+    private void loadValues() {
         informacoesAvaliacaoReturn = ((AvaliarActivity) fragmentActivity).getInformacoesAvaliacaoReturn();
         Veiculo veiculo = informacoesAvaliacaoReturn.getVeiculo();
         Estrutura estrutura = veiculo.getEstrutura();
@@ -388,4 +416,326 @@ public class MecanicaFragment extends BaseFragment {
 
     }
 
+
+    public String getMecMotorValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_motor_b)).isChecked()) {
+           ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_motor_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_motor_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecSuspDianteiraValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_susp_dianteira_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_susp_dianteira_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_susp_dianteira_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecHomocineticaValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_homocinetica_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_homocinetica_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_homocinetica_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecCambioValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_cambio_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_cambio_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_cambio_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecSuspTraseiraValueValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_susp_traseira_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_susp_traseira_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_susp_traseira_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecRolamentosValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_rolamentos_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_rolamentos_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_rolamentos_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecEmbreagemValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_embreagem_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_embreagem_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_embreagem_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecCxDirecaoValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_cx_direcao_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_cx_direcao_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_cx_direcao_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecPneusDiantValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_pneus_diant_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_pneus_diant_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_pneus_diant_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecFreiosValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_freios_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_freios_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_freios_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecEscapamentoValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_escapamento_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_escapamento_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_escapamento_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecPneusTrasValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_pneus_tras_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_pneus_tras_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_pneus_tras_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getMecDiferencialValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.mec_diferencial_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.mec_diferencial_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.mec_diferencial_r)).isChecked()) {
+            ret = "R";
+        }
+
+        return ret;
+    }
+
+    public String getEstLatariaValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_lataria_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_lataria_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_lataria_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstParachoqueDiantValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_parachoque_diant_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_parachoque_diant_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_parachoque_diant_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstPinturaValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_pintura_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_pintura_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_pintura_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstParachoqueTrasValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_parachoque_tras_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_parachoque_tras_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_parachoque_tras_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstCarroceriaValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_carroceria_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_carroceria_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_carroceria_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstParabrisaValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_parabrisa_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_parabrisa_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_parabrisa_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstPortaMalasValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_porta_malas_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_porta_malas_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_porta_malas_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstEstofamentoValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_estofamento_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_estofamento_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_estofamento_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstMotorValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_motor_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_motor_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_motor_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String getEstFarolValue() {
+        String ret = "";
+        if(((RadioButton)view.findViewById(R.id.est_farol_b)).isChecked()) {
+            ret = "B";
+        }else if(((RadioButton)view.findViewById(R.id.est_farol_m)).isChecked()) {
+            ret = "M";
+        }else if(((RadioButton)view.findViewById(R.id.est_farol_r)).isChecked()) {
+            ret = "R";
+        }
+        return ret;
+    }
+
+    public String[] getColisao() {
+        ArrayList<String> colisao = new ArrayList<>();
+        LinearLayout sinaisColisaoColumn = (LinearLayout)view.findViewById(R.id.sinaisColisaoColumn);
+
+        for(int i = 0; i < sinaisColisaoColumn.getChildCount(); i++) {
+            CheckBox check = (CheckBox)sinaisColisaoColumn.getChildAt(i);
+            if(check.isChecked()) {
+                String tag = (String)check.getTag();
+                colisao.add(tag);
+            }
+        }
+
+        String[] colisaoArray = new String[colisao.size()];
+        colisaoArray = colisao.toArray(colisaoArray);
+        return colisaoArray;
+    }
+
+    public String getEditObservacoes() {
+        return editObservacoes.getText().toString();
+    }
+
+    public String getEditObservacoesAdicionais() {
+        return editObservacoesAdicionais.getText().toString();
+    }
+
+    public String getEditValor() {
+        return editValor.getText().toString();
+    }
+
+    public String getEditReparos() {
+        return editReparos.getText().toString();
+    }
 }

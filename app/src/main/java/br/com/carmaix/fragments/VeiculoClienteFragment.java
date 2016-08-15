@@ -690,5 +690,128 @@ public class VeiculoClienteFragment extends BaseFragment {
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });*/
     }
+
+    public String getEditTextDataHoraReturn() {
+        return editTextDataHora.getText().toString();
+    }
+
+    public String getEditTextAvaliadorReturn() {
+        return editTextAvaliador.getText().toString();
+    }
+
+    public String getEditTextEmpresaReturn() {
+        return editTextEmpresa.getText().toString();
+    }
+
+    public String getSpinnerVendedorReturn() {
+        return ((VendedorReturn)spinnerVendedor.getSelectedItem()).getId();
+    }
+
+    public String getEditTextClienteReturn() {
+        return editTextCliente.getText().toString();
+    }
+
+    public String getEditTextTelefoneReturn() {
+        return editTextTelefone.getText().toString();
+    }
+
+    public String getSpinnerCategoriasReturn() {
+        return ((CategoriaReturn)spinnerCategoria.getSelectedItem()).getId();
+    }
+
+    public String getEditTextPlacaReturn() {
+        return editTextPlaca.getText().toString();
+    }
+
+    public String getEditTextChassiReturn() {
+        return editTextChassi.getText().toString();
+    }
+
+    public String getEditTextRenavamReturn() {
+        return editTextRenavam.getText().toString();
+    }
+
+    public String getEditTextSituacaoReturn() {
+        return editTextSituacao.getText().toString();
+    }
+
+    public String getSpinnerUfReturn() {
+        return ((UfReturn)spinnerUf.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerCidadesReturn() {
+        return ((CidadesReturn)spinnerCidades.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerMarcaReturn() {
+        return ((MarcasCategoriaReturn)spinnerMarcasCategoria.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerModeloReturn() {
+        return ((ModelosMarcaReturn)spinnerModelosMarca.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerAnoFabricacaoReturn() {
+        return ((AnoFabricacaoReturn)spinnerAnoFabricacao.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerAnoModeloValueReturn() {
+        return ((AnoModeloReturn)spinnerAnoModelo.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerCombustivelValueReturn() {
+        return ((CombustiveisReturn)spinnerCombustivel.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerAcessoriosReturn() {
+        return ((AcessorioReturn)spinnerAcessorios.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerPortasReturn() {
+        return ((PortasReturn)spinnerPortas.getSelectedItem()).getId();
+    }
+
+    public String getMotivoAvaliacaoReturn() {
+        return ((MotivoAvaliacaoReturn)spinnerMotivoAvaliacao.getSelectedItem()).getId();
+    }
+
+    public String getSpinnerClassificacaoReturnValue() {
+        return ((ClassificacaoReturn)spinnerClassificacao.getSelectedItem()).getId();
+    }
+
+    public String getCorReturn() {
+        return editTextCor.getText().toString();
+    }
+
+    public String getKmReturn() {
+        return editTextKm.getText().toString();
+    }
+
+    public String getNotaReturn() {
+        return ((NotaReturn)spinnerNotas.getSelectedItem()).getId();
+    }
+
+    public String getTipoCompraReturn() {
+        if(radioButtonAtacado.isChecked()) {
+            return Constants.OPTION_ATACADO;
+        }else if(radioButtonVarejo.isChecked()) {
+            return Constants.OPTION_VAREJO;
+        }
+        return "";
+    }
+
+    public String getGarantiaDeFabricaReturn() {
+        if(radioButtonGarantiaSim.isChecked()) {
+            return Constants.OPTION_GARANTIA_SIM;
+        }else if(radioButtonGarantiaNao.isChecked()) {
+            return Constants.OPTION_GARANTIA_NAO;
+        }
+        return "";
+    }
+
+    public String getAvaliadorId() {
+        return informacoesAvaliacaoReturn.getAvaliador_id();
+    }
+
 }
 

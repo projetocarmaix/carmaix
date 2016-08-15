@@ -24,6 +24,7 @@ public class Constants {
     public static final int ACTION_SEARCH = 7;
     public static final int ACTION_SEARCH_LIST = 8;
     public static final int ACTION_FILL = 9;
+    public static final int ACTION_SEND_IMAGE_FILES = 10;
 
     public static final String LOGOFF = "LOGOFF";
 
@@ -61,4 +62,7 @@ public class Constants {
 
     public final static String OPTION_GARANTIA_SIM = "S";
     public final static String OPTION_GARANTIA_NAO = "N";
+
+    public final static String NO_IMAGE = "";
 }
+
