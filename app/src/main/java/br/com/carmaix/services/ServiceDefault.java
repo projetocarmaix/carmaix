@@ -8,10 +8,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,6 +30,8 @@ import br.com.carmaix.utils.ValueLabelDefault;
 
 public class ServiceDefault implements VersionRelease {
     public final static String BASE_URL = "https://apicarmaix1.websiteseguro.com/v1";
+    public final static String BASE_URL_FOTOS = "http://www.carmaix.com.br/api/fotos";
+    public final static String TOKEN_URL_FOTOS = "ee977806d7286510da8b9a7492ba58e2484c0ecc";
 
     public TokenReturn login(Context context, String user, String password) throws Exception{
 
@@ -1039,15 +1044,30 @@ public class ServiceDefault implements VersionRelease {
         return hashMapReturn;
     }
 
-    public static Object sendImageFiles(String imageFrente, String directoryPath) {
-        if(imageFrente.isEmpty()) {
+    public String getImagePath(Context context, String imagePath) throws Exception {
 
-        }else if(imageFrente.contains(directoryPath)) {
+        String textJson = "";
+        String imagePathReturn = "";
+        File f = new File(imagePath);
+        byte[] bytes = FileUtils.readFileToByteArray(f);
+        String s = new String(bytes, StandardCharsets.UTF_8);
+        String URL = this.BASE_URL_FOTOS;
 
-        }else {
+        RestSKD consumerSDK = new RestSKD(context,this.TOKEN_URL_FOTOS);
+        consumerSDK.setMethodHttpType(MethodHttpType.PUT);
+        consumerSDK.setCacheTime(Constants.CACHE_TIME);
+        consumerSDK.setContentType("image/jpeg");
+        consumerSDK.setUrlFull(URL);
+        consumerSDK.AddBinaryBodyParam(s.getBytes());
 
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+
+        if (textJson != null) {
+            JSONObject jsonObjectReturn = new JSONObject(textJson);
+            imagePathReturn = (String)jsonObjectReturn.get("image_path");
         }
-        return null;
+
+        return imagePathReturn;
     }
 }
 

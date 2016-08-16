@@ -61,4 +61,6 @@ public interface VersionRelease {
 
     HashMap<String, Object> alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception;
 
+    String getImagePath(Context context, String imagePath) throws Exception;
+
 }

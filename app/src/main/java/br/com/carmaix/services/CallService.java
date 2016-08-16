@@ -135,4 +135,8 @@ public class CallService {
     public static HashMap<String, Object> alterarSenha(Context context, String senhaAtual, String novaSenha, String confirmacaoSenha) throws Exception {
         return getVersionRelease().alterarSenha(context, senhaAtual, novaSenha, confirmacaoSenha);
     }
+
+    public static String getImagePath(Context context, String imagePath) throws Exception {
+        return getVersionRelease().getImagePath(context, imagePath);
+    }
 }

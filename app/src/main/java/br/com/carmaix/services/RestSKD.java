@@ -204,6 +204,26 @@ public class RestSKD {
 
     }
 
+    public RestSKD(Context contextApplication, String token) {
+
+        params = new ArrayList<NameValuePair>();
+        headers = new ArrayList<NameValuePair>();
+        bodyParams = new ArrayList<NameValuePair>();
+        context = contextApplication;
+
+        try {
+            setHost("");
+            AddHeader("Accept-Language", getDefaultLanguage());
+            AddHeader("User-Agent", System.getProperty("http.agent"));
+            AddHeader("Authorization", token);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+
     public MethodHttpType getMethodHttpType() {
         return methodHttpType;
     }

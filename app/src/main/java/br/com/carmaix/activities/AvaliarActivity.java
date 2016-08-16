@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Spinner;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.CombustiveisReturn;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
+import br.com.carmaix.services.ServiceDefault;
 import br.com.carmaix.utils.Constants;
 
 /**
@@ -67,7 +69,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
         if(action == Constants.ACTION_LIST) {
             informacoesAvaliacaoReturn = CallService.listInformacaoAvaliacao(this,avaliacaoId);
         }else if(action == Constants.ACTION_SEND_IMAGE_FILES) {
-
+            CallService.getImagePath(this,imageTraseira);
         }
 
         super.backgroundMethod(action);
@@ -143,7 +145,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_save) {
-            sendData();
+            sendImageData();
             return true;
         }
         return false;
