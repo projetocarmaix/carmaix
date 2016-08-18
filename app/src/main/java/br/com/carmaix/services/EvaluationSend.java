@@ -3,7 +3,7 @@ package br.com.carmaix.services;
 /**
  * Created by fernando on 14/08/16.
  */
-public class AvaliationSend {
+public class EvaluationSend {
 
     private String avaliador_id;
     private String vendedor_id;
@@ -62,6 +62,17 @@ public class AvaliationSend {
     private String est_estofamento;
     private String est_motor;
     private String est_farol;
+
+    private String frente;
+    private String traseira;
+    private String lat_esquerda;
+    private String lat_direita;
+    private String interior;
+    private String odometro;
+    private String pneu;
+    private String detalhe;
+    private String estepe;
+    private String documento;
 
     public String getAvaliador_id() {
         return avaliador_id;
@@ -513,5 +524,84 @@ public class AvaliationSend {
 
     private String[] colisao;
 
+    public String getFrente() {
+        return frente;
+    }
+
+    public void setFrente(String frente) {
+        this.frente = frente;
+    }
+
+    public String getTraseira() {
+        return traseira;
+    }
+
+    public void setTraseira(String traseira) {
+        this.traseira = traseira;
+    }
+
+    public String getLat_esquerda() {
+        return lat_esquerda;
+    }
+
+    public void setLat_esquerda(String lat_esquerda) {
+        this.lat_esquerda = lat_esquerda;
+    }
+
+    public String getLat_direita() {
+        return lat_direita;
+    }
+
+    public void setLat_direita(String lat_direita) {
+        this.lat_direita = lat_direita;
+    }
+
+    public String getInterior() {
+        return interior;
+    }
+
+    public void setInterior(String interior) {
+        this.interior = interior;
+    }
+
+    public String getOdometro() {
+        return odometro;
+    }
+
+    public void setOdometro(String odometro) {
+        this.odometro = odometro;
+    }
+
+    public String getPneu() {
+        return pneu;
+    }
+
+    public void setPneu(String pneu) {
+        this.pneu = pneu;
+    }
+
+    public String getDetalhe() {
+        return detalhe;
+    }
+
+    public void setDetalhe(String detalhe) {
+        this.detalhe = detalhe;
+    }
+
+    public String getEstepe() {
+        return estepe;
+    }
+
+    public void setEstepe(String estepe) {
+        this.estepe = estepe;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
 
 }

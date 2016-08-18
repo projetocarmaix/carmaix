@@ -1048,26 +1048,70 @@ public class ServiceDefault implements VersionRelease {
 
         String textJson = "";
         String imagePathReturn = "";
-        File f = new File(imagePath);
-        byte[] bytes = FileUtils.readFileToByteArray(f);
-        String s = new String(bytes, StandardCharsets.UTF_8);
-        String URL = this.BASE_URL_FOTOS;
 
-        RestSKD consumerSDK = new RestSKD(context,this.TOKEN_URL_FOTOS);
+        if(imagePath.isEmpty()) {
+            return imagePathReturn;
+        }else {
+            File f = new File(imagePath);
+            if(f.exists()) {
+                byte[] bytes = FileUtils.readFileToByteArray(f);
+                String s = new String(bytes, StandardCharsets.UTF_8);
+                String URL = this.BASE_URL_FOTOS;
+
+                RestSKD consumerSDK = new RestSKD(context, this.TOKEN_URL_FOTOS);
+                consumerSDK.setMethodHttpType(MethodHttpType.PUT);
+                consumerSDK.setCacheTime(Constants.CACHE_TIME);
+                consumerSDK.setContentType("image/jpeg");
+                consumerSDK.setUrlFull(URL);
+                consumerSDK.AddBinaryBodyParam(s.getBytes());
+
+                textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+
+                if (textJson != null) {
+                    JSONObject jsonObjectReturn = new JSONObject(textJson);
+                    imagePathReturn = (String) jsonObjectReturn.get("image_path");
+                }
+
+                return imagePathReturn;
+            }else {
+                return imagePath;
+            }
+        }
+
+    }
+
+    public static void atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception {
+        String textJson = "";
+        Gson gsonConvertToSend = new Gson();
+        String jsonToSend = "";
+        String URL = "https://apicarmaix1.websiteseguro.com/v1"+"/avaliacoes/"+avaliationId;
+
+
+        RestSKD consumerSDK = new RestSKD(context);
         consumerSDK.setMethodHttpType(MethodHttpType.PUT);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
-        consumerSDK.setContentType("image/jpeg");
+        jsonToSend = gsonConvertToSend.toJson(avaliationSend);
+        consumerSDK.AddBinaryBodyParam(jsonToSend.getBytes());
         consumerSDK.setUrlFull(URL);
-        consumerSDK.AddBinaryBodyParam(s.getBytes());
+        consumerSDK.setCacheTime(999999999l);
 
         textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
 
         if (textJson != null) {
-            JSONObject jsonObjectReturn = new JSONObject(textJson);
-            imagePathReturn = (String)jsonObjectReturn.get("image_path");
+            Gson gson = new Gson();
+            JsonParser parser = new JsonParser();
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+            }
+
         }
 
-        return imagePathReturn;
     }
 }
 

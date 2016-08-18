@@ -25,6 +25,7 @@ public class Constants {
     public static final int ACTION_SEARCH_LIST = 8;
     public static final int ACTION_FILL = 9;
     public static final int ACTION_SEND_IMAGE_FILES = 10;
+    public static final int  ACTION_SEND_DATA = 11;
 
     public static final String LOGOFF = "LOGOFF";
 
