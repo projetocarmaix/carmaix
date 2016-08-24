@@ -285,6 +285,7 @@
 
                 <TextView
                     android:text="@string/label_veiculo_comprado"
+                    android:id="@+id/veiculo_compraLabel"
                     android:layout_height="match_parent"
                     android:layout_width="@dimen/avaliar_text_width"
                     android:textSize="@dimen/avaliar_text_size"
@@ -389,6 +390,7 @@
                     android:id="@+id/edit_text_telefone"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:textSize="@dimen/avaliar_text_size"
                 />
@@ -574,6 +576,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="@dimen/avaliar_text_width"
+                    android:inputType="number"
                     android:textSize="@dimen/avaliar_text_size"
                 />
 
@@ -582,6 +585,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
+                    android:inputType="number"
                     android:textSize="@dimen/avaliar_text_size"
                 />
 

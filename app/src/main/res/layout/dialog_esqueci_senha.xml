@@ -16,6 +16,7 @@
         <EditText
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:inputType="textEmailAddress"
             android:hint="@string/informe_o_seu_email"
             android:id="@+id/edit_esqueci_senha"
             android:layout_marginBottom="20dp" />

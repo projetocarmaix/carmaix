@@ -144,8 +144,13 @@ public class OpcionaisFragment extends BaseFragment {
         }
     }*/
 
-    public String getAro() {
-        return editAro.getText().toString();
+    public String getAroReturn() {
+        String aro = editAro.getText().toString();
+        if(aro.isEmpty()) {
+            aro = informacoesAvaliacaoReturn.getVeiculo().getAro();
+        }
+        return aro;
+
     }
 
     public String[] getOpcionais() {

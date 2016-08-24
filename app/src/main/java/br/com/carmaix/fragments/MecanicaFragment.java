@@ -25,6 +25,8 @@ import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.Mecanica;
 import br.com.carmaix.services.Veiculo;
 import br.com.carmaix.utils.Constants;
+import br.com.carmaix.utils.EditTextValidations;
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 /**
  * Created by fernando on 21/07/16.
@@ -128,7 +130,8 @@ public class MecanicaFragment extends BaseFragment {
         editObservacoes = (EditText)view.findViewById(R.id.edit_observacoes);
         editObservacoesAdicionais = (EditText)view.findViewById(R.id.edit_observacoes_adicionais);
         editValor = (EditText)view.findViewById(R.id.edit_valor);
-        
+        /*editValor.addTextChangedListener(new EditTextValidations(editValor,fragmentActivity));*/
+
 
         loadValues();
         return view;
@@ -406,7 +409,7 @@ public class MecanicaFragment extends BaseFragment {
         editObservacoes.setText(informacoesAvaliacaoReturn.getObservacao());
         editObservacoesAdicionais.setText(informacoesAvaliacaoReturn.getObservacoes_adicionais());
 
-        if((veiculo.getFranquia_reparos().isEmpty())) {
+        if((veiculo.getFranquia_reparos() == null || veiculo.getFranquia_reparos().isEmpty())) {
             editReparos.setText("0,00");
         }else {
             editReparos.setText(veiculo.getFranquia_reparos());
@@ -731,11 +734,20 @@ public class MecanicaFragment extends BaseFragment {
         return editObservacoesAdicionais.getText().toString();
     }
 
-    public String getEditValor() {
+    public String getEditValorReturn() {
         return editValor.getText().toString();
     }
 
-    public String getEditReparos() {
-        return editReparos.getText().toString();
+    public String getEditReparosReturn() {
+        return (editReparos.getText().toString().replace(",",""));
     }
+
+    public EditText getEditReparos() {
+        return editReparos;
+    }
+
+    public EditText getEditValor() {
+        return editValor;
+    }
+
 }

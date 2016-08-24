@@ -2,10 +2,22 @@ package br.com.carmaix.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.blankapp.validation.Rule;
+import org.blankapp.validation.ValidationError;
+import org.blankapp.validation.ValidationListener;
+import org.blankapp.validation.Validator;
+import org.blankapp.validation.handlers.DefaultErrorHandler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +28,7 @@ import br.com.carmaix.fragments.FotosFragment;
 import br.com.carmaix.fragments.MecanicaFragment;
 import br.com.carmaix.fragments.OpcionaisFragment;
 import br.com.carmaix.fragments.VeiculoClienteFragment;
+import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
 import br.com.carmaix.services.EvaluationSend;
@@ -23,6 +36,7 @@ import br.com.carmaix.services.CombustiveisReturn;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
 import br.com.carmaix.services.ServiceDefault;
+import br.com.carmaix.services.VendedorReturn;
 import br.com.carmaix.utils.Constants;
 
 /**
@@ -105,12 +119,13 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container_home_as_up, new AvaliarFragmentTab()).commit();
         }else if(action == Constants.ACTION_SEND_IMAGE_FILES) {
             evaluationSend.setAvaliador_id(veiculoClienteFragment.getAvaliadorId());
-            evaluationSend.setVendedor_id(veiculoClienteFragment.getSpinnerVendedorReturn());
+            evaluationSend.setVendedor_id(veiculoClienteFragment.getSpinnerVendedorValueReturn());
             evaluationSend.setNome(veiculoClienteFragment.getEditTextAvaliadorReturn());
             evaluationSend.setTelefone(veiculoClienteFragment.getEditTextTelefoneReturn());
             evaluationSend.setEstado_id(veiculoClienteFragment.getSpinnerUfReturn());
             evaluationSend.setCidade_id(veiculoClienteFragment.getSpinnerCidadesReturn());
             evaluationSend.setSituacao(veiculoClienteFragment.getEditTextSituacaoReturn());
+            /*evaluationSend.setSituacao("Avaliado");*/
             evaluationSend.setObservacao(mecanicaFragment.getEditObservacoes());
             evaluationSend.setObservacoes_adicionais(mecanicaFragment.getEditObservacoesAdicionais());
             evaluationSend.setMotivo_avaliacao(veiculoClienteFragment.getMotivoAvaliacaoReturn());
@@ -127,13 +142,13 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
             evaluationSend.setChassi(veiculoClienteFragment.getEditTextChassiReturn());
             evaluationSend.setRenavam(veiculoClienteFragment.getEditTextRenavamReturn());
             evaluationSend.setAcessorio(veiculoClienteFragment.getSpinnerAcessoriosReturn());
-            evaluationSend.setAro(opcionaisFragment.getAro());
+            evaluationSend.setAro(opcionaisFragment.getAroReturn());
             evaluationSend.setKm(veiculoClienteFragment.getKmReturn());
             evaluationSend.setGarantia_fabrica(veiculoClienteFragment.getGarantiaDeFabricaReturn());
             evaluationSend.setNota(veiculoClienteFragment.getNotaReturn());
             evaluationSend.setClassificacao(veiculoClienteFragment.getSpinnerClassificacaoReturnValue());
-            evaluationSend.setValor(mecanicaFragment.getEditValor());
-            evaluationSend.setFranquia_reparos(mecanicaFragment.getEditReparos());
+            evaluationSend.setValor(mecanicaFragment.getEditValorReturn());
+            evaluationSend.setFranquia_reparos(mecanicaFragment.getEditReparosReturn());
             evaluationSend.setOpcionais(opcionaisFragment.getOpcionais());
             evaluationSend.setItens(opcionaisFragment.getItens());
 
@@ -241,7 +256,14 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_save) {
-            loadSendClass();
+            loadFragmentsTabs();
+            String requiredFields = getRequiredFieldsNotFilled();
+            if(!requiredFields.isEmpty()){
+                Toast.makeText(this, this.getResources().getString(R.string.os_seguintes_campos_devem_ser_preenchidos) +"\n \n"+requiredFields,Toast.LENGTH_SHORT).show();
+
+            }else {
+                loadSendClass();
+            }
             return true;
         }
         return false;
@@ -270,7 +292,6 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
 
     private void loadSendClass() {
-        loadFragmentsTabs();
         sendData();
     }
 
@@ -298,24 +319,91 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
     }
 
+    private String getRequiredFieldsNotFilled() {
+        EditText editTextPlaca = veiculoClienteFragment.getEditTextPlaca();
+        EditText editTextAvaliador = veiculoClienteFragment.getEditTextAvaliador();
+        EditText editTextTelefone = veiculoClienteFragment.getEditTextTelefone();
+        EditText editTextChassi = veiculoClienteFragment.getEditTextChassi();
+        EditText editTextRenavam = veiculoClienteFragment.getEditTextRenavam();
+        EditText editValor = mecanicaFragment.getEditValor();
+        EditText editReparos = mecanicaFragment.getEditReparos();
+        RadioGroup radioGroupTipoCompra = veiculoClienteFragment.getRadioGroupTipoCompra();
+        String requiredFields = "";
+
+        if(editTextPlaca.getText().toString().isEmpty()) {
+            editTextPlaca.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += " - Placa \n";
+        }
+
+        if(editTextAvaliador.getText().toString().isEmpty()) {
+            editTextAvaliador.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Avaliador \n";
+        }
+
+        if(editTextTelefone.getText().toString().isEmpty()) {
+            editTextTelefone.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Telefone \n";
+        }
+
+        if(editTextChassi.getText().toString().isEmpty()) {
+            editTextChassi.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Chassi \n";
+        }
+
+        if(editTextRenavam.getText().toString().isEmpty()) {
+            editTextRenavam.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Renavam \n";
+        }
+
+        if(editValor.getText().toString().isEmpty()) {
+            editValor.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Valor \n";
+        }
+
+        if(editReparos.getText().toString().isEmpty()) {
+            editReparos.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Reparos \n";
+        }
+
+        Spinner spinnerAnoFabricacao = veiculoClienteFragment.getSpinnerAnoFabricacao();
+        Spinner spinnerCombustivel = veiculoClienteFragment.getSpinnerCombustivel();
+        Spinner spinnerVendedor = veiculoClienteFragment.getSpinnerVendedor();
+
+        View selectedView = spinnerAnoFabricacao.getSelectedView();
+        if (selectedView != null && selectedView instanceof TextView) {
+            TextView selectedTextView = (TextView) selectedView;
+            if (((AnoFabricacaoReturn)spinnerAnoFabricacao.getSelectedItem()).getId().isEmpty()) {
+                selectedTextView.setError(this.getResources().getString(R.string.campo_obrigatorio));
+                requiredFields += "- Ano Fabricação \n";
+            }
+        }
+
+        selectedView = spinnerCombustivel.getSelectedView();
+        if (selectedView != null && selectedView instanceof TextView) {
+            TextView selectedTextView = (TextView) selectedView;
+            if (((CombustiveisReturn)spinnerCombustivel.getSelectedItem()).getId().isEmpty()) {
+                selectedTextView.setError(this.getResources().getString(R.string.campo_obrigatorio));
+                requiredFields += "- Combustível \n";
+            }
+        }
+
+        selectedView = spinnerVendedor.getSelectedView();
+        if (selectedView != null && selectedView instanceof TextView) {
+            TextView selectedTextView = (TextView) selectedView;
+            if (((VendedorReturn)spinnerVendedor.getSelectedItem()).getId().isEmpty()) {
+                selectedTextView.setError(this.getResources().getString(R.string.campo_obrigatorio));
+                requiredFields += "- Vendedor \n";
+            }
+        }
+
+
+        if(radioGroupTipoCompra.getCheckedRadioButtonId() <=0) {
+            TextView veiculoCompra = veiculoClienteFragment.getVeiculoCompraLabel();
+            veiculoCompra.requestFocus();
+            veiculoCompra.setError(this.getResources().getString(R.string.campo_obrigatorio));
+            requiredFields += "- Veículo Comprado \n";
+        }
+
+        return requiredFields;
+    }
 }
-
-
-/*
-"field": "nome",
-"message": "Campo obrigatório."
-
-"field": "cor",
-"message": "Campo obrigatório."
-
-"field": "situacao",
-"message": "Campo obrigatório."
-
-"field": "observacao",
-"message": "Campo obrigatório."
-
-"field": "observacoes_adicionais",
-"message": "Campo obrigatório."
-
-"field": "valor",
-"message": "Campo obrigatório."*/

@@ -10,7 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -35,8 +37,10 @@ import br.com.carmaix.spinnerStaticValues.PortasReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.spinnerStaticValues.UfReturn;
 import br.com.carmaix.utils.Constants;
+import br.com.carmaix.utils.MaskValidations;
 import br.com.carmaix.utils.Utils;
 import br.com.carmaix.utils.ValueLabelDefault;
+import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 /**
  * Created by fernando on 12/07/16.
@@ -57,7 +61,6 @@ public class VeiculoClienteFragment extends BaseFragment {
     private ArrayList<ValueLabelDefault> anoModeloReturns;
     private ArrayList<ValueLabelDefault> cidadesReturns;
     private UserReturn userReturn;
-
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
     private Spinner spinnerCombustivel;
@@ -80,17 +83,22 @@ public class VeiculoClienteFragment extends BaseFragment {
     private EditText editTextTelefone;
     private EditText editTextPlaca;
     private EditText editTextChassi;
+
+    public ArrayList<ValueLabelDefault> getVendedorReturns() {
+        return vendedorReturns;
+    }
+
     private EditText editTextRenavam;
     private EditText editTextSituacao;
     private EditText editTextCor;
     private EditText editTextKm;
-
     private RadioButton radioButtonAtacado;
     private RadioButton radioButtonVarejo;
+    private TextView veiculoCompraLabel;
 
     private RadioButton radioButtonGarantiaSim;
     private RadioButton radioButtonGarantiaNao;
-
+    private RadioGroup radioGroupTipoCompra;
     private Boolean firstLoadMarcas = true;
     private Boolean firstLoadModelos = true;
     private Boolean firstLoadAnoFabricacao = true;
@@ -146,12 +154,18 @@ public class VeiculoClienteFragment extends BaseFragment {
         editTextCor     = (EditText)view.findViewById(R.id.edit_text_cor);
         editTextKm      = (EditText)view.findViewById(R.id.edit_text_km);
 
+        MaskEditTextChangedListener maskTEL = new MaskEditTextChangedListener("(##)####-####", editTextTelefone);
+        editTextTelefone.addTextChangedListener(maskTEL);
 
+        MaskEditTextChangedListener maskPlaca = new MaskEditTextChangedListener("###-####", editTextPlaca);
+        editTextPlaca.addTextChangedListener(maskPlaca);
+
+        radioGroupTipoCompra = (RadioGroup)view.findViewById(R.id.radio_tipo_compra);
         radioButtonAtacado = (RadioButton)view.findViewById(R.id.radio_atacado);
         radioButtonVarejo= (RadioButton)view.findViewById(R.id.radio_varejo);
         radioButtonGarantiaSim= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_sim);
         radioButtonGarantiaNao= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_nao);
-
+        veiculoCompraLabel = (TextView)view.findViewById(R.id.veiculo_compraLabel);
         runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
 
         return view;
@@ -703,8 +717,12 @@ public class VeiculoClienteFragment extends BaseFragment {
         return editTextEmpresa.getText().toString();
     }
 
-    public String getSpinnerVendedorReturn() {
-        return ((VendedorReturn)spinnerVendedor.getSelectedItem()).getId();
+    public String getSpinnerVendedorValueReturn() {
+        String vendedorId = ((VendedorReturn)spinnerVendedor.getSelectedItem()).getId();
+        if(vendedorId.isEmpty()) {
+            vendedorId = informacoesAvaliacaoReturn.getVendedor_id();
+        }
+        return vendedorId;
     }
 
     public String getEditTextClienteReturn() {
@@ -716,7 +734,11 @@ public class VeiculoClienteFragment extends BaseFragment {
     }
 
     public String getSpinnerCategoriasReturn() {
-        return ((CategoriaReturn)spinnerCategoria.getSelectedItem()).getId();
+        String categoria = ((CategoriaReturn)spinnerCategoria.getSelectedItem()).getId();;
+        if(categoria.isEmpty()) {
+            categoria = informacoesAvaliacaoReturn.getVeiculo().getCategoria_id();
+        }
+        return categoria;
     }
 
     public String getEditTextPlacaReturn() {
@@ -740,35 +762,69 @@ public class VeiculoClienteFragment extends BaseFragment {
     }
 
     public String getSpinnerCidadesReturn() {
-        return ((CidadesReturn)spinnerCidades.getSelectedItem()).getId();
+        String cidadeId = ((CidadesReturn)spinnerCidades.getSelectedItem()).getId();
+        if(cidadeId.isEmpty()) {
+            cidadeId = informacoesAvaliacaoReturn.getCliente().getCidade_id();
+        }
+        return cidadeId;
     }
 
     public String getSpinnerMarcaReturn() {
-        return ((MarcasCategoriaReturn)spinnerMarcasCategoria.getSelectedItem()).getId();
+        String marca = ((MarcasCategoriaReturn)spinnerMarcasCategoria.getSelectedItem()).getId();
+        if(marca.isEmpty()) {
+            marca = informacoesAvaliacaoReturn.getVeiculo().getMarca_id();
+        }
+
+        return marca;
     }
 
     public String getSpinnerModeloReturn() {
-        return ((ModelosMarcaReturn)spinnerModelosMarca.getSelectedItem()).getId();
+        String modelo = ((ModelosMarcaReturn)spinnerModelosMarca.getSelectedItem()).getId();
+        if(modelo.isEmpty()) {
+            modelo = informacoesAvaliacaoReturn.getVeiculo().getModelo_id();
+        }
+        return modelo;
     }
 
     public String getSpinnerAnoFabricacaoReturn() {
-        return ((AnoFabricacaoReturn)spinnerAnoFabricacao.getSelectedItem()).getId();
+        String anoFabricacao = ((AnoFabricacaoReturn)spinnerAnoFabricacao.getSelectedItem()).getId();
+        if(anoFabricacao.isEmpty()) {
+            anoFabricacao = informacoesAvaliacaoReturn.getVeiculo().getAno_fabricacao();
+        }
+        return anoFabricacao;
     }
 
     public String getSpinnerAnoModeloValueReturn() {
-        return ((AnoModeloReturn)spinnerAnoModelo.getSelectedItem()).getId();
+        String anoModelo = ((AnoModeloReturn)spinnerAnoModelo.getSelectedItem()).getId();
+        if(anoModelo.isEmpty()) {
+            anoModelo = informacoesAvaliacaoReturn.getVeiculo().getAno_modelo();
+        }
+
+        return anoModelo;
     }
 
     public String getSpinnerCombustivelValueReturn() {
-        return ((CombustiveisReturn)spinnerCombustivel.getSelectedItem()).getId();
+        String combustivel = ((CombustiveisReturn)spinnerCombustivel.getSelectedItem()).getId();
+        if(combustivel.isEmpty()) {
+            combustivel = informacoesAvaliacaoReturn.getVeiculo().getCombustivel_id();
+        }
+        return combustivel;
     }
 
     public String getSpinnerAcessoriosReturn() {
-        return ((AcessorioReturn)spinnerAcessorios.getSelectedItem()).getId();
+        String acessorios = ((AcessorioReturn)spinnerAcessorios.getSelectedItem()).getId();
+        if(acessorios.isEmpty()) {
+            acessorios = informacoesAvaliacaoReturn.getVeiculo().getAcessorio();
+        }
+        return acessorios;
     }
 
     public String getSpinnerPortasReturn() {
-        return ((PortasReturn)spinnerPortas.getSelectedItem()).getId();
+        String portas = ((PortasReturn)spinnerPortas.getSelectedItem()).getId();
+        if(portas.isEmpty()) {
+            portas= informacoesAvaliacaoReturn.getVeiculo().getPortas();
+        }
+        return portas;
     }
 
     public String getMotivoAvaliacaoReturn() {
@@ -776,7 +832,11 @@ public class VeiculoClienteFragment extends BaseFragment {
     }
 
     public String getSpinnerClassificacaoReturnValue() {
-        return ((ClassificacaoReturn)spinnerClassificacao.getSelectedItem()).getId();
+        String classificacao = ((ClassificacaoReturn)spinnerClassificacao.getSelectedItem()).getId();
+        if(classificacao.isEmpty()) {
+            classificacao = informacoesAvaliacaoReturn.getVeiculo().getClassificacao();
+        }
+        return classificacao;
     }
 
     public String getCorReturn() {
@@ -784,11 +844,20 @@ public class VeiculoClienteFragment extends BaseFragment {
     }
 
     public String getKmReturn() {
-        return editTextKm.getText().toString();
+        String km = editTextKm.getText().toString();
+        if(km.isEmpty()) {
+            km = informacoesAvaliacaoReturn.getVeiculo().getKm();
+        }
+        return km;
+
     }
 
     public String getNotaReturn() {
-        return ((NotaReturn)spinnerNotas.getSelectedItem()).getId();
+        String nota = ((NotaReturn)spinnerNotas.getSelectedItem()).getId();
+        if(nota.isEmpty()) {
+            nota = informacoesAvaliacaoReturn.getVeiculo().getNota();
+        }
+        return nota;
     }
 
     public String getTipoCompraReturn() {
@@ -813,5 +882,44 @@ public class VeiculoClienteFragment extends BaseFragment {
         return informacoesAvaliacaoReturn.getAvaliador_id();
     }
 
+    public EditText getEditTextPlaca() {
+        return editTextPlaca;
+    }
+
+    public EditText getEditTextAvaliador() {
+        return editTextAvaliador;
+    }
+
+    public EditText getEditTextTelefone() {
+        return editTextTelefone;
+    }
+    public Spinner getSpinnerAnoFabricacao() {
+        return spinnerAnoFabricacao;
+    }
+
+    public EditText getEditTextChassi() {
+        return editTextChassi;
+    }
+
+    public EditText getEditTextRenavam() {
+        return editTextRenavam;
+    }
+
+    public RadioGroup getRadioGroupTipoCompra() {
+        return radioGroupTipoCompra;
+    }
+
+    public RadioButton getRadioButtonAtacado() {
+        return radioButtonAtacado;
+    }
+
+    public TextView getVeiculoCompraLabel() {
+        return veiculoCompraLabel;
+    }
+
+    public Spinner getSpinnerVendedor() {
+        return spinnerVendedor;
+    }
 }
+
 

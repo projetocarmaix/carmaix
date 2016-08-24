@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -1082,7 +1083,7 @@ public class ServiceDefault implements VersionRelease {
 
     public static void atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception {
         String textJson = "";
-        Gson gsonConvertToSend = new Gson();
+        Gson gsonConvertToSend = new GsonBuilder().serializeNulls().create();
         String jsonToSend = "";
         String URL = "https://apicarmaix1.websiteseguro.com/v1"+"/avaliacoes/"+avaliationId;
 
@@ -1115,3 +1116,81 @@ public class ServiceDefault implements VersionRelease {
     }
 }
 
+
+/*
+* {
+   "acessorio":"Completo",
+   "ano_fabricacao":"2015",
+   "ano_modelo":"2016-G",
+   "aro":"",
+   "avaliador_id":"165",
+   "categoria_id":"1",
+   "chassi":"2222222222222222222222",
+
+   "classificacao":"",
+   "colisao":[
+
+   ],
+   "combustivel_id":"Bi",
+   "cor":"",
+   "detalhe":"",
+   "documento":"",
+   "est_carroceria":"",
+   "est_estofamento":"",
+   "est_farol":"",
+   "est_lataria":"",
+   "est_motor":"",
+   "est_parabrisa":"",
+   "est_parachoque_diant":"",
+   "est_parachoque_tras":"",
+   "est_pintura":"",
+   "est_porta_malas":"",
+   "estado_id":"11",
+   "estepe":"",
+   "franquia_reparos":"0,00",
+   "frente":"",
+   "garantia_fabrica":"",
+   "interior":"",
+   "itens":[
+      "opc_manual_proprietario",
+      "opc_chave_reserva"
+   ],
+   "km":"",
+   "lat_direita":"",
+   "lat_esquerda":"",
+   "marca_id":"27",
+   "mec_cambio":"",
+   "mec_cx_direcao":"",
+   "mec_diferencial":"",
+   "mec_embreagem":"",
+   "mec_escapamento":"",
+   "mec_freios":"",
+   "mec_homocinetica":"",
+   "mec_motor":"",
+   "mec_pneus_diant":"",
+   "mec_pneus_tras":"",
+   "mec_rolamentos":"",
+   "mec_susp_dianteira":"",
+   "mec_susp_traseira":"",
+   "modelo_id":"924",
+   "motivo_avaliacao":"troca",
+   "nome":"gerente",
+   "nota":"",
+   "observacao":"",
+   "observacoes_adicionais":"",
+   "odometro":"",
+   "opcionais":[
+
+   ],
+   "placa":"222-2222",
+   "pneu":"",
+   "portas":"4",
+   "renavam":"2222222222222222222222",
+   "situacao":"Pré-Cadastro",
+   "telefone":"(22) 222-2222",
+   "tipo_compra":"",
+   "traseira":"",
+   "valor":"14777",
+   "vendedor_id":"164"
+}
+* */

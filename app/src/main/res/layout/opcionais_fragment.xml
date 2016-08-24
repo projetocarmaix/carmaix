@@ -460,6 +460,7 @@
                     <EditText
                         android:layout_height="wrap_content"
                         android:id="@+id/edit_aro"
+                        android:inputType="number"
                         android:layout_width="40dp" />
                 </LinearLayout>
             </LinearLayout>
