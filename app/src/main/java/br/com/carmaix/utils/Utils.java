@@ -15,6 +15,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by rafael.savaris on 04/05/2016.
@@ -167,5 +169,11 @@ public class Utils {
             return null;
         }
         return ret;
+    }
+
+    public static Boolean validaPlaca(String placa) {
+        Pattern pattern = Pattern.compile("[a-zA-Z]{3,3}-\\d{4,4}");
+        Matcher matcher = pattern.matcher(placa);
+        return matcher.find();
     }
 }

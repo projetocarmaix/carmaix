@@ -121,7 +121,10 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                         revalidar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(context, "revalidar", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context, AvaliarActivity.class);
+                                intent.putExtra("avaliacaoId",avaliacaoId.getText());
+                                intent.putExtra("action",Constants.ACTION_REVALIDAR);
+                                context.startActivity(intent);
                             }
                         });
                     }else {
@@ -135,6 +138,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                             public void onClick(View view) {
                                 Intent intent = new Intent(context, AvaliarActivity.class);
                                 intent.putExtra("avaliacaoId",avaliacaoId.getText());
+                                intent.putExtra("action",Constants.ACTION_AVALIAR);
                                 context.startActivity(intent);
                             }
                         });

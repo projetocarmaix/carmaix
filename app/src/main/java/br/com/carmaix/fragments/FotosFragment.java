@@ -62,11 +62,13 @@ public class FotosFragment extends BaseFragment {
     private Button buttonDocumento;
     private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn;
     private String directoryPath = "";
+    private int actionParam;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fotos_fragment, container, false);
+        actionParam = ((AvaliarActivity)fragmentActivity).getActionParam();
         setupImageViews(view);
         setupButtons(view);
         return view;
@@ -117,18 +119,32 @@ public class FotosFragment extends BaseFragment {
         imageEstepe    = (ImageView)view.findViewById(R.id.image_estepe);
         imageDocumento = (ImageView)view.findViewById(R.id.image_documento);
 
-        informacoesAvaliacaoReturn = ((AvaliarActivity) fragmentActivity).getInformacoesAvaliacaoReturn();
-        Fotos fotos = informacoesAvaliacaoReturn.getVeiculo().getFotos();
-        inicializaImages(imageFrente, fotos.getFrente());
-        inicializaImages(imageTraseira, fotos.getTraseira());
-        inicializaImages(imageLateralE, fotos.getLat_esquerda());
-        inicializaImages(imageLateralD , fotos.getLat_direita());
-        inicializaImages(imageInterior, fotos.getInterior());
-        inicializaImages(imageOdometro, fotos.getOdometro());
-        inicializaImages(imagePneu, fotos.getPneu());
-        inicializaImages(imageDetalhe, fotos.getDetalhe());
-        inicializaImages(imageEstepe, fotos.getEstepe());
-        inicializaImages(imageDocumento, fotos.getDocumento());
+        if(actionParam == Constants.ACTION_AVALIAR) {
+            informacoesAvaliacaoReturn = ((AvaliarActivity) fragmentActivity).getInformacoesAvaliacaoReturn();
+            Fotos fotos = informacoesAvaliacaoReturn.getVeiculo().getFotos();
+
+            inicializaImages(imageFrente, fotos.getFrente());
+            inicializaImages(imageTraseira, fotos.getTraseira());
+            inicializaImages(imageLateralE, fotos.getLat_esquerda());
+            inicializaImages(imageLateralD, fotos.getLat_direita());
+            inicializaImages(imageInterior, fotos.getInterior());
+            inicializaImages(imageOdometro, fotos.getOdometro());
+            inicializaImages(imagePneu, fotos.getPneu());
+            inicializaImages(imageDetalhe, fotos.getDetalhe());
+            inicializaImages(imageEstepe, fotos.getEstepe());
+            inicializaImages(imageDocumento, fotos.getDocumento());
+        }else {
+            inicializaImages(imageFrente, "");
+            inicializaImages(imageTraseira, "");
+            inicializaImages(imageLateralE, "");
+            inicializaImages(imageLateralD, "");
+            inicializaImages(imageInterior, "");
+            inicializaImages(imageOdometro, "");
+            inicializaImages(imagePneu, "");
+            inicializaImages(imageDetalhe, "");
+            inicializaImages(imageEstepe, "");
+            inicializaImages(imageDocumento, "");
+        }
     }
 
     private void inicializaImages(ImageView imageView, String urlImg) {

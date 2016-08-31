@@ -287,6 +287,7 @@
     <string name="campo_obrigatorio">Campo obrigatório</string>
 
     <string name="os_seguintes_campos_devem_ser_preenchidos">Os seguintes campos precisam estar preechidos para o envio da avaliação:</string>
+    <string name="campo_placa_fora_do_padrao">Campo placa fora do padrão (AAA-9999)</string>
 
 </resources>
 

@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class MaskValidations implements TextWatcher{
     private EditText editText;
     private Context context;
-    private boolean isUpdating;
+    private boolean isUpdating= true;
     private String value;
     public MaskValidations(EditText editText, Context context)  {
         this.editText = editText;
@@ -25,23 +25,11 @@ public class MaskValidations implements TextWatcher{
     }
 
     @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        if (isUpdating) {
-            isUpdating = false;
-            return;
-        }
-        isUpdating = true;
+    public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
 
-        if(charSequence.toString().substring(0,2).contains("123456789")){
-            for(int j =0; j < charSequence.length(); j++) {
-                if("1234567890".contains(String.valueOf(charSequence.charAt(j)))) {
-                    value = charSequence.toString().replace(String.valueOf(charSequence.charAt(j)),"");
-                }
-            }
-        }
-
-        this.editText.setText(value);
     }
+
+
 
     @Override
     public void afterTextChanged(Editable editable) {

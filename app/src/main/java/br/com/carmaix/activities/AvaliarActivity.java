@@ -1,8 +1,10 @@
 package br.com.carmaix.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,16 +15,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.blankapp.validation.Rule;
-import org.blankapp.validation.ValidationError;
-import org.blankapp.validation.ValidationListener;
-import org.blankapp.validation.Validator;
-import org.blankapp.validation.handlers.DefaultErrorHandler;
-
 import java.util.HashMap;
 import java.util.List;
 
 import br.com.carmaix.R;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.fragments.AvaliarFragmentTab;
 import br.com.carmaix.fragments.FotosFragment;
 import br.com.carmaix.fragments.MecanicaFragment;
@@ -31,13 +28,13 @@ import br.com.carmaix.fragments.VeiculoClienteFragment;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
-import br.com.carmaix.services.EvaluationSend;
 import br.com.carmaix.services.CombustiveisReturn;
+import br.com.carmaix.services.EvaluationSend;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
-import br.com.carmaix.services.ServiceDefault;
 import br.com.carmaix.services.VendedorReturn;
 import br.com.carmaix.utils.Constants;
+import br.com.carmaix.utils.Utils;
 
 /**
  * Created by fernando on 07/07/16.
@@ -66,8 +63,11 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     private String imageEstepePath = "";
     private String imageDocumentoPath = "";
 
+    private String userName= "";
 
+    private String empresa = "";
     private EvaluationSend evaluationSend = new EvaluationSend();
+    private ApplicationCarmaix application = null;
 
     VeiculoClienteFragment veiculoClienteFragment = null;
     OpcionaisFragment opcionaisFragment = null;
@@ -75,16 +75,25 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     FotosFragment fotoFragment = null;
 
     private String avaliacaoId;
+    private int actionParam;
     private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn = null;
+    private String messageReturn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
             avaliacaoId = extras.getString("avaliacaoId");
+            actionParam = extras.getInt("action");
         }
 
-        runBackground("",false,true, Constants.ACTION_LIST);
+        application = (ApplicationCarmaix) this.getApplicationContext();
+
+        userName = application.getLoginTable().getUserName();
+        empresa = application.getLoginTable().getCompanyName();
+
+        runBackground(this.getResources().getString(R.string.carregando),true,true, actionParam);
     }
 
     public String getAvaliacaoId() {
@@ -93,7 +102,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
     @Override
     protected void backgroundMethod(int action) throws Throwable {
-        if(action == Constants.ACTION_LIST) {
+        if(action == Constants.ACTION_AVALIAR) {
             informacoesAvaliacaoReturn = CallService.listInformacaoAvaliacao(this,avaliacaoId);
         }else if(action == Constants.ACTION_SEND_IMAGE_FILES) {
             imageFrentePath    = CallService.getImagePath(AvaliarActivity.this,imageFrente);
@@ -107,7 +116,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
             imageEstepePath    = CallService.getImagePath(AvaliarActivity.this,imageEstepe);
             imageDocumentoPath = CallService.getImagePath(AvaliarActivity.this,imageDocumento);
         }else if(action == Constants.ACTION_SEND_DATA) {
-            ServiceDefault.atualizacaoAvaliacao(this,getAvaliacaoId(),evaluationSend);
+            messageReturn = CallService.atualizacaoAvaliacao(this,getAvaliacaoId(),evaluationSend);
         }
 
         super.backgroundMethod(action);
@@ -115,17 +124,19 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
     @Override
     protected void onEndBackgroundRun(int action) {
-        if(action == Constants.ACTION_LIST) {
+        if(action == Constants.ACTION_AVALIAR || action == Constants.ACTION_REVALIDAR) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container_home_as_up, new AvaliarFragmentTab()).commit();
         }else if(action == Constants.ACTION_SEND_IMAGE_FILES) {
-            evaluationSend.setAvaliador_id(veiculoClienteFragment.getAvaliadorId());
+
+            evaluationSend.setAvaliador_id(application.getLoginTable().getUserId());
             evaluationSend.setVendedor_id(veiculoClienteFragment.getSpinnerVendedorValueReturn());
-            evaluationSend.setNome(veiculoClienteFragment.getEditTextAvaliadorReturn());
+            evaluationSend.setNome(this.getUserName());
             evaluationSend.setTelefone(veiculoClienteFragment.getEditTextTelefoneReturn());
             evaluationSend.setEstado_id(veiculoClienteFragment.getSpinnerUfReturn());
             evaluationSend.setCidade_id(veiculoClienteFragment.getSpinnerCidadesReturn());
-            evaluationSend.setSituacao(veiculoClienteFragment.getEditTextSituacaoReturn());
-            /*evaluationSend.setSituacao("Avaliado");*/
+
+            evaluationSend.setSituacao("Avaliado");
+
             evaluationSend.setObservacao(mecanicaFragment.getEditObservacoes());
             evaluationSend.setObservacoes_adicionais(mecanicaFragment.getEditObservacoesAdicionais());
             evaluationSend.setMotivo_avaliacao(veiculoClienteFragment.getMotivoAvaliacaoReturn());
@@ -191,6 +202,19 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
             runBackground("Enviando os dados da avaliação...",true,true, Constants.ACTION_SEND_DATA);
 
+        }else if(action == Constants.ACTION_SEND_DATA) {
+            AlertDialog.Builder alerBuilder = new AlertDialog.Builder(this);
+            alerBuilder.setMessage(messageReturn);
+            alerBuilder.setTitle("Mensagem");
+            alerBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(AvaliarActivity.this,AvaliacaoActivity.class);
+                    startActivity(intent);
+                    AvaliarActivity.this.finish();
+                }
+            });
+            alerBuilder.show();
         }
 
         super.onEndBackgroundRun(action);
@@ -260,7 +284,6 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
             String requiredFields = getRequiredFieldsNotFilled();
             if(!requiredFields.isEmpty()){
                 Toast.makeText(this, this.getResources().getString(R.string.os_seguintes_campos_devem_ser_preenchidos) +"\n \n"+requiredFields,Toast.LENGTH_SHORT).show();
-
             }else {
                 loadSendClass();
             }
@@ -292,29 +315,21 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
 
     private void loadSendClass() {
+        imageFrente    = fotoFragment.getImageFrente();
+        imageTraseira  = fotoFragment.getImageTraseira();
+        imageLateralE  = fotoFragment.getImageLateralE();
+        imageLateralD  = fotoFragment.getImageLateralD();
+        imageInterior  = fotoFragment.getImageInterior();
+        imageOdometro  = fotoFragment.getImageOdometro();
+        imagePneu      = fotoFragment.getImagePneu();
+        imageDetalhe   = fotoFragment.getImageDetalhe();
+        imageEstepe    = fotoFragment.getImageEstepe();
+        imageDocumento = fotoFragment.getImageDocumento();
+        directoryPath  = fotoFragment.getDirectoryPath();
         sendData();
     }
 
     private void sendData() {
-        List<Fragment> fragmentList = getFragmentList();
-
-        for(Fragment fragment : fragmentList) {
-            if(fragment instanceof FotosFragment) {
-                imageFrente = ((FotosFragment)fragment).getImageFrente();
-                imageTraseira = ((FotosFragment)fragment).getImageTraseira();
-                imageLateralE = ((FotosFragment)fragment).getImageLateralE();
-                imageLateralD = ((FotosFragment)fragment).getImageLateralD();
-                imageInterior = ((FotosFragment)fragment).getImageInterior();
-                imageOdometro = ((FotosFragment)fragment).getImageOdometro();
-                imagePneu = ((FotosFragment)fragment).getImagePneu();
-                imageDetalhe = ((FotosFragment)fragment).getImageDetalhe();
-                imageEstepe = ((FotosFragment)fragment).getImageEstepe();
-                imageDocumento = ((FotosFragment)fragment).getImageDocumento();
-                directoryPath = ((FotosFragment) fragment).getDirectoryPath();
-                break;
-            }
-        }
-
         runBackground("Enviando as imagens...",true,true, Constants.ACTION_SEND_IMAGE_FILES);
 
     }
@@ -333,12 +348,19 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
         if(editTextPlaca.getText().toString().isEmpty()) {
             editTextPlaca.setError(this.getResources().getString(R.string.campo_obrigatorio));
             requiredFields += " - Placa \n";
+        }else {
+            if(!Utils.validaPlaca(editTextPlaca.getText().toString())) {
+                editTextPlaca.setError(this.getResources().getString(R.string.campo_placa_fora_do_padrao));
+                requiredFields += "- "+this.getResources().getString(R.string.campo_placa_fora_do_padrao)+"\n";
+            }
         }
 
-        if(editTextAvaliador.getText().toString().isEmpty()) {
+
+
+        /*if(editTextAvaliador.getText().toString().isEmpty()) {
             editTextAvaliador.setError(this.getResources().getString(R.string.campo_obrigatorio));
             requiredFields += "- Avaliador \n";
-        }
+        }*/
 
         if(editTextTelefone.getText().toString().isEmpty()) {
             editTextTelefone.setError(this.getResources().getString(R.string.campo_obrigatorio));
@@ -405,5 +427,17 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
         }
 
         return requiredFields;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public int getActionParam() {
+        return actionParam;
+    }
+
+    public String getEmpresa() {
+        return empresa;
     }
 }

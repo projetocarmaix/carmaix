@@ -26,7 +26,8 @@ public class Constants {
     public static final int ACTION_FILL = 9;
     public static final int ACTION_SEND_IMAGE_FILES = 10;
     public static final int  ACTION_SEND_DATA = 11;
-
+    public static final int ACTION_AVALIAR = 12;
+    public static final int ACTION_REVALIDAR = 13;
     public static final String LOGOFF = "LOGOFF";
 
     public final static int TAB_CINZA = 0;

@@ -139,4 +139,8 @@ public class CallService {
     public static String getImagePath(Context context, String imagePath) throws Exception {
         return getVersionRelease().getImagePath(context, imagePath);
     }
+
+    public static String atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception {
+        return getVersionRelease().atualizacaoAvaliacao( context,  avaliationId,  avaliationSend);
+    }
 }

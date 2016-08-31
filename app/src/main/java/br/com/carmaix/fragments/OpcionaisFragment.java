@@ -28,7 +28,7 @@ public class OpcionaisFragment extends BaseFragment {
     private LinearLayout opcionaosCol1;
     private LinearLayout opcionaosCol2;
     private LinearLayout itensCol;
-
+    private int actionParam;
     private EditText editAro;
 
     @Nullable
@@ -40,15 +40,16 @@ public class OpcionaisFragment extends BaseFragment {
         itensCol = (LinearLayout)v.findViewById(R.id.items);
 
         editAro = (EditText) v.findViewById(R.id.edit_aro);
-
+        actionParam = ((AvaliarActivity)fragmentActivity).getActionParam();
         return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadValues();
-        /*runBackground("",false,true, Constants.ACTION_LIST);*/
+        if(actionParam  == Constants.ACTION_AVALIAR) {
+            loadValues();
+        }
     }
 
     private void loadValues() {
@@ -92,57 +93,6 @@ public class OpcionaisFragment extends BaseFragment {
 
         editAro.setText(informacoesAvaliacaoReturn.getVeiculo().getAro());
     }
-
-
-    /*@Override
-    protected void backgroundMethod(int action) throws Throwable {
-        if(action == Constants.ACTION_LIST) {
-            informacoesAvaliacaoReturn = ((AvaliarActivity) fragmentActivity).getInformacoesAvaliacaoReturn();
-            opcionais = informacoesAvaliacaoReturn.getVeiculo().getOpcionais();
-            itens = informacoesAvaliacaoReturn.getVeiculo().getItens();
-        }
-    }
-
-    @Override
-    protected void onEndBackgroundRun(int action) {
-        if(action == Constants.ACTION_LIST) {
-            if(opcionais.length > 0) {
-                for (String opcional : opcionais) {
-                    for (int i = 0; i < opcionaosCol1.getChildCount(); i++) {
-                        CheckBox checkBox = (CheckBox) opcionaosCol1.getChildAt(i);
-                        if (opcional.equals(checkBox.getTag())) {
-                            checkBox.setChecked(true);
-                            break;
-                        }
-                    }
-
-                    for (int i = 0; i < opcionaosCol2.getChildCount(); i++) {
-                        CheckBox checkBox = (CheckBox) opcionaosCol2.getChildAt(i);
-                        if (opcional.equals(checkBox.getTag())) {
-                            checkBox.setChecked(true);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if(itens.length > 0) {
-                for (String item : itens) {
-                    for (int i = 0; i < itensCol.getChildCount(); i++) {
-                        if(itensCol.getChildAt(i) instanceof CheckBox) {
-                            CheckBox checkBox = (CheckBox) itensCol.getChildAt(i);
-                            if (item.equals(checkBox.getTag())) {
-                                checkBox.setChecked(true);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            editAro.setText(informacoesAvaliacaoReturn.getVeiculo().getAro());
-        }
-    }*/
 
     public String getAroReturn() {
         String aro = editAro.getText().toString();

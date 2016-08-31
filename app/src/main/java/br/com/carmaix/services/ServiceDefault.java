@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
@@ -1081,7 +1082,8 @@ public class ServiceDefault implements VersionRelease {
 
     }
 
-    public static void atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception {
+    public String atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception {
+        String message = "";
         String textJson = "";
         Gson gsonConvertToSend = new GsonBuilder().serializeNulls().create();
         String jsonToSend = "";
@@ -1092,32 +1094,34 @@ public class ServiceDefault implements VersionRelease {
         consumerSDK.setMethodHttpType(MethodHttpType.PUT);
         consumerSDK.setCacheTime(Constants.CACHE_TIME);
         jsonToSend = gsonConvertToSend.toJson(avaliationSend);
+
         consumerSDK.AddBinaryBodyParam(jsonToSend.getBytes());
         consumerSDK.setUrlFull(URL);
         consumerSDK.setCacheTime(999999999l);
 
         textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
 
+       /* String textJson = "{\"code\":\"200\",\"message\":\"Success\",\"description\":\"Ve\\u00edculo Avaliado em R$ 12.580,00.\"}";*/
         if (textJson != null) {
-            Gson gson = new Gson();
-            JsonParser parser = new JsonParser();
-            JsonElement element;
-
-            try {
-                element = parser.parse(textJson);
-            } catch (Exception e) {
-                CacheManager.invalidateCache(consumerSDK);
-                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
-                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+            JSONObject jsonObject = new JSONObject(textJson);
+            if(((String)jsonObject.get("code")).equals("200")) {
+                message = (String) jsonObject.get("description");
+            }else {
+                message = context.getResources().getString(R.string.algo_deu_errado);
             }
 
         }
-
+        return message;
     }
 }
 
 
 /*
+
+null{"code":"200","message":"Success","description":"Ve\u00edculo Avaliado em R$ 12.580,00."}
+
+
+
 * {
    "acessorio":"Completo",
    "ano_fabricacao":"2015",

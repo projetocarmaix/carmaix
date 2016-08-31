@@ -26,6 +26,7 @@ import br.com.carmaix.services.Mecanica;
 import br.com.carmaix.services.Veiculo;
 import br.com.carmaix.utils.Constants;
 import br.com.carmaix.utils.EditTextValidations;
+import br.com.carmaix.utils.NumberTextWatcher;
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 /**
@@ -62,9 +63,9 @@ public class MecanicaFragment extends BaseFragment {
     private String estEstofamento;
     private String estMotor;
     private String estFarol;
-
-
     private View view;
+    private int actionParam;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -130,10 +131,14 @@ public class MecanicaFragment extends BaseFragment {
         editObservacoes = (EditText)view.findViewById(R.id.edit_observacoes);
         editObservacoesAdicionais = (EditText)view.findViewById(R.id.edit_observacoes_adicionais);
         editValor = (EditText)view.findViewById(R.id.edit_valor);
-        /*editValor.addTextChangedListener(new EditTextValidations(editValor,fragmentActivity));*/
 
+        editValor.addTextChangedListener(new NumberTextWatcher(editValor));
+        actionParam = ((AvaliarActivity)fragmentActivity).getActionParam();
 
-        loadValues();
+        if(actionParam == Constants.ACTION_AVALIAR) {
+            loadValues();
+        }
+
         return view;
     }
 
@@ -735,7 +740,7 @@ public class MecanicaFragment extends BaseFragment {
     }
 
     public String getEditValorReturn() {
-        return editValor.getText().toString();
+        return editValor.getText().toString().replaceAll("[R$]", "");
     }
 
     public String getEditReparosReturn() {

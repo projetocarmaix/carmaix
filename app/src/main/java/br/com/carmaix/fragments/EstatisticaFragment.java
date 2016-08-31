@@ -380,8 +380,6 @@ public class EstatisticaFragment extends BaseFragment {
 
         if(!(this.modelo.isEmpty()) && !(this.combustivel.isEmpty()) && !(this.ano.isEmpty())) {
             runBackground(fragmentActivity.getResources().getString(R.string.carregando), true, true, Constants.ACTION_LIST);
-        }else {
-            runBackground(fragmentActivity.getResources().getString(R.string.carregando), true, true, Constants.ACTION_FILL);
         }
     }
 

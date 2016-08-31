@@ -63,4 +63,6 @@ public interface VersionRelease {
 
     String getImagePath(Context context, String imagePath) throws Exception;
 
+    String atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception;
+
 }

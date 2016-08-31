@@ -14,10 +14,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliarActivity;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;
@@ -27,7 +31,6 @@ import br.com.carmaix.services.CombustiveisReturn;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.MarcasCategoriaReturn;
 import br.com.carmaix.services.ModelosMarcaReturn;
-import br.com.carmaix.services.UserReturn;
 import br.com.carmaix.services.VendedorReturn;
 import br.com.carmaix.spinnerStaticValues.AcessorioReturn;
 import br.com.carmaix.spinnerStaticValues.ClassificacaoReturn;
@@ -37,7 +40,6 @@ import br.com.carmaix.spinnerStaticValues.PortasReturn;
 import br.com.carmaix.spinnerStaticValues.SpinnerStaticValues;
 import br.com.carmaix.spinnerStaticValues.UfReturn;
 import br.com.carmaix.utils.Constants;
-import br.com.carmaix.utils.MaskValidations;
 import br.com.carmaix.utils.Utils;
 import br.com.carmaix.utils.ValueLabelDefault;
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
@@ -60,7 +62,6 @@ public class VeiculoClienteFragment extends BaseFragment {
     ArrayList<ValueLabelDefault> anoFabricacaoReturns = null;
     private ArrayList<ValueLabelDefault> anoModeloReturns;
     private ArrayList<ValueLabelDefault> cidadesReturns;
-    private UserReturn userReturn;
     private Spinner spinnerVendedor;
     private Spinner spinnerCategoria;
     private Spinner spinnerCombustivel;
@@ -120,8 +121,7 @@ public class VeiculoClienteFragment extends BaseFragment {
     private ArrayAdapter motivoAvaliacaoSpinnerAdapter;
     private ArrayAdapter classificacaoSpinnerAdapter;
     private ArrayAdapter notasSpinnerAdapter;
-
-
+    private int actionParam;
 
     @Nullable
     @Override
@@ -157,16 +157,25 @@ public class VeiculoClienteFragment extends BaseFragment {
         MaskEditTextChangedListener maskTEL = new MaskEditTextChangedListener("(##)####-####", editTextTelefone);
         editTextTelefone.addTextChangedListener(maskTEL);
 
-        MaskEditTextChangedListener maskPlaca = new MaskEditTextChangedListener("###-####", editTextPlaca);
-        editTextPlaca.addTextChangedListener(maskPlaca);
-
         radioGroupTipoCompra = (RadioGroup)view.findViewById(R.id.radio_tipo_compra);
         radioButtonAtacado = (RadioButton)view.findViewById(R.id.radio_atacado);
         radioButtonVarejo= (RadioButton)view.findViewById(R.id.radio_varejo);
         radioButtonGarantiaSim= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_sim);
         radioButtonGarantiaNao= (RadioButton)view.findViewById(R.id.radio_garantia_de_fabrica_nao);
         veiculoCompraLabel = (TextView)view.findViewById(R.id.veiculo_compraLabel);
-        runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, Constants.ACTION_LIST);
+
+        editTextPlaca.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String placa = ((EditText)view).getText().toString();
+                if(!Utils.validaPlaca(placa)) {
+                    editTextPlaca.setError(fragmentActivity.getResources().getString(R.string.campo_placa_fora_do_padrao));
+                }
+            }
+        });
+        actionParam = ((AvaliarActivity)fragmentActivity).getActionParam();
+
+        runBackground(fragmentActivity.getResources().getString(R.string.carregando),true,true, actionParam);
 
         return view;
 
@@ -184,7 +193,7 @@ public class VeiculoClienteFragment extends BaseFragment {
 
     @Override
     protected void backgroundMethod(int action) throws Throwable {
-        if(action == Constants.ACTION_LIST) {
+        if(action == Constants.ACTION_AVALIAR) {
             try {
                 vendedorReturns = CallService.listVendedor(fragmentActivity);
                 categoriaReturns = CallService.listCategorias(fragmentActivity);
@@ -197,15 +206,26 @@ public class VeiculoClienteFragment extends BaseFragment {
                 ufReturns = SpinnerStaticValues.listUf(fragmentActivity);
 
                 informacoesAvaliacaoReturn = ((AvaliarActivity)fragmentActivity).getInformacoesAvaliacaoReturn();
-
-
                 cidadesReturns = CallService.listCidades(fragmentActivity,informacoesAvaliacaoReturn.getCliente().getEstado_id());
                 marcasCategoriaReturns = CallService.listMarcasCategoria(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getCategoria_id());
                 modelosMarcaReturns= CallService.listModelosMarca(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getMarca_id());
                 anoFabricacaoReturns= CallService.listAnoFabricacao(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getModelo_id());
                 anoModeloReturns = CallService.listAnoModelo(fragmentActivity, informacoesAvaliacaoReturn.getVeiculo().getModelo_id(),informacoesAvaliacaoReturn.getVeiculo().getAno_fabricacao());
 
-                userReturn = CallService.getAvaliador(fragmentActivity,informacoesAvaliacaoReturn.getAvaliador_id());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (action == Constants.ACTION_REVALIDAR) {
+            try {
+                vendedorReturns = CallService.listVendedor(fragmentActivity);
+                categoriaReturns = CallService.listCategorias(fragmentActivity);
+                combustiveisReturns = CallService.listCombustiveis(fragmentActivity);
+                portasReturns = SpinnerStaticValues.listPortas(fragmentActivity);
+                classificacaoReturns = CallService.listClassificacoes(fragmentActivity);
+                acessoriosReturns = SpinnerStaticValues.listAcessorios(fragmentActivity);
+                motivoAvaliacaoReturns = CallService.listMotivoAvaliacao(fragmentActivity);
+                notasReturns = SpinnerStaticValues.listNota(fragmentActivity);
+                ufReturns = SpinnerStaticValues.listUf(fragmentActivity);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -216,49 +236,48 @@ public class VeiculoClienteFragment extends BaseFragment {
 
     @Override
     protected void onEndBackgroundRun(int action) {
-        if(action == Constants.ACTION_LIST) {
-            vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,vendedorReturns);
+        if(action == Constants.ACTION_AVALIAR) {
+            vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, vendedorReturns);
             spinnerVendedor.setAdapter(vendedorSpinnerAdapter);
 
-            categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,categoriaReturns);
+            categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, categoriaReturns);
             spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
-            setDefaultValuesToSpinners(true,false,false,false);
-            setDefaultInitSpinners(true,false,false,false);
+            setDefaultValuesToSpinners(true, false, false, false);
 
-            marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
+            marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, marcasCategoriaReturns);
             spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
 
-            modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,modelosMarcaReturns);
+            modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaReturns);
             spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
 
-            anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,anoFabricacaoReturns);
+            anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
             spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
 
-            anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,anoModeloReturns);
+            anoModeloSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoModeloReturns);
             spinnerAnoModelo.setAdapter(anoModeloSpinnerAdapter);
 
-            combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,combustiveisReturns);
+            combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, combustiveisReturns);
             spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
 
-            portasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,portasReturns);
+            portasSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, portasReturns);
             spinnerPortas.setAdapter(portasSpinnerAdapter);
 
-            classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,classificacaoReturns);
+            classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, classificacaoReturns);
             spinnerClassificacao.setAdapter(classificacaoSpinnerAdapter);
 
-            acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,acessoriosReturns);
+            acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, acessoriosReturns);
             spinnerAcessorios.setAdapter(acessoriosSpinnerAdapter);
 
-            motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,motivoAvaliacaoReturns);
+            motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, motivoAvaliacaoReturns);
             spinnerMotivoAvaliacao.setAdapter(motivoAvaliacaoSpinnerAdapter);
 
-            notasSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,notasReturns);
+            notasSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, notasReturns);
             spinnerNotas.setAdapter(notasSpinnerAdapter);
 
-            ufSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,ufReturns);
+            ufSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, ufReturns);
             spinnerUf.setAdapter(ufSpinnerAdapter);
 
-            cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,cidadesReturns);
+            cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, cidadesReturns);
             spinnerCidades.setAdapter(cidadesSpinnerAdapter);
 
             spinnerUf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -290,13 +309,83 @@ public class VeiculoClienteFragment extends BaseFragment {
                         firstLoadCidades = false;
                     }
                 }
+
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) {}
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
 
             });
+            loadListeners();
+            loadValues();
+
+        }else if(action == Constants.ACTION_REVALIDAR) {
+            vendedorSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, vendedorReturns);
+            spinnerVendedor.setAdapter(vendedorSpinnerAdapter);
+
+            categoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, categoriaReturns);
+            spinnerCategoria.setAdapter(categoriaSpinnerAdapter);
+            setDefaultValuesToSpinners(true, false, false, false);
+
+            combustivelSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, combustiveisReturns);
+            spinnerCombustivel.setAdapter(combustivelSpinnerAdapter);
+
+            portasSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, portasReturns);
+            spinnerPortas.setAdapter(portasSpinnerAdapter);
+
+            classificacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, classificacaoReturns);
+            spinnerClassificacao.setAdapter(classificacaoSpinnerAdapter);
+
+            acessoriosSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, acessoriosReturns);
+            spinnerAcessorios.setAdapter(acessoriosSpinnerAdapter);
+
+            motivoAvaliacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, motivoAvaliacaoReturns);
+            spinnerMotivoAvaliacao.setAdapter(motivoAvaliacaoSpinnerAdapter);
+
+            notasSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, notasReturns);
+            spinnerNotas.setAdapter(notasSpinnerAdapter);
+
+            ufSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, ufReturns);
+            spinnerUf.setAdapter(ufSpinnerAdapter);
+            spinnerUf.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (!firstLoadCidades) {
+                        UfReturn ufReturn = (UfReturn) spinnerUf.getSelectedItem();
+                        final String uf = ufReturn.getId();
+                        AsyncTask asyncTaskCidades = new AsyncTask() {
+                            @Override
+                            protected Boolean doInBackground(Object[] params) {
+                                try {
+                                    cidadesReturns = CallService.listCidades(fragmentActivity, uf);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return true;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Object o) {
+                                cidadesSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, cidadesReturns);
+                                spinnerCidades.setAdapter(cidadesSpinnerAdapter);
+                            }
+                        };
+
+                        asyncTaskCidades.execute();
+                    } else {
+                        firstLoadCidades = false;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+
+            });
+
+            loadListeners();
+            loadValuesRevalidar();
         }
-        loadValues();
-        loadListeners();
+
         super.onEndBackgroundRun(action);
     }
 
@@ -317,8 +406,8 @@ public class VeiculoClienteFragment extends BaseFragment {
         for(int i = 0; i < spinnerVendedor.getCount(); i++) {
             VendedorReturn vendedorReturn = (VendedorReturn)vendedorSpinnerAdapter.getItem(i);
             if(vendedorReturn != null && (vendedorReturn.getId()).equals(informacoesAvaliacaoReturn.getVendedor_id())) {
-                    spinnerVendedor.setSelection(i);
-                    break;
+                spinnerVendedor.setSelection(i);
+                break;
             }
         }
 
@@ -430,9 +519,9 @@ public class VeiculoClienteFragment extends BaseFragment {
 
 
         editTextDataHora.setText(informacoesAvaliacaoReturn.getData());
-        if(userReturn != null) {
-            editTextAvaliador.setText(userReturn.getNome());
-        }
+        String userName = ((AvaliarActivity)fragmentActivity).getUserName();
+        editTextAvaliador.setText(userName);
+
         editTextEmpresa.setText(informacoesAvaliacaoReturn.getEmpresa());
         editTextCliente.setText(informacoesAvaliacaoReturn.getCliente().getNome());
         editTextTelefone.setText(informacoesAvaliacaoReturn.getCliente().getTelefone());
@@ -477,7 +566,6 @@ public class VeiculoClienteFragment extends BaseFragment {
                 marcasCategoriaSpinnerAdapter = new ArrayAdapter(fragmentActivity,R.layout.spinner_item,marcasCategoriaReturns);
                 spinnerMarcasCategoria.setAdapter(marcasCategoriaSpinnerAdapter);
                 setDefaultValuesToSpinners(false,true,false,false);
-                setDefaultInitSpinners(false,true,false,false);
                 loadModelos();
 
             }
@@ -507,7 +595,6 @@ public class VeiculoClienteFragment extends BaseFragment {
                     modelosMarcaSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, modelosMarcaReturns);
                     spinnerModelosMarca.setAdapter(modelosMarcaSpinnerAdapter);
                     setDefaultValuesToSpinners(false,false,true,false);
-                    setDefaultInitSpinners(false,false,true,false);
 
                     spinnerModelosMarca.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
@@ -553,7 +640,6 @@ public class VeiculoClienteFragment extends BaseFragment {
                     anoFabricacaoSpinnerAdapter = new ArrayAdapter(fragmentActivity, R.layout.spinner_item, anoFabricacaoReturns);
                     spinnerAnoFabricacao.setAdapter(anoFabricacaoSpinnerAdapter);
                     setDefaultValuesToSpinners(false,false,false,true);
-                    setDefaultInitSpinners(false,false,false,true);
                     spinnerAnoFabricacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -626,24 +712,6 @@ public class VeiculoClienteFragment extends BaseFragment {
         }
     }
 
-
-    private void setDefaultInitSpinners(Boolean categoria, Boolean marca,Boolean modelo, Boolean anoFabricacao) {
-        /*if(categoria) {
-            firstLoadMarcas = true;
-        }
-
-        if (categoria || marca) {
-            firstLoadModelos = true;
-        }
-
-        if (categoria || marca || modelo) {
-            firstLoadAnoFabricacao = true;
-        }
-
-        if (categoria || marca || modelo || anoFabricacao) {
-            firstLoadAnoModelo = true;
-        }*/
-    }
 
     private void loadListeners() {
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -919,6 +987,19 @@ public class VeiculoClienteFragment extends BaseFragment {
 
     public Spinner getSpinnerVendedor() {
         return spinnerVendedor;
+    }
+
+    public void loadValuesRevalidar() {
+        String userName = ((AvaliarActivity)fragmentActivity).getUserName();
+        editTextAvaliador.setText(userName);
+        String empresa = ((AvaliarActivity)fragmentActivity).getEmpresa();
+        editTextEmpresa.setText(empresa);
+
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy kk:mm:ss");
+        String date = formatter.format(today).toString();
+        editTextDataHora.setText(date);
+
     }
 }
 
