@@ -1113,6 +1113,46 @@ public class ServiceDefault implements VersionRelease {
         }
         return message;
     }
+
+    public String getCodigoAvaliacao(Context context, String avaliacaoId, String codigoVendedor) throws Exception{
+        String textJson = "";
+        String URL = this.BASE_URL+"/avaliacoes/"+avaliacaoId+"/revalidacoes";
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("vendedor",codigoVendedor);
+
+        RestSKD consumerSDK = new RestSKD(context);
+        consumerSDK.setMethodHttpType(MethodHttpType.GET_AND_POST);
+        consumerSDK.setCacheTime(Constants.CACHE_TIME);
+        consumerSDK.setUrlFull(URL);
+        consumerSDK.AddBinaryBodyParam(jsonObject.toString().getBytes());
+
+        textJson = CacheManager.getDataJSONArrayServer(consumerSDK, true);
+
+        if (textJson != null) {
+
+            /*Gson gson = new Gson();
+
+            JsonParser parser = new JsonParser();
+
+            JsonElement element;
+
+            try {
+                element = parser.parse(textJson);
+            } catch (Exception e) {
+
+                CacheManager.invalidateCache(consumerSDK);
+                Log.e("Service_1_3", "getLoggedUserCache JSON Error: " + e.getMessage());
+                throw new Exception(Utils.getContextApplication().getString(R.string.errorMessage500));
+
+            }*/
+
+
+        }
+
+        return textJson;
+
+    }
 }
 
 

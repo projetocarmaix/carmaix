@@ -65,4 +65,6 @@ public interface VersionRelease {
 
     String atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception;
 
+    String getCodigoAvaliacao(Context context, String avaliacaoId, String codigoVendedor) throws Exception;
+
 }

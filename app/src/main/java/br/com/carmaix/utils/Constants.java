@@ -66,5 +66,9 @@ public class Constants {
     public final static String OPTION_GARANTIA_NAO = "N";
 
     public final static String NO_IMAGE = "";
+
+    public final static String SITUACAO_ENVIO_AVALIADO = "avaliado";
+    public final static String SITUACAO_ENVIO_PRE_CADASTRO = "pre-cadastro";
+
 }
 

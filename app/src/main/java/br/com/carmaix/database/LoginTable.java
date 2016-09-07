@@ -33,7 +33,16 @@ public class LoginTable implements Serializable {
     String companyLogo;
 
     @DatabaseField
-    String userRevalida;
+    Boolean revalidar;
+
+    @DatabaseField
+    Boolean visualizar;
+
+    @DatabaseField
+    Boolean avaliar;
+
+    @DatabaseField
+    Boolean editar;
 
     public int getId() {
         return id;
@@ -91,11 +100,35 @@ public class LoginTable implements Serializable {
         this.token = token;
     }
 
-    public String getUserRevalida() {
-        return userRevalida;
+    public Boolean getRevalidar() {
+        return revalidar;
     }
 
-    public void setUserRevalida(String userRevalida) {
-        this.userRevalida = userRevalida;
+    public void setRevalidar(Boolean revalidar) {
+        this.revalidar = revalidar;
+    }
+
+    public Boolean getVisualizar() {
+        return visualizar;
+    }
+
+    public void setVisualizar(Boolean visualizar) {
+        this.visualizar = visualizar;
+    }
+
+    public Boolean getAvaliar() {
+        return avaliar;
+    }
+
+    public void setAvaliar(Boolean avaliar) {
+        this.avaliar = avaliar;
+    }
+
+    public Boolean getEditar() {
+        return editar;
+    }
+
+    public void setEditar(Boolean editar) {
+        this.editar = editar;
     }
 }

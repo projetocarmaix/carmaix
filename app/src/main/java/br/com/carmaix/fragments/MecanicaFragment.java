@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliarActivity;
+import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.services.Estrutura;
 import br.com.carmaix.services.InformacoesAvaliacaoReturn;
 import br.com.carmaix.services.Mecanica;
@@ -139,9 +140,20 @@ public class MecanicaFragment extends BaseFragment {
             loadValues();
         }
 
+        initializeValueField();
+
         return view;
     }
 
+    private void initializeValueField() {
+        if(actionParam == Constants.ACTION_AVALIAR) {
+            if (((AvaliarActivity)fragmentActivity).getLoginTable().getAvaliar()) {
+                editValor.setEnabled(true);
+            }else if(((AvaliarActivity)fragmentActivity).getLoginTable().getEditar()) {
+                editValor.setEnabled(false);
+            }
+        }
+    }
 
 
     private android.view.View.OnClickListener addReparo(final EditText editReparosDialog, final Integer value) {

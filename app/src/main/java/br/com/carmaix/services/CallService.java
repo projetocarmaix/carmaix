@@ -143,4 +143,8 @@ public class CallService {
     public static String atualizacaoAvaliacao(Context context, String avaliationId, EvaluationSend avaliationSend) throws Exception {
         return getVersionRelease().atualizacaoAvaliacao( context,  avaliationId,  avaliationSend);
     }
+
+    public static String getCodigoAvaliacao(Context context, String avaliacaoId, String codigoVendedor) throws Exception {
+        return getVersionRelease().getCodigoAvaliacao(context,avaliacaoId,codigoVendedor);
+    }
 }

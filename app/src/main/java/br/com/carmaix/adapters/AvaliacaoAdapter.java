@@ -19,6 +19,7 @@ import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.activities.AvaliarActivity;
 import br.com.carmaix.application.ApplicationCarmaix;
+import br.com.carmaix.database.LoginTable;
 import br.com.carmaix.domain.Avaliacao;
 import br.com.carmaix.services.AvaliationReturn;
 import br.com.carmaix.utils.Constants;
@@ -28,7 +29,6 @@ import br.com.carmaix.utils.Constants;
  */
 public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.AvaliacaoViewHolder> {
     private final Context context;
-
     private final ArrayList<AvaliationReturn> avaliacaoList;
 
     public AvaliacaoAdapter(Context context, ArrayList<AvaliationReturn> avaliacaoList) {
@@ -58,6 +58,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         holder.avaliacaoModelo.setText(avaliacaoSelecionada.getModelo());
         holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getPlaca());
         holder.setSituacao(avaliacaoSelecionada.getSituacao());
+        holder.vendedorId = avaliacaoSelecionada.getVendedor_id();
     }
 
 
@@ -77,6 +78,8 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         private TextView avaliacaoAvaliacao;
         private TextView avaliacaoNome;
         private String situacao;
+        private String vendedorId;
+        private LoginTable loginTable;
 
         public AvaliacaoViewHolder(View itemView, final Context context) {
             super(itemView);
@@ -89,6 +92,9 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
             avaliacaoAno = (TextView) itemView.findViewById(R.id.avaliacao_ano);
             avaliacaoClasse = (TextView) itemView.findViewById(R.id.avaliacao_classe);
             avaliacaoAvaliacao = (TextView) itemView.findViewById(R.id.avaliacao_avaliacao);
+
+            ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
+            loginTable = application.getLoginTable();
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,12 +123,13 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
 
                     TextView revalidar = (TextView)options.findViewById(R.id.dialog_revalidar);
-                    if(exibeRevalidar(context)) {
+                    if(exibeRevalidar()) {
                         revalidar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(context, AvaliarActivity.class);
                                 intent.putExtra("avaliacaoId",avaliacaoId.getText());
+                                intent.putExtra("vendedorId",vendedorId);
                                 intent.putExtra("action",Constants.ACTION_REVALIDAR);
                                 context.startActivity(intent);
                             }
@@ -132,7 +139,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     }
 
                     TextView avaliar = (TextView) options.findViewById(R.id.dialog_avaliar);
-                    if(situacao.equals(Constants.SITUACAO_NAO_AVALIADO)) {
+                    if(exibeAvaliar()) {
                         avaliar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -147,14 +154,16 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     }
 
                     TextView visualizar = (TextView)options.findViewById(R.id.dialog_visualizar);
-                    visualizar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(context, AvaliacaoVisualizarActivity.class);
-                            intent.putExtra("avaliacaoId",avaliacaoId.getText());
-                            context.startActivity(intent);
-                        }
-                    });
+                    if(exibeVisualizar()) {
+                        visualizar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(context, AvaliacaoVisualizarActivity.class);
+                                intent.putExtra("avaliacaoId", avaliacaoId.getText());
+                                context.startActivity(intent);
+                            }
+                        });
+                    }
 
                     LinearLayout optionsGroup = (LinearLayout)options.findViewById(R.id.options_group);
                     this.setbackgroundColor(optionsGroup);
@@ -188,10 +197,18 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
             return situacao;
         }
 
-        private Boolean exibeRevalidar(Context context) {
+        private Boolean exibeRevalidar() {
             String situacao = getSituacao();
-            ApplicationCarmaix application = (ApplicationCarmaix) context.getApplicationContext();
-            return (situacao.equals(Constants.SITUACAO_AVALIADO) && (application.getLoginTable().getUserRevalida()).equals("1"));
+            return (situacao.equals(Constants.SITUACAO_AVALIADO) && (loginTable.getRevalidar()));
+        }
+
+        private Boolean exibeAvaliar() {
+            String situacao = getSituacao();
+            return (situacao.equals(Constants.SITUACAO_NAO_AVALIADO) && (loginTable.getAvaliar() || loginTable.getEditar()));
+        }
+
+        private Boolean exibeVisualizar() {
+            return ((loginTable.getVisualizar()));
         }
     }
 

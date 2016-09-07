@@ -7,8 +7,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class TokenConvertedReturn {
 
-    @SerializedName("userRevalida")
-    private String userRevalida;
     @SerializedName("userName")
     private String userName;
     @SerializedName("userContrato")
@@ -17,13 +15,15 @@ public class TokenConvertedReturn {
     private String userSetor;
     @SerializedName("userId")
     private String userId;
+    @SerializedName("userAcl")
+    private UserAcl userAcl;
 
-    public String getUserRevalida() {
-        return userRevalida;
+    public UserAcl getUserAcl() {
+        return userAcl;
     }
 
-    public void setUserRevalida(String userRevalida) {
-        this.userRevalida = userRevalida;
+    public void setUserAcl(UserAcl userAcl) {
+        this.userAcl = userAcl;
     }
 
     public String getUserName() {

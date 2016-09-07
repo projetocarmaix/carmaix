@@ -329,8 +329,10 @@ public class DataBaseUtils {
         loginTable.setCompanyName(user.getNome_empresa());
         loginTable.setCompanyLogo(user.getLogo_empresa());
         loginTable.setUserId(user.getId());
-        loginTable.setUserRevalida(tokenConvertedReturn.getUserRevalida());
-
+        loginTable.setAvaliar(tokenConvertedReturn.getUserAcl().getAvaliacao().getAvaliar());
+        loginTable.setRevalidar(tokenConvertedReturn.getUserAcl().getAvaliacao().getRevalidar());
+        loginTable.setEditar(tokenConvertedReturn.getUserAcl().getAvaliacao().getEditar());
+        loginTable.setVisualizar(tokenConvertedReturn.getUserAcl().getAvaliacao().getVisualizar());
         RuntimeExceptionDao<LoginTable, Integer> simpleDao = application.getHelper().getSimpleServerInformationDao();
         simpleDao.update(loginTable);
     }

@@ -21,7 +21,6 @@ import java.util.Date;
 
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliarActivity;
-import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.services.AnoFabricacaoReturn;
 import br.com.carmaix.services.AnoModeloReturn;
 import br.com.carmaix.services.CallService;

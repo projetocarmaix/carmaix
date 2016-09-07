@@ -20,6 +20,7 @@ import java.util.List;
 
 import br.com.carmaix.R;
 import br.com.carmaix.application.ApplicationCarmaix;
+import br.com.carmaix.database.LoginTable;
 import br.com.carmaix.fragments.AvaliarFragmentTab;
 import br.com.carmaix.fragments.FotosFragment;
 import br.com.carmaix.fragments.MecanicaFragment;
@@ -62,7 +63,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     private String imageDetalhePath = "";
     private String imageEstepePath = "";
     private String imageDocumentoPath = "";
-
+    private LoginTable loginTable;
     private String userName= "";
 
     private String empresa = "";
@@ -78,22 +79,34 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
     private int actionParam;
     private InformacoesAvaliacaoReturn informacoesAvaliacaoReturn = null;
     private String messageReturn;
+    private String vendedorIdParam;
+    private String newAvaliacaoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
+
         if(extras!= null) {
             avaliacaoId = extras.getString("avaliacaoId");
             actionParam = extras.getInt("action");
+        }
+        if(actionParam == Constants.ACTION_REVALIDAR) {
+            vendedorIdParam = extras.getString("vendedorId");
         }
 
         application = (ApplicationCarmaix) this.getApplicationContext();
 
         userName = application.getLoginTable().getUserName();
         empresa = application.getLoginTable().getCompanyName();
+        loginTable = application.getLoginTable();
+
 
         runBackground(this.getResources().getString(R.string.carregando),true,true, actionParam);
+    }
+
+    public LoginTable getLoginTable() {
+        return loginTable;
     }
 
     public String getAvaliacaoId() {
@@ -117,6 +130,8 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
             imageDocumentoPath = CallService.getImagePath(AvaliarActivity.this,imageDocumento);
         }else if(action == Constants.ACTION_SEND_DATA) {
             messageReturn = CallService.atualizacaoAvaliacao(this,getAvaliacaoId(),evaluationSend);
+        }else if(action == Constants.ACTION_REVALIDAR) {
+            newAvaliacaoId = CallService.getCodigoAvaliacao(this,avaliacaoId,vendedorIdParam);
         }
 
         super.backgroundMethod(action);
@@ -135,7 +150,7 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
             evaluationSend.setEstado_id(veiculoClienteFragment.getSpinnerUfReturn());
             evaluationSend.setCidade_id(veiculoClienteFragment.getSpinnerCidadesReturn());
 
-            evaluationSend.setSituacao("Avaliado");
+            evaluationSend.setSituacao(getSituacao());
 
             evaluationSend.setObservacao(mecanicaFragment.getEditObservacoes());
             evaluationSend.setObservacoes_adicionais(mecanicaFragment.getEditObservacoesAdicionais());
@@ -219,6 +234,12 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
         super.onEndBackgroundRun(action);
     }
+
+    @Override
+    protected void onBackGroundMethodException(Throwable e, boolean highPriority) {
+        Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
 
     public HashMap<String,String> getEstatisticaParams() {
 
@@ -439,5 +460,22 @@ public class AvaliarActivity extends BaseActivityHomeAsUp{
 
     public String getEmpresa() {
         return empresa;
+    }
+
+    public String getNewAvaliacaoId() {
+        return newAvaliacaoId;
+    }
+
+    private String getSituacao() {
+        if(actionParam == Constants.ACTION_AVALIAR) {
+            if (loginTable.getAvaliar()) {
+                return Constants.SITUACAO_ENVIO_AVALIADO;
+            } else if (loginTable.getEditar()) {
+                return Constants.SITUACAO_ENVIO_PRE_CADASTRO;
+            }
+        }else if(actionParam == Constants.ACTION_REVALIDAR){
+            return Constants.SITUACAO_ENVIO_AVALIADO;
+        }
+        return "";
     }
 }
