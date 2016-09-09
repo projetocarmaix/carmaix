@@ -18,6 +18,7 @@ import java.util.List;
 import br.com.carmaix.R;
 import br.com.carmaix.activities.AvaliacaoVisualizarActivity;
 import br.com.carmaix.activities.AvaliarActivity;
+import br.com.carmaix.activities.DialogRevalidarActivity;
 import br.com.carmaix.application.ApplicationCarmaix;
 import br.com.carmaix.database.LoginTable;
 import br.com.carmaix.domain.Avaliacao;
@@ -100,9 +101,9 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                 @Override
                 public void onClick(View view) {
                     final TextView avaliacaoId = (TextView)view.findViewById(R.id.avaliacao_id);
-                    TextView avaliacaoMarca = (TextView)view.findViewById(R.id.avaliacao_marca);
-                    TextView avaliacaoModelo = (TextView)view.findViewById(R.id.avaliacao_modelo);
-                    TextView avaliacaoPlaca = (TextView)view.findViewById(R.id.avaliacao_placa);
+                    final TextView avaliacaoMarca = (TextView)view.findViewById(R.id.avaliacao_marca);
+                    final TextView avaliacaoModelo = (TextView)view.findViewById(R.id.avaliacao_modelo);
+                    final TextView avaliacaoPlaca = (TextView)view.findViewById(R.id.avaliacao_placa);
                     String situacao = getSituacao();
 
                     AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context);
@@ -127,10 +128,16 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                         revalidar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(context, AvaliarActivity.class);
+
+                                Intent intent = new Intent(context, DialogRevalidarActivity.class);
+
                                 intent.putExtra("avaliacaoId",avaliacaoId.getText());
                                 intent.putExtra("vendedorId",vendedorId);
+                                intent.putExtra("modelo",avaliacaoModelo.getText());
+                                intent.putExtra("marca",avaliacaoMarca.getText());
+                                intent.putExtra("placa",avaliacaoPlaca.getText());
                                 intent.putExtra("action",Constants.ACTION_REVALIDAR);
+
                                 context.startActivity(intent);
                             }
                         });

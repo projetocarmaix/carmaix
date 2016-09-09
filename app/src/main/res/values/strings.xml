@@ -289,6 +289,7 @@
     <string name="os_seguintes_campos_devem_ser_preenchidos">Os seguintes campos precisam estar preechidos para o envio da avaliação:</string>
     <string name="campo_placa_fora_do_padrao">Campo placa fora do padrão (AAA-9999)</string>
 
+    <string name="revalidar_avaliacao">Revalidar Avaliação</string>
 </resources>
 
 

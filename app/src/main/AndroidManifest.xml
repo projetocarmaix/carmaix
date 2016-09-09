@@ -97,6 +97,14 @@
             android:theme="@style/CustomDialog">
         </activity>
 
+        <activity
+            android:name=".activities.DialogRevalidarActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@style/CustomDialog"
+            android:parentActivityName=".activities.AvaliacaoActivity">
+        </activity>
+
     </application>
 
 </manifest>
