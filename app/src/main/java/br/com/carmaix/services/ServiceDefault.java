@@ -1158,6 +1158,17 @@ public class ServiceDefault implements VersionRelease {
 
 /*
 
+1. Mesmo com permissão de revalidação enviada no token, recebo essa mensagem:
+
+    "code": "403",
+    "message": "InsufficientAccountPermissions",
+    "description": "A conta que está sendo acessada não tem permissões suficientes para executar essa operação"
+
+2. Usuário da avaliação não aparece na lista de vendedores, portanto não consigo deixar o vendedor selecionado quando vou fazer a
+    revalidação
+
+
+
 null{"code":"200","message":"Success","description":"Ve\u00edculo Avaliado em R$ 12.580,00."}
 
 

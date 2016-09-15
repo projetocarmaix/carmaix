@@ -12,7 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import br.com.carmaix.R;
@@ -60,8 +64,8 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         holder.avaliacaoPlaca.setText(avaliacaoSelecionada.getPlaca());
         holder.setSituacao(avaliacaoSelecionada.getSituacao());
         holder.vendedorId = avaliacaoSelecionada.getVendedor_id();
+        holder.validade = avaliacaoSelecionada.getValidade();
     }
-
 
     @Override
     public int getItemCount() {
@@ -80,6 +84,7 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         private TextView avaliacaoNome;
         private String situacao;
         private String vendedorId;
+        private String validade;
         private LoginTable loginTable;
 
         public AvaliacaoViewHolder(View itemView, final Context context) {
@@ -105,7 +110,6 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
                     final TextView avaliacaoModelo = (TextView)view.findViewById(R.id.avaliacao_modelo);
                     final TextView avaliacaoPlaca = (TextView)view.findViewById(R.id.avaliacao_placa);
                     String situacao = getSituacao();
-
                     AlertDialog.Builder alerBuilder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = LayoutInflater.from(context);
                     View options = inflater.inflate(R.layout.dialog_options,null);
@@ -124,25 +128,29 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
 
                     TextView revalidar = (TextView)options.findViewById(R.id.dialog_revalidar);
-                    if(exibeRevalidar()) {
-                        revalidar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                    try {
+                        if(validaDataValidade(validade) && exibeRevalidar()) {
+                            revalidar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
-                                Intent intent = new Intent(context, DialogRevalidarActivity.class);
+                                    Intent intent = new Intent(context, DialogRevalidarActivity.class);
 
-                                intent.putExtra("avaliacaoId",avaliacaoId.getText());
-                                intent.putExtra("vendedorId",vendedorId);
-                                intent.putExtra("modelo",avaliacaoModelo.getText());
-                                intent.putExtra("marca",avaliacaoMarca.getText());
-                                intent.putExtra("placa",avaliacaoPlaca.getText());
-                                intent.putExtra("action",Constants.ACTION_REVALIDAR);
+                                    intent.putExtra("avaliacaoId",avaliacaoId.getText());
+                                    intent.putExtra("vendedorId",vendedorId);
+                                    intent.putExtra("modelo",avaliacaoModelo.getText());
+                                    intent.putExtra("marca",avaliacaoMarca.getText());
+                                    intent.putExtra("placa",avaliacaoPlaca.getText());
+                                    intent.putExtra("action",Constants.ACTION_REVALIDAR);
 
-                                context.startActivity(intent);
-                            }
-                        });
-                    }else {
-                        revalidar.setVisibility(View.GONE);
+                                    context.startActivity(intent);
+                                }
+                            });
+                        }else {
+                            revalidar.setVisibility(View.GONE);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
 
                     TextView avaliar = (TextView) options.findViewById(R.id.dialog_avaliar);
@@ -217,6 +225,23 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         private Boolean exibeVisualizar() {
             return ((loginTable.getVisualizar()));
         }
+
+        private Boolean validaDataValidade(String validade) throws ParseException {
+            if(!validade.isEmpty()) {
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date parse = sdf.parse(validade);
+
+                Date today = Calendar.getInstance().getTime();
+
+                int i = parse.compareTo(today);
+
+                if(i < 0 ) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     public void addItems(ArrayList<AvaliationReturn> avaliationReturns){
@@ -228,6 +253,8 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
         this.notifyDataSetChanged();
 
     }
+
+
 
 
 
