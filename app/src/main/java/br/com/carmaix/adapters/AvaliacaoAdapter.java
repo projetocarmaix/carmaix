@@ -236,11 +236,11 @@ public class AvaliacaoAdapter extends RecyclerView.Adapter<AvaliacaoAdapter.Aval
 
                 int i = parse.compareTo(today);
 
-                if(i < 0 ) {
-                    return false;
+                if(i >= 0 ) {
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 
