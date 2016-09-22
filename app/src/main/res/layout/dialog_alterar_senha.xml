@@ -37,9 +37,11 @@
            android:layout_width="match_parent"
            android:textSize="15dp"
            android:hint="@string/senha_atual"
+           android:fontFamily="@style/RobotoButtonStyle"
            android:textColorHint="@color/linha_tabela_cinza"
            android:paddingTop="10dp"
            android:inputType="textPassword"
+
            android:paddingBottom="10dp"
            android:layout_marginTop="5dp" />
 
@@ -47,6 +49,7 @@
             android:id="@+id/nova_senha"
             android:layout_width="match_parent"
             android:hint="@string/nova_senha"
+            android:fontFamily="@style/RobotoButtonStyle"
             android:textColorHint="@color/linha_tabela_cinza"
             android:textSize="15dp"
             android:paddingTop="10dp"
@@ -58,6 +61,7 @@
             android:id="@+id/confirmacao_senha"
             android:layout_width="match_parent"
             android:hint="@string/repita_a_nova_senha"
+            android:fontFamily="@style/RobotoButtonStyle"
             android:textColorHint="@color/linha_tabela_cinza"
             android:textSize="15dp"
             android:inputType="textPassword"

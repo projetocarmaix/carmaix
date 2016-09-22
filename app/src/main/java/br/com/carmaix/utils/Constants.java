@@ -40,7 +40,7 @@ public class Constants {
 
     public static int MAX_ITEMS = 20;
 
-    public static String SITUACAO_NAO_AVALIADO = "PrÃ©-Cadastro";
+    public static String SITUACAO_NAO_AVALIADO = "Pré-Cadastro";
     public static String SITUACAO_AVALIADO = "Avaliado";
     public static String SITUACAO_PROPOSTA = "Proposta";
     public static String SITUACAO_ESTOQUE = "Estoque";
